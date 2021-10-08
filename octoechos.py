@@ -1,6 +1,6 @@
 """
-Version 0.0.6
-Updated 10/6/2021
+Version 0.0.8
+Updated 10/8/2021
 
 Change Log:
 9/29/2021 - 0.0.1 - Initial Working Build - Web Scraping Added
@@ -8,30 +8,12 @@ Change Log:
 10/3/2021 - 0.0.3 - Compline Regex & HTML formatting added
 10/4/2021 - 0.0.4 - Nocturns Regex & HTML formatting added
 10/5/2021 - 0.0.6 - Matins (sessional hymns) Regex & HTML formatting added
+10/7/2021 - 0.0.7 - Matins (canon) Regex & HTML formatting added
+10/8/2021 - 0.0.8 - Integrated with _utils, Matins Regex & HTML formatting added
 """
 import os
-import io
 import re
-import requests
-import fitz
-from urllib.request import Request, urlopen
-
-def download_pdf (url:str, filename:str):
-    """
-    Downloads PDF from website, saves it off, parses text contents, then removes file.
-    Returns string value of PDF text.
-    """
-    r = urlopen(Request(url)) #open the URL
-    f = filename + '.pdf' #set download file name
-    file = open(f, 'wb') #open file
-    file.write(r.read()) #write content/download file
-    file.close() #close/save the file
-    with fitz.open(f) as content: #open for extraction
-        payload = ''
-        for page in content: #read each page
-            payload += page.getText() #add each page to payload
-    os.remove(f) #delete downloaded file after payload established
-    return payload #return payload string
+from _utils import process_pdf
 
 def string_search (input_string:str, start_searches:list=[], end_searches:list=[], start_position:int=0):
     """
@@ -303,6 +285,7 @@ def octoechos_matins (service:str):
         ]
         ,'praises': [ #weekday
             'On the Praises'
+            ,'On the Praises,'
         ]
         ,'aposticha': [
             'On the Aposticha'
@@ -327,7 +310,7 @@ def octoechos_matins (service:str):
         matins_session3_location, matins_session3 = string_search(service, matins_search.get('session3'), matins_search.get('canon'))
         matins_ascent_location = None
         matins_ascent = None
-    matins_praises_location, matins_praises = string_search(service, matins_search.get('praises'), matins_search.get('canon'))
+    #matins_praises_location, matins_praises = string_search(service, matins_search.get('praises'), matins_search.get('canon'))
     matins_aposticha_location, matins_aposticha = string_search(service, matins_search.get('aposticha'), matins_search.get('dismissal'))
     matins_dismissal_location, matins_dismissal = string_search(service, matins_search.get('dismissal'))
 
@@ -338,14 +321,18 @@ def octoechos_matins (service:str):
         matins_canon = service[matins_canon_location.start():matins_aposticha_location]
     except AttributeError: #None returned...
         matins_canon_location, matins_canon = string_search(service, matins_search.get('canon'), matins_search.get('aposticha'))
-
+    try:
+        matins_praises_location = re.search(r'\n[Oo]n [Tt]he [Pp]raises[,. ]', matins_canon,flags=re.M)
+        matins_praises = matins_canon[matins_praises_location.start() + 22:] #Trims search term out
+    except AttributeError: #None returned...
+        matins_praises_location = matins_praises = None
     #Clearing unused variables
     matins_resurrection = None if matins_resurrection_location == 0 else matins_resurrection
     matins_resurrection_location = None if matins_resurrection_location == 0 else matins_resurrection_location
     matins_session3 = None if matins_session3_location == 0 else matins_session3
     matins_session3_location = None if matins_session3_location == 0 else matins_session3_location
-    matins_praises = None if matins_praises_location == 0 else matins_praises
-    matins_praises_location = None if matins_praises_location == 0 else matins_praises_location
+    #matins_praises = None if matins_praises_location == 0 else matins_praises
+    #matins_praises_location = None if matins_praises_location == 0 else matins_praises_location
 
     #processing service components:
     #Resurrection Troparion (Sundays)
@@ -394,26 +381,39 @@ def octoechos_matins (service:str):
         matins_parts['ascent'] = matins_ascent
     #Matins Canon
     matins_canon = re.sub(r'(O\s*O\s*D\s*D\s*E\s*E\s*|О\s*О\s*D\s*D\s*E\s*E\s*)\s+([XVI]+)\s+',r'</p><h3>Ode \2</h3><p>',matins_canon) #Ode headers
-    matins_canon = re.sub(r'Irmos:','</h3><p><i class="note">Irmos:</i>',matins_canon) #close ODE header, wrap Irmos in note tag
-    matins_canon = re.sub(r'([Rr]efrain:|[A-Za-z]*[Tt]heotokion:|[Ii]kos:|[Vv]erse:|Another[ ,].*:)'
-                        ,r'</p><p><i class="note">\1</i>',matins_canon) + '</p>'#service notes
+    matins_canon = re.sub(r'^(.*[Aa]crostic.*)\n',r'\1',matins_canon,flags=re.M)#removes line breaks from lengthy titles for capture below
+    matins_canon = re.sub(r'^(.*[Aa]crostic.*)\n',r'\1',matins_canon,flags=re.M)#removes line breaks from REALLY lengthy titles for capture below
+    matins_canon = re.sub(r'\([Tt]wice[.]?\)',r'<i class="note">Twice.</i></p><p>',matins_canon)
+    matins_canon = re.sub(r', and make prostrations.', r'<i class="note"> Prostrations.</i>',matins_canon)
+    matins_canon = re.sub(r'(Resurrection canon.*|Canon.*|To the Martyrs:|Refrain:|[A-Za-z]*Theotokion:|Ikos:|And after each.*:|Verse:|Another[ ,].*\n?.*:)'
+                        ,r'</p><p><i class="note">\1</i>',matins_canon,flags=re.I) + '</p>'#service notes
+    matins_canon = re.sub(r'[Ii]rmos:',r'</p><p><i class="note">Irmos:</i>',matins_canon)
     matins_canon = re.sub(r'The Troparia from the Menaion, then the appointed Katavasia.*\s*'
                         ,r'</p><div class="matins menaion canon troparia"></div><div class="matins katavasia"></div><p>',matins_canon, flags=re.I) # menaion notes
     matins_canon = re.sub(r'(<p>The small litany:\s*</p>|<p>The small litany:\s*(.*Kontakion.*:))'
                         ,r'<p>Lord, have mercy. <i class="note">Twelve Times.</i></p><p><i class="note">\2</i></p>',matins_canon,flags=re.I) #litany replace
     matins_canon = re.sub(r'<p>The small litany:.*',r'</p>',matins_canon.replace('\n',''),flags=re.I) #final litany replace
-    matins_canon = re.sub(r'^([Tt]he [Cc]anon.*|[Cc]anon.*|[Rr]esurrection [Cc]anon.*)<p>',r'<p>\1</p>',matins_canon)
-    #???matins_canon = re.sub(r'<p>([Tt]he [Cc]anon.*|[Cc]anon.*|[Rr]esurrection [Cc]anon.*)</p>',r'<p><i class="note">\1</i></i></p>',matins_canon)
-    matins_canon = matins_canon.replace('XX','X').replace('VV','V').replace('II','I')
+    matins_canon = matins_canon.replace('XX','X').replace('VV','V').replace('II','I') #Remove duplicate Ode Roman Numerals
+    matins_canon = re.sub(r'Then, [“"].*','',matins_canon.replace('\n','')) #remove excess after canon
     matins_parts['canon'] = matins_canon
     #Praises / Lauds (Saturdays)
     if matins_praises:
         matins_praises = matins_praises
-
+        matins_praises = re.sub(r'([Ss]tichera.*:)',r'<p><i class="note">\1</i></p>',matins_praises)
+        matins_praises = re.sub(r'^(Verse:.*\n?.*\.)',r'</p>\1<p>',matins_praises,flags=re.I|re.M)
+        matins_praises = re.sub(r'(To the Martyrs:|For the Reposed:|[A-Za-z]*Theotokion:|Verse:)'
+                            ,r'</p><p><i class="note">\1</i>',matins_praises,flags=re.I) + '</p>'#service notes
+        matins_praises = re.sub(r'Glory[ .,]+Now & Ever[ .,]+',r'</p><p>Glory ..., Now & Ever ...,</p><p>',matins_praises, flags=re.I)
         matins_parts['praises'] = matins_praises
     #Aposticha
     matins_aposticha = matins_aposticha
-
+    matins_aposticha = re.sub(r'^(Verse:.*\n?.*\.)',r'</p>\1<p>',matins_aposticha,flags=re.I|re.M) #seperate verses
+    matins_aposticha = re.sub(r'(Spec[., ]+Mel[ .,]+:.*:|[A-Za-z]*Theotokion:|Verse:|To the Martyrs:|other stichera.*:)'
+                        ,r'</p><p><i class="note">\1</i>',matins_aposticha,flags=re.I) #service notes
+    matins_aposticha = re.sub(r'Glory[ .,]+Now & Ever[ .,]+',r'</p><p>Glory ..., Now & Ever ...,</p><p>',matins_aposticha, flags=re.I) #now and ever
+    matins_aposticha = matins_aposticha[re.search(r'(Stichera.*:|resurrection stichera.*:)',matins_aposticha,flags=re.I).start():]
+    matins_aposticha = re.sub(r'^(resurrection stichera.*:|stichera.*:)\s+\n',r'<p><i class="note">\1</i></p>'
+                        ,matins_aposticha,count=1,flags=re.I) #clear front matter
     matins_parts['aposticha'] = matins_aposticha
 
     #matins_dismissal = matins_dismissal
@@ -423,50 +423,61 @@ def octoechos_matins (service:str):
     return matins_parts
 
 
-
-tt = [1,2,3,4,5,6,7,8]
-dd = [1,2,3,4,5,6,7] #all days
-tt = [5]
-dd = [1] #Sundays only
-with open('results.html', 'wt', encoding='utf-8') as f:
-    for t in tt:
-        for d in dd:
-            tone = t
-            sergius_day = d
-            octoechos_url = f'http://www.st-sergius.org/services/oktiochos/{tone}-{sergius_day}.pdf'
-            #print(f'---------------------------------\n{t}/{d}')
-            octoechos = octoechos_variables(download_pdf(octoechos_url, 'octoechos'))
-            f.write('<h1>Tone ' + str(t) + ', Day ' + str(d) + '</h1>')
+if __name__ == '__main__':
+    tt = [1,2,3,4,5,6,7,8]
+    dd = [1,2,3,4,5,6,7]
+    #tt = [1]
+    #dd = [7]
+    with open('results.html', 'wt', encoding='utf-8') as f:
+        f.write('<head><link rel="stylesheet" href="docs\css\main.css"></head>')
+        for t in tt:
+            for d in dd:
+                tone = t
+                sergius_day = d
+                file = f'{tone}-{sergius_day}'
+                #octoechos_url = f'http://www.st-sergius.org/services/oktiochos/{tone}-{sergius_day}.pdf'
+                #print(f'---------------------------------\n{t}/{d}')
+                octoechos = octoechos_variables(process_pdf(file))
+                #octoechos = octoechos_variables(process_pdf(OCTOECHOS,))
+                f.write('<h1>Tone ' + str(t) + ', Day ' + str(d) + '</h1>')
+                # try:
+                #     f.write(f'<h3>Resurrection Troparion</h3>')
+                #     f.write(octoechos.get('matins').get('resurrection'))
+                # except:
+                #     f.write(f'<p>There is no Resurrectional Troparion Appointed...</p>')
+                # f.write(f'<h3>First Sessional Hymn</h3>')
+                # f.write(octoechos.get('matins').get('session1'))
+                # f.write(f'<h3>Second Sessional Hymn</h3>')
+                # f.write(octoechos.get('matins').get('session2'))
+                # try:
+                #     f.write(f'<h3>Third Sessional Hymn</h3>')
+                #     f.write(octoechos.get('matins').get('session3'))
+                # except:
+                #     f.write(f'<p>There is no 3rd Sessional Hymn Appointed...</p>')
+                # try:
+                #     f.write(f'<h3>Hymns of Ascent</h3>')
+                #     f.write(octoechos.get('matins').get('ascent'))
+                #     f.write(f'<h3>Prokeimenon</h3>')
+                #     f.write(octoechos.get('matins').get('prokeimenon'))
+                # except:
+                #     f.write(f'<p>There are no Hymns of Ascent Appointed...</p>')
+                # f.write('<div class="canon-ode">')
+                # f.write(octoechos.get('matins').get('canon'))
+                # f.write('</div>')
+                # try:
+                #     f.write('<h3>The Praises (Lauds)</h3>')
+                #     f.write(octoechos.get('matins').get('praises'))
+                # except:
+                #     f.write('There are no Praises Appointed...')
+                f.write(octoechos.get('matins').get('aposticha'))
+            # print('<h1>Compline</h1>')
+            # oo = octoechos.get('compline').get('odes')
+            # for o in oo:
+            #     print(f'{o}')
             # try:
-            #     f.write(f'<h3>Resurrection Troparion</h3>')
-            #     f.write(octoechos.get('matins').get('resurrection'))
-            # except:
-            #     f.write(f'<p>There is no Resurrectional Troparion Appointed...</p>')
-            # f.write(f'<h3>First Sessional Hymn</h3>')
-            # f.write(octoechos.get('matins').get('session1'))
-            # f.write(f'<h3>Second Sessional Hymn</h3>')
-            # f.write(octoechos.get('matins').get('session2'))
-            # try:
-            #     f.write(f'<h3>Third Sessional Hymn</h3>')
-            #     f.write(octoechos.get('matins').get('session3'))
-            # except:
-            #     f.write(f'<p>There is no 3rd Sessional Hymn Appointed...</p>')
-            # try:
-            #     f.write(f'<h3>Hymns of Ascent</h3>')
-            #     f.write(octoechos.get('matins').get('ascent'))
-            #     f.write(f'<h3>Prokeimenon</h3>')
-            #     f.write(octoechos.get('matins').get('prokeimenon'))
-            # except:
-            #     f.write(f'<p>There are no Hymns of Ascent Appointed...</p>')
-            f.write(octoechos.get('matins').get('canon'))
-        # print('<h1>Compline</h1>')
-        # oo = octoechos.get('compline').get('odes')
-        # for o in oo:
-        #     print(f'{o}')
-        # try:
-        #     nn = octoechos.get('nocturns').get('odes')
-        #     print('<h1>Nocturns</h1>')
-        #     for n in nn:
-        #         print(f'{n}')
-        # except AttributeError:
-        #     pass
+            #     nn = octoechos.get('nocturns').get('odes')
+            #     print('<h1>Nocturns</h1>')
+            #     for n in nn:
+            #         print(f'{n}')
+            # except AttributeError:
+            #     pass
