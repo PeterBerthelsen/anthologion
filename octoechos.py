@@ -13,7 +13,8 @@ Change Log:
 """
 import os
 import re
-from _utils import process_pdf
+from bs4 import BeautifulSoup
+from _utils import process_pdf, insert_html
 
 def string_search (input_string:str, start_searches:list=[], end_searches:list=[], start_position:int=0):
     """
@@ -180,7 +181,10 @@ def octoechos_vespers (service:str):
     vespers_stichera = vespers_stichera[:vespers_stichera.find('Then the Stichera from the Menaion')] #Sunday for blank stichera
     #regex to remove extra text:
     vespers_stichera = vespers_stichera.replace('Israel hope in the Lord,', 'Israel hope in the Lord.') #t4d6 typo
-    vespers_stichera = vespers_stichera.replace('\n','').split('Verse: ')[1:] #split by presence of Verse, then remove front matter
+    vespers_stichera = vespers_stichera.replace('\n','').split('Verse: ') #split by presence of Verse
+    vespers_stichera_tone = vespers_stichera.pop(0) #remove front matter
+    vespers_stichera_tone = re.sub(r'.*(stichera.*?:|resurrection stichera.*?:)',r'<p><i class="note">\1</i></p>',vespers_stichera_tone,flags=re.I)
+    vespers_stichera_tone = re.sub(r'(spec[ .,]+mel[ .,]+:.*:)',r'<p><i class="note">\1</i></p>',vespers_stichera_tone,flags=re.I)
     vespers_stichera = [re.sub(r'^.*?\.\s','',s).strip() for s in vespers_stichera] #remove Verses (each is start of line to a period)
     #   remove instructions for addtional stichera from the actual text of the stichera
     vespers_stichera = [re.sub(r'These Stichera.*?:$','',s) for s in vespers_stichera]
@@ -192,21 +196,21 @@ def octoechos_vespers (service:str):
     vespers_theotokion = vespers_theotokion[:vespers_theotokion.find('Then “O Joyous Light ...”')] #clip off at instructions after in case prior search failed
     vespers_theotokion = vespers_theotokion.replace('\n','').strip() #remove line breaks and white space
     vespers_theotokion = re.sub(r'\Athe','The',vespers_theotokion) #capitalize The
-    vespers_theotokion = '<p><i class="note moveable">' + vespers_theotokion.replace('on: ','on</i><br />').replace('tic:','tic</i><br />') + '</p>' #HTML formatting
+    vespers_theotokion = '<p><i class="note">' + vespers_theotokion.replace('on: ','on</i><br />').replace('tic:','tic</i><br />') + '</p>' #HTML formatting
     vespers_theotokion = vespers_theotokion.replace('in the same tone:','in the same tone</i><br />') #HTML formatting
     #   ---
     vespers_prokeimenon = re.sub(r'\nVouchsafe.*','',vespers_prokeimenon).strip() #remove service instructions after prokeimenon text
     vespers_prokeimenon = re.sub(r'^the','The',vespers_prokeimenon).strip() #capitalize The, remove white space
-    vespers_prokeimenon = '<p class="note moveable">' + re.sub(r':\s\n','</p><p class="moveable">',vespers_prokeimenon) #HTML formatting
-    vespers_prokeimenon = re.sub(r'\.\s\nVerse: ','</p><p class="moveable">Verse: ',vespers_prokeimenon) + '</p>' #HTML formatting
+    vespers_prokeimenon = '<p class="note">' + re.sub(r':\s\n','</p><p>',vespers_prokeimenon) #HTML formatting
+    vespers_prokeimenon = re.sub(r'\.\s\nVerse: ','</p><p>Verse: ',vespers_prokeimenon) + '</p>' #HTML formatting
     #   ---
     vespers_aposticha = re.sub(r'Glory from the Menaion.*?$','',vespers_aposticha) #removes instructions
     vespers_aposticha = re.sub(r'^the','The',vespers_aposticha).strip() #capitalize The, remove white space
     vespers_aposticha = vespers_aposticha.replace('Tone VIII', 'Tone VIII:') #t8d2 typo
     vespers_aposticha = vespers_aposticha.replace('Tone VI ', 'Tone VI: ') #t6d4 typo
-    vespers_aposticha = '<p class="moveable"><i class=note">' + re.sub(r'(:.\s\n|:.\n)','</i></p><p class="moveable"',vespers_aposticha) + '</p>' #HTML formatting first row
-    vespers_aposticha = re.sub(r'\.\s\n','.</p><p class="moveable">',vespers_aposticha) #HTML formatting line breaks for stichera
-    vespers_aposticha = vespers_aposticha.replace('\nVerse: ','</p><p class="moveable">Verse: ').replace('\n','') #HTML formatting line breaks for verses
+    vespers_aposticha = '<p><i class=note">' + re.sub(r'(:.\s\n|:.\n)','</i></p><p>',vespers_aposticha) + '</p>' #HTML formatting first row
+    vespers_aposticha = re.sub(r'\.\s\n','.</p><p>',vespers_aposticha) #HTML formatting line breaks for stichera
+    vespers_aposticha = vespers_aposticha.replace('\nVerse: ','</p><p>Verse: ').replace('\n','') #HTML formatting line breaks for verses
     vespers_aposticha = vespers_aposticha.replace('To the Martyrs:','<i class="note">To the Martyrs:</i>') #HTML formatting
     vespers_aposticha = vespers_aposticha.replace('For the reposed:','<i class="note">For the reposed:</i>') #HTML formatting
     vespers_aposticha = vespers_aposticha.replace('Verse:','<i class="note">Verse:</i>') #HTML formatting
@@ -217,6 +221,7 @@ def octoechos_vespers (service:str):
 
     #build service dictionary parts for payload
     vespers_parts['stichera'] = vespers_stichera
+    vespers_parts['stichera tone'] = vespers_stichera_tone
     vespers_parts['theotokion'] = vespers_theotokion
     vespers_parts['prokeimenon'] = vespers_prokeimenon
     vespers_parts['aposticha'] = vespers_aposticha
@@ -326,13 +331,13 @@ def octoechos_matins (service:str):
         matins_praises = matins_canon[matins_praises_location.start() + 22:] #Trims search term out
     except AttributeError: #None returned...
         matins_praises_location = matins_praises = None
+
     #Clearing unused variables
     matins_resurrection = None if matins_resurrection_location == 0 else matins_resurrection
     matins_resurrection_location = None if matins_resurrection_location == 0 else matins_resurrection_location
     matins_session3 = None if matins_session3_location == 0 else matins_session3
     matins_session3_location = None if matins_session3_location == 0 else matins_session3_location
-    #matins_praises = None if matins_praises_location == 0 else matins_praises
-    #matins_praises_location = None if matins_praises_location == 0 else matins_praises_location
+
 
     #processing service components:
     #Resurrection Troparion (Sundays)
@@ -343,7 +348,7 @@ def octoechos_matins (service:str):
             ,r'<div class="simple matins troparion"><p>Glory ..., Now & Ever ...,</p></div><p><i class="note">\1</i></p><p>',matins_resurrection) + '</p>' #format troparion
         matins_parts['resurrection'] = matins_resurrection
     #Sessional Hymns 1
-    matins_session1 = re.sub(r'([Vv]erse:|[A-Za-z]*[Tt]heotokion:|[Ss]essional [Hh]ymn.*:|[Ss]pec\.\s*Mel\.:.*:)',r'<i class="note">\1</i>',matins_session1) #service notes
+    matins_session1 = re.sub(r'([Vv]erse:|[A-Za-z]*[Tt]heotokion:|[Ss]essional [Hh]ymn.*:|[Ss]pec\.\s*Mel\.*?:.*?:)',r'<i class="note">\1</i>',matins_session1) #service notes
     matins_session1 = re.sub(r'([^\w,*\?;]) \n',r'\1 \n</p><p>',matins_session1).replace('\n','')  #close paragraphs after punctuation+line breaks, remove line breaks
     matins_session1 = re.sub(r'<p>\s*After the 2nd.?\s+chant.*',r'',matins_session1, flags=re.I) #remove extra content starting at 3rd Sessional hymn
     matins_session1 = re.sub(r'^.*?</p>',r'',matins_session1) #removes all content up to & including vestigial p close tag
@@ -368,16 +373,16 @@ def octoechos_matins (service:str):
     #Hymns of Ascent: (Sundays)
     if matins_ascent:
         #prokeimenon for Sunday captured in ascent
-        matins_prokeimenon = 'Prokeimenon' + re.split(r'[Pp]rokeimenon',matins_ascent,maxsplit=1)[1]
-        matins_prokeimenon = re.sub(r'.*([Pp]rokeimenon.*:)',r'<p><i class="note">\1</i></p><p>',matins_prokeimenon)
-        matins_prokeimenon = re.sub(r'Let every breath.*',r'</p>',matins_prokeimenon,flags=re.I)
-        matins_prokeimenon = re.split(r'The Sunday.*Gospel',matins_prokeimenon,flags=re.I)[0]
-        matins_prokeimenon = re.sub(r'([Tt]he [Vv]erse:|[Vv]erse:)',r'</p><p><i class="note">\1</i>',matins_prokeimenon)
+        matins_prokeimenon = 'Prokeimenon' + re.split(r'[Pp]rokeimenon',matins_ascent,maxsplit=1)[1] #grab prokeimenon from ascent
+        matins_prokeimenon = re.sub(r'.*([Pp]rokeimenon.*:)',r'<p><i class="note">\1</i></p><p>',matins_prokeimenon) #header note
+        matins_prokeimenon = re.sub(r'Let every breath.*',r'</p>',matins_prokeimenon,flags=re.I) #clear out excess
+        matins_prokeimenon = re.split(r'The Sunday.*Gospel',matins_prokeimenon,flags=re.I)[0] #split from reading
+        matins_prokeimenon = re.sub(r'([Tt]he [Vv]erse:|[Vv]erse:)',r'</p><p><i class="note">\1</i>',matins_prokeimenon) #notes for verses
         matins_parts['prokeimenon'] = matins_prokeimenon
         #then format the hymns of ascent
-        matins_ascent = re.split(r'[Pp]rokeimenon',matins_ascent)[0]
-        matins_ascent = re.sub(r'([0-9][A-Za-z]+ [Aa]ntiphon:)',r'</p><p><i class="note">\1</i></p><p>',matins_ascent)
-        matins_ascent = re.sub(r'(Glory[ .,]+Now & Ever[ .,]+)',r'</p><p>\1</p><p>',matins_ascent,flags=re.I)
+        matins_ascent = re.split(r'[Pp]rokeimenon',matins_ascent)[0] #grab text before prokeimenon
+        matins_ascent = re.sub(r'([0-9][A-Za-z]+ [Aa]ntiphon:)',r'</p><p><i class="note">\1</i></p><p>',matins_ascent) #note antiphon headers
+        matins_ascent = re.sub(r'(Glory[ .,]+Now & Ever[ .,]+)',r'</p><p>\1</p><p>',matins_ascent,flags=re.I) #line break on G, N&E
         matins_parts['ascent'] = matins_ascent
     #Matins Canon
     matins_canon = re.sub(r'(O\s*O\s*D\s*D\s*E\s*E\s*|О\s*О\s*D\s*D\s*E\s*E\s*)\s+([XVI]+)\s+',r'</p><h3>Ode \2</h3><p>',matins_canon) #Ode headers
@@ -411,14 +416,10 @@ def octoechos_matins (service:str):
     matins_aposticha = re.sub(r'(Spec[., ]+Mel[ .,]+:.*:|[A-Za-z]*Theotokion:|Verse:|To the Martyrs:|other stichera.*:)'
                         ,r'</p><p><i class="note">\1</i>',matins_aposticha,flags=re.I) #service notes
     matins_aposticha = re.sub(r'Glory[ .,]+Now & Ever[ .,]+',r'</p><p>Glory ..., Now & Ever ...,</p><p>',matins_aposticha, flags=re.I) #now and ever
-    matins_aposticha = matins_aposticha[re.search(r'(Stichera.*:|resurrection stichera.*:)',matins_aposticha,flags=re.I).start():]
-    matins_aposticha = re.sub(r'^(resurrection stichera.*:|stichera.*:)\s+\n',r'<p><i class="note">\1</i></p>'
+    matins_aposticha = matins_aposticha[re.search(r'(Stichera.*?:|resurrection stichera.*?:)',matins_aposticha,flags=re.I).start():]
+    matins_aposticha = re.sub(r'^(resurrection stichera.*?:|stichera.*?:)\s+\n',r'<p><i class="note">\1</i></p>'
                         ,matins_aposticha,count=1,flags=re.I) #clear front matter
     matins_parts['aposticha'] = matins_aposticha
-
-    #matins_dismissal = matins_dismissal
-
-
 
     return matins_parts
 
@@ -426,20 +427,36 @@ def octoechos_matins (service:str):
 if __name__ == '__main__':
     tt = [1,2,3,4,5,6,7,8]
     dd = [1,2,3,4,5,6,7]
-    #tt = [1]
-    #dd = [7]
+    tt = [1]
+    dd = [7]
     with open('results.html', 'wt', encoding='utf-8') as f:
-        f.write('<head><link rel="stylesheet" href="docs\css\main.css"></head>')
         for t in tt:
             for d in dd:
-                tone = t
-                sergius_day = d
-                file = f'{tone}-{sergius_day}'
+                file = f'{t}-{d}'
+                octoechos = octoechos_variables(process_pdf(file))
+                vfil = open('docs/html/vespers.html')
+                vespers = BeautifulSoup(vfil, 'html.parser')
+                aposticha = vespers.select_one('.vespers-aposticha')
+                aposticha_octoechos = BeautifulSoup(octoechos.get('vespers').get('aposticha'),'html.parser')
+                aposticha.append(aposticha_octoechos)
+                f.write(vespers.prettify())
+
+    #     f.write('<head><link rel="stylesheet" href="docs\css\main.css"></head>')
+    #     for t in tt:
+    #         for d in dd:
+    #             tone = t
+    #             sergius_day = d
+    #             file = f'{tone}-{sergius_day}'
                 #octoechos_url = f'http://www.st-sergius.org/services/oktiochos/{tone}-{sergius_day}.pdf'
                 #print(f'---------------------------------\n{t}/{d}')
-                octoechos = octoechos_variables(process_pdf(file))
+                # octoechos = octoechos_variables(process_pdf(file))
+
+
+
                 #octoechos = octoechos_variables(process_pdf(OCTOECHOS,))
-                f.write('<h1>Tone ' + str(t) + ', Day ' + str(d) + '</h1>')
+                # f.write('<h1>Tone ' + str(t) + ', Day ' + str(d) + '</h1>')
+                # print(octoechos.get('vespers').get('stichera tone'))
+
                 # try:
                 #     f.write(f'<h3>Resurrection Troparion</h3>')
                 #     f.write(octoechos.get('matins').get('resurrection'))
@@ -469,15 +486,4 @@ if __name__ == '__main__':
                 #     f.write(octoechos.get('matins').get('praises'))
                 # except:
                 #     f.write('There are no Praises Appointed...')
-                f.write(octoechos.get('matins').get('aposticha'))
-            # print('<h1>Compline</h1>')
-            # oo = octoechos.get('compline').get('odes')
-            # for o in oo:
-            #     print(f'{o}')
-            # try:
-            #     nn = octoechos.get('nocturns').get('odes')
-            #     print('<h1>Nocturns</h1>')
-            #     for n in nn:
-            #         print(f'{n}')
-            # except AttributeError:
-            #     pass
+                #f.write(octoechos.get('matins').get('aposticha'))
