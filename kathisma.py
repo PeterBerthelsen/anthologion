@@ -4597,3 +4597,6 @@ kathisma_numbers = {
     ,19: nineteenth_kathisma
     ,20: twentieth_kathisma
 }
+
+def parse_kathisma(number):
+    return kathisma_numbers.get(number)

@@ -1,6 +1,6 @@
 """
-Version 0.0.8
-Updated 10/8/2021
+Version 0.1.0
+Updated 10/13/2021
 
 Change Log:
 9/29/2021 - 0.0.1 - Initial Working Build - Web Scraping Added
@@ -10,6 +10,7 @@ Change Log:
 10/5/2021 - 0.0.6 - Matins (sessional hymns) Regex & HTML formatting added
 10/7/2021 - 0.0.7 - Matins (canon) Regex & HTML formatting added
 10/8/2021 - 0.0.8 - Integrated with _utils, Matins Regex & HTML formatting added
+10/13/2021 - 0.1.0 - Minor syntax updates for Vespers build
 """
 import os
 import re
@@ -191,7 +192,7 @@ def octoechos_vespers (service:str):
     vespers_stichera = [re.sub(r'Then the Stichera.*?:$','',s) for s in vespers_stichera]
     vespers_stichera = [re.sub(r'Other Stichera.*?:$','',s) for s in vespers_stichera]
     vespers_stichera = [re.sub(r'\. Then.*?.*?:$','.',s) for s in vespers_stichera]
-    vespers_stichera = ['<p class="stichera moveable">' + s + '</p>' for s in vespers_stichera] #HTML wrap
+    vespers_stichera = ['<p class="stichera"><i class="note">*</i>' + s + '</p>' for s in vespers_stichera] #HTML wrap
     #   ---
     vespers_theotokion = vespers_theotokion[:vespers_theotokion.find('Then “O Joyous Light ...”')] #clip off at instructions after in case prior search failed
     vespers_theotokion = vespers_theotokion.replace('\n','').strip() #remove line breaks and white space
@@ -208,7 +209,7 @@ def octoechos_vespers (service:str):
     vespers_aposticha = re.sub(r'^the','The',vespers_aposticha).strip() #capitalize The, remove white space
     vespers_aposticha = vespers_aposticha.replace('Tone VIII', 'Tone VIII:') #t8d2 typo
     vespers_aposticha = vespers_aposticha.replace('Tone VI ', 'Tone VI: ') #t6d4 typo
-    vespers_aposticha = '<p><i class=note">' + re.sub(r'(:.\s\n|:.\n)','</i></p><p>',vespers_aposticha) + '</p>' #HTML formatting first row
+    vespers_aposticha = '<p><i class="note">' + re.sub(r'(:.\s\n|:.\n)','</i></p><p>',vespers_aposticha) + '</p>' #HTML formatting first row
     vespers_aposticha = re.sub(r'\.\s\n','.</p><p>',vespers_aposticha) #HTML formatting line breaks for stichera
     vespers_aposticha = vespers_aposticha.replace('\nVerse: ','</p><p>Verse: ').replace('\n','') #HTML formatting line breaks for verses
     vespers_aposticha = vespers_aposticha.replace('To the Martyrs:','<i class="note">To the Martyrs:</i>') #HTML formatting
@@ -424,22 +425,22 @@ def octoechos_matins (service:str):
     return matins_parts
 
 
-if __name__ == '__main__':
-    tt = [1,2,3,4,5,6,7,8]
-    dd = [1,2,3,4,5,6,7]
-    tt = [1]
-    dd = [7]
-    with open('results.html', 'wt', encoding='utf-8') as f:
-        for t in tt:
-            for d in dd:
-                file = f'{t}-{d}'
-                octoechos = octoechos_variables(process_pdf(file))
-                vfil = open('docs/html/vespers.html')
-                vespers = BeautifulSoup(vfil, 'html.parser')
-                aposticha = vespers.select_one('.vespers-aposticha')
-                aposticha_octoechos = BeautifulSoup(octoechos.get('vespers').get('aposticha'),'html.parser')
-                aposticha.append(aposticha_octoechos)
-                f.write(vespers.prettify())
+# if __name__ == '__main__':
+#     tt = [1,2,3,4,5,6,7,8]
+#     dd = [1,2,3,4,5,6,7]
+#     tt = [1]
+#     dd = [7]
+#     with open('results.html', 'wt', encoding='utf-8') as f:
+#         for t in tt:
+#             for d in dd:
+#                 file = f'{t}-{d}'
+#                 octoechos = octoechos_variables(process_pdf(file))
+#                 vfil = open('docs/html/vespers.html')
+#                 vespers = BeautifulSoup(vfil, 'html.parser')
+#                 aposticha = vespers.select_one('.vespers-aposticha')
+#                 aposticha_octoechos = BeautifulSoup(octoechos.get('vespers').get('aposticha'),'html.parser')
+#                 aposticha.append(aposticha_octoechos)
+#                 f.write(vespers.prettify())
 
     #     f.write('<head><link rel="stylesheet" href="docs\css\main.css"></head>')
     #     for t in tt:

@@ -23,7 +23,6 @@ service_rank = {
     ,6: 'Afterfeast'
     ,7: 'Ordinary'
 }
-weekly_tone = {}
 menaion_type = {
     1: 'Lord and Master Jesus Christ'
     ,2: 'Mother of God'

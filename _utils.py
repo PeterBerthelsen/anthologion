@@ -22,8 +22,8 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
     """
     payload = ''
     caller = inspect.stack()[1][1].split('\\')[-1][:-3] #name of file (no extension) calling function
-    for i in inspect.stack():
-        print(i)
+    # for i in inspect.stack():
+    #     print(i)
     dir = os.path.dirname(caller)
     page = { #for each file, a corresponding page on the St. Sergius site
         'octoechos': 'services/oktiochos/'
@@ -61,22 +61,22 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
             print(f'Gathering {filename} from local = {local} FAILED! Attempting with local = {not local}')
             local = not local
 
-def insert_html (target_html_file:str, target_html_element:str, html_to_insert:str):
-        """
-        Takes in a file name for source service (e.g. vespers), name element where
-        moveable HTML will be inserted (e.g. '.vespers-aposticha'), and HTML string
-        to inject. Inserts the HTML, then returns the full combined HTML string.
-        """
-        caller = inspect.stack()[1][1].split('\\')[-1] #name of file calling function
-        dir = os.path.dirname(caller)
-        folder = { #for each file, a corresponding local folder
-            'octoechos.py': 'docs\html'
-            ,'menaion.py': 'docs\html'
-        }
-        f = open(os.path.join(dir, folder.get(caller),target_html_file))
-        source = BeautifulSoup(f, 'html.parser')
-        element = source.select_one(target_html_element)
-        insert = BeautifulSoup(html_to_insert, 'html.parser')
-        element.append(insert)
-        #payload = source.prettify()
-        return source.prettify()#payload
+# def insert_html (target_html_file:str, target_html_element:str, html_to_insert:str):
+#         """
+#         Takes in a file name for source service (e.g. vespers), name element where
+#         moveable HTML will be inserted (e.g. '.vespers-aposticha'), and HTML string
+#         to inject. Inserts the HTML, then returns the full combined HTML string.
+#         """
+#         caller = inspect.stack()[1][1].split('\\')[-1] #name of file calling function
+#         dir = os.path.dirname(caller)
+#         folder = { #for each file, a corresponding local folder
+#             'octoechos.py': 'docs\html'
+#             ,'menaion.py': 'docs\html'
+#         }
+#         f = open(os.path.join(dir, folder.get(caller),target_html_file))
+#         source = BeautifulSoup(f, 'html.parser')
+#         element = source.select_one(target_html_element)
+#         insert = BeautifulSoup(html_to_insert, 'html.parser')
+#         element.append(insert)
+#         #payload = source.prettify()
+#         return source.prettify()#payload
