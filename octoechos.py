@@ -1,6 +1,6 @@
 """
-Version 0.1.0
-Updated 10/13/2021
+Version 0.1.1
+Updated 10/14/2021
 
 Change Log:
 9/29/2021 - 0.0.1 - Initial Working Build - Web Scraping Added
@@ -11,11 +11,12 @@ Change Log:
 10/7/2021 - 0.0.7 - Matins (canon) Regex & HTML formatting added
 10/8/2021 - 0.0.8 - Integrated with _utils, Matins Regex & HTML formatting added
 10/13/2021 - 0.1.0 - Minor syntax updates for Vespers build
+10/14/2021 - 0.1.1 - Variables updated for Flask integration
 """
 import os
 import re
 from bs4 import BeautifulSoup
-from _utils import process_pdf, insert_html
+from _utils import process_pdf
 
 def string_search (input_string:str, start_searches:list=[], end_searches:list=[], start_position:int=0):
     """
