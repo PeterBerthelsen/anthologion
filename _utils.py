@@ -31,8 +31,8 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
         ,'menaion': 'services/menaion/'
     }
     folder = { #for each file, a corresponding local folder
-        'octoechos': 'services\octoechos'
-        ,'menaion': 'services\menaion'
+        'octoechos': 'services/octoechos'
+        ,'menaion': 'services/menaion'
     }
     f = filename if filename[-4:] == '.pdf' else filename + '.pdf' #set download file name
 
