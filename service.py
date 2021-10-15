@@ -138,7 +138,7 @@ def rubrics(rank:int, octoechos=None, menaion=None, paschal=None):
         return octoechos
 
 def vespers(date:str, parts:dict, kathisma_number:int, weekday:int):
-    vfil = open('docs/html/vespers.html') #html template
+    vfil = open('static/html/vespers.html') #html template
     vespers = BeautifulSoup(vfil, 'html.parser') #service html
     vdate = vespers.select_one('.vespers-date') #date field from service html
     stichera = vespers.select('.vespers-sticheron') #list of stichera from service html
@@ -228,7 +228,7 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     #for now, just octoechos
     variables = octoechos
 
-    html = '<head><link href="../css/main.css" rel="stylesheet"/></head><body>'
+    html = '<head><link href="../static/css/main.css" rel="stylesheet"/></head><body><div id="wrapper"><div id="main"><section class="post">'
 
     #Generating Vespers
     if calendar == 0: #New Calendar
@@ -245,7 +245,7 @@ def generate_day(month=None, day=None, year=None, calendar=1):
             ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
             ,weekday=service_date.weekday()
         )
-    html += '</body>'
+    html += '</section></div></div></body>'
     return html
 #
 # with open('docs/html/test.html', 'wt', encoding='utf-8') as f:
