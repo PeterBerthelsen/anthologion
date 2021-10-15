@@ -23,8 +23,8 @@ def index():
     day = request.args.get('d', None)
     year = request.args.get('y', None)
     calendar = request.args.get('c', None)
-    print(f'{month}/{day}/{year} ~ {calendar}')
+    print(f' Loaded "/" for date: {month}/{day}/{year} ~ calendar: {calendar}')
     return generate_day(month=month, day=day, year=year, calendar=calendar)
 
 if __name__ == "__main__":
-    app.run(threaded=True)#, port=5000)
+    app.run(threaded=True, port=5000)

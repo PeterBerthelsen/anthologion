@@ -25,6 +25,7 @@ def string_search (input_string:str, start_searches:list=[], end_searches:list=[
     (at start position) for each search until a result is given.
     returns list: [starting location found (int), processed string with no search term]
     """
+    print(f'string_search initiated for input: {input_string[:30]}...')
     i = -1 #iterators will start at 0 in loop
     j = -1 #iterating after would mess up the return section by 1 index position
     begin = -1 #find method returns -1 if no result is found
@@ -33,15 +34,19 @@ def string_search (input_string:str, start_searches:list=[], end_searches:list=[
         while begin == -1: #while no result is found, search next in searches
             i += 1 #iterate...
             begin = input_string.find(start_searches[i],start_position)
-    except: #error thrown if all searches fail (index error)
+    except: #error thrown if all begin searches fail (index error)
+        print(f'No start found')
         return [0,input_string]
     try:
         while end == -1: #again, while no result is found...
             j += 1 #iterate...
             end = input_string.find(end_searches[j],start_position)
-    except:
+    except:  #error thrown if all end searches fail (index error)
+        print(f'start {begin} found, but no end')
         output = input_string[begin + len(start_searches[i]):]
         return [begin, output]
+    #successfully found begin and end, returning processed string.
+    print(f'start {begin}, end {end} found')
     output = input_string[begin + len(start_searches[i]):end]
     return [begin, output]
 
