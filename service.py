@@ -228,8 +228,8 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     #for now, just octoechos
     variables = octoechos
 
-    html = '<head><link href="../static/css/main.css" rel="stylesheet"/>
-    html += '<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></head>
+    html = '<head><link href="../static/css/main.css" rel="stylesheet"/>'
+    html += '<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"></head>'
     html += '<body><div id="wrapper"><div id="main"><section class="post">'
 
     #Generating Vespers
