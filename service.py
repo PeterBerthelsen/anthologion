@@ -174,14 +174,14 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     octoechos = octoechos_variables(process_pdf(filename=octoechos_file,service='octoechos')) if tone else None
 
     kathisma_rubric = {
-        #day of week: [vespers, [matins]]
-        0: [0,[4,5]] #Monday
-        ,1: [6,[7,8]] #Tuesday
-        ,2: [9,[10,11]] #Wednesday
-        ,3: [12,[13,14]] #Thursday
-        ,4: [15,[19,20]] #Friday
-        ,5: [18,[16,17]] #Saturday
-        ,6: [1,[2,3]] #Sunday
+        #day of week: [vespers, nocturns, [matins]]
+        0: [0,17,[4,5]] #Monday
+        ,1: [6,17,[7,8]] #Tuesday
+        ,2: [9,17,[10,11]] #Wednesday
+        ,3: [12,17,[13,14]] #Thursday
+        ,4: [15,17,[19,20]] #Friday
+        ,5: [18,9,[16,17]] #Saturday
+        ,6: [1,None,[2,3]] #Sunday
     }
 
     #Date strings, used for text within HTML
@@ -215,7 +215,7 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     variables = octoechos
     #create Vespers - add extra variables, render template, add to output
     vespers_variables = variables.get('vespers')
-    vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(service_date.weekday())[0])
+    vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[0])
     vespers_variables['night_date'] = night_string_oc
     vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
     vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday)
@@ -223,10 +223,15 @@ def generate_day(month=None, day=None, year=None, calendar=1):
 
     compline_variables = variables.get('compline')
     compline_variables['troparion'] = compline_troparia(weekday=weekday, rank=rank)
+    compline_variables['night_date'] = night_string_oc
     compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
     liturgics['compline'] = compline
 
-    #nocturns = variables.get('nocturns')
+    nocturns_variables = variables.get('nocturns', {})
+    nocturns_variables['kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[1])
+    nocturns_variables['date'] = day_string_oc
+    nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
+    liturgics['nocturns'] = nocturns
     #matins = variables.get('matins')
 
     #services = [vespers,compline,nocturns,matins]

@@ -1,0 +1,138 @@
+<div class="service" id="nocturns">
+  <h1>Nocturns</h1>
+  <h3>{{ variables.date|safe }}</h3>
+  <p>Through the prayers of our holy Fathers, O Lord Jesus Christ our God, have mercy on us. Amen. </p>
+  <p>Glory to Thee, our God, glory to Thee.</p>
+  <p>O Heavenly King, Comforter, Spirit of Truth, Who art everywhere present and fillest all things, Treasury of good things and Giver of life: Come and dwell in us, and cleanse us of all impurity, and save our souls, O Good One.</p>
+  <p>Holy God, Holy Mighty, Holy Immortal, have mercy on us. <i class="note">Thrice.</i></p>
+  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the unto the ages of ages. Amen.</p>
+  <p>O Most Holy Trinity, have mercy on us. O Lord, blot out our sins. O Master, pardon our iniquities. O Holy One, visit and heal our infirmities for Thy name's sake.</p>
+  <p>Lord have mercy. <i class="note">Thrice.</i></p>
+  <p>Glory to the Father and to the Son and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+  <p>Our Father, Who art in the Heavens, hallowed be Thy Name. Thy Kingdom come, Thy will be done, on earth as it is in Heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors; and lead us not into temptation, but deliver us from the evil one.</p>
+  <p>O Lord, Jesus Christ, Son of God, have mercy on us. Amen. </p>
+  <p>Lord, Have mercy. <i class="note">Twelve Times.</i></p>
+  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the unto the ages of ages. Amen.</p>
+  <p>O come, let us worship God our King.
+    <br/>O come, let us worship and fall down before Christ our King and God.
+    <br/>O come, let us worship and fall down before Christ Himself, our King and God.
+  </p>
+  <h3>Psalm 50</h3>
+  <p>Have mercy on me, O God, according to Thy great mercy; and according to the multitude of Thy compassions blot out my transgression. Wash me thoroughly from mine iniquity, and cleanse me from my sin. For I know mine iniquity, and my sin is ever before me. Against Thee only have I sinned and done this evil before Thee, that Thou mightest be justified in Thy words, and prevail when Thou art judged. For behold, I was conceived in iniquities, and in sins did my mother bear me. For behold, Thou hast loved truth; the hidden and secret things of Thy wisdom hast Thou made manifest unto me. Thou shalt sprinkle me with hyssop, and I shall be made clean; Thou shalt wash me, and I shall be made whiter than snow. Thou shalt make me to hear joy and gladness; the bones that be humbled, they shall rejoice. Turn Thy face away from my sins, and blot out all mine iniquities. Create in me a clean heart, O God, and renew a right spirit within me. Cast me not away from Thy presence, and take not Thy Holy Spirit from me. Restore unto me the joy of Thy salvation, and with Thy governing Spirit establish me. I shall teach transgressors Thy ways, and the ungodly shall turn back unto Thee. Deliver me from blood-guiltiness, O God, Thou God of my salvation; my tongue shall rejoice in Thy righteousness. O Lord, Thou shalt open my lips, and my mouth shall declare Thy praise. For if Thou hadst desired sacrifice, I had given it; with whole-burnt offerings Thou shalt not be pleased. A sacrifice unto God is a broken spirit; a heart that is broken and humbled God will not despise. Do good, O Lord, in Thy good pleasure unto Zion, and let the walls of Jerusalem be builded. Then shalt Thou be pleased with a sacrifice of righteousness, with oblation and whole-burnt offerings. Then shall they offer bullocks upon Thine altar. </p>
+  {% if weekday == 6 %}
+    <!--Sunday Variables-->
+    {% for ode in variables.odes %}
+      {{ ode|safe }}
+    {% endfor %}
+    <hr/>
+    <p>It is truly meet * to glorify Thee, God the Word, * before Whom the Cherubim quake and tremble, * and Whom the heavenly hosts doxologize; * the One Who arose on the third day from the tomb, * Christ the Life-giver, in fear let us glorify.</p>
+    <p>Let us all in divine songs befitting God, * hymn the Father, and the Son, and the Divine Spirit, * the tri-personed Dominion, * One kingdom and Sovereignty.</p>
+    <p>Thou Whom all the earth-born hymn, * and the heavenly hosts doxologize, * art faithfully worshipped by all, * O Unity in essence, in Three persons.</p>
+    <p>O Thou Who art Lord of the Cherubim, * and from whom the incomparable Seraphim received their beginning, * indivisible Trinity in Unity, * the very Godhead, Thee do we magnify.</p>
+    <p>The unoriginate Father and God, * the co-unoriginate Word together with the Spirit, I worship; * the inseparable only-united Essence, * the Three-fold Unity let us honor in hymns.</p>
+    <p>Thy resplendent lightnings do Thou shine upon me, * O my God in Three Persons, the Creator of all; * and show me forth as the abode of Thine unapproachable glory, * shining and light-bearing and unchanging.</p>
+    <p>Him before Whom the Cherubim quake and tremble, * and whom angelic hosts doxologize, * Who of the Virgin was ineffably incarnate, * Christ the Life-giver, with fear let us glorify.    </p>
+  {% else %}
+    <!--Weekday/Saturday Variables-->
+    {% for id,part in variables.kathisma.items() %}
+      {{ part|safe }}
+    {% endfor %}
+    <hr/>
+    <h3>The Symbol of Faith</h3>
+    <p>I believe in one God, the Father Almighty, Maker of heaven and earth and of all things visible and invisible. And in one Lord Jesus Christ, the Son of God, the Only-begotten, begotten of the Father before all ages; Light of Light, true God of true God; begotten, not made; of one essence with the Father, by Whom all things were made; Who for us men and for our salvation came down from the heavens, and was incarnate of the Holy Spirit and the Virgin Mary, and became man; And was crucified for us under Pontius Pilate, and suffered and was buried; And arose again on the third day according to the Scriptures; And ascended into the heavens, and sitteth at the right hand of the Father; And shall come again, with glory, to judge both the living and the dead; Whose kingdom shall have no end. And in the Holy Spirit, the Lord, the Giver of life; Who proceedeth from the Father; Who with the Father and the Son together is worshipped and glorified; Who spake by the prophets. In One, Holy, Catholic, and Apostolic Church. I confess one baptism for the remission of sins. I look for the resurrection of the dead, And the life of the age to come. Amen. </p>
+  {% endif %}
+  <p>Holy God, Holy Mighty, Holy Immortal, have mercy on us. <i class="note">Thrice.</i></p>
+  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+  <p>O Most Holy Trinity, have mercy on us. O Lord, blot out our sins. O Master, pardon our iniquities. O Holy One, visit and heal our infirmities for Thy name's sake.</p>
+  <p>Lord have mercy. <i class="note">Thrice.</i></p>
+  <p>Glory to the Father and to the Son and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+  <p>Our Father, Who art in the Heavens, hallowed be Thy Name. Thy Kingdom come, Thy will be done, on earth as it is in Heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors; and lead us not into temptation, but deliver us from the evil one.  </p>
+  <p>O Lord, Jesus Christ, Son of God, have mercy on us. Amen. </p>
+  {% if weekday == 6 %}
+    <!--Sunday Ending-->
+    <!--Hypakoe-->
+    <p>Lord, have mercy. <i class="note">Forty Times.</i></p>
+    <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+    <p>More honorable than the Cherubim, and beyond compare more glorious than the Seraphim; who without corruption gavest birth to God the Word, the very Theotokos, thee do we magnify.</p>
+    <p>Through the prayers of our holy fathers, O Lord Jesus Christ our God, have mercy on us. Amen.</p>
+  {% else %}
+    <!--Weekday/Saturday Ending-->
+    {% if weekday == 5 %}
+      <p><i class="note">In Tone 2:</i></p>
+      <p>O Thou Who art by nature Uncreated, the Fashioner of all, do Thou open our lips that we may proclaim Thy praise while we cry: Holy, Holy, Holy, art Thou, O God; through the Theotokos, have mercy on us.</p>
+      <p>Glory to the Father and to the Son and to the Holy Spirit.</p>
+      <p>Imitating on earth the Hosts on high, we offer Thee, O Good One, the triumphant song: Holy, Holy, Holy, art Thou, O God; through the Theotokos, have mercy on us.</p>
+      <p>Both now and ever, and unto the ages of ages. Amen.</p>
+      <p>From bed and sleep hast Thou raised me up, O Lord; enlighten my mind and heart, and open my lips that I may hymn Thee, O Holy Trinity: Holy, Holy, Holy, art Thou, O God; through the Theotokos, have mercy on us.</p>
+    {% else %}
+      <p><i class="note">In Tone 8:</i></p>
+      <p>Behold, the Bridegroom cometh at midnight, and blessed is that servant whom He shall find watching; but unworthy is he whom He shall find heedless. Beware, therefore, O my soul, lest thou be weighed down with sleep; lest thou be given up to death, and be shut out from the kingdom. But rouse thyself and cry: Holy, Holy, Holy art Thou, O God, through the Theotokos have mercy on us.</p>
+      <p>Glory to the Father and to the Son and to the Holy Spirit.</p>
+      <p>Meditating on that terrible day, O my soul, watch, keeping thy lamp alight and filled with oil; for thou knowest not when unto thee shall come the voice saying: Behold the Bridegroom! Beware, therefore, my soul, lest thou fall into slumber and be left outside, knocking, as were the five virgins; but wakefully watch, that thou mayest come to meet Christ with good oil, and He shall bestow upon thee the divine chamber of His glory.</p>
+      <p>Both now and ever, and unto the ages of ages. Amen.</p>
+      <p><i class="note">Theotokion:</i></p>
+      <p>Thee, the unassailable wall, confirmation of salvation, O Virgin Theotokos, do we supplicate, to destroy the counsels of the enemies, to change the sorrows of thy people into joy, to protect thy city, to ensure victory for pious rulers, and to pray for the peace of the world; for thou, O Theotokos, art our hope.</p>
+    {% endif %}
+    <p>Lord, have mercy. <i class="note">Forty Times.</i> </p>
+    <p><i class="note">And the Prayer of the Hours:</i></p>
+    <p>Thou Who at all times and at every hour, in heaven and on earth, art worshipped and glorified, O Christ God, Who art long-suffering, plenteous in mercy, most compassionate, Who lovest the righteous and hast mercy on sinners; Who callest all men to salvation through the promise of good things to come: Receive, O Lord, our prayers at this hour, and guide our life toward Thy commandments. Sanctify our souls, make chaste our bodies, correct our thoughts, purify our intentions, and deliver us from every sorrow, evil, and pain. Compass us about with Thy holy angels, that, guarded and guided by their array, we may attain to the unity of the faith and to the knowledge of Thine unapproachable glory: For blessed art Thou unto the ages of ages. Amen.</p>
+    <p>Lord have mercy. <i class="note">Thrice.</i></p>
+    <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+    <p>More honorable than the Cherubim, and beyond compare more glorious than the Seraphim; who without corruption gavest birth to God the Word, the very Theotokos, thee do we magnify.</p>
+    <p>Through the prayers of our holy fathers, O Lord Jesus Christ our God, have mercy on us. Amen.</p>
+    {% if weekday != 5 %}
+      {# More logic needed here #}
+      <!--
+      If it is Great Lent, or the first day of the Apostles’ Fast, or of the Nativity Fast (if it falls on a weekday), we say the Prayer of St. Ephrem the Syrian, dividing it into three parts with prostrations, then the twelve reverences in which we say each time “O God, cleanse me a sinner” and then the entire prayer with a prostration.
+      -->
+      <!--
+      It should be known that the following two prayers are said from September 22nd o.s. until Palm Sunday:
+
+      O Lord Almighty, God of hosts and of all flesh, Who dwellest on high and lookest down on things that are lowly, Who searchest the heart and innermost being, and clearly foreknowest the secrets of men; O unoriginate and everlasting Light, with Whom is no variableness, neither shadow of turning: Do Thou, O Immortal King, receive our supplications which we, daring because of the multitude of Thy compassions, offer Thee at the present time from defiled lips; and forgive us our sins, in deed, word, and thought, whether committed by us knowingly or in ignorance, and cleanse us from every defilement of flesh and spirit. And grant us to pass through the whole night of this present life with watchful heart and sober thought, ever expecting the coming of the bright and appointed day of Thine Only-begotten Son, our Lord and God and Savior, Jesus Christ, whereon the Judge of all shall come with glory to reward each according to his deeds. May we not be found fallen and idle, but watching, and upright in activity, ready to accompany Him into the joy and divine palace of His glory, where there is the ceaseless sound of those that keep festival, and the unspeakable delight of those that behold the ineffable beauty of Thy countenance. For Thou art the true Light that enlightenest and sanctifiest all, and all creation doth hymn Thee unto the ages of ages. Amen.
+      We bless Thee, O Most High God and Lord of mercy, Who ever doest with us things both great and inscrutable, both glorious and awesome, of which there is no measure; Who grantest to us sleep for rest from our infirmities, and relaxation from the labors of our much-toiling flesh. We thank Thee that Thou hast not destroyed us with our iniquities, but hast shown Thy loving-kindness to man as usual, and while we were lying in despair upon our beds, Thou hast raised us up that we might glorify Thy dominion. Wherefore, we implore Thy boundless goodness: Enlighten the eyes of our understanding and raise up our mind from the heavy sleep of indolence; open our mouth and fill it with Thy praise, that we may be able steadily to hymn and confess Thee, Who art God glorified in all and by all, the unoriginate Father, with Thine Only-begotten Son, and Thine All-holy and good and life-creating Spirit, now and ever, and unto the ages of ages. Amen.
+      -->
+    {% endif %}
+    <p>O Master God, the Father Almighty, O Lord, the Only-begotten Son, Jesus Christ, and O Holy Spirit, one Godhead, one Power: Have mercy on me a sinner, and by the judgments which Thou knowest, save me, Thine unworthy servant; for blessed art Thou unto the ages of ages. Amen.</p>
+    {% if weekday == 5 %}
+      <p><i class="note">A Prayer of St. Eustratius:</i></p>
+      <p>Most highly do I magnify Thee, O Lord, for Thou didst take notice of my lowliness and hast not delivered me into the hands of mine enemies, but relieved my soul from wants. And now, O Master, let Thy hand shelter me and let Thy mercy descend upon me, for my soul is distracted and pained at its departure from this my wretched and filthy body, lest the evil design of the adversary overtake it and make it stumble into the darkness for the unknown and known sins amassed by me in this life. Be merciful unto me, O Master, and let not my soul see the dark countenances of the evil spirits, but let it be received by Thine Angels bright and shining. Glorify Thy holy name and by Thy might set me before Thy divine judgment seat. When I am being judged, suffer not that the hand of the prince of this world should take hold of me to throw me, a sinner, into the depths of hades, but stand by me and be unto me a savior and mediator, for these bodily torments gladden Thy servants. Have mercy, O Lord, on my soul defiled through the passions of this life and receive it cleansed by penitence and confession, for blessed art Thou unto the ages of ages. Amen.</p>
+    {% endif %}
+    <p>O come, let us worship God our King.
+      <br/>O come, let us worship and fall down before Christ our King and God.
+      <br/>O come, let us worship and fall down before Christ Himself, our King and God.
+    </p>
+    <h3>Psalm 120</h3>
+    <p>I have lifted up mine eyes to the mountains, from whence cometh my help. My help cometh from the Lord, Who hath made heaven and the earth. Give not thy foot unto moving, and may He not slumber that keepeth thee. Behold, He shall not slumber nor shall He sleep, He that keepeth Israel. The Lord shall keep thee; the Lord is thy shelter at thy right hand. The sun shall not burn thee by day, nor the moon by night. The Lord shall keep thee from all evil, the Lord shall guard thy soul. The Lord shall keep thy coming in and thy going out, from henceforth and for evermore.</p>
+    <h3>Psalm 133</h3>
+    <p>Behold now, bless ye the Lord, all ye servants of the Lord. Ye that stand in the house of the Lord, in the courts of the house of our God, in the nights lift up your hands unto the holies, and bless the Lord. The Lord bless thee out of Zion, He that made heaven and the earth.</p>
+    <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+    <p>Holy God, Holy Mighty, Holy Immortal, have mercy on us. <i class="note">Thrice.</i></p>
+    <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+    <p>O Most Holy Trinity, have mercy on us. O Lord, blot out our sins. O Master, pardon our iniquities. O Holy One, visit and heal our infirmities for Thy name's sake.</p>
+    <p>Lord have mercy. <i class="note">Thrice.</i></p>
+    <p>Glory to the Father and to the Son and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+    <p>Our Father, Who art in the Heavens, hallowed be Thy Name. Thy Kingdom come, Thy will be done, on earth as it is in Heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors; and lead us not into temptation, but deliver us from the evil one.</p>
+    <p>O Lord, Jesus Christ, Son of God, have mercy on us. Amen. </p>
+    <p><i class="note">And these troparia:</i></p>
+    <p>Tone 2: Remember, O Lord, for Thou art good, Thy servants and forgive them whatsoever sins they have committed in life; for none is sinless but Thee Who art able to give repose unto them that are departed.</p>
+    <p>O Thou Who by the depth of Thy wisdom dost provide all things out of love for mankind, and grantest unto all that which is profitable, O only Creator: Grant rest, O Lord, to the souls of Thy servants; for in Thee have they placed their hope, O our Creator and Fashioner and God.</p>
+    <p>Glory to the Father and to the Son and to the Holy Spirit.</p>
+    <p><i class="note">Kontakion:</i></p>
+    <p>With the saints give rest, O Christ, to the souls of Thy servants, where there is neither sickness, nor sorrow, nor sighing, but life everlasting.</p>
+    <p>Both now and ever, and unto the ages of ages. Amen.</p>
+    <p><i class="note">Theotokion:</i></p>
+    <p>In all generations we call thee blessed, O Virgin Theotokos, for in thee the uncontainable Christ our God was pleased to be contained. Blessed are we also, having thee as mediatress; for day and night pleadest thou for us, and the scepters of kingdoms are strengthened by thine intercessions. Wherefore in hymns we cry unto thee: Rejoice! O thou who art full of grace, the Lord is with thee.</p>
+    <p>Lord, have mercy. <i class="note">Twelve Times.</i> And this Prayer:</p>
+    <p>Remember, O Lord, our fathers and brethren who fell asleep in the hope of resurrection unto life eternal, and all those who ended this life in piety and faith, and pardon them every transgression which they have willingly or unwillingly, in word or deed or thought committed, and settle them in a place of light, a place of refreshment, a place of repose, wherefrom every sickness, sorrow and sighing are banished, and wherein from eternity the light of Thy countenance shineth and gladdeneth all Thy saints. Grant unto them and unto us Thy kingdom, and participation in Thine ineffable blessings, and the enjoyment of Thine endless and blessed life. For Thou art the life, and the resurrection, and the repose of Thy departed servants, O Christ our God, and to Thee we send up glory, with Thine unoriginate Father, and Thy most holy and good and life-creating Spirit, now and ever, and unto the ages of ages. Amen.</p>
+    <p>Most glorious, Ever-Virgin, Mother of Christ God, present our prayer to thy Son and our God, that through thee, He may save our souls.</p>
+    <p>My hope is the Father, my refuge is the Son, my protection is the Holy Spirit: O Holy Trinity, glory to Thee.</p>
+  {% endif %}
+  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
+  <p>Lord, have mercy. <i class="note">Thrice.</i></p>
+  <p>O Lord, bless.</p>
+  <p><i class="note">Facing East:</i> O Lord Jesus Christ, Son of God, for the sake of the prayers of Thy most pure Mother, our holy and God-bearing fathers, and all the saints, have mercy on us and save us, for Thou art good and the Lover of mankind. Amen.</p>
+  <p>Remit, pardon, forgive, O God, our offenses, both voluntary and involuntary, in deed and word, in knowledge and ignorance, by day and by night, in mind and thought; forgive us all things, for Thou art good and the Lover of mankind. Amen.</p>
+  <p>O Lord, Lover of mankind, forgive them that hate and wrong us. Do good to them that do good. Grant our brethren and kindred their saving petitions and life eternal; visit the infirm and grant them healing. Guide those at sea. Journey with them that travel. Help Orthodox Christians to struggle. To them that serve and are kind to us grant remissions of sins. On them that have charged us, the unworthy, to pray for them, have mercy according to Thy great mercy. Remember, O Lord, our fathers and brethren departed before us, and grant them rest where the light of Thy countenance shall visit them. Remember, O Lord, our brethren in captivity, and deliver them from every misfortune. Remember, O Lord, those that bear fruit and do good works in Thy holy churches, and grant them their saving petitions and life eternal. Remember also, O Lord, us Thy lowly and sinful and unworthy servants, and enlighten our minds with the light of Thy knowledge, and guide us in the way of Thy commandments; through the intercessions of our most pure Lady, the Theotokos and Ever-Virgin Mary, and of all Thy saints, for blessed art Thou unto the ages of ages. Amen.</p>
+  <p>Lord, have mercy. <i class="note">Thrice.</i></p>
+  <p>Through the prayers of our holy fathers, O Lord Jesus Christ our God, have mercy on us. Amen.</p>
+</div>
