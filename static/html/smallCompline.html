@@ -35,8 +35,9 @@
   <h3>The Symbol of Faith</h3>
   <p>I believe in one God, the Father Almighty, Maker of heaven and earth and of all things visible and invisible. And in one Lord Jesus Christ, the Son of God, the Only-begotten, begotten of the Father before all ages; Light of Light, true God of true God; begotten, not made; of one essence with the Father, by Whom all things were made; Who for us men and for our salvation came down from the heavens, and was incarnate of the Holy Spirit and the Virgin Mary, and became man; And was crucified for us under Pontius Pilate, and suffered and was buried; And arose again on the third day according to the Scriptures; And ascended into the heavens, and sitteth at the right hand of the Father; And shall come again, with glory, to judge both the living and the dead; Whose kingdom shall have no end. And in the Holy Spirit, the Lord, the Giver of life; Who proceedeth from the Father; Who with the Father and the Son together is worshipped and glorified; Who spake by the prophets. In One, Holy, Catholic, and Apostolic Church. I confess one baptism for the remission of sins. I look for the resurrection of the dead, And the life of the age to come. Amen.</p>
   <hr/>
-  <h2>Canon</h2>
-  <div class="compline-canon"></div>
+  {% for ode in variables.odes %}
+    {{ ode|safe }}
+  {% endfor %}
   <hr/>
   <p>It is truly meet to bless thee, the Theotokos, ever blessed and most blameless, and Mother of our God. More honorable than the Cherubim, and beyond compare more glorious than the Seraphim, who without corruption gavest birth to God the Word, the very Theotokos, thee do we magnify.</p>
   <p>Holy God, Holy Mighty, Holy Immortal, have mercy on us. <i class="note">Thrice.</i></p>
@@ -46,44 +47,10 @@
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <p>Our Father, Who art in the Heavens, hallowed be Thy Name. Thy Kingdom come, Thy will be done, on earth as it is in Heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors. And lead us not into temptation, but deliver us from the evil one.</p>
   <p>O Lord, Jesus Christ, Son of God, have mercy on us. Amen.</p>
-  <p><i class="note">The Daily Troparion:</i><p>
-
-  On Sunday night:
-  <p>Supreme Commanders of the Heavenly Hosts, we unworthy ones implore you that by your supplications ye will encircle us with the shelter of the wings of your immaterial glory, and guard us who fall down before you and fervently cry: Deliver us from dangers since ye are the Marshals of the Hosts on high.</p>
-
-  On Monday night:
-  <p>The memory of the righteous is celebrated with hymns of praise, but the Lord's testimony is sufficient for thee, O Forerunner; for thou hast proved to be even more venerable than the prophets since thou wast granted to baptize in the running waters Him Whom they proclaimed. Wherefore, having contested for the truth, thou didst rejoice to announce the good tidings even to those in Hades; that God hath appeared in the flesh, taking away the sin of the world and granting us great mercy.</p>
-
-  On Tuesday night:
-  <p>Save, O Lord, Thy people, and bless Thine inheritance; grant Thou unto Orthodox Christians victory over enemies; and by the power of Thy Cross do Thou preserve Thy commonwealth.·</p>
-
-  On Wednesday night:
-  <p>O holy Apostles, intercede with the merciful God, that He grant unto our souls forgiveness of offenses.</p>
-  <p>And to St. Nicholas, Fourth Tone:</p>
-  <p>The truth of things hath revealed thee to thy flock as a rule of faith, an icon of meekness and a teacher of temperance; therefore thou hast achieved the heights by humility, riches by poverty. O Father and Hierarch Nicholas, intercede with Christ God that our souls be saved.</p>
-
-  On Thursday night:
-  <p>Save, O Lord, Thy people, and bless Thine inheritance; grant Thou unto Orthodox Christians victory over enemies; and by the power of Thy Cross do Thou preserve Thy commonwealth.</p>
-
-  Then, Sunday night through Thursday night (if simple service):
-  <p>O God of our fathers, Who ever dealest with us according to Thy kindness, do not withdraw Thy mercy from us, but through their intercessions guide our life in peace.</p>
-  <p>Adorned in the blood of Thy martyrs throughout all the world, as in purple and fine linen, Thy Church, through them, doth cry unto Thee, O Christ God: Send down Thy compassions upon Thy people; grant to Thy community, and to our souls great mercy.</p>
-  <p>Glory to the Father, and to the Son, and to the Holy Spirit.</p>
-  <p>With the saints give rest, O Christ, to the souls of Thy servants, where there is neither sickness, nor sorrow, nor sighing, but life everlasting.</p>
-  <p>Both now and ever, and unto the ages of ages. Amen.</p>
-  <p>Through the intercessions, O Lord, of all the saints and the Theotokos, grant us Thy peace, and have mercy on us, as Thou alone art compassionate.</p>
-
-  On Friday night:
-  <p>O Apostles, Martyrs, and Prophets, Venerable and Righteous Ones; ye that have accomplished a good labor and kept the Faith, that have boldness before the Savior; O Good Ones, intercede for us, we pray, that our souls be saved.</p>
-  <p>Glory to the Father and to the Son, and to the Holy Spirit.</p>
-  <p>With the saints give rest, O Christ, to the souls of Thy servants, where there is neither sickness, nor sorrow, nor sighing, but life everlasting.</p>
-  <p>Both now and ever, and unto the ages of ages. Amen.</p>
-  <p>To Thee, O Lord, the Planter of creation, the world doth offer the God-bearing martyrs as the first-fruits of nature. By their intercessions preserve Thy Church, Thy commonwealth, in profound peace, through the Theotokos, O Greatly-merciful One.</p>
-
+  <p><i class="note">The Daily Troparion:</i></p>
   <!--The troparion for a church patron saint is not said on Saturdays. On Saturday at Compline, the troparion and Kontakion of the Resurrection in the occurring tone are read.
   IT SHOULD BE KNOWN: that from the Sunday of the Publican and the Pharisee, and during all of the Holy Great Lent, on all Saturdays at Compline the Kontakion of the Resurrection is not read, but rather the one from the Triodion (except the fifth week of Lent), as also during the Holy Pentecost season on all days the Kontakion from the Pentecostarion is read, until the Sunday of All Saints. If there occur on Sunday a feast of the Lord, only the Kontakion of the feast is read. But if there be a feast of the Theotokos, or one of the saints that have a Polyeleos, or a great doxology, the Kontakion of the Resurrection is read, but that of the occurring feast or saint is omitted.-->
-  <div class="compline-kontakion"></div>
-
+  {{ variables.troparion|safe }}
   <p>Lord, have mercy. <i class="note"> Forty times</i></p>
   <p>Thou Who at all times and at every hour, in heaven and on earth, art worshipped and glorified, O Christ God, Who art long-suffering, plenteous in mercy, most compassionate, Who lovest the righteous and hast mercy on sinners, Who callest all to salvation through the promise of good things to come: Receive, O Lord, our prayers at this hour, and guide our life toward Thy commandments. Sanctify our souls, make chaste our bodies, correct our thoughts, purify our intentions, and deliver us from every sorrow, evil and pain. Compass us about with Thy holy angels, that, guarded and guided by their array, we may attain to the unity of the faith and the knowledge of Thine unapproachable glory; for blessed art Thou unto the ages of ages. Amen.</p>
   <p>Lord have mercy. <i class="note">Thrice.</i></p>

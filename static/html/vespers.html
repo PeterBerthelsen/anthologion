@@ -1,6 +1,6 @@
 <div class="service" id="vespers">
   <h1>Vespers</h1>
-  <h2 class="vespers-date"></h2>
+  {{ variables.night_date|safe }}
   <p class="note">
   If the Vespers was preceded by the Ninth Hour, then skip to "O come..."
   </p>
@@ -34,14 +34,16 @@
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <hr/>
   <h2>Kathisma Reading</h2>
-  <div class="vespers-kathisma"></div>
+  {% for id,part in variables.vespers_kathisma.items() %}
+    <div>{{ part|safe }}</div>
+  {% endfor %}
   <hr/>
   <p class="note">In place of the Little Litany, chant the following</p>
   <p>Lord have mercy. <i class="note">Twelve Times</i></p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <hr/>
   <h2>Lord, I Have Cried</h2>
-  <div class="vespers-stichera-tone"></div>
+  {{ variables.stichera_tone|safe }}
   <h4>Psalm 140</h4>
   <p>Lord, I have cried unto Thee, hearken unto me.* Hearken unto me, O Lord.* Lord, I have cried unto Thee, hearken unto me;* attend to the voice of my supplication,* when I cry unto Thee.* Hearken unto me, O Lord.</p>
   <p>Let my prayer be set forth* as incense before Thee,* the lifting up of my hands* as an evening sacrifice.* Hearken unto me, O Lord.</p>
@@ -67,45 +69,47 @@
   <p>Deliver me from them that persecute me, for they are stronger than I.</p>
   <p class="note">And the beginning of the stichoi...</p>
   <p>Bring my soul out of prison that I may confess Thy name.</p>
-  <div class="vespers-sticheron" id="10"></div>
+  {% if variables.stichera[-10] is defined %}{{ variables.stichera[-10]|safe }}{% endif %}
   <p>The righteous shall wait patiently for me* until Thou shalt reward me.</p>
-  <div class="vespers-sticheron" id="9"></div>
+  {% if variables.stichera[-9] is defined %}{{ variables.stichera[-9]|safe }}{% endif %}
   <h4>Psalm 129</h4>
   <p>Out of the depths have I cried unto Thee, O Lord;* O Lord, hear my voice.</p>
-  <div class="vespers-sticheron" id="8"></div>
+  {% if variables.stichera[-8] is defined %}{{ variables.stichera[-8]|safe }}{% endif %}
   <p>Let Thine ears be attentive* to the voice of my supplication.</p>
-  <div class="vespers-sticheron" id="7"></div>
+  {% if variables.stichera[-7] is defined %}{{ variables.stichera[-7]|safe }}{% endif %}
   <p>If Thou shouldest mark iniquities, O Lord, O Lord, who shall stand?* For with Thee there is forgiveness.</p>
-  <div class="vespers-sticheron" id="6"></div>
+  {% if variables.stichera[-6] is defined %}{{ variables.stichera[-6]|safe }}{% endif %}
   <p>For Thy name's sake have I patiently waited for Thee, O Lord; my soul hath waited patiently for Thy word,* my soul hath hoped in the Lord.</p>
-  <div class="vespers-sticheron" id="5"></div>
+  {% if variables.stichera[-5] is defined %}{{ variables.stichera[-5]|safe }}{% endif %}
   <p>From the morning watch until night, from the morning watch* let Israel hope in the Lord.</p>
-  <div class="vespers-sticheron" id="4"></div>
+  {% if variables.stichera[-4] is defined %}{{ variables.stichera[-4]|safe }}{% endif %}
   <p>For with the Lord there is mercy, and with Him is plenteous redemption;* and He shall redeem Israel out of all his iniquities.</p>
-  <div class="vespers-sticheron" id="3"></div>
+  {% if variables.stichera[-3] is defined %}{{ variables.stichera[-3]|safe }}{% endif %}
   <h4>Psalm 116</h4>
   <p>O praise the Lord, all ye nations;* praise Him, all ye peoples.</p>
-  <div class="vespers-sticheron" id="2"></div>
+  {% if variables.stichera[-2] is defined %}{{ variables.stichera[-2]|safe }}{% endif %}
   <p>For He hath made His mercy to prevail over us,* and the truth of the Lord abideth for ever.</p>
-  <div class="vespers-sticheron" id="1"></div>
+  {% if variables.stichera[-1] is defined %}{{ variables.stichera[-1]|safe }}{% endif %}
   <p>Glory to the Father, and to the Son, and to the Holy Spirit.</p>
-  <div class="vespers-doxastichon"></div>
+  {{ variables.doxastichon|safe }}
   <p>Both now and ever, and unto the ages of ages. Amen.</p>
-  <div class="vespers-theotokion"></div>
+  {{ variables.theotokion|safe }}
+  <hr/>
   <p>O Gladsome Light of the holy glory of the immortal, heavenly, holy, blessed Father, O Jesus Christ: Having come to the setting of the sun, having beheld the evening light, we praise the Father, the Son, and the Holy Spirit: God.  Meet it is for Thee at all times to be praised with gladsome voices, O Son of God, Giver of life.  Wherefore, the world doth glorify Thee.</p>
   <h3>The Daily Prokeimenon</h3>
-  <div class="vespers-prokeimenon"></div>
-  <div class="vespers-readings"></div>
+  {{ variables.prokeimenon|safe }}
+  {{ variables.readings|safe }}
   <!--<p class="note">In place of the Litany of Fervent Supplication, chant the following</p>
   <p>Lord have mercy. <i class="note">Forty Times</i></p>
   <p>Through the prayers of our holy Fathers, O Lord Jesus Christ our God, have mercy on us. Amen.</p>-->
+  <hr/>
   <p>Vouchsafe, O Lord, to keep us this evening without sin. Blessed art Thou, O Lord, the God of our Fathers, and praised and glorified is Thy name unto the ages. Amen.</p>
   <p>Let Thy mercy, O Lord, be upon us, according as we have hoped in Thee. Blessed art Thou, O Lord, teach me Thy statutes. Blessed art Thou, O Master, grant me understanding of Thy statutes. Blessed art Thou, O Holy One, enlighten me by Thy statutes. O Lord, Thy mercy endureth for ever; disdain not the works of Thy hands.</p>
   <p>Unto Thee is due praise, unto Thee is due song, unto Thee glory is due, to the Father, and to the Son, and to the Holy Spirit, now and ever, and unto ages of ages. Amen.</p>
   <p>Lord, have mercy. <i class="note">Twelve Times.</i></p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <h2>Aposticha</h2>
-  <div class="vespers-aposticha"></div>
+  {{ variables.aposticha|safe }}
   <h3>The Prayer of St. Symeon</h3>
   <p>Now lettest Thou Thy servant depart in peace, O Master,according to Thy word, for mine eyes have seen Thy salvation, which Thou hastprepared before the face of all peoples; a light of revelation for the Gentiles, andthe glory of Thy people Israel.</p>
   <p>Holy God, Holy Mighty, Holy Immortal, have mercy on us. <i class="note">Thrice.</i></p>
@@ -115,7 +119,7 @@
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <p>Our Father, Who art in the heavens, hallowed be Thy name. Thy kingdom come, Thy will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors; and lead us not into temptation, but deliver us from the evil one.</p>
   <p>O Lord, Jesus Christ, Son of God, have mercy on us. Amen.</p>
-  <div class="vespers-apolytichion"></div>
+  {{ variables.apolytichion|safe }}
   <h3>Dismissal</h3>
   <p>Establish, O God, the holy Orthodox Faith of Orthodox Christians, unto the ages of ages.</p>
   <p>More honourable than the Cherubim, and beyond compare more glorious than the Seraphim, who without corruption gavest birth to God the Word, the very Theotokos, thee do we magnify.</p>

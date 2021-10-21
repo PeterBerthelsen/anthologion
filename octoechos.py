@@ -1,6 +1,6 @@
 """
-Version 0.1.1
-Updated 10/14/2021
+Version 0.1.3
+Updated 10/21/2021
 
 Change Log:
 9/29/2021 - 0.0.1 - Initial Working Build - Web Scraping Added
@@ -12,6 +12,7 @@ Change Log:
 10/8/2021 - 0.0.8 - Integrated with _utils, Matins Regex & HTML formatting added
 10/13/2021 - 0.1.0 - Minor syntax updates for Vespers build
 10/14/2021 - 0.1.1 - Variables updated for Flask integration
+10/21/2021 - 0.1.3 - Updated variables, removed vespers prokeimenon from payload
 """
 import os
 import re
@@ -25,7 +26,6 @@ def string_search (input_string:str, start_searches:list=[], end_searches:list=[
     (at start position) for each search until a result is given.
     returns list: [starting location found (int), processed string with no search term]
     """
-    print(f'string_search initiated for input: {input_string[:30]}...')
     i = -1 #iterators will start at 0 in loop
     j = -1 #iterating after would mess up the return section by 1 index position
     begin = -1 #find method returns -1 if no result is found
@@ -35,18 +35,15 @@ def string_search (input_string:str, start_searches:list=[], end_searches:list=[
             i += 1 #iterate...
             begin = input_string.find(start_searches[i],start_position)
     except: #error thrown if all begin searches fail (index error)
-        print(f'No start found')
         return [0,input_string]
     try:
         while end == -1: #again, while no result is found...
             j += 1 #iterate...
             end = input_string.find(end_searches[j],start_position)
     except:  #error thrown if all end searches fail (index error)
-        print(f'start {begin} found, but no end')
         output = input_string[begin + len(start_searches[i]):]
         return [begin, output]
     #successfully found begin and end, returning processed string.
-    print(f'start {begin}, end {end} found')
     output = input_string[begin + len(start_searches[i]):end]
     return [begin, output]
 
@@ -206,10 +203,10 @@ def octoechos_vespers (service:str):
     vespers_theotokion = '<p><i class="note">' + vespers_theotokion.replace('on: ','on</i><br />').replace('tic:','tic</i><br />') + '</p>' #HTML formatting
     vespers_theotokion = vespers_theotokion.replace('in the same tone:','in the same tone</i><br />') #HTML formatting
     #   ---
-    vespers_prokeimenon = re.sub(r'\nVouchsafe.*','',vespers_prokeimenon).strip() #remove service instructions after prokeimenon text
-    vespers_prokeimenon = re.sub(r'^the','The',vespers_prokeimenon).strip() #capitalize The, remove white space
-    vespers_prokeimenon = '<p class="note">' + re.sub(r':\s\n','</p><p>',vespers_prokeimenon) #HTML formatting
-    vespers_prokeimenon = re.sub(r'\.\s\nVerse: ','</p><p>Verse: ',vespers_prokeimenon) + '</p>' #HTML formatting
+    # vespers_prokeimenon = re.sub(r'\nVouchsafe.*','',vespers_prokeimenon).strip() #remove service instructions after prokeimenon text
+    # vespers_prokeimenon = re.sub(r'^the','The',vespers_prokeimenon).strip() #capitalize The, remove white space
+    # vespers_prokeimenon = '<p class="note">' + re.sub(r':\s\n','</p><p>',vespers_prokeimenon) #HTML formatting
+    # vespers_prokeimenon = re.sub(r'\.\s\nVerse: ','</p><p><i class="note">Verse:</i> ',vespers_prokeimenon) + '</p>' #HTML formatting
     #   ---
     vespers_aposticha = re.sub(r'Glory from the Menaion.*?$','',vespers_aposticha) #removes instructions
     vespers_aposticha = re.sub(r'^the','The',vespers_aposticha).strip() #capitalize The, remove white space
@@ -228,11 +225,13 @@ def octoechos_vespers (service:str):
 
     #build service dictionary parts for payload
     vespers_parts['stichera'] = vespers_stichera
-    vespers_parts['stichera tone'] = vespers_stichera_tone
+    vespers_parts['stichera_tone'] = vespers_stichera_tone
+    vespers_parts['doxastichon'] = ''
     vespers_parts['theotokion'] = vespers_theotokion
-    vespers_parts['prokeimenon'] = vespers_prokeimenon
+    #vespers_parts['prokeimenon'] = vespers_prokeimenon #handled by hymns.py
     vespers_parts['aposticha'] = vespers_aposticha
     vespers_parts['apolytichion'] = vespers_apolytichion
+    vespers_parts['readings'] = ''
 
     return vespers_parts
 
@@ -429,68 +428,3 @@ def octoechos_matins (service:str):
     matins_parts['aposticha'] = matins_aposticha
 
     return matins_parts
-
-
-# if __name__ == '__main__':
-#     tt = [1,2,3,4,5,6,7,8]
-#     dd = [1,2,3,4,5,6,7]
-#     tt = [1]
-#     dd = [7]
-#     with open('results.html', 'wt', encoding='utf-8') as f:
-#         for t in tt:
-#             for d in dd:
-#                 file = f'{t}-{d}'
-#                 octoechos = octoechos_variables(process_pdf(file))
-#                 vfil = open('docs/html/vespers.html')
-#                 vespers = BeautifulSoup(vfil, 'html.parser')
-#                 aposticha = vespers.select_one('.vespers-aposticha')
-#                 aposticha_octoechos = BeautifulSoup(octoechos.get('vespers').get('aposticha'),'html.parser')
-#                 aposticha.append(aposticha_octoechos)
-#                 f.write(vespers.prettify())
-
-    #     f.write('<head><link rel="stylesheet" href="docs\css\main.css"></head>')
-    #     for t in tt:
-    #         for d in dd:
-    #             tone = t
-    #             sergius_day = d
-    #             file = f'{tone}-{sergius_day}'
-                #octoechos_url = f'http://www.st-sergius.org/services/oktiochos/{tone}-{sergius_day}.pdf'
-                #print(f'---------------------------------\n{t}/{d}')
-                # octoechos = octoechos_variables(process_pdf(file))
-
-
-
-                #octoechos = octoechos_variables(process_pdf(OCTOECHOS,))
-                # f.write('<h1>Tone ' + str(t) + ', Day ' + str(d) + '</h1>')
-                # print(octoechos.get('vespers').get('stichera tone'))
-
-                # try:
-                #     f.write(f'<h3>Resurrection Troparion</h3>')
-                #     f.write(octoechos.get('matins').get('resurrection'))
-                # except:
-                #     f.write(f'<p>There is no Resurrectional Troparion Appointed...</p>')
-                # f.write(f'<h3>First Sessional Hymn</h3>')
-                # f.write(octoechos.get('matins').get('session1'))
-                # f.write(f'<h3>Second Sessional Hymn</h3>')
-                # f.write(octoechos.get('matins').get('session2'))
-                # try:
-                #     f.write(f'<h3>Third Sessional Hymn</h3>')
-                #     f.write(octoechos.get('matins').get('session3'))
-                # except:
-                #     f.write(f'<p>There is no 3rd Sessional Hymn Appointed...</p>')
-                # try:
-                #     f.write(f'<h3>Hymns of Ascent</h3>')
-                #     f.write(octoechos.get('matins').get('ascent'))
-                #     f.write(f'<h3>Prokeimenon</h3>')
-                #     f.write(octoechos.get('matins').get('prokeimenon'))
-                # except:
-                #     f.write(f'<p>There are no Hymns of Ascent Appointed...</p>')
-                # f.write('<div class="canon-ode">')
-                # f.write(octoechos.get('matins').get('canon'))
-                # f.write('</div>')
-                # try:
-                #     f.write('<h3>The Praises (Lauds)</h3>')
-                #     f.write(octoechos.get('matins').get('praises'))
-                # except:
-                #     f.write('There are no Praises Appointed...')
-                #f.write(octoechos.get('matins').get('aposticha'))

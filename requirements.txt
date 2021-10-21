@@ -15,17 +15,14 @@ Jinja2==3.0.2
 MarkupSafe==2.0.1
 MouseInfo==0.1.3
 parso==0.8.2
-pdf2image==1.16.0
 Pillow==8.3.2
 PyAutoGUI==0.9.53
 PyGetWindow==0.0.9
 PyMsgBox==1.0.9
 PyMuPDF==1.18.19
-PyPDF2==1.26.0
 pyperclip==1.8.2
 PyRect==0.1.4
 PyScreeze==0.1.28
-pytesseract==0.3.8
 pytweening==1.0.4
 requests==2.26.0
 soupsieve==2.2.1

@@ -1,6 +1,6 @@
 """
-Version 0.1.1
-Updated 10/14/2021
+Version 0.1.3
+Updated 10/21/2021
 
 Change Log:
 10/11/2021 - 0.0.8 - Initial Creation, Vespers elements
@@ -8,20 +8,17 @@ Change Log:
 10/13/2021 - 0.0.9 - Tone of the week added to Paschalion
 10/13/2021 - 0.1.0 - Initial build of Vespers service complete
 10/14/2021 - 0.1.1 - Updated variables for Flask integration
+10/21/2021 - 0.1.3 - Updated generate_day for templating, added exception handling
+                    -Deleted vespers() and is_leap_year()
 """
 import os
-from prokeimena import vespers_prokeimena
+from flask import render_template
+from hymns import vespers_prokeimena, compline_troparia
 from kathisma import parse_kathisma
 from datetime import datetime, timedelta, date
 from octoechos import octoechos_variables
 from _utils import process_pdf
 from bs4 import BeautifulSoup
-
-def is_leap_year(year):
-    """
-    Determine whether given a year is a leap year.
-    """
-    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
 
 def paschalion(month, day, year):
     """
@@ -36,7 +33,6 @@ def paschalion(month, day, year):
     moveable_dates = {}
     T = datetime(year,month,day)
     Y = year
-    L = is_leap_year(Y)
     #Offset for Old Calendar
     if Y <= 2099:
         O = 13
@@ -137,56 +133,43 @@ def rubrics(rank:int, octoechos=None, menaion=None, paschal=None):
     if rank == 7: #simple service
         return octoechos
 
-def vespers(date:str, parts:dict, kathisma_number:int, weekday:int):
-    vfil = open('static/html/vespers.html') #html template
-    vespers = BeautifulSoup(vfil, 'html.parser') #service html
-    vdate = vespers.select_one('.vespers-date') #date field from service html
-    stichera = vespers.select('.vespers-sticheron') #list of stichera from service html
-    theotokion = vespers.select_one('.vespers-theotokion') #theotokion field from service html
-    kathisma = vespers.select_one('.vespers-kathisma') #kathisma field from service html
-    prokeimenon = vespers.select_one('.vespers-prokeimenon') #prokeimenon field from service html
-    aposticha = vespers.select_one('.vespers-aposticha') #aposticha field from service html
-    apolytichion = vespers.select_one('.vespers-apolytichion') #apolytichion field from service html
-
-    #Iterate in reverse through sticheron divs inserting stichera grabbed in reverse order
-    for s, p in zip(stichera[::-1], parts.get('vespers').get('stichera')[::-1]):
-        try:
-            s.append(BeautifulSoup(p, 'html.parser'))
-        except IndexError:
-            pass
-    kathisma_reading = parse_kathisma(kathisma_number)
-    kathisma_html = kathisma_reading.get('title')+kathisma_reading.get(1)+kathisma_reading.get(2)+kathisma_reading.get(3)
-    vdate.append(BeautifulSoup(date, 'html.parser'))
-    theotokion.append(BeautifulSoup(parts.get('vespers').get('theotokion'),'html.parser'))
-    kathisma.append(BeautifulSoup(kathisma_html, 'html.parser'))
-    prokeimenon.append(BeautifulSoup(vespers_prokeimena(weekday), 'html.parser'))
-    aposticha.append(BeautifulSoup(parts.get('vespers').get('aposticha'),'html.parser'))
-    apolytichion.append(BeautifulSoup(parts.get('vespers').get('apolytichion'),'html.parser'))
-
-    return vespers.prettify()
-
 def generate_day(month=None, day=None, year=None, calendar=1):
-    """
-    Takes a date value, and determines service rank & resources needed
-    Calendar (0=New/1=Old)
-    """
-    #convert strings to int
-    month = int(month) if type(month) == str else month
-    day = int(day) if type(day) == str else day
-    year = int(year) if type(year) == str else year
-    calendar = int(calendar) if type(calendar) == str else calendar
+    try:
+        #convert strings to int
+        month = int(month) if type(month) == str else month
+        day = int(day) if type(day) == str else day
+        year = int(year) if type(year) == str else year
+    except ValueError: #If string value contains non-int values
+        month = day = year = None
+    try: #calendar handled separately
+        calendar = int(calendar) if type(calendar) == str else calendar
+    except ValueError: #If string value contains non-int values
+        calendar = None
 
     today = datetime.today()
     month = month if month else today.month
     day = day if day else today.day
     year = year if year else today.year
-    service_date = date(year=year,month=month,day=day)
-    date_oc = service_date - timedelta(days=13)
-    liturgical_day = paschalion(month=month, day=day, year=year)
+
+    try:
+        #create service day variables
+        service_date = date(year=year,month=month,day=day)
+        date_oc = service_date - timedelta(days=13)
+        liturgical_day = paschalion(month=month, day=day, year=year)
+    except ValueError: #If month/day/year value passed was too large/small
+        #forcing variables to match current day
+        month = today.month
+        day = today.day
+        year = today.year
+        service_date = date(year=year,month=month,day=day)
+        date_oc = service_date - timedelta(days=13)
+        liturgical_day = paschalion(month=month, day=day, year=year)
+
     tone = liturgical_day.get('weekly_tone')
+    weekday = service_date.weekday()
 
     if tone: #If a tone is returned, we need octoechos, so we need sergius day for file format.
-        sergius_day = service_date.weekday() + 2 if service_date.weekday() < 6 else service_date.weekday() - 5
+        sergius_day = weekday + 2 if weekday < 6 else weekday - 5
         octoechos_file = f'{tone}-{sergius_day}'
     octoechos = octoechos_variables(process_pdf(filename=octoechos_file,service='octoechos')) if tone else None
 
@@ -219,36 +202,58 @@ def generate_day(month=None, day=None, year=None, calendar=1):
 
     """
     Logic will be added here to gather feast days from above dictionaries to determine rank...
+    Will need variable logic for OC NC for menaion.
     Also needed for Triodion/Pentecostarion (for paschal variable on rubrics)...
     Until then, simple services via octoechos will be generated.
     """
     rank = 7
 
+    liturgics = {} #dictionary for return
+
     #variables = rubrics(etc, etc,)
     #for now, just octoechos
     variables = octoechos
+    #create Vespers - add extra variables, render template, add to output
+    vespers_variables = variables.get('vespers')
+    vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(service_date.weekday())[0])
+    vespers_variables['night_date'] = night_string_oc
+    vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
+    vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday)
+    liturgics['vespers'] = vespers
 
-    html = '<head><link href="../static/css/main.css" rel="stylesheet"/>'
-    html += '<link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}"></head>'
-    html += '<body><div id="wrapper"><div id="main"><section class="post">'
+    compline_variables = variables.get('compline')
+    compline_variables['troparion'] = compline_troparia(weekday=weekday, rank=rank)
+    compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
+    liturgics['compline'] = compline
 
-    #Generating Vespers
-    if calendar == 0: #New Calendar
-        html += vespers(
-            date=night_string
-            ,parts=variables
-            ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
-            ,weekday=service_date.weekday()
-        )
-    else: #Old Calendar
-        html += vespers(
-            date=night_string_oc
-            ,parts=variables
-            ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
-            ,weekday=service_date.weekday()
-        )
-    html += '</section></div></div></body>'
-    return html
-#
-# with open('docs/html/test.html', 'wt', encoding='utf-8') as f:
-#     f.write(generate_day(calendar=0))
+    #nocturns = variables.get('nocturns')
+    #matins = variables.get('matins')
+
+    #services = [vespers,compline,nocturns,matins]
+
+    return liturgics
+
+
+
+    #Build The Services
+    # if calendar == 0: #New Calendar
+    #     #Vespers
+    #     html += vespers(
+    #         date=night_string
+    #         ,parts=variables
+    #         ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
+    #         ,weekday=service_date.weekday()
+    #     )
+    #     #Compline
+
+    # else: #Old Calendar
+    #     html += vespers(
+    #         date=night_string_oc
+    #         ,parts=variables
+    #         ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
+    #         ,weekday=service_date.weekday()
+    #     )
+    #     #Compline
+    #
+    # html += ''
+    # return html

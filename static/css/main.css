@@ -398,7 +398,7 @@ input, select, textarea {
   		position: relative;
   		margin: 0 auto;
   		width: calc(100% - 4rem);
-  		max-width: 72rem;
+  		max-width: 90rem;
   		z-index: 2;
   	}
 
@@ -417,7 +417,7 @@ input, select, textarea {
   		}
 
   		#main > .post {
-  			padding: 8rem 8rem 6rem 8rem ;
+  			padding: 4rem 4rem 3rem 4rem ;
   		}
 
   			#main > .post header.major > .date {
@@ -437,7 +437,7 @@ input, select, textarea {
   			@media screen and (max-width: 1280px) {
 
   				#main > .post {
-  					padding: 6rem 4rem 4rem 4rem ;
+  					padding: 1.5rem 1rem 1rem 1rem ;
   				}
 
   			}
@@ -445,7 +445,7 @@ input, select, textarea {
   			@media screen and (max-width: 736px) {
 
   				#main > .post {
-  					padding: 4rem 2rem 2rem 2rem ;
+  					padding: 1.5rem 1rem 1rem 1rem ;
   				}
 
   					#main > .post header.major > .date {

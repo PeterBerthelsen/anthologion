@@ -1,0 +1,19 @@
+<head>
+  <link href="../static/css/main.css" rel="stylesheet"/>
+  <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
+</head>
+<body>
+  <div id="wrapper">
+    <div id="main">
+      <section class="post">
+        {{ liturgics.vespers|safe }}
+        <hr/>
+        {{ liturgics.compline|safe }}
+        <hr/>
+        {{ liturgics.nocturns|safe }}
+        <hr/>
+        {{ liturgics.matins|safe }}
+      </section>
+    </div>
+  </div>
+</body>
