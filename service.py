@@ -232,9 +232,16 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     nocturns_variables['date'] = day_string_oc
     nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
     liturgics['nocturns'] = nocturns
-    #matins = variables.get('matins')
 
-    #services = [vespers,compline,nocturns,matins]
+    matins_variables = variables.get('matins')
+    matins_variables['kathisma1'] = parse_kathisma(kathisma_rubric.get(weekday)[2][0])
+    matins_variables['kathisma2'] = parse_kathisma(kathisma_rubric.get(weekday)[2][1])
+    matins_variables['date'] = day_string_oc
+    matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank)
+    liturgics['matins'] = matins
+
+    #don't forget liturgy stuff for typica!
+
 
     return liturgics
 

@@ -1,6 +1,6 @@
 """
-Version 0.1.3
-Updated 10/21/2021
+Version 0.1.4
+Updated 10/26/2021
 
 Change Log:
 9/29/2021 - 0.0.1 - Initial Working Build - Web Scraping Added
@@ -13,6 +13,7 @@ Change Log:
 10/13/2021 - 0.1.0 - Minor syntax updates for Vespers build
 10/14/2021 - 0.1.1 - Variables updated for Flask integration
 10/21/2021 - 0.1.3 - Updated variables, removed vespers prokeimenon from payload
+10/26/2021 - 0.1.4 - Added Liturgy variables
 """
 import os
 import re
@@ -53,8 +54,6 @@ def octoechos_variables (input_string:str):
     Text is divided at common breakpoints from PDFs, then formatted for use.
     Returns list with variables at set index locations.
     """
-
-    liturgy_parts = {}
 
     #Establish Beginnings
     #Header text has font shadows, so lettering is often doubled
@@ -112,7 +111,7 @@ def octoechos_variables (input_string:str):
         'vespers': octoechos_vespers(vespers_service)
         ,'compline': octoechos_compline(compline_service)
         ,'matins': octoechos_matins(matins_service)
-        ,'liturgy': liturgy_parts
+        ,'liturgy': octoechos_liturgy(liturgy_service)
     }
     if nocturns_service:
         payload['nocturns'] = octoechos_compline(nocturns_service)
@@ -360,7 +359,7 @@ def octoechos_matins (service:str):
     matins_session1 = re.sub(r'^.*?</p>',r'',matins_session1) #removes all content up to & including vestigial p close tag
     matins_parts['session1'] = matins_session1
     #Sessional Hymns 2
-    matins_session2 = re.sub(r'([Vv]erse:|[A-Za-z]*[Tt]heotokion:|[Ss]essional [Hh]ymn.*:|[Tt]o [Tt]he [Mm]artyrs.*:|[Ss]pec\.\s*Mel\.:.*:)',r'<i class="note">\1</i>',matins_session2) #service notes
+    matins_session2 = re.sub(r'([Vv]erse:|[A-Za-z]*[Tt]heotokion:|[Ss]essional [Hh]ymn.*:|[Tt]o [Tt]he [Mm]artyrs.*:|[Ss]pec\.\s*Mel\.:.*:)',r'</p><p><i class="note">\1</i>',matins_session2) #service notes
     matins_session2 = re.sub(r'([^\w,*\?;]) \n',r'\1 \n</p><p>',matins_session2).replace('\n','')  #close paragraphs after punctuation+line breaks, remove line breaks
     matins_session2 = re.sub(r'<p>\s*If a polyeleos.*',r'',matins_session2, flags=re.I) #remove extra content starting at polyeleos (Sundays)
     matins_session2 = re.sub(r'<p>\s*After the 3rd.?\s+chant.*',r'',matins_session2, flags=re.I) #remove extra content starting at 3rd Sessional hymn
@@ -428,3 +427,48 @@ def octoechos_matins (service:str):
     matins_parts['aposticha'] = matins_aposticha
 
     return matins_parts
+
+def octoechos_liturgy(service:str):
+    """
+    Formats liturgy-specific service section and returns liturgy parts dictionary
+    """
+    #Dictionary for Return
+    liturgy_parts = {}
+    #Estalish Litury breakpoints
+    beatitudes_start = re.search(r'At The Liturgy Beatitudes', service, flags=re.I) #3-1 redundancy
+    beatitudes_start = re.search(r'(On the beatitudes|beatitudes)',service, flags=re.I) if not beatitudes_start else beatitudes_start
+    res_troparion_start = re.search(r'(resurrection troparion|troparion of the resurrection)', service, flags=re.I)
+    res_kontakion_start = re.search(r'(resurrection kontakion|kontakion of the resurrection)', service, flags=re.I)
+    prokeimenon_start = re.search(r'on (monday|tuesday|wednesday|thursday|friday|saturday|sunday)[, ]?',service, flags=re.I)
+    prokeimenon_start = re.search(r'Prokeimenon[, ]+',service) if not prokeimenon_start else prokeimenon_start
+    if res_troparion_start: #if resurrection troparion is present, end there, otherwise, the prokeimenon
+        troparia = service[beatitudes_start.start():res_troparion_start.start()]
+    else:
+        troparia = service[beatitudes_start.start():prokeimenon_start.start()]
+    troparia = re.sub(r'(.*?[Bb]eatitudes.*?[Tt]one [ivIV]+(?<!(:)\n))',r'\1:',troparia) #adding ':' missing from 3-1
+    troparia = re.sub(r'([Tt]one [ivIV]+.*?:)',r'\1|',troparia) #bar off tone tone for later split
+    troparia = re.sub(r'([Tt]heotokion:|[Mm]artyricon:|[Tt]o the [Mm]artyrs:|[Ff]or the [Rr]eposed:)',r'<i class="note">\1</i>',troparia,re.I)
+    troparia = re.sub(r'([!.?”"’])[ ]+?\n',r'\1|<i class="note">*</i>',troparia.strip(), flags=re.M).split('|') #split along new line
+    liturgy_parts['troparia_tone'] = '<p><i class="note">' + troparia.pop(0) + '</i></p>' #tone note as it's own variable
+    troparia = [re.sub(r'^: ',r'<i class="note">*</i>',t) for t in troparia] #removing excess ':' sometimes added
+    troparia = ['<p>' + re.sub(r'\n',r'',t.strip()) + '</p>' for t in troparia]
+
+    if res_troparion_start:
+        res_troparion = service[res_troparion_start.start():res_kontakion_start.start()]
+        res_troparion = re.sub(r'(([Tt]roparion of the [Rr]esurrection|[Rr]esurrection [Tt]roparion).*?:)',r'<p><i class="note">\1</i></p><p>',res_troparion.replace('\n','')) + '</p>'
+        liturgy_parts['resurrection_troparion'] = res_troparion
+        res_kontakion = service[res_kontakion_start.start():prokeimenon_start.start()]
+        res_kontakion = re.sub(r'(([Kk]ontakion of the [Rr]esurrection|[Rr]esurrection [Kk]ontakion).*?:)',r'<p><i class="note">\1</i></p><p>',res_kontakion.replace('\n','')) + '</p>'
+        res_kontakion = re.sub(r'The\s+</p>',r'</p>',res_kontakion) #'the' captured from 'The Prokeimenon' beginning needs to be removed.
+        liturgy_parts['resurrection_kontakion'] = res_kontakion
+
+    prokeimenon = service[prokeimenon_start.start():]
+    prokeimenon = re.sub(r'on (monday|tuesday|wednesday|thursday|friday|saturday|sunday).*?:\s+',r'',prokeimenon.replace('\n','').strip(),flags=re.I) #remove line breaks and extra label
+    prokeimenon = re.sub(r'communion verse:.*',r'',prokeimenon,flags=re.I) #remove communion verse and everything after
+    prokeimenon = re.sub(r'(the verse:|verse:|alleluia.*?:|and for the departed.*?:|prokeimenon.*?:)',r'</p><p><i class="note">\1</i>',prokeimenon,flags=re.I) #common line breaks needed
+
+    alleluia = '<p><i class="note">' + re.sub(r'.*(alleluia.*?:.*)',r'\1',prokeimenon,flags=re.I)
+    liturgy_parts['alleluia'] = alleluia
+
+    prokeimenon = re.sub(r'(.*)<p><i class="note">alleluia.*:.*',r'\1',prokeimenon,flags=re.I)
+    liturgy_parts['prokeimenon'] = prokeimenon

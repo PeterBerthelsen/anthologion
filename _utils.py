@@ -20,7 +20,7 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
     If initial method (local vs. web) fails, it will attempt the other.
     Returns string value of PDF text.
     """
-    print(f'process_pdf initiated for file: {filename}')
+    #print(f'process_pdf initiated for file: {filename}')
     payload = ''
     caller = inspect.stack()[1][1].split('\\')[-1][:-3] #name of file (no extension) calling function
     # for i in inspect.stack():
@@ -54,7 +54,7 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
                 return payload #return payload string
             else: #gather file from web
                 #if service is provided, grab from filepath, otherwise, use caller to determine...
-                print(f'opening local file: {os.path.join(dir,folder.get(service if service else caller),f)}')
+                #print(f'opening local file: {os.path.join(dir,folder.get(service if service else caller),f)}')
                 with fitz.open(os.path.join(dir,folder.get(service if service else caller),f)) as content:
                     for page in content: #read each page
                         payload += page.getText() #add each page to payload
