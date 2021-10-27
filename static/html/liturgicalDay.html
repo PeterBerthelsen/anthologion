@@ -5,7 +5,13 @@
 <body>
   <div id="wrapper">
     <div id="main">
-      <section class="post">
+      <section class="post" id="{{liturgics.link_date}}">
+        <h2>Contents</h2>
+        {% for link in liturgics.links %}
+          {{ link|safe }}
+        {% endfor %}
+        <hr/>
+        <h1>{{ liturgics.day_string }}</h1>
         {{ liturgics.vespers|safe }}
         <hr/>
         {{ liturgics.compline|safe }}

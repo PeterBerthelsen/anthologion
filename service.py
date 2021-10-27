@@ -1,5 +1,5 @@
 """
-Version 0.1.3
+Version 0.1.4
 Updated 10/21/2021
 
 Change Log:
@@ -10,6 +10,7 @@ Change Log:
 10/14/2021 - 0.1.1 - Updated variables for Flask integration
 10/21/2021 - 0.1.3 - Updated generate_day for templating, added exception handling
                     -Deleted vespers() and is_leap_year()
+10/27/2021 - 0.1.4 - Added table of contents to generate_day()
 """
 import os
 from flask import render_template
@@ -187,6 +188,7 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     #Date strings, used for text within HTML
     day_string = service_date.strftime('%m/%d/%Y')
     day_string_oc = day_string + ' / ' + date_oc.strftime('%m/%d/%Y')
+    link_date = service_date.strftime('%m%d%Y')
 
     #Night strings, used for Vespers service within HTML
     night_string = (service_date - timedelta(days=1)).strftime('%m/%d/%Y')
@@ -209,27 +211,37 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     rank = 7
 
     liturgics = {} #dictionary for return
+    liturgics['link_date'] = link_date
+    liturgics['day_string'] = day_string
+    links = [f'<h3><a href="#{link_date}">{day_string}</a></h3>']
 
     #variables = rubrics(etc, etc,)
     #for now, just octoechos
     variables = octoechos
+
     #create Vespers - add extra variables, render template, add to output
     vespers_variables = variables.get('vespers')
     vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[0])
     vespers_variables['night_date'] = night_string_oc
     vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
+    vespers_variables['link'] = f'{link_date}-vespers'
+    links.append(f'<h4><a href="#{link_date}-vespers">Vespers</a></h4>')
     vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday)
     liturgics['vespers'] = vespers
 
     compline_variables = variables.get('compline')
     compline_variables['troparion'] = compline_troparia(weekday=weekday, rank=rank)
     compline_variables['night_date'] = night_string_oc
+    compline_variables['link'] = f'{link_date}-compline'
+    links.append(f'<h4><a href="#{link_date}-compline">Compline</a></h4>')
     compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
     liturgics['compline'] = compline
 
     nocturns_variables = variables.get('nocturns', {})
     nocturns_variables['kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[1])
     nocturns_variables['date'] = day_string_oc
+    nocturns_variables['link'] = f'{link_date}-nocturns'
+    links.append(f'<h4><a href="#{link_date}-nocturns">Nocturns</a></h4>')
     nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
     liturgics['nocturns'] = nocturns
 
@@ -237,11 +249,14 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     matins_variables['kathisma1'] = parse_kathisma(kathisma_rubric.get(weekday)[2][0])
     matins_variables['kathisma2'] = parse_kathisma(kathisma_rubric.get(weekday)[2][1])
     matins_variables['date'] = day_string_oc
+    matins_variables['link'] = f'{link_date}-matins'
+    links.append(f'<h4><a href="#{link_date}-matins">Matins</a></h4>')
     matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank)
     liturgics['matins'] = matins
 
     #don't forget liturgy stuff for typica!
 
+    liturgics['links'] = links
 
     return liturgics
 
