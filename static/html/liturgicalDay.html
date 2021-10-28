@@ -8,26 +8,26 @@
       <section class="post" id="{{liturgics.link_date}}">
         <h2>Contents</h2>
         {% for link in liturgics.links %}
-          {{ link|safe }}
+          <h4>{{ link|safe }}</h4>
         {% endfor %}
         <hr/>
         <h1>{{ liturgics.day_string }}</h1>
         {{ liturgics.vespers|safe }}
-        <hr/>
+        {% if liturgics.vespers is defined %}<hr/>{% endif %}
         {{ liturgics.compline|safe }}
-        <hr/>
+        {% if liturgics.compline is defined %}<hr/>{% endif %}
         {{ liturgics.nocturns|safe }}
-        <hr/>
+        {% if liturgics.nocturns is defined %}<hr/>{% endif %}
         {{ liturgics.matins|safe }}
-        <hr/>
+        {% if liturgics.matins is defined %}<hr/>{% endif %}
         {{ liturgics.first|safe }}
-        <hr/>
+        {% if liturgics.first is defined %}<hr/>{% endif %}
         {{ liturgics.third|safe }}
-        <hr/>
+        {% if liturgics.third is defined %}<hr/>{% endif %}
         {{ liturgics.sixth|safe }}
-        <hr/>
+        {% if liturgics.sixth is defined %}<hr/>{% endif %}
         {{ liturgics.typika|safe }}
-        <hr/>
+        {% if liturgics.typika is defined %}<hr/>{% endif %}
         {{ liturgics.ninth|safe }}
       </section>
     </div>

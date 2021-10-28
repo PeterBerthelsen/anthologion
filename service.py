@@ -13,6 +13,7 @@ Change Log:
 10/27/2021 - 0.1.4 - Added table of contents to generate_day()
 """
 import os
+import re
 from flask import render_template
 from hymns import vespers_prokeimena, compline_troparia
 from kathisma import parse_kathisma
@@ -134,7 +135,9 @@ def rubrics(rank:int, octoechos=None, menaion=None, paschal=None):
     if rank == 7: #simple service
         return octoechos
 
-def generate_day(month=None, day=None, year=None, calendar=1):
+
+
+def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     try:
         #convert strings to int
         month = int(month) if type(month) == str else month
@@ -145,12 +148,24 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     try: #calendar handled separately
         calendar = int(calendar) if type(calendar) == str else calendar
     except ValueError: #If string value contains non-int values
-        calendar = None
+        calendar = 1
 
     today = datetime.today()
     month = month if month else today.month
     day = day if day else today.day
     year = year if year else today.year
+
+    #establish custom schedule
+    schedule = schedule if schedule else 'vcnm136t9'
+    do_vespers = re.search(r'v',schedule,flags=re.I)
+    do_compline = re.search(r'c',schedule,flags=re.I)
+    do_nocturns = re.search(r'n',schedule,flags=re.I)
+    do_matins = re.search(r'm',schedule,flags=re.I)
+    do_typika = re.search(r't',schedule,flags=re.I)
+    do_first = re.search(r'1',schedule,flags=re.I)
+    do_third = re.search(r'3',schedule,flags=re.I)
+    do_sixth = re.search(r'6',schedule,flags=re.I)
+    do_ninth = re.search(r'9',schedule,flags=re.I)
 
     try:
         #create service day variables
@@ -187,20 +202,22 @@ def generate_day(month=None, day=None, year=None, calendar=1):
 
     #Date strings, used for text within HTML
     day_string = service_date.strftime('%m/%d/%Y')
-    day_string_oc = day_string + ' / ' + date_oc.strftime('%m/%d/%Y')
+    day_string_oc = day_string + ' (' + date_oc.strftime('%m/%d/%Y') + ')'
     link_date = service_date.strftime('%m%d%Y')
 
     #Night strings, used for Vespers service within HTML
     night_string = (service_date - timedelta(days=1)).strftime('%m/%d/%Y')
-    night_string_oc = night_string + ' / ' + (date_oc - timedelta(days=1)).strftime('%m/%d/%Y')
+    night_string_oc = night_string + ' (' + (date_oc - timedelta(days=1)).strftime('%m/%d/%Y') + ')'
 
     fixed_feasts = {
         #MM-DD: #[Service Name, Menaion, Rank]
     }
+    menaion = None #for now...
 
     moveable_feasts = {
         #Pascha offset: #[Service Name, Paschal, Rank]
     }
+    paschal = None #for now...
 
     """
     Logic will be added here to gather feast days from above dictionaries to determine rank...
@@ -213,96 +230,109 @@ def generate_day(month=None, day=None, year=None, calendar=1):
     liturgics = {} #dictionary for return
     liturgics['link_date'] = link_date
     liturgics['day_string'] = day_string
-    links = [f'<h3><a href="#{link_date}">{day_string}</a></h3>']
+    links = [f'<a href="#{link_date}">{day_string}</a>']
 
-    #variables = rubrics(etc, etc,)
-    #for now, just octoechos
-    variables = octoechos
+    variables = rubrics(rank=rank, octoechos=octoechos, menaion=menaion, paschal=paschal)
 
     #create services, grabbing service variables from rubic variables
     #add template variables, then render
     #add service to liturgics dictionary for return
-    vespers_variables = variables.get('vespers')
-    vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[0])
-    vespers_variables['night_date'] = night_string_oc
-    vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
-    vespers_variables['link'] = f'{link_date}-vespers'
-    links.append(f'<h4><a href="#{link_date}-vespers">Vespers</a></h4>')
-    vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday)
-    liturgics['vespers'] = vespers
+    if do_vespers:
+        vespers_variables = variables.get('vespers')
+        vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[0])
+        vespers_variables['night_date'] = night_string_oc if calendar == 1 else night_string
+        vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
+        vespers_variables['link'] = f'{link_date}-vespers'
+        links.append(f'<a href="#{link_date}-vespers">Vespers</a>')
+        vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday)
+        liturgics['vespers'] = vespers
 
-    compline_variables = variables.get('compline')
-    compline_variables['troparion'] = compline_troparia(weekday=weekday, rank=rank)
-    compline_variables['night_date'] = night_string_oc
-    compline_variables['link'] = f'{link_date}-compline'
-    links.append(f'<h4><a href="#{link_date}-compline">Compline</a></h4>')
-    compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
-    liturgics['compline'] = compline
+    if do_compline:
+        compline_variables = variables.get('compline')
+        compline_variables['troparion'] = compline_troparia(weekday=weekday, rank=rank)
+        compline_variables['night_date'] = night_string_oc if calendar == 1 else night_string
+        compline_variables['link'] = f'{link_date}-compline'
+        links.append(f'<a href="#{link_date}-compline">Compline</a>')
+        compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
+        liturgics['compline'] = compline
 
-    nocturns_variables = variables.get('nocturns', {})
-    nocturns_variables['kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[1])
-    nocturns_variables['date'] = day_string_oc
-    nocturns_variables['link'] = f'{link_date}-nocturns'
-    links.append(f'<h4><a href="#{link_date}-nocturns">Nocturns</a></h4>')
-    nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
-    liturgics['nocturns'] = nocturns
+    if do_nocturns:
+        nocturns_variables = variables.get('nocturns', {})
+        nocturns_variables['kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[1])
+        nocturns_variables['date'] = day_string_oc if calendar == 1 else day_string
+        nocturns_variables['link'] = f'{link_date}-nocturns'
+        links.append(f'<a href="#{link_date}-nocturns">Nocturns</a>')
+        nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
+        liturgics['nocturns'] = nocturns
 
-    matins_variables = variables.get('matins')
-    matins_variables['kathisma1'] = parse_kathisma(kathisma_rubric.get(weekday)[2][0])
-    matins_variables['kathisma2'] = parse_kathisma(kathisma_rubric.get(weekday)[2][1])
-    matins_variables['date'] = day_string_oc
-    matins_variables['link'] = f'{link_date}-matins'
-    links.append(f'<h4><a href="#{link_date}-matins">Matins</a></h4>')
-    matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank)
-    liturgics['matins'] = matins
+    if do_matins:
+        matins_variables = variables.get('matins')
+        matins_variables['kathisma1'] = parse_kathisma(kathisma_rubric.get(weekday)[2][0])
+        matins_variables['kathisma2'] = parse_kathisma(kathisma_rubric.get(weekday)[2][1])
+        matins_variables['date'] = day_string_oc if calendar == 1 else day_string
+        matins_variables['link'] = f'{link_date}-matins'
+        links.append(f'<a href="#{link_date}-matins">Matins</a>')
+        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank)
+        liturgics['matins'] = matins
 
-    typika_variables = variables.get('liturgy')
-    typika_variables['date'] = day_string_oc
-    typika_variables['link'] = f'{link_date}-typika'
-    links.append(f'<h4><a href="#{link_date}-typika">Typika</a></h4>')
-    typika = render_template('typika.html', variables = typika_variables)
-    liturgics['typika'] = typika
-
-    #The hours require troparia and kontakia. These are built out separately
-    #NC can be grabbed from: https://www.oca.org/saints/lives/yyyy/mm/dd
-    #OC can be grabbed from: https://www.holytrinityorthodox.com/calendar/index.php?year=yyyy&today=dd&month=mm&trp=1&tzo=0
-    hours_troparia = []
-    res_troparion = typika_variables.get('resurrection_troparion')
-    if res_troparion:
-        hours_troparia.append(res_troparion)
-    hours_kontakia = []
-    res_kontakion = typika_variables.get('resurrection_kontakion')
-    if res_kontakion:
-        hours_kontakia.append(res_kontakion)
+    if do_typika or do_first or do_third or do_sixth or do_ninth:
+        #all hours use typika variables
+        typika_variables = variables.get('liturgy')
+        #The hours require troparia and kontakia. These are built out separately
+        #NC can be grabbed from: https://www.oca.org/saints/lives/yyyy/mm/dd
+        #OC can be grabbed from: https://www.holytrinityorthodox.com/calendar/index.php?year=yyyy&today=dd&month=mm&trp=1&tzo=0
+        hours_troparia = []
+        res_troparion = typika_variables.get('resurrection_troparion')
+        if res_troparion:
+            hours_troparia.append(res_troparion)
+        hours_kontakia = []
+        res_kontakion = typika_variables.get('resurrection_kontakion')
+        if res_kontakion:
+            hours_kontakia.append(res_kontakion)
 
 
-    first_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
-    first_variables['date'] = day_string_oc
-    first_variables['link'] = f'{link_date}-first'
-    links.append(f'<h4><a href="#{link_date}-first">First Hour</a></h4>')
-    first = render_template('first.html', variables = first_variables)
-    liturgics['first'] = first
+    if do_typika:
+        typika_variables['date'] = day_string_oc if calendar == 1 else day_string
+        typika_variables['link'] = f'{link_date}-typika'
+        #(link appended below)
+        typika = render_template('typika.html', variables = typika_variables)
+        liturgics['typika'] = typika
 
-    third_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
-    third_variables['date'] = day_string_oc
-    third_variables['link'] = f'{link_date}-third'
-    links.append(f'<h4><a href="#{link_date}-third">Third Hour</a></h4>')
-    third = render_template('third.html', variables = third_variables)
-    liturgics['third'] = third
+    if do_first:
+        first_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
+        first_variables['date'] = day_string_oc if calendar == 1 else day_string
+        first_variables['link'] = f'{link_date}-first'
+        links.append(f'<a href="#{link_date}-first">First Hour</a>')
+        first = render_template('first.html', variables = first_variables)
+        liturgics['first'] = first
 
-    sixth_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
-    sixth_variables['date'] = day_string_oc
-    sixth_variables['link'] = f'{link_date}-sixth'
-    links.append(f'<h4><a href="#{link_date}-sixth">Sixth Hour</a></h4>')
-    sixth = render_template('sixth.html', variables = sixth_variables)
-    liturgics['sixth'] = sixth
+    if do_third:
+        third_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
+        third_variables['date'] = day_string_oc if calendar == 1 else day_string
+        third_variables['link'] = f'{link_date}-third'
+        links.append(f'<a href="#{link_date}-third">Third Hour</a>')
+        third = render_template('third.html', variables = third_variables)
+        liturgics['third'] = third
 
-    ninth_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
-    ninth_variables['date'] = day_string_oc
-    ninth_variables['link'] = f'{link_date}-ninth'
-    links.append(f'<h4><a href="#{link_date}-ninth">Ninth Hour</a></h4>')
-    ninth = render_template('ninth.html', variables = ninth_variables)
-    liturgics['ninth'] = ninth
+    if do_sixth:
+        sixth_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
+        sixth_variables['date'] = day_string_oc if calendar == 1 else day_string
+        sixth_variables['link'] = f'{link_date}-sixth'
+        links.append(f'<a href="#{link_date}-sixth">Sixth Hour</a>')
+        sixth = render_template('sixth.html', variables = sixth_variables)
+        liturgics['sixth'] = sixth
+
+    if do_typika:
+        #adding typika link in correct order
+        links.append(f'<a href="#{link_date}-typika">Typika</a>')
+
+    if do_ninth:
+        ninth_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
+        ninth_variables['date'] = day_string_oc if calendar == 1 else day_string
+        ninth_variables['link'] = f'{link_date}-ninth'
+        links.append(f'<a href="#{link_date}-ninth">Ninth Hour</a>')
+        ninth = render_template('ninth.html', variables = ninth_variables)
+        liturgics['ninth'] = ninth
 
     liturgics['links'] = links
 

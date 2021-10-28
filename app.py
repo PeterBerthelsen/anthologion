@@ -15,7 +15,8 @@ flask run
 
 from flask import Flask, request, render_template
 from service import generate_day
-from bs4 import BeautifulSoup
+from calendar import monthrange
+from datetime import datetime
 app = Flask(__name__,template_folder='static/html')
 
 @app.route("/", methods=['GET'])
@@ -23,9 +24,110 @@ def main():
     month = request.args.get('m', None)
     day = request.args.get('d', None)
     year = request.args.get('y', None)
-    calendar = request.args.get('c', None)
+    calendar = request.args.get('c', 1)
+    schedule = request.args.get('s',None)
     print(f' Loaded "/" for date: {month}/{day}/{year} ~ calendar: {calendar}')
-    return render_template('liturgicalDay.html', liturgics = generate_day(month=month, day=day, year=year, calendar=calendar))
+    return render_template(
+        'liturgicalDay.html'
+        ,liturgics = generate_day(
+            month=month
+            ,day=day
+            ,year=year
+            ,calendar=calendar
+            ,schedule=schedule
+        )
+    )
+
+@app.route("/now", methods=['GET'])
+def now():
+    rubric = {
+        0: 'n'
+        ,1: 'n'
+        ,2: 'n'
+        ,3: 'm'
+        ,4: 'm'
+        ,5: 'm'
+        ,6: 'm'
+        ,7: '1'
+        ,8: '1'
+        ,9: '1'
+        ,10: '1'
+        ,11: '1'
+        ,12: '3'
+        ,13: '3'
+        ,14: '3'
+        ,15: '6'
+        ,16: '6'
+        ,17: 't'
+        ,18: 't'
+        ,19: '9'
+        ,20: '9'
+        ,21: 'v'
+        ,22: 'v'
+        ,23: 'v'
+        ,24: 'n'
+    }
+    gmt = request.args.get('gmt',0)
+    gmt = int(gmt)
+    hour = datetime.now().hour + gmt
+    hour = hour if hour >= 0 else hour + 24
+    month = request.args.get('m', None)
+    day = request.args.get('d', None)
+    year = request.args.get('y', None)
+    calendar = request.args.get('c', 1)
+    return render_template(
+        'liturgicalDay.html'
+        ,liturgics = generate_day(
+            month=month
+            ,day=day
+            ,year=year
+            ,calendar=calendar
+            ,schedule=rubric.get(hour)
+        )
+    )
+
+@app.route("/month", methods=['GET'])
+def build_month():
+    month = request.args.get('m', None)
+    year = request.args.get('y', None)
+    calendar = request.args.get('c', 1)
+    schedule = request.args.get('s',None)
+    today = datetime.today()
+    month = int(month) if type(month) == str else month
+    month = month if month else today.month
+    year = int(year) if type(year) == str else year
+    year = year if year else today.year
+    days = range(1,monthrange(year,month)[1] + 1)
+    contents = '<h2>Contents</h2>'
+    header = """<head><link href="../static/css/main.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
+    </head><body><div id="wrapper"><div id="main">"""
+    html = ''
+    for day in days:
+        contents += render_template(
+            'liturgicalContents.html'
+            ,liturgics = generate_day(
+                month=month
+                ,day=day
+                ,year=year
+                ,calendar=calendar
+                ,schedule=schedule
+            )
+        )
+        html += render_template(
+            'liturgicalMonth.html'
+            ,liturgics = generate_day(
+                month=month
+                ,day=day
+                ,year=year
+                ,calendar=calendar
+                ,schedule=schedule
+            )
+        )
+    contents = '<section class="post" id="contents">' + contents + '</section>'
+    html = header + contents + html
+    html += '</div></div></body>'
+    return html
 
 if __name__ == "__main__":
     app.run(threaded=True, debug=True, port=5000)

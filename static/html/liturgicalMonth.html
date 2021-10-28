@@ -1,0 +1,25 @@
+<section class="post" id="{{liturgics.link_date}}">
+  <h1>{{ liturgics.day_string }}</h1>
+  <p><a href="#contents">Return to Table of Contents</a></p>
+  {% for link in liturgics.links[1:] %}
+    <h4>{{ link|safe }}</h4>
+  {% endfor %}
+
+  {{ liturgics.vespers|safe }}
+  {% if liturgics.vespers is defined %}<hr/>{% endif %}
+  {{ liturgics.compline|safe }}
+  {% if liturgics.compline is defined %}<hr/>{% endif %}
+  {{ liturgics.nocturns|safe }}
+  {% if liturgics.nocturns is defined %}<hr/>{% endif %}
+  {{ liturgics.matins|safe }}
+  {% if liturgics.matins is defined %}<hr/>{% endif %}
+  {{ liturgics.first|safe }}
+  {% if liturgics.first is defined %}<hr/>{% endif %}
+  {{ liturgics.third|safe }}
+  {% if liturgics.third is defined %}<hr/>{% endif %}
+  {{ liturgics.sixth|safe }}
+  {% if liturgics.sixth is defined %}<hr/>{% endif %}
+  {{ liturgics.typika|safe }}
+  {% if liturgics.typika is defined %}<hr/>{% endif %}
+  {{ liturgics.ninth|safe }}
+</section>
