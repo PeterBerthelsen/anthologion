@@ -19,6 +19,7 @@ from hymns import vespers_prokeimena, compline_troparia
 from kathisma import parse_kathisma
 from datetime import datetime, timedelta, date
 from octoechos import octoechos_variables
+from menaion import menaion_variables
 from _utils import process_pdf
 from bs4 import BeautifulSoup
 
@@ -122,12 +123,14 @@ def paschalion(month, day, year):
 
     return moveable_dates
 
-def rubrics(rank:int, octoechos=None, menaion=None, paschal=None):
+def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=None, paschal=None):
     """
     Takes in dictionaries from various sources.
     Determines moveable service portions based on rank.
     Returns dictionary of moveable portions to use for each service assembly.
     """
+    variables = {'rank': rank, 'name': name}
+
     if rank < 7 and not (menaion or paschal):
         print(f'Service rank {rank} with no menaion or triodion/pentecostarion! \nGenerating simple service instead')
         rank = 7
@@ -135,7 +138,89 @@ def rubrics(rank:int, octoechos=None, menaion=None, paschal=None):
     if rank == 7: #simple service
         return octoechos
 
+    if not paschal:
+        #ranked service outside Lent/Pentecost
+        #we will be working with the octoechos and menaion
+        vespers = {}
+        #build out stichera
 
+        vo_stichera_needed = 6 #determined by rank
+        vm_stichera_needed = 4 #determined by rank
+
+        vo_stichera = octoechos.get('vespers').get('stichera')
+        vm_stichera = menaion.get('vespers').get('stichera')
+        if weekday == 6:
+            vo_stichera = vo_stichera[:7] #7 resurrection stichera.
+        else:
+            vo_stichera = vo_stichera[:3] #with menaion only 3 used.
+        po_stichera = []
+        pm_stichera = []
+        #payload_stichera = []
+
+        vo_duplicates = vo_stichera_needed - len(vo_stichera)
+        vm_duplicates = vm_stichera_needed - len(vm_stichera)
+        #enumerate octoechos stichera, assign duplicates as needed
+        for i, s in enumerate(vo_stichera):
+            po_stichera.append(s)
+            print(f'Added {s[41:52]}')
+            if i + 1 <= vo_duplicates:
+                po_stichera.append(s)
+                print(f'*Added {s[41:52]}')
+        print(f'{len(po_stichera)} from octoechos added!')
+
+        #enumerate menaion stichera, assign duplicates as needed
+        for i, s in enumerate(vm_stichera):
+            pm_stichera.append(s)
+            print(f'Added {s[24:35]}')
+            if i + 1<= vm_duplicates:
+                pm_stichera.append(s)
+                print(f'*Added {s[24:35]}')
+        print(f'{len(pm_stichera)} from menaion added!')
+        vespers['stichera'] = po_stichera + pm_stichera
+
+        #determine stichera tone
+        vespers['stichera_tone'] = menaion.get('vespers').get('stichera_tone')
+
+        #doxastichon from menaion
+        vm_doxastichon = menaion.get('vespers').get('doxastichon',None)
+        if vm_doxastichon:
+            vespers['doxastichon'] = vm_doxastichon
+
+        #dogmaticon from menaion
+        vm_dogmaticon = menaion.get('vespers').get('dogmaticon',None)
+        if vm_dogmaticon:
+            vespers['dogmaticon'] = vm_dogmaticon
+
+        #determine theotokion
+        vo_theotokion = octoechos.get('vespers').get('theotokion')
+        vm_theotokion = menaion.get('vespers').get('theotokion',None)
+        vespers['theotokion'] = vm_theotokion if vm_theotokion else vo_theotokion
+
+        #readings from menaion
+        vespers['readings'] = menaion.get('vespers').get('readings')
+
+        #determine aposticha
+        aposticha = menaion.get('vespers').get('aposticha', None)
+        if not aposticha:
+            aposticha = octoechos.get('vespers').get('aposticha')
+        vespers['aposticha'] = aposticha
+        vespers['aposticha_theotokion'] = menaion.get('vespers').get('aposticha_theotokion')
+
+        #use all apolytichia, menaion then octoechos.
+        vo_apolytichion = octoechos.get('vespers').get('apolytichion')
+        vm_apolytichion = menaion.get('vespers').get('apolytichion')
+        vespers['apolytichion'] = vm_apolytichion + vo_apolytichion
+
+        compline = octoechos.get('compline') #no menaion variables
+        nocturns = octoechos.get('nocturns') #no menaion variables
+        matins = octoechos.get('matins') #octoechos until menaion established
+        liturgy = octoechos.get('liturgy') #liturgy until menaion established
+        variables['vespers'] = vespers
+        variables['compline'] = compline
+        variables['matins'] = matins
+        variables['liturgy'] = liturgy
+
+        return variables
 
 def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     try:
@@ -187,7 +272,14 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     if tone: #If a tone is returned, we need octoechos, so we need sergius day for file format.
         sergius_day = weekday + 2 if weekday < 6 else weekday - 5
         octoechos_file = f'{tone}-{sergius_day}'
-    octoechos = octoechos_variables(process_pdf(filename=octoechos_file,service='octoechos')) if tone else None
+        octoechos = octoechos_variables(
+            input_string = process_pdf(
+                filename=octoechos_file
+                ,service='octoechos'
+            )
+        )
+    else: #if no tone is returned (Holy week, etc)
+        octoechos = None
 
     kathisma_rubric = {
         #day of week: [vespers, nocturns, [matins]]
@@ -210,9 +302,27 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     night_string_oc = night_string + ' (' + (date_oc - timedelta(days=1)).strftime('%m/%d/%Y') + ')'
 
     fixed_feasts = {
-        #MM-DD: #[Service Name, Menaion, Rank]
+        #MM-DD: #[Service Name, Service Type, Rank]
+        # 'MM-DD': ['Kursk Root Icon', 'Theotokos', 4] #uncomment to test menaion...
     }
-    menaion = None #for now...
+
+    #grabs menaion info from dictionary if available
+    menaion_service = fixed_feasts.get('MM-DD', None)
+    service_name = menaion_service[0] if menaion_service else None
+    menaion_file = menaion_service[1] if menaion_service else None
+    rank = menaion_service[2] if menaion_service else 7 #menaion rank or simple service
+
+    if menaion_service:
+        menaion = menaion_variables(
+            input_string = process_pdf(
+                filename=menaion_file
+                ,service='menaion'
+            )
+                ,name=service_name
+                ,service_type=menaion_file
+        )
+    else:
+        menaion = None
 
     moveable_feasts = {
         #Pascha offset: #[Service Name, Paschal, Rank]
@@ -225,14 +335,20 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     Also needed for Triodion/Pentecostarion (for paschal variable on rubrics)...
     Until then, simple services via octoechos will be generated.
     """
-    rank = 7
 
     liturgics = {} #dictionary for return
     liturgics['link_date'] = link_date
     liturgics['day_string'] = day_string
     links = [f'<a href="#{link_date}">{day_string}</a>']
 
-    variables = rubrics(rank=rank, octoechos=octoechos, menaion=menaion, paschal=paschal)
+    variables = rubrics(
+        rank=rank
+        ,weekday=weekday
+        ,name=service_name
+        ,octoechos=octoechos
+        ,menaion=menaion
+        ,paschal=paschal
+    )
 
     #create services, grabbing service variables from rubic variables
     #add template variables, then render
@@ -244,7 +360,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
         vespers_variables['link'] = f'{link_date}-vespers'
         links.append(f'<a href="#{link_date}-vespers">Vespers</a>')
-        vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday)
+        vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name)
         liturgics['vespers'] = vespers
 
     if do_compline:
@@ -272,7 +388,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         matins_variables['date'] = day_string_oc if calendar == 1 else day_string
         matins_variables['link'] = f'{link_date}-matins'
         links.append(f'<a href="#{link_date}-matins">Matins</a>')
-        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank)
+        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name)
         liturgics['matins'] = matins
 
     if do_typika or do_first or do_third or do_sixth or do_ninth:
@@ -295,7 +411,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         typika_variables['date'] = day_string_oc if calendar == 1 else day_string
         typika_variables['link'] = f'{link_date}-typika'
         #(link appended below)
-        typika = render_template('typika.html', variables = typika_variables)
+        typika = render_template('typika.html', variables = typika_variables, name=service_name)
         liturgics['typika'] = typika
 
     if do_first:
@@ -339,26 +455,5 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     return liturgics
 
 
-
-    #Build The Services
-    # if calendar == 0: #New Calendar
-    #     #Vespers
-    #     html += vespers(
-    #         date=night_string
-    #         ,parts=variables
-    #         ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
-    #         ,weekday=service_date.weekday()
-    #     )
-    #     #Compline
-
-    # else: #Old Calendar
-    #     html += vespers(
-    #         date=night_string_oc
-    #         ,parts=variables
-    #         ,kathisma_number=kathisma_rubric.get(service_date.weekday())[0]
-    #         ,weekday=service_date.weekday()
-    #     )
-    #     #Compline
-    #
-    # html += ''
-    # return html
+if __name__ == '__main__':
+    day = generate_day()

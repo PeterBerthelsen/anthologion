@@ -63,6 +63,35 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
             print(f'Gathering {filename} from local = {local} FAILED! Attempting with local = {not local}')
             local = not local
 
+def string_search (input_string:str, start_searches:list=[], end_searches:list=[], start_position:int=0):
+    """
+    Takes in a string and a list of strings.
+    performs various find() functions on input string
+    (at start position) for each search until a result is given.
+    returns list: [starting location found (int), processed string with no search term]
+    """
+    i = -1 #iterators will start at 0 in loop
+    j = -1 #iterating after would mess up the return section by 1 index position
+    begin = -1 #find method returns -1 if no result is found
+    end = -1
+    try:
+        while begin == -1: #while no result is found, search next in searches
+            i += 1 #iterate...
+            begin = input_string.find(start_searches[i],start_position)
+    except: #error thrown if all begin searches fail (index error)
+        return [0,input_string]
+    try:
+        while end == -1: #again, while no result is found...
+            j += 1 #iterate...
+            end = input_string.find(end_searches[j],start_position)
+    except:  #error thrown if all end searches fail (index error)
+        output = input_string[begin + len(start_searches[i]):]
+        return [begin, output]
+    #successfully found begin and end, returning processed string.
+    output = input_string[begin + len(start_searches[i]):end]
+    return [begin, output]
+
+
 # def insert_html (target_html_file:str, target_html_element:str, html_to_insert:str):
 #         """
 #         Takes in a file name for source service (e.g. vespers), name element where

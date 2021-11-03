@@ -1,5 +1,6 @@
 <div class="service" id="{{ variables.link }}">
   <h1>Vespers</h1>
+  {% if name != None %}<h2>For {{ name }}</h2>{% endif %}
   <p><a href="#{{ variables.link.split('-')[0] }}">Return to Date</a></p>
   <h3>{{ variables.night_date|safe }}</h3>
   <p class="note">
@@ -92,9 +93,13 @@
   <p>For He hath made His mercy to prevail over us,* and the truth of the Lord abideth for ever.</p>
   {{ variables.stichera[-1]|safe }}
   <p>Glory to the Father, and to the Son, and to the Holy Spirit.</p>
-  {{ variables.doxastichon|safe }}
+  {% if variables.doxastichon is defined %}{{ variables.doxastichon|safe }}{% endif %}
   <p>Both now and ever, and unto the ages of ages. Amen.</p>
-  {{ variables.theotokion|safe }}
+  {% if variables.dogmaticon is defined %}
+    {{ variables.dogmaticon|safe }}
+  {% else %}
+    {{ variables.theotokion|safe }}
+  {% endif %}
   <hr/>
   <p>O Gladsome Light of the holy glory of the immortal, heavenly, holy, blessed Father, O Jesus Christ: Having come to the setting of the sun, having beheld the evening light, we praise the Father, the Son, and the Holy Spirit: God.  Meet it is for Thee at all times to be praised with gladsome voices, O Son of God, Giver of life.  Wherefore, the world doth glorify Thee.</p>
   <h3>The Daily Prokeimenon</h3>
@@ -111,6 +116,7 @@
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <h2>Aposticha</h2>
   {{ variables.aposticha|safe }}
+  {{ variables.aposticha_theotokion|safe }}
   <h3>The Prayer of St. Symeon</h3>
   <p>Now lettest Thou Thy servant depart in peace, O Master,according to Thy word, for mine eyes have seen Thy salvation, which Thou hastprepared before the face of all peoples; a light of revelation for the Gentiles, andthe glory of Thy people Israel.</p>
   <p>Holy God, Holy Mighty, Holy Immortal, have mercy on us. <i class="note">Thrice.</i></p>

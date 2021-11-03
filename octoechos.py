@@ -18,35 +18,7 @@ Change Log:
 import os
 import re
 from bs4 import BeautifulSoup
-from _utils import process_pdf
-
-def string_search (input_string:str, start_searches:list=[], end_searches:list=[], start_position:int=0):
-    """
-    Takes in a string and a list of strings.
-    performs various find() functions on input string
-    (at start position) for each search until a result is given.
-    returns list: [starting location found (int), processed string with no search term]
-    """
-    i = -1 #iterators will start at 0 in loop
-    j = -1 #iterating after would mess up the return section by 1 index position
-    begin = -1 #find method returns -1 if no result is found
-    end = -1
-    try:
-        while begin == -1: #while no result is found, search next in searches
-            i += 1 #iterate...
-            begin = input_string.find(start_searches[i],start_position)
-    except: #error thrown if all begin searches fail (index error)
-        return [0,input_string]
-    try:
-        while end == -1: #again, while no result is found...
-            j += 1 #iterate...
-            end = input_string.find(end_searches[j],start_position)
-    except:  #error thrown if all end searches fail (index error)
-        output = input_string[begin + len(start_searches[i]):]
-        return [begin, output]
-    #successfully found begin and end, returning processed string.
-    output = input_string[begin + len(start_searches[i]):end]
-    return [begin, output]
+from _utils import process_pdf, string_search
 
 def octoechos_variables (input_string:str):
     """
@@ -194,7 +166,7 @@ def octoechos_vespers (service:str):
     vespers_stichera = [re.sub(r'Then the Stichera.*?:$','',s) for s in vespers_stichera]
     vespers_stichera = [re.sub(r'Other Stichera.*?:$','',s) for s in vespers_stichera]
     vespers_stichera = [re.sub(r'\. Then.*?.*?:$','.',s) for s in vespers_stichera]
-    vespers_stichera = ['<p class="stichera"><i class="note">*</i>' + s + '</p>' for s in vespers_stichera] #HTML wrap
+    vespers_stichera = ['<p><i class="note">*</i>' + s + '</p>' for s in vespers_stichera] #HTML wrap
     #   ---
     vespers_theotokion = vespers_theotokion[:vespers_theotokion.find('Then “O Joyous Light ...”')] #clip off at instructions after in case prior search failed
     vespers_theotokion = vespers_theotokion.replace('\n','').strip() #remove line breaks and white space
@@ -351,7 +323,7 @@ def octoechos_matins (service:str):
         matins_resurrection = re.sub(r'Glory.*otherwise[; ]+Glory[., ]+Now & Ever[., ]+',r'<div class="menaion matins troparion"></div>',matins_resurrection, flags=re.I) #div for Menaion
         matins_resurrection = re.sub(r'\s*([Tt]he [Tt]heotokion.*:)'
             ,r'<div class="simple matins troparion"><p>Glory ..., Now & Ever ...,</p></div><p><i class="note">\1</i></p><p>',matins_resurrection) + '</p>' #format troparion
-        matins_parts['resurrection'] = matins_resurrection
+        matins_parts['troparion'] = matins_resurrection
     #Sessional Hymns 1
     matins_session1 = re.sub(r'([Vv]erse:|[A-Za-z]*[Tt]heotokion:|[Ss]essional [Hh]ymn.*:|[Ss]pec\.\s*Mel\.*?:.*?:)',r'<i class="note">\1</i>',matins_session1) #service notes
     matins_session1 = re.sub(r'([^\w,*\?;]) \n',r'\1 \n</p><p>',matins_session1).replace('\n','')  #close paragraphs after punctuation+line breaks, remove line breaks
@@ -474,3 +446,11 @@ def octoechos_liturgy(service:str):
     prokeimenon = re.sub(r'(.*)<p><i class="note">alleluia.*:.*',r'\1',prokeimenon,flags=re.I)
     liturgy_parts['prokeimenon'] = prokeimenon
     return liturgy_parts
+
+# dd = [1,2,3,4,5,6,7]
+# tt = [1,2,3,4,5,6,7,8]
+#
+# for t in tt:
+#     for d in dd:
+#         octoechos = octoechos_variables(process_pdf(filename=f'{t}-{d}',service='octoechos'))
+#         print(octoechos.get('vespers').get('aposticha'))
