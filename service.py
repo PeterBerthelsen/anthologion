@@ -1,16 +1,18 @@
 """
-Version 0.1.4
-Updated 10/21/2021
+Version 0.1.7
+Updated 11/5/2021
 
 Change Log:
-10/11/2021 - 0.0.8 - Initial Creation, Vespers elements
-10/12/2021 - 0.0.9 - Paschalion (def pascha) calculations started.
-10/13/2021 - 0.0.9 - Tone of the week added to Paschalion
-10/13/2021 - 0.1.0 - Initial build of Vespers service complete
-10/14/2021 - 0.1.1 - Updated variables for Flask integration
-10/21/2021 - 0.1.3 - Updated generate_day for templating, added exception handling
-                    -Deleted vespers() and is_leap_year()
-10/27/2021 - 0.1.4 - Added table of contents to generate_day()
+10/11/2021 - 0.0.8  - Initial Creation, Vespers elements
+10/12/2021 - 0.0.9  - Paschalion (def pascha) calculations started.
+10/13/2021 - 0.0.9  - Tone of the week added to Paschalion
+10/13/2021 - 0.1.0  - Initial build of Vespers service complete
+10/14/2021 - 0.1.1  - Updated variables for Flask integration
+10/21/2021 - 0.1.3  - Updated generate_day for templating, added exception handling
+                    - Deleted vespers() and is_leap_year()
+10/27/2021 - 0.1.4  - Added table of contents to generate_day()
+11/5/2021  - 0.1.7  - Updated Rubrics for Menaion Matins
+                    - Updated generate_day() for matins use
 """
 import os
 import re
@@ -123,7 +125,7 @@ def paschalion(month, day, year):
 
     return moveable_dates
 
-def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=None, paschal=None):
+def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=None, paschal=None, service_type=None):
     """
     Takes in dictionaries from various sources.
     Determines moveable service portions based on rank.
@@ -142,79 +144,142 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
         #ranked service outside Lent/Pentecost
         #we will be working with the octoechos and menaion
         vespers = {}
+        vo = octoechos.get('vespers')
+        vm = menaion.get('vespers')
+
         #build out stichera
+        if rank == 1:
+            vo_stichera_needed = 4
+            vm_stichera_needed = 6
+        elif rank == 2:
+            vo_stichera_needed = 4 if weekday == 6 else 2
+            vm_stichera_needed = 6
+        elif rank == 3:
+            vo_stichera_needed = 6 if weekday == 6 else 0
+            vm_stichera_needed = 4 if weekday == 6 else 6
+        else:
+            vo_stichera_needed = 6 if weekday == 6 else 3
+            vm_stichera_needed = 4 if weekday == 6 else 3
 
-        vo_stichera_needed = 6 #determined by rank
-        vm_stichera_needed = 4 #determined by rank
+        vo_stichera = vo.get('stichera')
+        vm_stichera = vm.get('stichera')
 
-        vo_stichera = octoechos.get('vespers').get('stichera')
-        vm_stichera = menaion.get('vespers').get('stichera')
         if weekday == 6:
             vo_stichera = vo_stichera[:7] #7 resurrection stichera.
         else:
             vo_stichera = vo_stichera[:3] #with menaion only 3 used.
+
         po_stichera = []
         pm_stichera = []
-        #payload_stichera = []
 
         vo_duplicates = vo_stichera_needed - len(vo_stichera)
         vm_duplicates = vm_stichera_needed - len(vm_stichera)
+
         #enumerate octoechos stichera, assign duplicates as needed
         for i, s in enumerate(vo_stichera):
             po_stichera.append(s)
-            print(f'Added {s[41:52]}')
             if i + 1 <= vo_duplicates:
                 po_stichera.append(s)
-                print(f'*Added {s[41:52]}')
-        print(f'{len(po_stichera)} from octoechos added!')
 
         #enumerate menaion stichera, assign duplicates as needed
         for i, s in enumerate(vm_stichera):
             pm_stichera.append(s)
-            print(f'Added {s[24:35]}')
             if i + 1<= vm_duplicates:
                 pm_stichera.append(s)
-                print(f'*Added {s[24:35]}')
-        print(f'{len(pm_stichera)} from menaion added!')
+
         vespers['stichera'] = po_stichera + pm_stichera
 
         #determine stichera tone
-        vespers['stichera_tone'] = menaion.get('vespers').get('stichera_tone')
+        vespers['stichera_tone'] = vm.get('stichera_tone')
 
         #doxastichon from menaion
-        vm_doxastichon = menaion.get('vespers').get('doxastichon',None)
+        vm_doxastichon = vm.get('doxastichon',None)
         if vm_doxastichon:
             vespers['doxastichon'] = vm_doxastichon
 
         #dogmaticon from menaion
-        vm_dogmaticon = menaion.get('vespers').get('dogmaticon',None)
+        vm_dogmaticon = vm.get('dogmaticon',None)
         if vm_dogmaticon:
             vespers['dogmaticon'] = vm_dogmaticon
 
         #determine theotokion
-        vo_theotokion = octoechos.get('vespers').get('theotokion')
-        vm_theotokion = menaion.get('vespers').get('theotokion',None)
-        vespers['theotokion'] = vm_theotokion if vm_theotokion else vo_theotokion
+        vo_theotokion = vo.get('theotokion', None)
+        vm_theotokion = vm.get('theotokion', None)
+        if vo_theotokion or vm_theotokion:
+            vespers['theotokion'] = vm_theotokion if vm_theotokion else vo_theotokion
 
         #readings from menaion
-        vespers['readings'] = menaion.get('vespers').get('readings')
+        vespers['readings'] = vm.get('readings')
 
         #determine aposticha
-        aposticha = menaion.get('vespers').get('aposticha', None)
+        aposticha = vm.get('aposticha', None)
         if not aposticha:
-            aposticha = octoechos.get('vespers').get('aposticha')
+            aposticha = vo.get('aposticha')
         vespers['aposticha'] = aposticha
-        vespers['aposticha_theotokion'] = menaion.get('vespers').get('aposticha_theotokion')
+        vespers['aposticha_theotokion'] = vm.get('aposticha_theotokion')
 
         #use all apolytichia, menaion then octoechos.
-        vo_apolytichion = octoechos.get('vespers').get('apolytichion')
-        vm_apolytichion = menaion.get('vespers').get('apolytichion')
+        vo_apolytichion = vo.get('apolytichion')
+        vm_apolytichion = vm.get('apolytichion')
         vespers['apolytichion'] = vm_apolytichion + vo_apolytichion
+
+        #Matins
+        matins = {}
+        mo = octoechos.get('matins')
+        mm = menaion.get('matins')
+
+        mm_troparion = mm.get('troparion', None)
+        mo_troparion = mo.get('troparion', None)
+        if mm_troparion or mo_troparion:
+            matins['troparion'] = mm_troparion if mm_troparion else mo_troparion
+
+        if service_type == 'Holy Fathers':
+            matins['session1'] = mo.get('session1')
+            matins['session2'] = mo.get('session2')
+            matins['session3'] = mo.get('session3')
+            matins['ascent'] = mo.get('ascent')
+            matins['prokeimenon'] = mo.get('prokeimenon')
+        else:
+            #sessional hymns are taken from the menaion for all ranks. Except Holy Fathers
+            matins['session1'] = mm.get('session1')
+            matins['session2'] = mm.get('session2')
+            matins['session3'] = mm.get('session3')
+            matins['apolytichion'] = mm.get('apolytichion')
+            matins['megalynarion'] = mm.get('megalynarion')
+
+        #aposticha currently only in octoechos, not used rank 4 or higher
+        if rank >= 5: #six verse & afterfeast
+            matins['aposticha'] = mo.get('aposticha')
+
+        matins['exapostilarion'] = mm.get('exapostilarion')
+
+        if rank <= 3: #polyeleos or higher
+            mo_prokeimenon = mo.get('prokeimenon', None)
+            mm_prokeimenon = mm.get('prokeimenon', None)
+            if mm_prokeimenon or mo_prokeimenon:
+                matins['prokeimenon'] = mm_prokeimenon if mm_prokeimenon else mo_prokeimenon
+
+            matins['readings'] = mm.get('readings', None)
+            matins['after50'] = mm.get('after50', None)
+
+            mo_ascent = mo.get('ascent', None)
+            mm_ascent = mm.get('ascent', None)
+            if mo_ascent or mm_ascent:
+                matins['ascent'] = mm_ascent if mm_ascent else mo_ascent
+
+            matins['canon'] = mm.get('canon')
+        else:
+            matins['canon'] = mo.get('canon')
+
+        #currently using octoechos praises. Need to do work on changing format to stichera to get menaion working.
+        matins['praises'] = mo.get('praises')
+
+
+        liturgy = octoechos.get('liturgy') #liturgy until menaion established
 
         compline = octoechos.get('compline') #no menaion variables
         nocturns = octoechos.get('nocturns') #no menaion variables
-        matins = octoechos.get('matins') #octoechos until menaion established
-        liturgy = octoechos.get('liturgy') #liturgy until menaion established
+
         variables['vespers'] = vespers
         variables['compline'] = compline
         variables['matins'] = matins
@@ -303,7 +368,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
 
     fixed_feasts = {
         #MM-DD: #[Service Name, Service Type, Rank]
-        # 'MM-DD': ['Kursk Root Icon', 'Theotokos', 4] #uncomment to test menaion...
+        #'MM-DD': ['Kursk Root Icon', 'Theotokos', 4] #uncomment to test menaion...
     }
 
     #grabs menaion info from dictionary if available
@@ -348,6 +413,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         ,octoechos=octoechos
         ,menaion=menaion
         ,paschal=paschal
+        ,service_type=menaion_file if menaion_file else None
     )
 
     #create services, grabbing service variables from rubic variables
@@ -388,7 +454,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         matins_variables['date'] = day_string_oc if calendar == 1 else day_string
         matins_variables['link'] = f'{link_date}-matins'
         links.append(f'<a href="#{link_date}-matins">Matins</a>')
-        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name)
+        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=menaion_file if menaion_file else None)
         liturgics['matins'] = matins
 
     if do_typika or do_first or do_third or do_sixth or do_ninth:

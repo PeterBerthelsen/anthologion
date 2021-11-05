@@ -1,10 +1,11 @@
 """
-Version 0.1.3
-Updated 10/21/2021
+Version 0.1.7
+Updated 11/5/2021
 
 Change Log:
-10/13/2021 - 0.1.0 - Initial Working Build - vespers prokeimena added
-10/21/2021 - 0.1.3 - Update file name, incorporated with jinja templates
+10/13/2021  - 0.1.0 - Initial Working Build - vespers prokeimena added
+10/21/2021  - 0.1.3 - Update file name, incorporated with jinja templates
+11/5/2021   - 0.1.7 - Added Forerunner hymns
 """
 daily_vespers_prokeimena = {
     0: '<p class="note">In the Eighth Tone:</p><p>Behold now, bless ye the Lord, all ye servants of the Lord.</p><p><i class="note">Stichos:</i> Ye that stand in the house of the Lord, in the courts of the house of our God.</p>'
@@ -30,6 +31,24 @@ daily_compline_troparia = {
     <p>Both now and ever, and unto the ages of ages. Amen.</p>
     <p>To Thee, O Lord, the Planter of creation, the world doth offer the God-bearing martyrs as the first-fruits of nature. By their intercessions preserve Thy Church, Thy commonwealth, in profound peace, through the Theotokos, O Greatly-merciful One.</p>"""
 }
+
+forerunner_troparia = {
+##'Name of Feast (may need updating when rubric is made)': 'troparia HTML'
+'The General Troparion': '<p><i class="note">Troparion in Tone II:</i></p><p>The memory of the just is celebrated with hymns of praise * but the Lord’testimony is enough for thee, O Forerunner, * for thou wast shown to be morwonderful than the Prophets * since thou wast granted to baptize in the runninwaters * Him Whom thou didst proclaim. * Then having endured great suffering fothe Truth, * Thou didst rejoice to bring, even to those in hell * the good tidings thaGod Who had appeared in the flesh * takes away the sin of the world * and grants us the great mercy.</p><p>Glory ..., Now & Ever ...,</p><p><i class="note">Theotokion, in Tone II:</i> All of thy most glorious mysteries are beyond comprehension, * O Theotokos; * for, thy purity sealed and thy virginity intact, * thou art known to be a true Mother, having given birth unto God. ** Him do thou entreat, that our souls be saved.</p>'
+
+,'Nativity of the Forerunner': '<p><i class="note">Troparion of the Conception of the Forerunner in Tone IV:</i></p><p>Sing, O barren one that didst not bear, * for thou hast conceived the lamp of the Sun * Who is to enlighten the whole world suffering from blindness. * O Zacharias rejoice and shout: * "The Prophet of the Most High is to be born."</p><p>Glory ..., Now & Ever ..., </p><p><i class="note">Theotokion, in Tone IV:</i> The mystery hidden from all ages * and unknown to the ranks of Angels, * hath been revealed to those on earth through thee, O Theotokos: * God incarnate in an uncommingled union, * Who willingly accepted the Cross for our sake, * and through it hath raised up the first-formed man, ** and saved our souls from death.</p>'
+
+,'Synaxis of the Forerunner': '<p><i class="note">Troparion of the Synaxis of the Forerunner: in Tone II:</i></p><p>The memory of the just is celebrated with hymns of praise, * but the Lord’s testimony is enough for thee, O Forerunner * for thou wast shown to be more wonderful than the Prophets * since thou wast granted to baptize in the running waters * Him whom thou didst proclaim. * Then having endured great suffering for the Truth, * thou didst rejoice to bring, even to those in hell, * the good tidings that God Who had appeared in the flesh * takes away the sin of the world and grants us the great mercy.</p><p>Glory ..., Now & Ever ...,</p><p><i class="note">Theotokion, in Tone II:</i> All of thy most glorious mysteries are beyond comprehension, * O Theotokos; * for, thy purity sealed and thy virginity intact, * thou art known to be a true Mother, having given birth unto God. ** Him do thou entreat, that our souls be saved.</p>'
+
+,'Birth of the Forerunner': '<p><i class="note">Troparion for the Birth of the Forerunner: in Tone IV:</i></p><p>O Prophet and Forerunner of the coming of Christ, * we honor thee lovingly but cannot extol thee worthily; * for by thy birth * thy mother’s barrenness and thy Father’s dumbness were unfettered; * and the Incarnation of the Son of God is proclaimed to the world.</p><p>Glory ..., Now & Ever ...,</p><p><i class="note">Theotokion, in Tone IV:</i> All of thy most glorious mysteries are beyond comprehension, * O Theotokos; * for, thy purity sealed and thy virginity intact, * thou art known to be a true Mother, having given birth unto God. ** Him do thou entreat, that our souls be saved.</p>'
+
+,'Finding of the Head of the Forerunner': '<p><i class="note">Troparion for the 1st & 2nd Finding: in Tone IV:</i></p><p>The head of the Forerunner has risen from the earth * and sends forth healing rays of incorruption to all the faithful. * In heaven it is mustering a host of Angels, * and on earth it is assembling mankind * to ascribe glory to our God.</p><p>Glory ..., Now & Ever ...,</p><p><i class="note">Theotokion, in Tone IV:</i> All of thy most glorious mysteries are beyond comprehension, * O Theotokos; * for, thy purity sealed and thy virginity intact, * thou art known to be a true Mother, having given birth unto God. ** Him do thou entreat, that our souls be saved.</p>'
+
+,'Third Finding of the Head of the Forerunner': '<p><i class="note">Troparion for the 3rd Finding: in Tone IV:</i></p><p>Christ has revealed thy head to us, O Prophet and Forerunner * as a divine treasure hidden in the earth. * We come with hymns to honor its discovery, * and praise the Savior Who saves us from corruption, * through Thine intercessions.</p>'
+}
+
+forerunner_megalynaria = {}
+forerunner_kontakia = {}
 
 def vespers_prokeimena(weekday:int):
     return daily_vespers_prokeimena.get(weekday)

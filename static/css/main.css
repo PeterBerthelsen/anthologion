@@ -32,6 +32,11 @@ body {
   	font-style:italic;
 }
 
+.name {
+		color:blue;
+		font-style:italic;
+}
+
 ol, ul {
 	list-style: none;
 }

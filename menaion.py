@@ -1,14 +1,16 @@
 """
-Version 0.1.5
-Updated 10/28/2021
+Version 0.1.7
+Updated 11/5/2021
 
 Change Log:
-10/8/2021 - 0.0.8 - Initial build, dictionary
-10/28/2021 - 0.1.5 - started building vespers
+10/8/2021   - 0.0.8 - Initial build, dictionary
+10/28/2021  - 0.1.5 - started building vespers
+11/5/2021   - 0.1.7 - finished vespers and matins
 """
 import os
 import re
 from _utils import process_pdf, string_search
+from hymns import forerunner_troparia, forerunner_megalynaria, forerunner_kontakia
 
 menaion_class = {
     #general menaion classes
@@ -43,6 +45,7 @@ def menaion_vespers(service:str, name:str, service_type:str):
     """
     Formats vespers-specific service section and returns vespers parts dictionary
     """
+
     #Dictionary for Return
     vespers_parts = {'name': name}
     vespers_search = {
@@ -51,7 +54,6 @@ def menaion_vespers(service:str, name:str, service_type:str):
             ,'On “Lord, I have cried ...”,'
             ,'Lord, I have cried ...'
             ,'On “Lord'
-
         ]
         ,'doxastichon': [
             'If an Idiomelon be appointed, Glory ...,'
@@ -104,8 +106,6 @@ def menaion_vespers(service:str, name:str, service_type:str):
         ]
     }
 
-    service = re.sub(r'[(]name.*?[)]',name,service)
-
     #establish breakpoints
     stichera_beginning, stichera = string_search(service, vespers_search.get('stichera'),vespers_search.get('theotokion'))
     doxastichon_beginning, doxastichon = string_search(service, vespers_search.get('doxastichon'), vespers_search.get('readings'))
@@ -114,7 +114,8 @@ def menaion_vespers(service:str, name:str, service_type:str):
     aposticha_beginning, aposticha = string_search(service.replace('\n', ' '), vespers_search.get('aposticha'))
     aposticha2_beginning, aposticha2 = string_search(aposticha, vespers_search.get('aposticha2'))
     apolytichion_beginning, apolytichion = string_search(service,vespers_search.get('apolytichion'),vespers_search.get('apolytichion2'))
-    print(doxastichon_beginning, theotokion_beginning, readings_beginning, aposticha_beginning, apolytichion_beginning)
+    #print(doxastichon_beginning, theotokion_beginning, readings_beginning, aposticha_beginning, apolytichion_beginning)
+
     if theotokion_beginning > readings_beginning:
         #string_search grabbed later Glory ..., Now & Ever ..., and will cause a blank string
         theotokion_beginning = theotokion = None
@@ -127,7 +128,9 @@ def menaion_vespers(service:str, name:str, service_type:str):
     stichera = [f'<p><i class="note">*</i>{s.strip()}</p>' for s in stichera] #add notes
     stichera_tone = stichera.pop(0) #separate tone notes
     stichera_tone = stichera_tone.replace('*</i>','') + '</i>'
+
     #additional formating, primarily for unique Holy Fathers service...
+    #should probably redo this. removing while iterating is bad...works for this single use, though.
     for s in stichera:
         if s.find('Verse:') > 0:
             stichera.remove(s)
@@ -153,13 +156,11 @@ def menaion_vespers(service:str, name:str, service_type:str):
         if service_type != 'Holy Fathers': #no dogmaticon defined in Holy Fathers Service
             vespers_parts['dogmaticon'] = dogmaticon
 
-
     if theotokion:
         theotokion = theotokion[:theotokion.find('If an Idiomel')]
         theotokion = re.sub(r'.*?([a-z]*theotokion.*?:|in tone [vi]+:)'
             ,r'</p><p><i class="note">\1</i></p><p>',theotokion.strip(),flags=re.I) + '</p>'
         vespers_parts['theotokion'] = theotokion
-
 
     readings = re.sub(r'\n([^a-z]+)\s*\n',r'</p><h3>\1</h3><p>',readings)
     readings = re.sub(r'At the Litiya.*',r'',readings.replace('\n',' '))
@@ -186,8 +187,6 @@ def menaion_vespers(service:str, name:str, service_type:str):
         vespers_parts['aposticha'] = aposticha
     vespers_parts['aposticha_theotokion'] = aposticha_theotokion
 
-
-
     apolytichion = '<p>Troparion' + re.sub(
         r'(of the Festival|[(]Also for the Beheading[)]|of the venerable nun-martyr|from the (Typicon|Typikon)).*?,*([, ]{0,2}in Tone [VI]+:)'
         ,r'\3</i>',apolytichion.replace('\n',' '),flags=re.I) + '</p>'
@@ -204,6 +203,7 @@ def menaion_matins(service:str, name:str, service_type:str):
     """
     Formats matins-specific service section and returns matins parts dictionary
     """
+
     #Dictionary for Return
     matins_parts = {}
 
@@ -216,30 +216,36 @@ def menaion_matins(service:str, name:str, service_type:str):
         ]
         ,'session1': [
             'After the 1st chanting of the Psalter, '
+            ,'After the 1st Kathisma, '
         ]
         ,'session2': [
             'After the 2nd chanting of the Psalter, '
+            ,'After the 2nd Kathisma, '
         ]
         ,'megalynarion': [
             'After the Polyeleos, The Megalynarion:'
+            ,'After the Polyeleos'
             ,'The Megalynarion'
         ]
         ,'session3': [
             'After the 3rd chanting of the Psalter'
             ,'After the Polyeleos, the Sessional Hymn'
+            ,'After the Polyeleos the Sessional Hymn'
         ]
         ,'ascent': [
             'The Songs of Ascent:'
+            ,'The Song of Ascents:'
             ,'Songs of Ascent'
         ]
         ,'prokeimenon': [
-            'The Prokeimenon'
-            ,'Prokeimenon'
+            'Prokeimenon'
+            ,'The Prokeimenon'
         ]
         ,'readings': [
             'Let Every breath ...,'
             ,'Let every breath ...,'
             ,'Let every breath.'
+            ,'THE GOSPEL ACCORDING TO '
         ]
         ,'after50': [
             'After the 50th Psalm:'
@@ -253,9 +259,11 @@ def menaion_matins(service:str, name:str, service_type:str):
         ]
         ,'praises': [
             'On the Praises, '
+            ,'On the Aposticha' #unmercenaries has this??
         ]
         ,'apolytichion': [
-            'After Our Father .., '
+            'Doxology'
+            ,'After Our Father .., '
             ,'if there is no Typicon sing the following:'
 
         ]
@@ -265,18 +273,141 @@ def menaion_matins(service:str, name:str, service_type:str):
     #establish breakpoints
     troparion_beginning, troparion = string_search(service, matins_search.get('troparion'), matins_search.get('session1'))
     session1_beginning, session1 = string_search(service, matins_search.get('session1'), matins_search.get('session2'))
-    session2_beginning, session2 = string_search(service, matins_search.get('session2'), matins_search.get('megalynarion'))
-    megalynarion_beginning, megalynarion = string_search(service, matins_search.get('megalynarion'), matins_search.get('session3'))
+    session2_beginning, session2 = string_search(service, matins_search.get('session2'), matins_search.get('megalynarion'),session1_beginning)
+    megalynarion_beginning, megalynarion = string_search(service, matins_search.get('megalynarion'), matins_search.get('session3'),session2_beginning)
     session3_beginning, session3 = string_search(service, matins_search.get('session3'), matins_search.get('ascent'))
     ascent_beginning, ascent = string_search(service, matins_search.get('ascent'), matins_search.get('prokeimenon'))
     prokeimenon_beginning, prokeimenon = string_search(service, matins_search.get('prokeimenon'), matins_search.get('readings'))
     readings_beginning, readings = string_search(service, matins_search.get('readings'), matins_search.get('after50'))
     after50_beginning, after50 = string_search(service, matins_search.get('after50'), matins_search.get('canon'))
-    canon_beginning, canon = string_search(service, matins_search.get('canon'), matins_search.get('exapostilarion'))
     exapostilarion_beginning, exapostilarion = string_search(service, matins_search.get('exapostilarion'), matins_search.get('praises'))
     praises_beginning, praises = string_search(service, matins_search.get('praises'), matins_search.get('apolytichion'))
+    if exapostilarion_beginning == 0: #for some reason exapostilarion and canon searches do not work with string_search.
+        try: #using custom logic for these...
+            exapostilarion_beginning = re.search(r'Exapostilarion',service,flags=re.I).start()
+            exapostilarion = service[exapostilarion_beginning:praises_beginning]
+        except:
+            exapostilarion_beginning = 0
+    canon_beginning = re.search(r'(The Canon|Canon)',service,flags=re.I).start()
+    canon = service[canon_beginning:exapostilarion_beginning]
     apolytichion_beginning, apolytichion = string_search(service, matins_search.get('apolytichion'))
-    print(name, troparion_beginning)
+
+    print(service_type, exapostilarion_beginning, praises_beginning, apolytichion_beginning)
+
+    if service_type == 'St John Baptist':
+        troparion = forerunner_troparia.get(name, None)
+        if not troparion:
+            troparion = forerunner_troparia.get('The General Troparion')
+        matins_parts['troparion'] = troparion
+    else:
+        troparion = re.sub(r'the (Troparion.*?:)',r'<p><i class="note">The \1</i></p><p>',troparion)
+        troparion = re.sub(r' of the Resurrection .*?Glory ...',r'',troparion) #Holy Fathers anomoly
+        troparion = re.sub(r'(Glory[ .,]+Now & Ever[ .,]+|Now & Ever[ .,]+).*',r'</p>',troparion.replace('\n',' '),flags=re.I)
+        troparion = re.sub(r'[(]Twice[)]',r'<i class="note">Twice.</i>',troparion)
+        matins_parts['troparion'] = troparion
+
+    if service_type == 'Holy Fathers':
+        matins_parts['session1'] = None
+        matins_parts['session2'] = None
+        matins_parts['session3'] = None
+        matins_parts['megalynarion'] = None
+        matins_parts['ascent'] = None
+        matins_parts['prokeimenon'] = None
+        matins_parts['readings'] = None
+        matins_parts['after50'] = None
+    else:
+        session1 = re.sub(r'^the Sessional Hymn[ .,:]',r'The Sessional Hymn ',session1) #capitalize
+        session1 = re.sub(r'(The Sessional.*?:|Spec[. ]+Mel[. ]+:.*?:|[a-zA-Z]*heotokion.*?:)',r'</p><p><i class="note">\1</i></p><p>',session1) #note sections
+        session1 = re.sub(r'[(]Twice[)]',r'<i class="note">Twice</i>.</p><p>',session1) #notes for 'twice'
+        session1 = re.sub(r'(.*)(the foregoing is repeated).*',r'\1</p><p><i class="note">(\2)</i></p>',session1.replace('\n',' '))
+
+        matins_parts['session1'] = session1
+
+        session2 = re.sub(r'^the Sessional Hymn[ .,:]',r'The Sessional Hymn ',session2) #capitalize
+        session2 = re.sub(r'(The Sessional.*?:|Spec[. ]+Mel[. ]+:.*?:|[a-zA-Z]*heotokion.*?:)',r'</p><p><i class="note">\1</i></p><p>',session2) #note sections
+        session2 = re.sub(r'[(]Twice[)]',r'<i class="note">Twice</i>.</p><p>',session2) #notes for 'twice'
+        session2 = re.sub(r'(.*)(the foregoing is repeated).*',r'\1</p><p><i class="note">(\2)</i></p>',session2.replace('\n',' '))
+        session2 = re.sub(r'After Praise ye the name of the Lord.*',r'',session2) #end matter on St John Baptist
+        matins_parts['session2'] = session2
+
+        #Need logic here to handle St John Baptist megalynaria...
+        #
+        #
+        megalynarion = re.sub(r'^[ ,]+the (Megalynarion:)',r'<p><i class="note">\1</i></p><p>',megalynarion.replace('\n',' '))
+        megalynarion = re.sub(r'(Verse:)',r'</p><p><i class="note">\1</i>',megalynarion)
+        matins_parts['megalynarion'] = megalynarion
+
+        session3 = 'The Sessional Hymn' + session3[1:]
+        session3 = re.sub(r'(The Sessional.*?:|Spec[. ]+Mel[. ]+:.*?:|[a-zA-Z]*heotokion.*?:)',r'</p><p><i class="note">\1</i></p><p>',session3) #note sections
+        session3 = re.sub(r'[(]Twice[)]',r'<i class="note">Twice</i>.</p><p>',session3) #notes for 'twice'
+        session3 = re.sub(r'((?<!<p>)Glory ..., Now & Ever ...,)',r'</p><p>\1',session3)
+        session3 = re.sub(r'(.*)(the foregoing is repeated).*',r'\1</p><p><i class="note">(\2)</i></p>',session3.replace('\n',' '))
+        session3 = re.sub(r'([Ii]f of Polyeleos|If not a Resurrection).*',r'',session3) #end matter, clipping into ascents
+        matins_parts['session3'] = session3
+
+        ascent = ascent.replace(', First Antiphon', '') #Unmercenaries typo
+        ascent = re.sub(r'^.*(in Tone [VI]+:)',r'<p><i class="notes">The Song of Ascent, First Antiphon \1</i></p><p>',ascent)
+        ascent = re.sub(r'(Glory[ .,]+Now & Ever[ .,]+)',r'</p><p>\1</p><p>',ascent)
+        ascent = re.sub(r'Prokeimenon.*',r'',ascent.replace('\n',' '))
+        matins_parts['ascent'] = ascent
+
+        prokeimenon = re.sub(r'^.*(Tone [VI]+:)',r'<p><i class="note">The Prokeimenon in \1</i></p><p>',prokeimenon.replace('\n',' '))
+        prokeimenon = re.sub(r'[ ]*The Prokeimenon:[ ]*',r'',prokeimenon,flags=re.I)
+        prokeimenon = re.sub(r'(Verse:)',r'</p><p><i class="note">\1</i>',prokeimenon) + '<p>'
+        matins_parts['prokeimenon'] = prokeimenon
+
+        readings = re.sub(r'^ST',r'THE GOSPEL ACCORDING TO ST',readings) #Nun/Nuns search cuts this
+        readings = '<h3>' + re.sub(r'([)][ .]*)',r'\1</h3><p>',readings.replace('\n',' ')) + '</p>'
+        matins_parts['readings'] = readings
+
+        after50 = re.sub(r'The Canon.*',r'',after50.replace('\n',' '))
+        after50 = after50.replace('Sessional Hymn:','Sessional Hymn,') #theotokos typo
+        after50 = after50.replace('Or for many','Sessional Hymn, For Several Angels') #angels conditional
+        after50 = after50.replace('. In Tone VI','</p><p>The Sessional Hymn, in Tone VI') #apostle typo
+        after50 = re.sub(r'(Then the|the| )[ ]*(Sessional Hymn.*?:)',r'</p><p><i class="note">The \2</i></p><p>',after50)
+        after50 = re.sub(r'(Now & Ever)',r'</p><p>\1',after50)
+        after50 = re.sub(r'([Ii]n Tone [VI]+:)',r'<i class="note">\1</i>',after50)
+        matins_parts['after50'] = after50
+
+        apolytichion = apolytichion.replace('(Also for the Beheading)','') #St John Baptist header
+        apolytichion = re.sub(r'.*?(troparion.*?:)',r'</p><p><i class="note">\1</i></p><p>',apolytichion,flags=re.I|re.S)
+        apolytichion = re.sub(r'</p><p><i class="note">(Troparion is sung after the Doxology:|Troparion for the feast [(]from above[)] or else:)</i></p><p>',r'',apolytichion,flags=re.S) #unmercenaries typo
+        apolytichion = re.sub(r'(Glory[ .,]{3,}Now & Ever[ .,]+.*|The Dismissal.*)',r'</p>',apolytichion,flags=re.I|re.S)
+        matins_parts['apolytichion'] = apolytichion
+
+    #the rest of the parts are in all services
+    canon = canon.replace('Thou that wast of Thine own will ...”.', 'Thou that wast of Thine own will ...”:') #Cross Ode 6 typo
+    canon = re.sub(r'(O\s*O\s*D\s*D\s*E\s*E\s*|О\s*О\s*D\s*D\s*E\s*E\s*)\s+([XVI]+)\s+',r'</p><h3>Ode \2</h3><p>',canon) #Ode headers
+    canon = re.sub(r'^(.*[Aa]crostic.*)\n',r'\1',canon,flags=re.M)#removes line breaks from lengthy titles for capture below
+    canon = re.sub(r'^(.*[Aa]crostic.*)\n',r'\1',canon,flags=re.M)#removes line breaks from REALLY lengthy titles for capture below
+    canon = re.sub(r'\([Tt]wice[.]?\)',r'<i class="note">Twice.</i></p><p>',canon)
+    canon = re.sub(r', and make prostrations.', r'<i class="note"> Prostrations.</i>',canon)
+    canon = re.sub(r'(The Kontakion|Kontakion).*?from the Typi[ck]on.*?following[:,]',r'',canon,flags=re.S|re.I)
+    canon = re.sub(r'(Trinitarion:|Katavasia.*?:|The Canon.*?:|(The | )Sessional Hymn.*?:|(The K|K)ontakion.*?:|Refrain:|(The [a-z]*|[a-z]*)Theotokion.*?:|(The I|I)kos:|Spec[ .]+Mel[. :]+.*?:|Verse:|\n\s*Another[ ,].*?:)'
+                        ,r'</p><p><i class="note">\1</i>',canon,flags=re.I|re.S) + '</p>'#service notes
+    canon = re.sub(r'[Ii]rmos:',r'</p><p><i class="note">Irmos:</i>',canon)
+    canon = re.sub(r'(?<!<p>)(Glory [.,]{3,})',r'<p>\1',canon)
+    canon = re.sub(r'(Glory[ .,]{3,}Now & Ever[ .,]+)(the same.|the foregoing is repeated.)',r'\1</p><p><i class="note">the foregoing is repeated.</i>',canon,flags=re.I)
+    #Need logic here to handle St John Baptist Kontakia
+    if service_type == 'St John Baptist':
+        canon = re.sub(r'THE KONTAKIA.*[*] O wise Baptist of Christ, save us all.\s*',r'<<KONTAKIA HERE>>',canon,flags=re.I|re.S)
+        canon = canon.replace('<<KONTAKIA HERE>>',forerunner_kontakia.get(name, ''))
+    canon = canon.replace('XX','X').replace('VV','V').replace('II','I') #Remove duplicate Ode Roman Numerals
+    canon = re.sub(r'Then, [“"].*','',canon.replace('\n','')) #remove excess after canon
+    matins_parts['canon'] = canon
+
+    exapostilarion = re.sub(r'^(?<!Exapostilarion )(in Tone [VI]+:)',r'Exapostilarion \1',exapostilarion,flags=re.I)
+    exapostilarion = re.sub(r'(Exapostilarion.*?:)',r'<i class="note">\1</i></p><p>',exapostilarion,flags=re.I)
+    exapostilarion = re.sub(r'(Glory[ .,]{3,}Now & Ever[ .,]+)',r'</p><p>\1',exapostilarion,flags=re.I)
+    exapostilarion = re.sub(r'(spec[. ]+mel[. ]+:.*?:|[a-z]*theotokion.*?:)',r'</p><p><i class="note">\1</i>',exapostilarion,flags=re.I)
+    exapostilarion = '<p>' + exapostilarion + '</p>'
+    matins_parts['exapostilarion'] = exapostilarion
+
+    #Praises.. individual stichera!?
+    #For now, just use octoechos..
+    #
+    #
+    matins_parts['praises'] = praises
 
     return matins_parts
 
@@ -289,6 +420,9 @@ def menaion_variables (input_string:str, name:str, service_type:str):
     Text is divided at common breakpints from PDFs, then formatted for use.
     Returns list with variables at set index location.
     """
+    #Insert name variable into service
+    input_string = re.sub(r'[(]name.*?[)]',f'<i class="name">{name}</i>',input_string,flags=re.S)
+    input_string = input_string.replace('О', 'O') #replace known cyrillic chracter \u041e which throws error
 
     #breakpoints needed modification. Each letter paired with space triggered matches on 6+ spaces in wrong places.
     matins_breakpoint = re.search(r'[A]+[T]+[ ]{1,2}[M ]+[A]+[T]+[I]+[N ]+[S ]+',input_string.replace('\n', ' '),flags=re.I)
@@ -305,29 +439,46 @@ def menaion_variables (input_string:str, name:str, service_type:str):
 
     return payload
 
-#
-# test = re.search(r'glory[., ]+now & ever[., ]+','Glory ..., Now & Ever ...,',flags=re.I)
-# print(test)
+
 if __name__=='__main__':
     with open('test.html', 'w') as f:
         for id, m in menaion_class.items():
             #if m == 'Holy Fathers':
             f.write(f'<h2>{m}</h2>')
-            menaion = menaion_variables(process_pdf(filename=m, service='menaion'),name=m)
-            #f.write(menaion.get('matins').get(''))
-
+            menaion = menaion_variables(process_pdf(filename=m, service='menaion'),name=m, service_type=m)
+            # f.write(menaion.get('matins').get('troparion'))
+            # if menaion.get('matins').get('session1'):
+            #     f.write(menaion.get('matins').get('session1'))
+            # if menaion.get('matins').get('session2'):
+            #     f.write(menaion.get('matins').get('session2'))
+            # if menaion.get('matins').get('megalynarion'):
+            #     f.write(menaion.get('matins').get('megalynarion'))
+            # if menaion.get('matins').get('session3'):
+            #     f.write(menaion.get('matins').get('session3'))
+            # if menaion.get('matins').get('prokeimenon'):
+            #     f.write(menaion.get('matins').get('prokeimenon'))
+            # if menaion.get('matins').get('readings'):
+            #     f.write(menaion.get('matins').get('readings'))
+            # if menaion.get('matins').get('after50'):
+            #     f.write(menaion.get('matins').get('after50'))
+            # f.write(menaion.get('matins').get('canon'))
+            # f.write(menaion.get('matins').get('exapostilarion'))
+            # f.write(menaion.get('matins').get('praises'))
+            # if menaion.get('matins').get('apolytichion'):
+            #     f.write(menaion.get('matins').get('apolytichion'))
+            # # #--------------------------------------------------------------------------
             # for s in menaion.get('vespers').get('stichera'):
             #     f.write(s.replace('О','O') + '\n')
             # #Compare these with Anthologion later for confirmation!!!
             # if menaion.get('vespers').get('doxastichon'):
             #     f.write('<h3>Doxastichon</h3>')
-            #     f.write(menaion.get('vespers').get('doxastichon').replace('О','O')) #cyrillic character...
+            #     f.write(menaion.get('vespers').get('doxastichon'))
             # if menaion.get('vespers').get('dogmaticon'):
             #     f.write('<h3>Dogmaticon</h3>')
-            #     f.write(menaion.get('vespers').get('dogmaticon').replace('О','O')) #cyrillic character...
+            #     f.write(menaion.get('vespers').get('dogmaticon'))
             # if menaion.get('vespers').get('theotokion'):
             #     f.write('<h3>Theotokion</h3>')
-            #     f.write(menaion.get('vespers').get('theotokion').replace('О','O')) #cyrillic character...
+            #     f.write(menaion.get('vespers').get('theotokion'))
             # f.write(menaion.get('vespers').get('readings'))
             # f.write(menaion.get('vespers').get('aposticha'))
             # f.write(menaion.get('vespers').get('aposticha_theotokion'))

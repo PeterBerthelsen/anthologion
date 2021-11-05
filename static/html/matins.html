@@ -1,5 +1,6 @@
 <div class="service" id="{{ variables.link }}">
  <h1>Matins</h1>
+  {% if name != None %}<h2>For {{ name }}</h2>{% endif %}
  <p><a href="#{{ variables.link.split('-')[0] }}">Return to Date</a></p>
  <h3>{{ variables.date|safe }}</h3>
  <p><i class="note">If Matins was preceded Nocturns, then skip to "O come..."</i></p>
@@ -90,6 +91,15 @@
  {% endfor %}
  {{ variables.session2|safe}}
 
+ {# In theory, Polyeleos goes here?? #}
+ {# If of polyeleos (3 or less) rank:
+   {{ variables.megalynarion|safe }}
+   {{ variables.session3|safe }}
+   {{ variables.ascent|safe }}
+   {{ variables.prokeimenon|safe }}
+   #}
+ {{ variables.readings|safe }}
+
  <p>Lord, have mercy. <i class="note">Thrice.</i></p>
  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
  <h3>Psalm 50</h3>
@@ -102,7 +112,7 @@
  <p>Lord, have mercy. <i class="note">Thrice.</i>/p>
  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
 
- {# Exapostilaria here.. #}
+ {{ variables.exapostilarion|safe }}
 
  <p>The Lauds (the Praises):</p>
  <p>Praise the Lord from the heavens, praise Him in the highest. To Thee is due praise, O God.</p>
@@ -145,7 +155,7 @@
    <p>Praise Him with timbrel and dance, * praise him with strings and flute. Sticheron.</p>
    <p>Praise Him with tuneful cymbals, praise Him with cymbals of jubilation. * Let every breath praise the Lord. Sticheron.</p>
  <p>Glory to the Father, and to the Son, and to the Holy Spirit.</p>
- {{ variables.doxastichon }}
+ {{ variables.doxastichon|safe }}
  <p>Both now and ever, and unto the ages of ages. Amen.</p>
 
  {# theotokion here for when there's no stichera? #}
@@ -166,7 +176,12 @@
  <p>Glory to the Father and to the Son and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
  <p>Our Father, Who art in the Heavens, hallowed be Thy Name. Thy Kingdom come, Thy will be done, on earth as it is in Heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors; and lead us not into temptation, but deliver us from the evil one.</p>
  <p>O Lord, Jesus Christ, Son of God, have mercy on us. Amen.</p>
- {# dismissal troparia? #}
+ {% if service_type == 'Holy Fathers' %}
+  {{ variables.troparion }}
+ {% else %}
+  {{ variables.apolytichion|safe }}
+ {% endif %}
+
  <p>Lord, have mercy. <i class="note">Forty Times.</i></p>
  <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
  <p>Establish, O God, the holy Orthodox Faith of Orthodox Christians unto the ages of ages.</p>
