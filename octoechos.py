@@ -424,7 +424,7 @@ def octoechos_liturgy(service:str):
     liturgy_parts['troparia_tone'] = '<p><i class="note">' + troparia.pop(0) + '</i></p>' #tone note as it's own variable
     troparia = [re.sub(r'^: ',r'<i class="note">*</i>',t) for t in troparia] #removing excess ':' sometimes added
     troparia = ['<p>' + re.sub(r'\n',r'',t.strip()) + '</p>' for t in troparia]
-    liturgy_parts['troparia'] = troparia
+    liturgy_parts['beatitudes'] = troparia #labeled to reduce confusion.
 
     if res_troparion_start:
         res_troparion = service[res_troparion_start.start():res_kontakion_start.start()]

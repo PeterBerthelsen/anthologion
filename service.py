@@ -1,6 +1,6 @@
 """
-Version 0.1.7
-Updated 11/5/2021
+Version 0.1.8
+Updated 11/7/2021
 
 Change Log:
 10/11/2021 - 0.0.8  - Initial Creation, Vespers elements
@@ -13,6 +13,7 @@ Change Log:
 10/27/2021 - 0.1.4  - Added table of contents to generate_day()
 11/5/2021  - 0.1.7  - Updated Rubrics for Menaion Matins
                     - Updated generate_day() for matins use
+11/7/2021 - 0.1.8   - Updated Rubrics for Menaion Typika
 """
 import os
 import re
@@ -274,8 +275,45 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
         #currently using octoechos praises. Need to do work on changing format to stichera to get menaion working.
         matins['praises'] = mo.get('praises')
 
+        #establish Typika variables
+        liturgy = {}
+        to = octoechos.get('liturgy')
+        tm = menaion.get('liturgy')
 
-        liturgy = octoechos.get('liturgy') #liturgy until menaion established
+        to_beatitudes = to.get('beatitudes')
+        tm_beatitudes = tm.get('beatitudes')
+
+        if weekday == 6:
+            beatitudes_needed = 10
+            feast_beatitudes = len(tm_beatitudes)
+            extra_beatitudes = beatitudes_needed - feast_beatitudes
+        elif rank <= 3:
+            beatitudes_needed = 8
+            feast_beatitudes = len(tm_beatitudes)
+            extra_beatitudes = beatitudes_needed - feast_beatitudes
+        elif rank > 6:
+            beatitudes_needed = 6
+            feast_beatitudes = len(tm_beatitudes)
+            extra_beatitudes = beatitudes_needed - feast_beatitudes
+        else: #afterfeast, 3 & 3
+            beatitudes_needed = 6
+            feast_beatitudes = 3
+            extra_beatitudes = 3
+
+        extra_beatitudes = None if extra_beatitudes <= 0 else extra_beatitudes
+        if extra_beatitudes:
+            beatitudes = to_beatitudes[0:extra_beatitudes] + tm_beatitudes[0:feast_beatitudes]
+        else:
+            beatitudes = tm_beatitudes
+        liturgy['beatitutdes'] = beatitudes
+
+        if weekday == 6:
+            liturgy['resurrection_troparion'] = to.get('resurrection_troparion')
+
+        liturgy['troparion'] = tm.get('troparion')
+        liturgy['kontakion'] = tm.get('kontakion')
+        liturgy['prokeimenon'] = tm.get('prokeimenon')
+        liturgy['readings'] = tm.get('readings')
 
         compline = octoechos.get('compline') #no menaion variables
         nocturns = octoechos.get('nocturns') #no menaion variables

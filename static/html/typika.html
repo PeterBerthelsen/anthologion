@@ -33,28 +33,28 @@
   <h3>The Beatitudes </h3>
   <p>In Thy kingdom remember us, O Lord, * when Thou comest in Thy kingdom.</p>
   <p>Blessed are the poor in spirit, * for theirs is the kingdom of heaven.</p>
-  {{ variables.troparia[-12]|safe }}
+  {{ variables.beatitudes[-12]|safe }}
   <p>Blessed are they that mourn, * for they shall be comforted.</p>
-  {{ variables.troparia[-11]|safe }}
+  {{ variables.beatitudes[-11]|safe }}
   <p>Blessed are the meek, * for they shall inherit the earth.</p>
-  {{ variables.troparia[-10]|safe }}
+  {{ variables.beatitudes[-10]|safe }}
   <p>Blessed are they that hunger and thirst after righteousness, * for they shall be filled.</p>
-  {{ variables.troparia[-9]|safe }}
+  {{ variables.beatitudes[-9]|safe }}
   <p>Blessed are the merciful, * for they shall obtain mercy.</p>
-  {{ variables.troparia[-8]|safe }}
+  {{ variables.beatitudes[-8]|safe }}
   <p>Blessed are the pure in heart, * for they shall see God.</p>
-  {{ variables.troparia[-7]|safe }}
+  {{ variables.beatitudes[-7]|safe }}
   <p>Blessed are the peacemakers, * for they shall be called the sons of God.</p>
-  {{ variables.troparia[-6]|safe }}
+  {{ variables.beatitudes[-6]|safe }}
   <p>Blessed are they which are persecuted for righteousness' sake, * for theirs is the kingdom of heaven.</p>
-  {{ variables.troparia[-5]|safe }}
+  {{ variables.beatitudes[-5]|safe }}
   <p>Blessed are ye, when men shall revile you, and persecute you, * and shall say all manner of evil against you falsely, for my sake.</p>
-  {{ variables.troparia[-4]|safe }}
+  {{ variables.beatitudes[-4]|safe }}
   <p>Rejoice, and be exceeding glad, * for great is your reward in the heavens.</p>
-  {{ variables.troparia[-3]|safe }}
-  {% if variables.troparia is defined %}
-   {{ variables.troparia[-2]|safe }}
-   {{ variables.troparia[-1]|safe }}
+  {{ variables.beatitudes[-3]|safe }}
+  {% if variables.beatitudes is defined %}
+   {{ variables.beatitudes[-2]|safe }}
+   {{ variables.beatitudes[-1]|safe }}
   {% else %}
    <p>Glory to the Father, * and to the Son, * and to the Holy Spirit.</p>
    <p>Both now and ever, * and unto the ages of ages. Amen.</p>
@@ -73,11 +73,14 @@
   {% if variables.epistle is defined %}
    <h3>Epistle</h3>
    {{ variables.epistle|safe }}
+   {{ variables.alleluia|safe }}
   {% endif %}
-  {{ variables.alleluia|safe }}
   {% if variables.gospel is defined %}
    <h3>The Gospel</h3>
    {{ variables.gospel|safe }}
+  {% endif %}
+  {% if variables.readings is defined %}
+    {{ variables.readings|safe }}
   {% endif %}
   <p>Glory to Thee, O Lord, Glory to Thee!</p>
   <p><i class="note">In the 6th Sticheron Tone</i></p>

@@ -1,11 +1,12 @@
 """
-Version 0.1.7
-Updated 11/5/2021
+Version 0.1.8
+Updated 11/7/2021
 
 Change Log:
 10/8/2021   - 0.0.8 - Initial build, dictionary
 10/28/2021  - 0.1.5 - started building vespers
 11/5/2021   - 0.1.7 - finished vespers and matins
+11/7/2021   - 0.1.8 - finished typika
 """
 import os
 import re
@@ -292,7 +293,7 @@ def menaion_matins(service:str, name:str, service_type:str):
     canon = service[canon_beginning:exapostilarion_beginning]
     apolytichion_beginning, apolytichion = string_search(service, matins_search.get('apolytichion'))
 
-    print(service_type, exapostilarion_beginning, praises_beginning, apolytichion_beginning)
+    #print(service_type, exapostilarion_beginning, praises_beginning, apolytichion_beginning)
 
     if service_type == 'St John Baptist':
         troparion = forerunner_troparia.get(name, None)
@@ -412,7 +413,81 @@ def menaion_matins(service:str, name:str, service_type:str):
     return matins_parts
 
 def menaion_liturgy(service:str, name:str, service_type:str):
-    return service
+    """
+    Formats liturgy-specific service section and returns matins parts dictionary
+    """
+
+    #Dictionary for Return
+    liturgy_parts = {}
+
+    #Establish Matins breakpoints
+    liturgy_search = {
+        'beatitudes': [
+            'Typika and Beatitudes'
+            ,'On the Beatitudes'
+            ,'Beatitudes'
+        ]
+        ,'troparion': [
+            'The Troparion, in Tone'
+            ,'Troparion'
+        ]
+        ,'kontakion': [
+            'The Kontakion, in Tone'
+            ,'Kontakion'
+        ]
+        ,'prokeimenon': [
+            'The Prokeimenon'
+            ,'Prokeimenon'
+        ]
+    }
+
+    service = re.sub(r'Troparion.*?Kontakion.*?Typicon.*?:',r'',service,flags=re.S|re.I) #remove Troparion/Kontakion header to give valid search results
+    beatitudes_beginning, beatitudes = string_search(service,liturgy_search.get('beatitudes'),liturgy_search.get('troparion'))
+    troparion_beginning, troparion = string_search(service,liturgy_search.get('troparion'),liturgy_search.get('kontakion'))
+    kontakion_beginning, kontakion = string_search(service,liturgy_search.get('kontakion'),liturgy_search.get('prokemenon'))
+    prokeimenon_beginning, prokeimenon = string_search(service,liturgy_search.get('prokeimenon'))
+    beatitudes = re.sub(r'\A\s*([.]\s*|[,].*?:\s*)([a-zA-Z])',r'\2',beatitudes,flags=re.S) #front matter
+    beatitudes = re.sub(r'\A.*?ODE VI.*?\n',r'',beatitudes) #fools, front matter
+    #beatitudes = re.sub(r'',r'',beatitudes,flags=re.I|re.S)
+    beatitudes = re.sub(r'([.])\s*\n',r'\1|',beatitudes,re.S)
+    beatitudes = re.sub(r'[(]Twice[)]',r'<i class="note">|the foregoing is repeated.</i>|',beatitudes)
+    beatitudes = re.sub(r'([a-zA-Z]*Theotokion)',r'<i class="note">\1</i>',beatitudes,flags=re.I|re.S)
+    beatitudes = re.sub(r'|(\s*The\s*\Z|TROPARIA.*)',r'',beatitudes,flags=re.S|re.M)
+    #errant line splits:
+    beatitudes.replace('||','|') #double breaks (happen on a few occurences of "(Twice)")
+    beatitudes = re.sub(r'[|]Illumine', ' Illumine', beatitudes) #theotokos, period @ EOL
+
+    beatitudes = ['<p>' + b + '</p>' for b in beatitudes.split('|')]
+    liturgy_parts['beatitudes'] = beatitudes
+
+    if service_type == 'St John Baptist':
+        liturgy_parts['troparion'] = forerunner_troparia.get(name,'')
+        liturgy_parts['kontakion'] = forerunner_kontakia.get(name,'')
+    else:
+        troparion = re.sub(r'(^.*?:)',r'<p><i class="note">Troparion\1</i></p><p>',troparion) + '</p>'
+        liturgy_parts['troparion'] = troparion
+        kontakion = re.sub(r'(^.*?:)(.*?)Prokeimenon.*',r'<p><i class="note">Kontakion\1</i></p><p>\2</p>',kontakion,flags=re.S)
+        liturgy_parts['kontakion'] = kontakion
+
+    prokeimenon = re.sub(r'(Tone [VI]+),',r'\1:',prokeimenon) #fools/unmercenaries typo
+    prokeimenon = prokeimenon.replace('of the Fathers:','of the Fathers,') #Holy Fathers formatting
+    prokeimenon = prokeimenon.replace('(Psalm 15:3, 8)','') #unmercenaries formatting
+    prokeimenon = re.sub(r'(^.*?:)(.*?)[A-Z ]{5,}.*',r'<p><i class="note">Prokeimenon\1</i></p><p>\2',prokeimenon,flags=re.S)
+    prokeimenon = re.sub(r'Verse:',r'</p><p><i class="note">Verse:</i>',prokeimenon)
+    prokeimenon = re.sub(r'THE [0-9].*',r'',prokeimenon) #end matter, clipping on ordinal titles for readings
+    liturgy_parts['prokeimenon'] = prokeimenon
+
+    readings_beginning = re.search(r'(THE READING|THE EPISTLE|THE 1st EPISTLE|THE 2nd EPISTLE|THE FIRST EPISTLE|THE SECOND|THE ACTS)',service,flags=re.I)
+    readings = service[readings_beginning.start():]
+    readings = readings.replace('(and are)','and are') #close paren at EOL in Apostle
+    readings = readings.replace('behind (him)','behind him') #Nuns Gospel reading
+    readings = re.sub(r'(in Tone [VI]+),',r'\1:',readings,flags=re.I|re.S) #fools typo
+    readings = '<h3>' + re.sub(r'[)][.]*\s*\n',r')</h3><p>',readings,flags=re.S)
+    readings = re.sub(r'(GOSPEL|THE GOSPEL|THE HOLY GOSPEL)',r'<h3>\1',readings) + '</p>'
+    readings = re.sub(r'(The Communion|Communion) .*',r'',readings,flags=re.S)
+    readings = re.sub(r'(Alleluia.*?:|Verse:)',r'</p><p><i class="note">\1</i>',readings,flags=re.I|re.S)
+    liturgy_parts['readings'] = readings
+    return liturgy_parts
 
 def menaion_variables (input_string:str, name:str, service_type:str):
     """
@@ -446,6 +521,13 @@ if __name__=='__main__':
             #if m == 'Holy Fathers':
             f.write(f'<h2>{m}</h2>')
             menaion = menaion_variables(process_pdf(filename=m, service='menaion'),name=m, service_type=m)
+            # for b in menaion.get('liturgy').get('beatitudes'):
+            #     f.write(b)
+            # f.write(menaion.get('liturgy').get('troparion'))
+            # f.write(menaion.get('liturgy').get('kontakion'))
+            # f.write(menaion.get('liturgy').get('prokeimenon'))
+            f.write(menaion.get('liturgy').get('readings'))
+
             # f.write(menaion.get('matins').get('troparion'))
             # if menaion.get('matins').get('session1'):
             #     f.write(menaion.get('matins').get('session1'))
