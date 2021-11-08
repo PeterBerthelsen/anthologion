@@ -1,6 +1,6 @@
 <div class="service" id="{{ variables.link }}">
  <h1>Matins</h1>
-  {% if name != None %}<h2>For {{ name }}</h2>{% endif %}
+  {% if name != None %}<h2>For {{ long_name }}</h2>{% endif %}
  <p><a href="#{{ variables.link.split('-')[0] }}">Return to Date</a></p>
  <h3>{{ variables.date|safe }}</h3>
  <p><i class="note">If Matins was preceded Nocturns, then skip to "O come..."</i></p>

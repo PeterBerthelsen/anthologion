@@ -1,6 +1,6 @@
 """
-Version 0.1.8
-Updated 11/7/2021
+Version 0.1.9
+Updated 11/8/2021
 
 Change Log:
 10/11/2021 - 0.0.8  - Initial Creation, Vespers elements
@@ -14,6 +14,8 @@ Change Log:
 11/5/2021  - 0.1.7  - Updated Rubrics for Menaion Matins
                     - Updated generate_day() for matins use
 11/7/2021 - 0.1.8   - Updated Rubrics for Menaion Typika
+11/8/2021 - 0.1.9   - Updated Fixed feasts for first half of November
+
 """
 import os
 import re
@@ -305,7 +307,7 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
             beatitudes = to_beatitudes[0:extra_beatitudes] + tm_beatitudes[0:feast_beatitudes]
         else:
             beatitudes = tm_beatitudes
-        liturgy['beatitutdes'] = beatitudes
+        liturgy['beatitudes'] = beatitudes
 
         if weekday == 6:
             liturgy['resurrection_troparion'] = to.get('resurrection_troparion')
@@ -405,16 +407,34 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     night_string_oc = night_string + ' (' + (date_oc - timedelta(days=1)).strftime('%m/%d/%Y') + ')'
 
     fixed_feasts = {
-        #MM-DD: #[Service Name, Service Type, Rank]
-        #'MM-DD': ['Kursk Root Icon', 'Theotokos', 4] #uncomment to test menaion...
+        #MM-DD: #[Rank, Service Name, Service Type, Service Long Name]
+        '10-01': [3,'Protection', 'Theotokos', 'The Protecting Veil of the Most Holy Theotokos'] #uncomment to test menaion...
+        #Need October filled in
+        ,'10-26': [3,'Demetrius','Martyr','Great Martyr Demetrius']
+        ,'11-01': [5,'Cosmas and Damian', 'Unmercenaries', 'Unmercenaries Cosmas and Damian']
+        ,'11-03': [4,'George','Martyr','Church of St. George']
+        ,'11-06': [5,'Paul','HieroConfessor','Paul the Confessor']
+        ,'11-08': [3,'Angels','Angels','The Synaxis of the Angels']
+        ,'11-09': [3,'Nectarius','Hierarch','Nectarius of Pentapolis']
+        ,'11-11': [4,'Theodore', 'HieroConfessor', 'Theodore the Studite']
+        ,'11-13': [3,'John Chrysostom','Hierarch']
+        #Keep filling in as time goes by...
     }
 
     #grabs menaion info from dictionary if available
-    menaion_service = fixed_feasts.get('MM-DD', None)
-    service_name = menaion_service[0] if menaion_service else None
-    menaion_file = menaion_service[1] if menaion_service else None
-    rank = menaion_service[2] if menaion_service else 7 #menaion rank or simple service
-
+    if calendar == 1: #old calendar
+        menaion_date = date_oc.strftime('%m-%d')
+    else: #new Calendar
+        menaion_date = service_date.strftime('%m-%d')
+    print(menaion_date)
+    menaion_service = fixed_feasts.get(menaion_date, None) #account for calendar here..
+    rank = menaion_service[0] if menaion_service else 7 #menaion rank or simple service
+    service_name = menaion_service[1] if menaion_service else None
+    menaion_file = menaion_service[2] if menaion_service else None
+    try:
+        service_long_name = menaion_service[3]
+    except: #IndexError #No long name listed. #NoneType #No Menaion
+        service_long_name = service_name
     if menaion_service:
         menaion = menaion_variables(
             input_string = process_pdf(
@@ -464,7 +484,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
         vespers_variables['link'] = f'{link_date}-vespers'
         links.append(f'<a href="#{link_date}-vespers">Vespers</a>')
-        vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name)
+        vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name, long_name=service_long_name)
         liturgics['vespers'] = vespers
 
     if do_compline:
@@ -492,7 +512,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         matins_variables['date'] = day_string_oc if calendar == 1 else day_string
         matins_variables['link'] = f'{link_date}-matins'
         links.append(f'<a href="#{link_date}-matins">Matins</a>')
-        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=menaion_file if menaion_file else None)
+        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=menaion_file, long_name=service_long_name)
         liturgics['matins'] = matins
 
     if do_typika or do_first or do_third or do_sixth or do_ninth:
@@ -515,7 +535,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         typika_variables['date'] = day_string_oc if calendar == 1 else day_string
         typika_variables['link'] = f'{link_date}-typika'
         #(link appended below)
-        typika = render_template('typika.html', variables = typika_variables, name=service_name)
+        typika = render_template('typika.html', variables = typika_variables, weekday=weekday, name=service_name, service_type=menaion_file, long_name=service_long_name)
         liturgics['typika'] = typika
 
     if do_first:

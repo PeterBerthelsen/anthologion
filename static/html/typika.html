@@ -1,5 +1,6 @@
 <div class="service" id="{{ variables.link }}">
   <h1>Typika</h1>
+  {% if name != None %}<h2>For {{ long_name }}</h2>{% endif %}
   <p><a href="#{{ variables.link.split('-')[0] }}">Return to Date</a></p>
   <h3>{{ variables.date|safe }}</h3>
   <p class="note">
@@ -53,22 +54,29 @@
   <p>Rejoice, and be exceeding glad, * for great is your reward in the heavens.</p>
   {{ variables.beatitudes[-3]|safe }}
   {% if variables.beatitudes is defined %}
-   {{ variables.beatitudes[-2]|safe }}
-   {{ variables.beatitudes[-1]|safe }}
+    <p>Glory to the Father, * and to the Son, * and to the Holy Spirit.</p>
+    {{ variables.beatitudes[-2]|safe }}
+    <p>Both now and ever, * and unto the ages of ages. Amen.</p>
+    {{ variables.beatitudes[-1]|safe }}
   {% else %}
    <p>Glory to the Father, * and to the Son, * and to the Holy Spirit.</p>
    <p>Both now and ever, * and unto the ages of ages. Amen.</p>
   {% endif %}
   <p><i class="note">Entry Hymn:</i></p>
-  <p>O come let us worship and fall down before Christ, [Who rose from the dead,]* O Son of God, save us who sing to Thee: Alleluia, alleluia, alleluia.</p>
-  <p>*This is how it is sung on Sundays, but on weekdays sing “Who art wondrous in the saints”, unless it is a feast of the Theotokos, in which case we sing “through the prayers of the Theotokos”.</p>
-  <!--<h3>Troparia</h3>-->
+  {% if weekday == 6 %}
+    <p>O come let us worship and fall down before Christ, Who rose from the dead,* O Son of God, save us who sing to Thee: Alleluia, alleluia, alleluia.</p>
+  {% elif service_type == 'Theotokos' %}
+    <p>O come let us worship and fall down before Christ, through the prayers of the Theotokos,* O Son of God, save us who sing to Thee: Alleluia, alleluia, alleluia.</p>
+  {% else %}
+  <p>O come let us worship and fall down before Christ, Who art wondrous in the saints,* O Son of God, save us who sing to Thee: Alleluia, alleluia, alleluia.</p>
+  {% endif %}
   {{ variables.resurrection_troparion|safe }}
   {{ variables.troparion|safe }}
   <h3>Trisagion</h3>
   <p>Holy God, Holy mighty, Holy Immortal have mercy on us. <i class="note">Thrice.</i></p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen. Holy Immortal have mercy on us.</p>
   <p>Holy God, Holy mighty, Holy Immortal have mercy on us.</p>
+  <hr />
   {{ variables.prokeimenon|safe }}
   {% if variables.epistle is defined %}
    <h3>Epistle</h3>
@@ -88,7 +96,7 @@
   <p>Remember us, O Master, when Thou comest in Thy kingdom.</p>
   <p>Remember us, O Holy One, when Thou comest in Thy kingdom.</p>
   <p>The heavenly choir praiseth Thee and saith: Holy, Holy, Holy, Lord of Sabaoth; heaven and earth are full of Thy glory.</p>
-  <p><i class="note">stichos:</i> Come unto Him, and be enlightened and your faces shall not be ashamed.</p>
+  <p>Come unto Him, and be enlightened and your faces shall not be ashamed.</p>
   <p>The heavenly choir praiseth Thee and saith: Holy, Holy, Holy, Lord of Sabaoth; heaven and earth are full of Thy glory.</p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit.</p>
   <p>The choir of Holy angels and archangels, with all the heavenly hosts praiseth Thee and saith: Holy, Holy, Holy, Lord of Sabaoth; heaven and earth are full of Thy glory.</p>
@@ -98,9 +106,8 @@
   <p>Remit, pardon, forgive, O God, our offenses, both voluntary and involuntary, in deed and word, in knowledge and ignorance, by day and by night, in mind and thought; forgive us all things, for Thou art good and the Lover of mankind.</p>
   <p>Our Father, Who art in the heavens, hallowed be Thy name. Thy kingdom come, Thy will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our debts, as we forgive our debtors; and lead us not into temptation, but deliver us from the evil one.</p>
   <p>O Lord Jesus Christ, Son of God, have mercy on us. Amen.</p>
-  <!--<h3>Kontakia</h3>-->
-  {{ variables.resurrection_kontakion }}
-  {{ variables.kontakion }}
+  {{ variables.resurrection_kontakion|safe }}
+  {{ variables.kontakion|safe }}
   <p>Lord, have mercy. <i class="note">Twelve Times.</i></p>
   <p>O All-Holy Trinity, the consubstantial dominion, the indivisible Kingdom, and cause of every Good: Show Thy good will even unto me a sinner; make steadfast my heart and grant it understanding, and take away mine every defilement; enlighten my mind that I may glorify, hymn, worship, and say:</p>
   <p>One is Holy, One is Lord, Jesus Christ, to the Glory of God the Father. Amen.</p>
