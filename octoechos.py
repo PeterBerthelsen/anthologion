@@ -201,7 +201,7 @@ def octoechos_vespers (service:str):
     vespers_parts['theotokion'] = vespers_theotokion
     #vespers_parts['prokeimenon'] = vespers_prokeimenon #handled by hymns.py
     vespers_parts['aposticha'] = vespers_aposticha
-    vespers_parts['apolytichion'] = vespers_apolytichion
+    vespers_parts['aposticha_theotokion'] = vespers_apolytichion #apolytichion is mislabeled...
     vespers_parts['readings'] = ''
 
     return vespers_parts
@@ -450,8 +450,10 @@ def octoechos_liturgy(service:str):
 
 # dd = [1,2,3,4,5,6,7]
 # tt = [1,2,3,4,5,6,7,8]
-#
+
 # for t in tt:
 #     for d in dd:
 #         octoechos = octoechos_variables(process_pdf(filename=f'{t}-{d}',service='octoechos'))
-#         print(octoechos.get('vespers').get('aposticha'))
+#         print(f'<p>---------------------------------------{t}-{d}---------------------------------------</p>')
+#         print(octoechos.get('vespers').get('theotokion'))
+#         print(octoechos.get('vespers').get('apolytichion'))

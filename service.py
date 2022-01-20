@@ -24,7 +24,7 @@ from hymns import vespers_prokeimena, compline_troparia
 from kathisma import parse_kathisma
 from datetime import datetime, timedelta, date
 from octoechos import octoechos_variables
-from menaion import menaion_variables
+from menaion import menaion_variables, menaion_class
 from _utils import process_pdf
 from bs4 import BeautifulSoup
 
@@ -155,7 +155,7 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
             vo_stichera_needed = 4
             vm_stichera_needed = 6
         elif rank == 2:
-            vo_stichera_needed = 4 if weekday == 6 else 2
+            vo_stichera_needed = 2 if weekday == 6 else 2
             vm_stichera_needed = 6
         elif rank == 3:
             vo_stichera_needed = 6 if weekday == 6 else 0
@@ -219,10 +219,16 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
         if not aposticha:
             aposticha = vo.get('aposticha')
         vespers['aposticha'] = aposticha
-        vespers['aposticha_theotokion'] = vm.get('aposticha_theotokion')
+
+        #aposticha theotokion may need to be swapped based on rank...
+        #for now it's just based on presence of menaion or not.
+        aposticha_theotokion = vm.get('aposticha_theotokion')
+        if not aposticha_theotokion:
+            aposticha_theotokion = vo.get('aposticha_theotokion')
+        vespers['aposticha_theotokion'] = aposticha_theotokion
 
         #use all apolytichia, menaion then octoechos.
-        vo_apolytichion = vo.get('apolytichion')
+        #vo_apolytichion = vo.get('apolytichion')
         vm_apolytichion = vm.get('apolytichion')
         vespers['apolytichion'] = vm_apolytichion + vo_apolytichion
 
@@ -408,16 +414,26 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
 
     fixed_feasts = {
         #MM-DD: #[Rank, Service Name, Service Type, Service Long Name]
-        '10-01': [3,'Protection', 'Theotokos', 'The Protecting Veil of the Most Holy Theotokos'] #uncomment to test menaion...
+        '10-01': [3,'Protection', 1, 'The Protecting Veil of the Most Holy Theotokos'] #uncomment to test menaion...
         #Need October filled in
-        ,'10-26': [3,'Demetrius','Martyr','Great Martyr Demetrius']
-        ,'11-01': [5,'Cosmas and Damian', 'Unmercenaries', 'Unmercenaries Cosmas and Damian']
-        ,'11-03': [4,'George','Martyr','Church of St. George']
-        ,'11-06': [5,'Paul','HieroConfessor','Paul the Confessor']
-        ,'11-08': [3,'Angels','Angels','The Synaxis of the Angels']
-        ,'11-09': [3,'Nectarius','Hierarch','Nectarius of Pentapolis']
-        ,'11-11': [4,'Theodore', 'HieroConfessor', 'Theodore the Studite']
-        ,'11-13': [3,'John Chrysostom','Hierarch']
+        ,'10-26': [2,16,'Demetrius','The Holy and Glorious Great Martyr Demetrius, The Myrrh-Gusher of Thessalonica']
+        ,'11-01': [5,24,'Cosmas and Damian','The Holy Cosmas and Damian, Wonderworkers and Unmercenary Physicians in Asia']
+        ,'11-03': [4,16,'George','The Consecration of the Church of the Great Martyr George of Lydda']
+        ,'11-06': [5,12,'Paul','Our Father among the Saints, Paul the Confessor, Archbishop of Constantinople']
+        ,'11-08': [3,5,'Archangels Michael, Gabriel, Raphael, Uriel, Salaphiel, Judgudiel, and Barachiel','The Synaxis of the Angels']
+        ,'11-09': [3,8,'Nectarius','Our Father among the Saints, Nectarius, Bishop of Pentapolis, Wonderworker of Aegina']
+        ,'11-11': [4,12,'Theodore', 'Our Father among the Saints, Theodore the Studite']
+        ,'11-13': [3,8,'John Chrysostom', 'Our Father among the Saints, John Chrysostom, Archbishop of Constantinople']
+        ,'11-14': [4,6,'Philip','The Holy and Glorious Apostle Philip']
+        ,'11-15': [5,17,'Shamuna, Guria, and Habib','The Holy Matryrs Shamuna, Guria, and Habib']
+        ,'11-16': [3,6,'Matthew','The Holy Apostle and Evangelist Matthew']
+        ,'11-21': [2,1,'Entrance','The Entrance of the Most Holy Theotokos into the Temple']
+        ,'11-22': [6,1,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
+        ,'11-23': [6,1,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
+        ,'11-24': [3,18,'Catherine','The Holy Great Martyr Catherine of Alexandria']
+        ,'11-25': [4,1,'Entrance','The Leavetaking of the Entrance of the Theotokos']
+        ,'11-30': [3,6,'Andrew','The Holy and All-Praised Apostle Andrew, The First-Called']
+        #,'': [0,'','','']
         #Keep filling in as time goes by...
     }
 
@@ -429,20 +445,24 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     print(menaion_date)
     menaion_service = fixed_feasts.get(menaion_date, None) #account for calendar here..
     rank = menaion_service[0] if menaion_service else 7 #menaion rank or simple service
-    service_name = menaion_service[1] if menaion_service else None
-    menaion_file = menaion_service[2] if menaion_service else None
+    service_type = menaion_service[1] if menaion_service else None
+    service_name = menaion_service[2] if menaion_service else None
+    if type(service_type) == int:
+        service_type = menaion_class.get(service_type)
     try:
         service_long_name = menaion_service[3]
     except: #IndexError #No long name listed. #NoneType #No Menaion
         service_long_name = service_name
     if menaion_service:
+        if service_type == 'Master':
+            input_string = None
+        else:
+            input_string = process_pdf(filename=service_type,service='menaion')
         menaion = menaion_variables(
-            input_string = process_pdf(
-                filename=menaion_file
-                ,service='menaion'
-            )
-                ,name=service_name
-                ,service_type=menaion_file
+            input_string=input_string
+            ,name=service_name
+            ,service_type=service_type
+            ,weekday=weekday
         )
     else:
         menaion = None
@@ -471,7 +491,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         ,octoechos=octoechos
         ,menaion=menaion
         ,paschal=paschal
-        ,service_type=menaion_file if menaion_file else None
+        ,service_type=service_type if service_type else None
     )
 
     #create services, grabbing service variables from rubic variables
@@ -512,7 +532,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         matins_variables['date'] = day_string_oc if calendar == 1 else day_string
         matins_variables['link'] = f'{link_date}-matins'
         links.append(f'<a href="#{link_date}-matins">Matins</a>')
-        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=menaion_file, long_name=service_long_name)
+        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=service_type, long_name=service_long_name)
         liturgics['matins'] = matins
 
     if do_typika or do_first or do_third or do_sixth or do_ninth:
@@ -535,7 +555,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         typika_variables['date'] = day_string_oc if calendar == 1 else day_string
         typika_variables['link'] = f'{link_date}-typika'
         #(link appended below)
-        typika = render_template('typika.html', variables = typika_variables, weekday=weekday, name=service_name, service_type=menaion_file, long_name=service_long_name)
+        typika = render_template('typika.html', variables = typika_variables, weekday=weekday, name=service_name, service_type=service_type, long_name=service_long_name)
         liturgics['typika'] = typika
 
     if do_first:

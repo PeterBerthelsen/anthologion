@@ -1,4 +1,4 @@
-<div class="service" id="{{ variables.link }}">
+   <div class="service" id="{{ variables.link }}">
   <h1>Vespers</h1>
   {% if name != None %}<h2>For {{ long_name }}</h2>{% endif %}
   <p><a href="#{{ variables.link.split('-')[0] }}">Return to Date</a></p>
@@ -31,7 +31,6 @@
   <p>The sun knoweth his going down, Thou appointedst the darkness, and there was the night. How magnified are Thy works, O Lord! In wisdom hast Thou made them all.</p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <p>Alleluia, alleluia, alleluia. Glory to Thee, O God. <i class="note">Thrice.</i></p>
-  <p class="note">In place of the Litany of Peace, chant the following</p>
   <p>Lord have mercy. <i class="note">Twelve Times</i></p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <hr/>
@@ -39,8 +38,6 @@
   {% for id,part in variables.vespers_kathisma.items() %}
     <div>{{ part|safe }}</div>
   {% endfor %}
-  <hr/>
-  <p class="note">In place of the Little Litany, chant the following</p>
   <p>Lord have mercy. <i class="note">Twelve Times</i></p>
   <p>Glory to the Father, and to the Son, and to the Holy Spirit, both now and ever, and unto the ages of ages. Amen.</p>
   <hr/>

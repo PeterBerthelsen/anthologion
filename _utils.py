@@ -6,6 +6,7 @@ Change Log:
 10/8/2021 - 0.0.8 - Initial Creation, added try loop/switch on process_pdf
 """
 import os
+import re
 import inspect
 import fitz
 from bs4 import BeautifulSoup
@@ -13,6 +14,40 @@ from urllib.request import Request, urlopen
 from io import TextIOWrapper
 
 SERGIUS = 'http://www.st-sergius.org/'
+
+def open_service(service:str, filename:str):
+    payload = ''
+    f = filename if '.' in filename else filename + '.pdf'
+    # print(f[-4:])
+    #f = filename if filename[-4:] == '.pdf' else filename + '.pdf' #set download file name
+    src = f'services/{service}/{f}'
+    if f[-4:] == '.pdf':
+        with fitz.open(src) as content:
+            for page in content: #read each page
+                i = page.getText('blocks', flags=fitz.TEXT_INHIBIT_SPACES|fitz.TEXT_DEHYPHENATE)
+                #print(i)
+                if type(i) == str:
+                    payload += i
+                if type(i) == list:
+                    for j in i:
+                        if type(j) == str:
+                            payload += j
+                        if type(j) == tuple:
+                            for k in j:
+                                if type(k) == str:
+                                    payload += k
+    elif f[-4:] == '.txt':
+        with open(src, 'r', encoding='utf-8') as fil:
+            #print(fil)
+            payload = fil.read()
+    #payload = payload.replace('h2','p').replace('<b>','</p><p><b>')
+    payload = re.sub(r'((?<![.!?:A-Z])\s*)\n',r'\1',payload)
+    return payload #return payload string
+
+def regex_parse(input:str, substitutions:dict):
+    output = input
+    for search, replace in substitutions.items():
+        output = re.sub(search,replace,output,flags=re.S|re.I)
 
 def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
     """
@@ -90,24 +125,3 @@ def string_search (input_string:str, start_searches:list=[], end_searches:list=[
     #successfully found begin and end, returning processed string.
     output = input_string[begin + len(start_searches[i]):end]
     return [begin, output]
-
-
-# def insert_html (target_html_file:str, target_html_element:str, html_to_insert:str):
-#         """
-#         Takes in a file name for source service (e.g. vespers), name element where
-#         moveable HTML will be inserted (e.g. '.vespers-aposticha'), and HTML string
-#         to inject. Inserts the HTML, then returns the full combined HTML string.
-#         """
-#         caller = inspect.stack()[1][1].split('\\')[-1] #name of file calling function
-#         dir = os.path.dirname(caller)
-#         folder = { #for each file, a corresponding local folder
-#             'octoechos.py': 'docs\html'
-#             ,'menaion.py': 'docs\html'
-#         }
-#         f = open(os.path.join(dir, folder.get(caller),target_html_file))
-#         source = BeautifulSoup(f, 'html.parser')
-#         element = source.select_one(target_html_element)
-#         insert = BeautifulSoup(html_to_insert, 'html.parser')
-#         element.append(insert)
-#         #payload = source.prettify()
-#         return source.prettify()#payload
