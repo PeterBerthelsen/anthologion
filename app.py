@@ -26,17 +26,31 @@ def main():
     year = request.args.get('y', None)
     calendar = request.args.get('c', 1)
     schedule = request.args.get('s',None)
+    variables_only = request.args.get('vars',None)
     print(f' Loaded "/" for date: {month}/{day}/{year} ~ calendar: {calendar}')
-    return render_template(
-        'liturgicalDay.html'
-        ,liturgics = generate_day(
-            month=month
-            ,day=day
-            ,year=year
-            ,calendar=calendar
-            ,schedule=schedule
+    if variables_only:
+        return render_template(
+            'variableDay.html'
+            ,liturgics = generate_day(
+                month=month
+                ,day=day
+                ,year=year
+                ,calendar=calendar
+                ,schedule=schedule
+                ,variables_only_flag=variables_only
+            )
         )
-    )
+    else:
+        return render_template(
+            'liturgicalDay.html'
+            ,liturgics = generate_day(
+                month=month
+                ,day=day
+                ,year=year
+                ,calendar=calendar
+                ,schedule=schedule
+            )
+        )
 
 @app.route("/now", methods=['GET'])
 def now():
@@ -92,6 +106,7 @@ def build_month():
     year = request.args.get('y', None)
     calendar = request.args.get('c', 1)
     schedule = request.args.get('s',None)
+    variables_only = request.args.get('vars',None)
     today = datetime.today()
     month = int(month) if type(month) == str else month
     month = month if month else today.month
@@ -103,6 +118,12 @@ def build_month():
     <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
     </head><body><div id="wrapper"><div id="main">"""
     html = ''
+    if variables_only:
+        month_template = 'variableMonth.html'
+        schedule = 'vcnmt'
+    else:
+        month_template = 'liturgicalMonth.html'
+
     for day in days:
         contents += render_template(
             'liturgicalContents.html'
@@ -112,16 +133,18 @@ def build_month():
                 ,year=year
                 ,calendar=calendar
                 ,schedule=schedule
+                ,variables_only_flag=variables_only
             )
         )
         html += render_template(
-            'liturgicalMonth.html'
+            month_template
             ,liturgics = generate_day(
                 month=month
                 ,day=day
                 ,year=year
                 ,calendar=calendar
                 ,schedule=schedule
+                ,variables_only_flag=variables_only
             )
         )
     contents = '<section class="post" id="contents">' + contents + '</section>'

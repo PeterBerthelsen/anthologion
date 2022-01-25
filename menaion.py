@@ -16,31 +16,31 @@ from hymns import forerunner_troparia, forerunner_megalynaria, forerunner_kontak
 menaion_class = {
     #general menaion classes
     #names correspond to .pdf file names (w/ typos)
-    '0': 'Master'
-    ,'1':'Theotokos' #Mother of God
-    ,'2':'Cross' #Holy Cross
-    ,'3':'St John Baptist' #Forerunner
-    ,'4':'Prophet' #Prphet
-    ,'5':'Angels' #angels
-    ,'6':'Apostle' #Apostle
-    ,'7':'Apostles' #Several Apostles
-    ,'8':'Heirarch' #Hierarch
-    ,'9':'Heirarchs' #Several Hierarchs
-    ,'10':'Hieromartyr' #hieromartyr
-    ,'11':'Heiromartyrs' #several hieromartyrs
-    ,'12':'HieroConfessor' #Confessor
-    ,'13':'MonasticMartyr' #Male Ascetic
-    ,'14':'MonasticMartyrs' #Several Male Ascetics
-    ,'15':'Holy Fathers'
-    ,'16':'Martyr' #Male Martyr
-    ,'17':'Martyrs' #Several Male Martyrs
-    ,'18':'Martyress' #Female Martyr
-    ,'19':'Martyresses' #Several Female Martyrs
-    ,'20':'Nun' #Female Ascetic
-    ,'21':'Nuns' #Several Female Ascetics
-    #,'22':'NunMartyr'
-    ,'23':'Fools' #Fools
-    ,'24':'Unmercenaries' #unmercenary healers
+    0: 'Master'
+    ,1:'Theotokos' #Mother of God
+    ,2:'Cross' #Holy Cross
+    ,3:'St John Baptist' #Forerunner
+    ,4:'Prophet' #Prphet
+    ,5:'Angels' #angels
+    ,6:'Apostle' #Apostle
+    ,7:'Apostles' #Several Apostles
+    ,8:'Heirarch' #Hierarch
+    ,9:'Heirarchs' #Several Hierarchs
+    ,10:'Hieromartyr' #hieromartyr
+    ,11:'Heiromartyrs' #several hieromartyrs
+    ,12:'HieroConfessor' #Confessor
+    ,13:'MonasticMartyr' #Male Ascetic
+    ,14:'MonasticMartyrs' #Several Male Ascetics
+    ,15:'Holy Fathers'
+    ,16:'Martyr' #Male Martyr
+    ,17:'Martyrs' #Several Male Martyrs
+    ,18:'Martyress' #Female Martyr
+    ,19:'Martyresses' #Several Female Martyrs
+    ,20:'Nun' #Female Ascetic
+    ,21:'Nuns' #Several Female Ascetics
+    #,22:'NunMartyr'
+    ,23:'Fools' #Fools
+    ,24:'Unmercenaries' #unmercenary healers
 }
 
 def menaion_vespers(service:str, name:str, service_type:str, weekday:int):

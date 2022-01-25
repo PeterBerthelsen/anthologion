@@ -148,7 +148,7 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
         #we will be working with the octoechos and menaion
         vespers = {}
         vo = octoechos.get('vespers')
-        vm = menaion.get('vespers')
+        vm = menaion.get('vespers') if menaion else None
 
         #build out stichera
         if rank == 1:
@@ -165,84 +165,109 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
             vm_stichera_needed = 4 if weekday == 6 else 3
 
         vo_stichera = vo.get('stichera')
-        vm_stichera = vm.get('stichera')
+        vm_stichera = vm.get('stichera') if vm else None
 
         if weekday == 6:
             vo_stichera = vo_stichera[:7] #7 resurrection stichera.
         else:
             vo_stichera = vo_stichera[:3] #with menaion only 3 used.
 
-        po_stichera = []
-        pm_stichera = []
+        if rank == 8:
+            vespers['m_stichera'] = vm_stichera if vm else None
+            vespers['o_stichera'] = vo_stichera
+        else:
+            po_stichera = []
+            pm_stichera = []
 
-        vo_duplicates = vo_stichera_needed - len(vo_stichera)
-        vm_duplicates = vm_stichera_needed - len(vm_stichera)
+            vo_duplicates = vo_stichera_needed - len(vo_stichera)
+            vm_duplicates = vm_stichera_needed - len(vm_stichera)
 
-        #enumerate octoechos stichera, assign duplicates as needed
-        for i, s in enumerate(vo_stichera):
-            po_stichera.append(s)
-            if i + 1 <= vo_duplicates:
+            #enumerate octoechos stichera, assign duplicates as needed
+            for i, s in enumerate(vo_stichera):
                 po_stichera.append(s)
+                if i + 1 <= vo_duplicates:
+                    po_stichera.append(s)
 
-        #enumerate menaion stichera, assign duplicates as needed
-        for i, s in enumerate(vm_stichera):
-            pm_stichera.append(s)
-            if i + 1<= vm_duplicates:
+            #enumerate menaion stichera, assign duplicates as needed
+            for i, s in enumerate(vm_stichera):
                 pm_stichera.append(s)
+                if i + 1<= vm_duplicates:
+                    pm_stichera.append(s)
 
-        vespers['stichera'] = po_stichera + pm_stichera
+            vespers['stichera'] = po_stichera + pm_stichera
 
         #determine stichera tone
-        vespers['stichera_tone'] = vm.get('stichera_tone')
+        vespers['stichera_tone'] = vm.get('stichera_tone') if vm else None
 
         #doxastichon from menaion
-        vm_doxastichon = vm.get('doxastichon',None)
+        vm_doxastichon = vm.get('doxastichon',None) if vm else None
         if vm_doxastichon:
             vespers['doxastichon'] = vm_doxastichon
 
         #dogmaticon from menaion
-        vm_dogmaticon = vm.get('dogmaticon',None)
+        vm_dogmaticon = vm.get('dogmaticon',None) if vm else None
         if vm_dogmaticon:
             vespers['dogmaticon'] = vm_dogmaticon
 
         #determine theotokion
         vo_theotokion = vo.get('theotokion', None)
-        vm_theotokion = vm.get('theotokion', None)
-        if vo_theotokion or vm_theotokion:
+        vm_theotokion = vm.get('theotokion', None) if vm else None
+        if rank == 8:
+            vespers['m_theotokion'] = vm_theotokion if vm else None
+            vespers['o_theotokion'] = vo_theotokion
+        elif vo_theotokion or vm_theotokion:
             vespers['theotokion'] = vm_theotokion if vm_theotokion else vo_theotokion
 
         #readings from menaion
-        vespers['readings'] = vm.get('readings')
+        vespers['readings'] = vm.get('readings') if vm else None
 
         #determine aposticha
-        aposticha = vm.get('aposticha', None)
-        if not aposticha:
-            aposticha = vo.get('aposticha')
-        vespers['aposticha'] = aposticha
+        if rank == 8:
+            vespers['m_aposticha'] = vm.get('aposticha', None) if vm else None
+            vespers['o_aposticha'] = vo.get('aposticha', None)
+            #vespers['m_aposticha_theotokion'] = vm.get('aposticha_theotokion', None) if vm else None
+            #vespers['o_aposticha_theotokion'] = vo.get('aposticha_theotokion')
+        else:
+            aposticha = vm.get('aposticha', None)
+            if not aposticha:
+                aposticha = vo.get('aposticha')
+            vespers['aposticha'] = aposticha
 
-        #aposticha theotokion may need to be swapped based on rank...
-        #for now it's just based on presence of menaion or not.
-        aposticha_theotokion = vm.get('aposticha_theotokion')
-        if not aposticha_theotokion:
-            aposticha_theotokion = vo.get('aposticha_theotokion')
-        vespers['aposticha_theotokion'] = aposticha_theotokion
+            #aposticha theotokion may need to be swapped based on rank...
+            #for now it's just based on presence of menaion or not.
+            aposticha_theotokion = vm.get('aposticha_theotokion')
+            if not aposticha_theotokion:
+                aposticha_theotokion = vo.get('aposticha_theotokion')
+            vespers['aposticha_theotokion'] = aposticha_theotokion
 
-        #use all apolytichia, menaion then octoechos.
-        #vo_apolytichion = vo.get('apolytichion')
-        vm_apolytichion = vm.get('apolytichion')
-        vespers['apolytichion'] = vm_apolytichion + vo_apolytichion
+
+        vm_apolytichion = vm.get('apolytichion', None) if vm else None
+        vespers['apolytichion'] = vm_apolytichion if vm_apolytichion else None
 
         #Matins
         matins = {}
         mo = octoechos.get('matins')
-        mm = menaion.get('matins')
+        mm = menaion.get('matins') if menaion else None
 
-        mm_troparion = mm.get('troparion', None)
+        mm_troparion = mm.get('troparion', None) if mm else None
         mo_troparion = mo.get('troparion', None)
-        if mm_troparion or mo_troparion:
+        if rank == 8:
+            matins['m_troparion'] = mm_troparion if mm else None
+            matins['o_troparion'] = mo_troparion
+        elif mm_troparion or mo_troparion:
             matins['troparion'] = mm_troparion if mm_troparion else mo_troparion
 
-        if service_type == 'Holy Fathers':
+        if rank == 8:
+            matins['o_session1'] = mo.get('session1')
+            matins['o_session2'] = mo.get('session2')
+            matins['o_session3'] = mo.get('session3')
+            matins['m_session1'] = mm.get('session1') if mm else None
+            matins['m_session2'] = mm.get('session2') if mm else None
+            matins['m_session3'] = mm.get('session3') if mm else None
+            matins['o_ascent'] = mo.get('ascent')
+            matins['apolytichion'] = mm.get('apolytichion') if mm else None
+            matins['megalynarion'] = mm.get('megalynarion') if mm else None
+        elif service_type == 'Holy Fathers':
             matins['session1'] = mo.get('session1')
             matins['session2'] = mo.get('session2')
             matins['session3'] = mo.get('session3')
@@ -260,23 +285,30 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
         if rank >= 5: #six verse & afterfeast
             matins['aposticha'] = mo.get('aposticha')
 
-        matins['exapostilarion'] = mm.get('exapostilarion')
+        matins['exapostilarion'] = mm.get('exapostilarion') if mm else None
 
-        if rank <= 3: #polyeleos or higher
+        if rank <= 3 or rank == 8: #polyeleos or higher
             mo_prokeimenon = mo.get('prokeimenon', None)
-            mm_prokeimenon = mm.get('prokeimenon', None)
-            if mm_prokeimenon or mo_prokeimenon:
+            mm_prokeimenon = mm.get('prokeimenon', None) if mm else None
+            if rank == 8:
+                matins['m_prokeimenon'] = mm_prokeimenon
+                matins['o_prokeimenon'] = mo_prokeimenon
+            elif mm_prokeimenon or mo_prokeimenon:
                 matins['prokeimenon'] = mm_prokeimenon if mm_prokeimenon else mo_prokeimenon
 
-            matins['readings'] = mm.get('readings', None)
-            matins['after50'] = mm.get('after50', None)
+            matins['readings'] = mm.get('readings', None) if mm else None
+            matins['after50'] = mm.get('after50', None) if mm else None
 
             mo_ascent = mo.get('ascent', None)
-            mm_ascent = mm.get('ascent', None)
-            if mo_ascent or mm_ascent:
+            mm_ascent = mm.get('ascent', None) if mm else None
+            if rank == 8:
+                matins['m_ascent'] = mm_ascent if mm else None
+                matins['o_ascent'] = mo_ascent
+                matins['m_canon'] = mm.get('canon') if mm else None
+                matins['o_canon'] = mo.get('canon')
+            elif mo_ascent or mm_ascent:
                 matins['ascent'] = mm_ascent if mm_ascent else mo_ascent
-
-            matins['canon'] = mm.get('canon')
+                matins['canon'] = mm.get('canon')
         else:
             matins['canon'] = mo.get('canon')
 
@@ -286,54 +318,59 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
         #establish Typika variables
         liturgy = {}
         to = octoechos.get('liturgy')
-        tm = menaion.get('liturgy')
+        tm = menaion.get('liturgy') if menaion else None
 
         to_beatitudes = to.get('beatitudes')
-        tm_beatitudes = tm.get('beatitudes')
+        tm_beatitudes = tm.get('beatitudes') if tm else None
 
-        if weekday == 6:
-            beatitudes_needed = 10
-            feast_beatitudes = len(tm_beatitudes)
-            extra_beatitudes = beatitudes_needed - feast_beatitudes
-        elif rank <= 3:
-            beatitudes_needed = 8
-            feast_beatitudes = len(tm_beatitudes)
-            extra_beatitudes = beatitudes_needed - feast_beatitudes
-        elif rank > 6:
-            beatitudes_needed = 6
-            feast_beatitudes = len(tm_beatitudes)
-            extra_beatitudes = beatitudes_needed - feast_beatitudes
-        else: #afterfeast, 3 & 3
-            beatitudes_needed = 6
-            feast_beatitudes = 3
-            extra_beatitudes = 3
-
-        extra_beatitudes = None if extra_beatitudes <= 0 else extra_beatitudes
-        if extra_beatitudes:
-            beatitudes = to_beatitudes[0:extra_beatitudes] + tm_beatitudes[0:feast_beatitudes]
+        if rank == 8:
+            liturgy['m_beatitudes'] = tm_beatitudes
+            liturgy['o_beatitudes'] = to_beatitudes
         else:
-            beatitudes = tm_beatitudes
-        liturgy['beatitudes'] = beatitudes
+            if weekday == 6:
+                beatitudes_needed = 10
+                feast_beatitudes = len(tm_beatitudes)
+                extra_beatitudes = beatitudes_needed - feast_beatitudes
+            elif rank <= 3:
+                beatitudes_needed = 8
+                feast_beatitudes = len(tm_beatitudes)
+                extra_beatitudes = beatitudes_needed - feast_beatitudes
+            elif rank > 6:
+                beatitudes_needed = 6
+                feast_beatitudes = len(tm_beatitudes)
+                extra_beatitudes = beatitudes_needed - feast_beatitudes
+            else: #afterfeast, 3 & 3
+                beatitudes_needed = 6
+                feast_beatitudes = 3
+                extra_beatitudes = 3
+
+            extra_beatitudes = None if extra_beatitudes <= 0 else extra_beatitudes
+            if extra_beatitudes:
+                beatitudes = to_beatitudes[0:extra_beatitudes] + tm_beatitudes[0:feast_beatitudes]
+            else:
+                beatitudes = tm_beatitudes
+            liturgy['beatitudes'] = beatitudes
 
         if weekday == 6:
             liturgy['resurrection_troparion'] = to.get('resurrection_troparion')
 
-        liturgy['troparion'] = tm.get('troparion')
-        liturgy['kontakion'] = tm.get('kontakion')
-        liturgy['prokeimenon'] = tm.get('prokeimenon')
-        liturgy['readings'] = tm.get('readings')
+        liturgy['troparion'] = tm.get('troparion') if tm else None
+        liturgy['kontakion'] = tm.get('kontakion') if tm else None
+        liturgy['prokeimenon'] = tm.get('prokeimenon') if tm else None
+        liturgy['readings'] = tm.get('readings') if tm else None
 
         compline = octoechos.get('compline') #no menaion variables
         nocturns = octoechos.get('nocturns') #no menaion variables
 
         variables['vespers'] = vespers
         variables['compline'] = compline
+        variables['nocturns'] = nocturns
         variables['matins'] = matins
         variables['liturgy'] = liturgy
 
         return variables
 
-def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
+def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, variables_only_flag=None):
     try:
         #convert strings to int
         month = int(month) if type(month) == str else month
@@ -350,6 +387,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     month = month if month else today.month
     day = day if day else today.day
     year = year if year else today.year
+    variables_only_flag = variables_only_flag if variables_only_flag else None
 
     #establish custom schedule
     schedule = schedule if schedule else 'vcnm136t9'
@@ -484,6 +522,9 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     liturgics['day_string'] = day_string
     links = [f'<a href="#{link_date}">{day_string}</a>']
 
+    print(variables_only_flag)
+    rank = 8 if variables_only_flag else rank
+
     variables = rubrics(
         rank=rank
         ,weekday=weekday
@@ -497,6 +538,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
     #create services, grabbing service variables from rubic variables
     #add template variables, then render
     #add service to liturgics dictionary for return
+
     if do_vespers:
         vespers_variables = variables.get('vespers')
         vespers_variables['vespers_kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[0])
@@ -504,8 +546,11 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         vespers_variables['prokeimenon'] = vespers_prokeimena(weekday)
         vespers_variables['link'] = f'{link_date}-vespers'
         links.append(f'<a href="#{link_date}-vespers">Vespers</a>')
-        vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name, long_name=service_long_name)
-        liturgics['vespers'] = vespers
+        if variables_only_flag:
+            liturgics['vespers'] = vespers_variables
+        else:
+            vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name, long_name=service_long_name)
+            liturgics['vespers'] = vespers
 
     if do_compline:
         compline_variables = variables.get('compline')
@@ -513,17 +558,24 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         compline_variables['night_date'] = night_string_oc if calendar == 1 else night_string
         compline_variables['link'] = f'{link_date}-compline'
         links.append(f'<a href="#{link_date}-compline">Compline</a>')
-        compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
-        liturgics['compline'] = compline
+        if variables_only_flag:
+            liturgics['compline'] = compline_variables
+        else:
+            compline = render_template('smallCompline.html', variables=compline_variables, weekday=weekday)
+            liturgics['compline'] = compline
 
     if do_nocturns:
         nocturns_variables = variables.get('nocturns', {})
+        nocturns_variables = {} if not nocturns_variables else nocturns_variables
         nocturns_variables['kathisma'] = parse_kathisma(kathisma_rubric.get(weekday)[1])
         nocturns_variables['date'] = day_string_oc if calendar == 1 else day_string
         nocturns_variables['link'] = f'{link_date}-nocturns'
         links.append(f'<a href="#{link_date}-nocturns">Nocturns</a>')
-        nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
-        liturgics['nocturns'] = nocturns
+        if variables_only_flag:
+            liturgics['nocturns'] = nocturns_variables
+        else:
+            nocturns = render_template('nocturns.html', variables=nocturns_variables, weekday=weekday)
+            liturgics['nocturns'] = nocturns
 
     if do_matins:
         matins_variables = variables.get('matins')
@@ -532,8 +584,11 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         matins_variables['date'] = day_string_oc if calendar == 1 else day_string
         matins_variables['link'] = f'{link_date}-matins'
         links.append(f'<a href="#{link_date}-matins">Matins</a>')
-        matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=service_type, long_name=service_long_name)
-        liturgics['matins'] = matins
+        if variables_only_flag:
+            liturgics['matins'] = matins_variables
+        else:
+            matins = render_template('matins.html', variables = matins_variables, weekday=weekday, tone=tone, rank=rank, name=service_name, service_type=service_type, long_name=service_long_name)
+            liturgics['matins'] = matins
 
     if do_typika or do_first or do_third or do_sixth or do_ninth:
         #all hours use typika variables
@@ -549,14 +604,19 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         res_kontakion = typika_variables.get('resurrection_kontakion')
         if res_kontakion:
             hours_kontakia.append(res_kontakion)
-
+        if variables_only_flag:
+            liturgics['troparia'] = hours_troparia
+            liturgics['kontakia'] = hours_kontakia
 
     if do_typika:
         typika_variables['date'] = day_string_oc if calendar == 1 else day_string
         typika_variables['link'] = f'{link_date}-typika'
         #(link appended below)
-        typika = render_template('typika.html', variables = typika_variables, weekday=weekday, name=service_name, service_type=service_type, long_name=service_long_name)
-        liturgics['typika'] = typika
+        if variables_only_flag:
+            liturgics['typika'] = typika_variables
+        else:
+            typika = render_template('typika.html', variables = typika_variables, weekday=weekday, name=service_name, service_type=service_type, long_name=service_long_name)
+            liturgics['typika'] = typika
 
     if do_first:
         first_variables = {'troparia': hours_troparia, 'kontakia': hours_kontakia}
@@ -593,6 +653,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None):
         links.append(f'<a href="#{link_date}-ninth">Ninth Hour</a>')
         ninth = render_template('ninth.html', variables = ninth_variables)
         liturgics['ninth'] = ninth
+
 
     liturgics['links'] = links
 

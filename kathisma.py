@@ -10,7 +10,7 @@ no_kathisma = {
 }
 
 first_kathisma = {
-    'title': '<h2>First Kathisma</h2>'
+    'title': '<h3>First Kathisma</h3>'
     ,1:"""
 <h4>First Stasis</h4>
 <h3>Psalm 1</h3>
@@ -183,7 +183,7 @@ O Lord our Governor: how excellent is thy Name in all the world!
     """
 }
 second_kathisma = {
-'title': '<h2>Second Kathisma</h2>'
+'title': '<h3>Second Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm9</h3>
 For the end. A psalm of David concerning the secrets of the Son
@@ -403,7 +403,7 @@ But as for me, I will behold thy presence in righteousness: and when I awake up
 after thy likeness, I shall be satisfied with it."""
 }
 third_kathisma = {
-'title': '<h2>Third Kathisma</h2>'
+'title': '<h3>Third Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 17</h3>
 For the end. A psalm of David the servant of the Lord. The words which he spoke to the Lord,
@@ -660,7 +660,7 @@ King of glory shall come in.
 Who is the King of glory: even the Lord of hosts, he is the King of glory.
 """}
 fourth_kathisma = {
-'title': '<h2>Fourth Kathisma</h2>'
+'title': '<h3>Fourth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 24</h3>
 A psalm of David
@@ -894,7 +894,7 @@ Be glad, O ye righteous, and rejoice in the Lord: and be joyful, all ye that are
 of heart.
 """}
 fifth_kathisma = {
-'title': '<h2>Fifth Kathisma</h2>'
+'title': '<h3>Fifth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 32</h3>
 A psalm of David
@@ -1129,7 +1129,7 @@ And the Lord shall stand by them, and save them: he shall deliver them from the
 ungodly, and shall save them, because they put their trust in him.
 """}
 sixth_kathisma = {
-'title': '<h2>Sixth Kathisma</h2>'
+'title': '<h3>Sixth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 37</h3>
 A psalm of David . For remembrance concerning the Sabbath-day
@@ -1406,7 +1406,7 @@ will be exalted in the earth.
 The Lord of hosts is with us: the God of Jacob is our refuge.
 """}
 seventh_kathisma = {
-'title': '<h2>Seventh Kathisma</h2>'
+'title': '<h3>Seventh Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 46</h3>
 For the end. A psalm for the sons of Core
@@ -1651,7 +1651,7 @@ The blood-thirsty and deceitful men shall not live out half their days:
 nevertheless, my trust shall be in thee, O Lord.
 """}
 eighth_kathisma = {
-'title': '<h2>Eighth Kathisma</h2>'
+'title': '<h3>Eighth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 55</h3>
 For the end. Concerning the people that were removed from the sanctuary. By David for a
@@ -1863,7 +1863,7 @@ The righteous shall rejoice in the Lord, and put his trust in him: and all they 
 are true of heart shall be glad.
 """}
 ninth_kathisma = {
-'title': '<h2>Ninth Kathisma</h2>'
+'title': '<h3>Ninth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 64</h3>
 For the end. A psalm and song of David
@@ -2084,7 +2084,7 @@ As for me, I am poor and in misery: haste thee unto me, O God.
 Thou art my helper and my redeemer: O Lord, make no long tarrying.
 """}
 tenth_kathisma = {
-'title': '<h2>Tenth Kathisma</h2>'
+'title': '<h3>Tenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 70</h3>
 By David. A psalm sung by the sons of Jonadab and the first that were taken captive
@@ -2337,7 +2337,7 @@ not known.
 Thou leddest thy people like sheep: by the hand of Moses and Aaron.
 """}
 eleventh_kathisma = {
-'title': '<h2>Eleventh Kathisma</h2>'
+'title': '<h3>Eleventh Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 77</h3>
 A psalm of instruction for Asaph
@@ -2645,7 +2645,7 @@ Yea, the Lord shall shew loving-kindness: and our land shall give her increase.
 Righteousness shall go before him: and he shall direct his going in the way.
 """}
 twelfth_kathisma = {
-'title': '<h2>Twelfth Kathisma</h2>'
+'title': '<h3>Twelfth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 85</h3>
 A prayer of David
@@ -2873,7 +2873,7 @@ deliver him, and bring him to honour.
 With long life will I satisfy him: and shew him my salvation.
 """}
 thirteenth_kathisma = {
-'title': '<h2>Thirteenth Kathisma</h2>'
+'title': '<h3>Thirteenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 91</h3>
 A psalm of a song for the Sabbath-day
@@ -3090,7 +3090,7 @@ I shall soon destroy all the ungodly that are in the land: that I may root out a
 wicked doers from the city of the Lord.
 """}
 fourteenth_kathisma = {
-'title': '<h2>Fourteenth Kathisma</h2>'
+'title': '<h3>Fourteenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 101</h3>
 A prayer for the poor, when he is deeply afflicted and pours out his supplication before the Lord
@@ -3306,7 +3306,7 @@ in possession;
 That they might keep his statutes: and observe his laws.
 """}
 fifteenth_kathisma = {
-'title': '<h2>Fifteenth Kathisma</h2>'
+'title': '<h3>Fifteenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 105</h3>
 Alleluia
@@ -3537,7 +3537,7 @@ For he shall stand at the right hand of the poor: to save his soul from the
 unrighteous judges.
 """}
 sixteenth_kathisma = {
-'title': '<h2>Sixteenth Kathisma</h2>'
+'title': '<h3>Sixteenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 109</h3>
 A Psalm of David
@@ -3729,7 +3729,7 @@ Thou art my God, and I will thank thee: thou art my God, and I will praise thee.
 O give thanks unto the Lord, for he is gracious: and his mercy endureth for ever.
 """}
 seventeeth_kathisma = {
-'title': '<h2>Seventeenth Kathisma</h2>'
+'title': '<h3>Seventeenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 118</h3>
 Alleluia
@@ -3979,7 +3979,7 @@ I have gone astray like a sheep that is lost: O seek thy servant, for I do not f
 thy commandments.
 """}
 eighteenth_kathisma = {
-'title': '<h2>Eighteenth Kathisma</h2>'
+'title': '<h3>Eighteenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 119</h3>
 A song of ascents
@@ -4163,7 +4163,7 @@ Lift up your hands in the sanctuary: and praise the Lord.
 The Lord that made heaven and earth: give thee blessing out of Sion.
 """}
 nineteenth_kathisma = {
-    'title': '<h2>Nineteenth Kathisma</h2>'
+    'title': '<h3>Nineteenth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 134</h3>
 Alleluia
@@ -4394,7 +4394,7 @@ And of thy goodness slay mine enemies: and destroy all them that vex my soul ;
 for I am thy servant.
 """}
 twentieth_kathisma = {
-'title': '<h2>Twentieth Kathisma</h2>'
+'title': '<h3>Twentieth Kathisma</h3>'
 ,1:"""<h4>First Stasis</h4>
 <h3>Psalm 143</h3>
 A psalm of David concerning Goliath

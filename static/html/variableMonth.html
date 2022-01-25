@@ -1,0 +1,389 @@
+<section class="post" id="{{liturgics.link_date}}">
+  <h1>{{ liturgics.day_string }}</h1>
+  <p><a href="#contents">Return to Table of Contents</a></p>
+  {% for link in liturgics.links[1:] %}
+    <h4>{{ link|safe }}</h4>
+  {% endfor %}
+
+  {% set id = 1 %}
+  <hr />
+  {% if liturgics.vespers is defined %}
+    <h2 id="{{liturgics.vespers.link}}">Vespers</h2>
+    <div id={{id}}>
+      <h3>Kathisma Reading</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% for id,part in liturgics.vespers.vespers_kathisma.items() %}
+        <div>{{ part|safe }}</div>
+      {% endfor %}
+    </div>
+
+    {% if liturgics.vespers.m_stichera != None %}
+      <div id={{id}}>
+        <h3>Menaion Stichera</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {% for stichera in liturgics.vespers.m_stichera %}
+          {{ stichera|safe }}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if liturgics.vespers.o_stichera != None %}
+      <div id={{id}}>
+        <h3>Octoechos Stichera</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {% for stichera in liturgics.vespers.o_stichera %}
+          {{ stichera|safe }}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div id={{id}}>
+      <h3>Hymns</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.vespers.doxastichon != None %}
+        <h4>Doxastichon from the Menaion</h4>
+        {{ liturgics.vespers.doxastichon|safe }}
+      {% endif %}
+      {% if liturgics.vespers.dogmaticon != None %}
+        <h4>Dogmaticon from the Menaion</h4>
+        {{ liturgics.vespers.dogmaticon|safe }}
+      {% endif %}
+      {% if liturgics.vespers.m_theotokion != None %}
+        <h4>Theotokia from the Menaion</h4>
+        {{ liturgics.vespers.m_theotokion|safe }}
+      {% endif %}
+      {% if liturgics.vespers.o_theotokion != None %}
+        <h4>Theotokia from the Octoechos</h4>
+        {{ liturgics.vespers.o_theotokion|safe }}
+      {% endif %}
+    </div>
+
+    {% if liturgics.vespers.readings != None %}
+      <div id={{id}}>
+        <h3>Readings from the Menaion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.vespers.readings|safe }}
+      </div>
+    {% endif %}
+
+    <h3>Aposticha</h3>
+    {% if liturgics.vespers.m_aposticha != None %}
+    <div id={{id}}>
+      <h4>From the Menaion</h4>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.vespers.m_aposticha|safe }}
+    </div>
+    {% endif %}
+    {% if liturgics.vespers.o_aposticha != None %}
+    <div id={{id}}>
+      <h4>From the Octoechos</h4>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.vespers.o_aposticha|safe }}
+    </div>
+    {% endif %}
+
+    {% if liturgics.vespers.apolytichion != None %}
+      <div id={{id}}>
+        <h3>Apolytichia</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.vespers.apolytichion|safe }}
+      </div>
+    {% endif %}
+    <hr />
+  {% endif %}
+
+  {% if liturgics.matins is defined %}
+    <h2 id="{{liturgics.matins.link}}">Matins</h2>
+    <div id={{id}}>
+      <h3>Troparia</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.matins.m_troparia != None %}
+        <h4>From the Menaion</h4>
+        {{ liturgics.matins.m_troparia|safe }}
+      {% endif %}
+      {% if liturgics.matins.o_troparia != None %}
+        <h4>From the Octoechos</h4>
+        {{ liturgics.matins.o_troparia|safe }}
+      {% endif %}
+    </div>
+
+    <div id={{id}}>
+      <h3>First Kathisma Reading</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% for id,part in liturgics.matins.kathisma1.items() %}
+        <div>{{ part|safe }}</div>
+      {% endfor %}
+    </div>
+
+    <div id={{id}}>
+      <h3>Second Kathisma Reading</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% for id,part in liturgics.matins.kathisma2.items() %}
+        <div>{{ part|safe }}</div>
+      {% endfor %}
+    </div>
+
+    <div id={{id}}>
+      <h3>First Sessional Hymn</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.matins.m_session1 != None %}
+        <h4>From the Menaion</h4>
+        {{ liturgics.matins.m_session1|safe }}
+      {% endif %}
+      {% if liturgics.matins.o_session1 != None %}
+        <h4>From the Octoechos</h4>
+        {{ liturgics.matins.o_session1|safe }}
+      {% endif %}
+    </div>
+
+    <div id={{id}}>
+      <h3>Second Sessional Hymn</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.matins.m_session2 != None %}
+        <h4>From the Menaion</h4>
+        {{ liturgics.matins.m_session2|safe }}
+      {% endif %}
+      {% if liturgics.matins.o_session2 != None %}
+        <h4>From the Octoechos</h4>
+        {{ liturgics.matins.o_session2|safe }}
+      {% endif %}
+    </div>
+
+    <div id={{id}}>
+      <h3>Third Sessional Hymn</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.matins.m_session3 != None %}
+        <h4>From the Menaion</h4>
+        {{ liturgics.matins.m_session3|safe }}
+      {% endif %}
+      {% if liturgics.matins.o_session3 != None %}
+        <h4>From the Octoechos</h4>
+        {{ liturgics.matins.o_session3|safe }}
+      {% endif %}
+    </div>
+
+
+    {% if liturgics.matins.apolytichion != None %}
+      <div id={{id}}>
+        <h3>Apolytichion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.apolytichion|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.matins.megalynarion != None %}
+      <div id={{id}}>
+        <h3>Megalynarion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.megalynarion|safe }}
+      </div>
+    {% endif %}
+
+    <div id={{id}}>
+      <h3>Prokeimena</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.matins.m_prokeimenon != None %}
+        <h4>From the Menaion</h4>
+        {{ liturgics.matins.m_prokeimenon|safe }}
+      {% endif %}
+      {% if liturgics.matins.o_prokeimenon != None %}
+        <h4>From the Octoechos</h4>
+        {{ liturgics.matins.o_prokeimenon|safe }}
+      {% endif %}
+    </div>
+
+    {% if liturgics.matins.readings != None %}
+      <div id={{id}}>
+        <h3>Readings</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.readings|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.matins.after50 != None %}
+      <div id={{id}}>
+        <h3>After Psalm 50</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.after50|safe }}
+      </div>
+    {% endif %}
+
+    <div id={{id}}>
+      <h3>Hymn of Ascent</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.matins.m_ascent != None %}
+      <h4>From the Menaion</h4>
+      {{ liturgics.matins.m_ascent|safe }}
+      {% endif %}
+      {% if liturgics.matins.o_ascent != None %}
+      <h4>From the Octoechos</h4>
+      {{ liturgics.matins.o_ascent|safe }}
+      {% endif %}
+    </div>
+
+    {% if liturgics.matins.m_canon != None %}
+      <div id={{id}}>
+        <h3>Canon</h3>
+        <h4>From the Menaion</h4>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.m_canon|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.matins.o_canon != None %}
+      <div id={{id}}>
+        <h3>Canon</h3>
+        <h4>From the Octoechos</h4>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.o_canon|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.matins.exapostilarion != None %}
+      <div id={{id}}>
+        <h3>Exapostilarion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.exapostilarion|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.matins.praises != None %}
+      <div id={{id}}>
+        <h3>Lauds (Praises)</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.praises|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.matins.aposticha != None %}
+      <div id={{id}}>
+        <h3>Aposticha</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.matins.aposticha|safe }}
+      </div>
+    {% endif %}
+
+    <hr />
+  {% endif %}
+
+  {% if liturgics.liturgy is defined %}
+    <h2 id="{{liturgics.liturgy.link}}">Typika</h2>
+    <div id={{id}}>
+      <h3>Beatitudes</h3>
+      {% set id = id + 1 %}
+      <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+      {% if liturgics.liturgy.m_beatitudes != None %}
+        <h4>From the Menaion</h4>
+        {{ liturgics.liturgy.m_beatitudes|safe }}
+      {% endif %}
+      {% if liturgics.liturgy.o_beatitudes != None %}
+        <h4>From the Octoechos</h4>
+        {{ liturgics.liturgy.o_beatitudes|safe }}
+      {% endif %}
+    </div>
+
+    {% if liturgics.liturgy.resurrection_troparion != None %}
+      <div id={{id}}>
+        <h3>Resurrection Troparion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.liturgy.resurrection_troparion|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.liturgy.troparion != None %}
+      <div id={{id}}>
+        <h3>Troparion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.liturgy.troparion|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.liturgy.kontakion != None %}
+      <div id={{id}}>
+        <h3>Kontakion</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.liturgy.kontakion|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.liturgy.prokeimenon != None %}
+      <div id={{id}}>
+        <h3>Prokeimenon</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.liturgy.prokeimenon|safe }}
+      </div>
+    {% endif %}
+
+    {% if liturgics.liturgy.readings != None %}
+      <div id={{id}}>
+        <h3>Readings</h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {{ liturgics.liturgy.readings|safe }}
+      </div>
+    {% endif %}
+
+    <hr />
+  {% endif %}
+
+  {% if liturgics.compline is defined %}
+    <h2 id="{{liturgics.compline.link}}">Compline</h2>
+    {% if liturgics.compline.odes != None %}
+      <div id={{id}}>
+        <h3></h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {% for part in liturgics.compline.odes %}
+          <div>{{ part|safe }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <hr />
+  {% endif %}
+
+  {% if liturgics.nocturns is defined %}
+    <h2 id="{{liturgics.nocturns.link}}">Nocturns</h2>
+    {% if liturgics.nocturns.odes != None %}
+      <div id={{id}}>
+        <h3></h3>
+        {% set id = id + 1 %}
+        <p><a href=#{{id-2}}>&lt&ltBack</a> | <a href=#{{id}}>Next>></a></p>
+        {% for part in liturgics.nocturns.odes %}
+          <div>{{ part|safe }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <hr />
+  {% endif %}
+</section>
