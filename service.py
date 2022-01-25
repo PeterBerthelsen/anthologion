@@ -480,7 +480,6 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         menaion_date = date_oc.strftime('%m-%d')
     else: #new Calendar
         menaion_date = service_date.strftime('%m-%d')
-    print(menaion_date)
     menaion_service = fixed_feasts.get(menaion_date, None) #account for calendar here..
     rank = menaion_service[0] if menaion_service else 7 #menaion rank or simple service
     service_type = menaion_service[1] if menaion_service else None
@@ -522,7 +521,6 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
     liturgics['day_string'] = day_string
     links = [f'<a href="#{link_date}">{day_string}</a>']
 
-    print(variables_only_flag)
     rank = 8 if variables_only_flag else rank
 
     variables = rubrics(
@@ -548,6 +546,8 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         links.append(f'<a href="#{link_date}-vespers">Vespers</a>')
         if variables_only_flag:
             liturgics['vespers'] = vespers_variables
+            print(vespers_variables.get('doxastichon'))
+            print(vespers_variables.get('dogmaticon'))
         else:
             vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name, long_name=service_long_name)
             liturgics['vespers'] = vespers

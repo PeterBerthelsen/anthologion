@@ -36,7 +36,7 @@ def main():
                 ,day=day
                 ,year=year
                 ,calendar=calendar
-                ,schedule=schedule
+                ,schedule='vcnmt'
                 ,variables_only_flag=variables_only
             )
         )
