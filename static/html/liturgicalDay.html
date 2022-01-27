@@ -1,35 +1,25 @@
-<head>
-  <link href="../static/css/main.css" rel="stylesheet"/>
-  <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
-</head>
-<body>
-  <div id="wrapper">
-    <div id="main">
-      <section class="post" id="{{liturgics.link_date}}">
-        <h2>Contents</h2>
-        {% for link in liturgics.links %}
-          <h4>{{ link|safe }}</h4>
-        {% endfor %}
-        <hr/>
-        <h1>{{ liturgics.day_string }}</h1>
-        {{ liturgics.vespers|safe }}
-        {% if liturgics.vespers is defined %}<hr/>{% endif %}
-        {{ liturgics.compline|safe }}
-        {% if liturgics.compline is defined %}<hr/>{% endif %}
-        {{ liturgics.nocturns|safe }}
-        {% if liturgics.nocturns is defined %}<hr/>{% endif %}
-        {{ liturgics.matins|safe }}
-        {% if liturgics.matins is defined %}<hr/>{% endif %}
-        {{ liturgics.first|safe }}
-        {% if liturgics.first is defined %}<hr/>{% endif %}
-        {{ liturgics.third|safe }}
-        {% if liturgics.third is defined %}<hr/>{% endif %}
-        {{ liturgics.sixth|safe }}
-        {% if liturgics.sixth is defined %}<hr/>{% endif %}
-        {{ liturgics.typika|safe }}
-        {% if liturgics.typika is defined %}<hr/>{% endif %}
-        {{ liturgics.ninth|safe }}
-      </section>
-    </div>
-  </div>
-</body>
+<section class="post" id="{{liturgics.link_date}}">
+  <h2>Contents</h2>
+  {% for link in liturgics.links %}
+    <h4>{{ link|safe }}</h4>
+  {% endfor %}
+  <hr />
+  <h1>{{ liturgics.day_string }}</h1>
+  {{ liturgics.vespers|safe }}
+  {% if liturgics.vespers is defined %}<hr/>{% endif %}
+  {{ liturgics.compline|safe }}
+  {% if liturgics.compline is defined %}<hr/>{% endif %}
+  {{ liturgics.nocturns|safe }}
+  {% if liturgics.nocturns is defined %}<hr/>{% endif %}
+  {{ liturgics.matins|safe }}
+  {% if liturgics.matins is defined %}<hr/>{% endif %}
+  {{ liturgics.first|safe }}
+  {% if liturgics.first is defined %}<hr/>{% endif %}
+  {{ liturgics.third|safe }}
+  {% if liturgics.third is defined %}<hr/>{% endif %}
+  {{ liturgics.sixth|safe }}
+  {% if liturgics.sixth is defined %}<hr/>{% endif %}
+  {{ liturgics.typika|safe }}
+  {% if liturgics.typika is defined %}<hr/>{% endif %}
+  {{ liturgics.ninth|safe }}
+</section>

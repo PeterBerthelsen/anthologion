@@ -451,11 +451,8 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
     night_string_oc = night_string + ' (' + (date_oc - timedelta(days=1)).strftime('%m/%d/%Y') + ')'
 
     fixed_feasts = {
-        #MM-DD: #[Rank, Service Name, Service Type, Service Long Name]
-        '10-01': [3,'Protection', 1, 'The Protecting Veil of the Most Holy Theotokos'] #uncomment to test menaion...
-        #Need October filled in
-        ,'10-26': [2,16,'Demetrius','The Holy and Glorious Great Martyr Demetrius, The Myrrh-Gusher of Thessalonica']
-        ,'11-01': [5,24,'Cosmas and Damian','The Holy Cosmas and Damian, Wonderworkers and Unmercenary Physicians in Asia']
+        #MM-DD: #[Rank, Service Type, Service Name, Service Long Name]
+        '11-01': [5,24,'Cosmas and Damian','The Holy Cosmas and Damian, Wonderworkers and Unmercenary Physicians in Asia']
         ,'11-03': [4,16,'George','The Consecration of the Church of the Great Martyr George of Lydda']
         ,'11-06': [5,12,'Paul','Our Father among the Saints, Paul the Confessor, Archbishop of Constantinople']
         ,'11-08': [3,5,'Archangels Michael, Gabriel, Raphael, Uriel, Salaphiel, Judgudiel, and Barachiel','The Synaxis of the Angels']
@@ -471,7 +468,28 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         ,'11-24': [3,18,'Catherine','The Holy Great Martyr Catherine of Alexandria']
         ,'11-25': [4,1,'Entrance','The Leavetaking of the Entrance of the Theotokos']
         ,'11-30': [3,6,'Andrew','The Holy and All-Praised Apostle Andrew, The First-Called']
-        #,'': [0,'','','']
+        ,'12-04': [3,18,'Barbara','Holy Great-Martyr Barbara']
+        ,'12-05': [3,13,'Sabbas','Our Venerable and God-Bearing Father, Sabbas the Sanctified']
+        ,'12-06': [3,8,'Nicholas','Our Father Among the Saints Nicholas, Archbishop of Myra']
+        ,'12-07': [4,8,'Ambrose','Our Father Among the Saints, Ambrose, Bishop of Milan']
+        ,'12-09': [3,1,'Conception','The Conception of the Most Holy Theotokos by Saint Anna']
+        ,'12-12': [3,8,'Spyridon','Our Venerable Father Spyridon The Wonderworker, Bishop of Tremithus']
+        ,'12-15': [4,10,'Eleutherius','The Holy Hieromartyr Eleutherius']
+        ,'12-17': [5,4,'Daniel','Holy Prophet Daniel']
+        ,'12-20': [5,10,'Ignatius','Holy Hieromartyr Ignatius The God-Bearer']
+        ,'12-25': [1,0,'Nativity','The Nativity, According To The Flesh, Of Our Lord God & Savior Jesus Christ']
+        ,'12-27': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-28': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-29': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-30': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-31': [4,0,'Nativity','The Leavetaking of the Nativity of our Lord']
+        
+
+
+
+        #Need October filled in
+        ,'10-26': [2,16,'Demetrius','The Holy and Glorious Great Martyr Demetrius, The Myrrh-Gusher of Thessalonica']
+        #,'': [0,0,'','']
         #Keep filling in as time goes by...
     }
 

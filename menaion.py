@@ -20,7 +20,7 @@ menaion_class = {
     ,1:'Theotokos' #Mother of God
     ,2:'Cross' #Holy Cross
     ,3:'St John Baptist' #Forerunner
-    ,4:'Prophet' #Prphet
+    ,4:'Prophet' #Prophet
     ,5:'Angels' #angels
     ,6:'Apostle' #Apostle
     ,7:'Apostles' #Several Apostles

@@ -29,28 +29,30 @@ def main():
     variables_only = request.args.get('vars',None)
     print(f' Loaded "/" for date: {month}/{day}/{year} ~ calendar: {calendar}')
     if variables_only:
-        return render_template(
-            'variableDay.html'
-            ,liturgics = generate_day(
-                month=month
-                ,day=day
-                ,year=year
-                ,calendar=calendar
-                ,schedule='vcnmt'
-                ,variables_only_flag=variables_only
-            )
-        )
+        template = 'variableDay.html'
+        schedule = 'vcnmt'
     else:
-        return render_template(
-            'liturgicalDay.html'
-            ,liturgics = generate_day(
-                month=month
-                ,day=day
-                ,year=year
-                ,calendar=calendar
-                ,schedule=schedule
-            )
-        )
+        template = 'liturgicalDay.html'
+
+    liturgics = generate_day(
+        month=month
+        ,day=day
+        ,year=year
+        ,calendar=calendar
+        ,schedule=schedule
+        ,variables_only_flag=variables_only
+    )
+
+    post = render_template(
+        template
+        ,liturgics = liturgics
+    )
+
+    return render_template(
+        'liturgicalPost.html'
+        ,post = post
+    )
+    return html
 
 @app.route("/now", methods=['GET'])
 def now():
@@ -113,44 +115,39 @@ def build_month():
     year = int(year) if type(year) == str else year
     year = year if year else today.year
     days = range(1,monthrange(year,month)[1] + 1)
-    contents = '<h2>Contents</h2>'
-    header = """<head><link href="../static/css/main.css" rel="stylesheet"/>
-    <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
-    </head><body><div id="wrapper"><div id="main">"""
-    html = ''
+    contents = '<h2>Days</h2>'
+    post = ''
     if variables_only:
-        month_template = 'variableMonth.html'
+        template = 'variableDay.html'
         schedule = 'vcnmt'
     else:
-        month_template = 'liturgicalMonth.html'
+        template = 'liturgicalDay.html'
 
     for day in days:
+        liturgics = generate_day(
+            month=month
+            ,day=day
+            ,year=year
+            ,calendar=calendar
+            ,schedule=schedule
+            ,variables_only_flag=variables_only
+        )
+
         contents += render_template(
             'liturgicalContents.html'
-            ,liturgics = generate_day(
-                month=month
-                ,day=day
-                ,year=year
-                ,calendar=calendar
-                ,schedule=schedule
-                ,variables_only_flag=variables_only
-            )
+            ,liturgics = liturgics
         )
-        html += render_template(
-            month_template
-            ,liturgics = generate_day(
-                month=month
-                ,day=day
-                ,year=year
-                ,calendar=calendar
-                ,schedule=schedule
-                ,variables_only_flag=variables_only
-            )
+
+        post += render_template(
+            template
+            ,liturgics = liturgics
         )
-    contents = '<section class="post" id="contents">' + contents + '</section>'
-    html = header + contents + html
-    html += '</div></div></body>'
-    return html
+
+    return render_template(
+        'liturgicalPost.html'
+        ,contents = contents
+        ,post = post
+    )
 
 if __name__ == "__main__":
     app.run(threaded=True, debug=True, port=5000)
