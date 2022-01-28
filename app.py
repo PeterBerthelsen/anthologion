@@ -13,17 +13,51 @@ set FLASK_ENV=development
 flask run
 """
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
+from flask_wtf import FlaskForm
+from wtforms.fields import DateField, RadioField, SelectField, SubmitField
+from wtforms.validators import DataRequired
 from service import generate_day
 from calendar import monthrange
 from datetime import datetime
 app = Flask(__name__,template_folder='static/html')
+app.config['SECRET_KEY'] = 'boughtahondabutishouldaboughtakia'
 
-@app.route("/", methods=['GET'])
+class HomeForm(FlaskForm):
+    lit_dt = DateField(format='%m-%d-%Y', validators=[DataRequired()])
+    cal_fl = SelectField(choices=[(1,'New Calendar'),(0,'Old Calendar')])
+    var_fl = RadioField(choices=[(None, 'Full Service'),('true','Variables Only')])
+    submit = SubmitField()
+
+@app.route("/", methods=['POST','GET'])
+def home():
+    form = HomeForm()
+    if request.method == 'POST':
+        calendar = form.cal_fl.data
+        vars = None if form.var_fl.data == 'None' else form.var_fl.data
+        print(vars)
+        if vars:
+            return redirect(f"/day?date={form.lit_dt._value()}&c={calendar}&vars={vars}")
+        else:
+            return redirect(f"/day?date={form.lit_dt._value()}&c={calendar}")
+    else:
+        return render_template(
+            'home.html'
+            ,today = datetime.today()
+            ,form = form
+        )
+
+@app.route("/day", methods=['POST','GET'])
 def main():
-    month = request.args.get('m', None)
-    day = request.args.get('d', None)
-    year = request.args.get('y', None)
+    dd = request.args.get('date', None)
+    if dd:
+        month = int(dd.split('-')[1])
+        day = int(dd.split('-')[2])
+        year = int(dd.split('-')[0])
+    else:
+        month = request.args.get('m', None)
+        day = request.args.get('d', None)
+        year = request.args.get('y', None)
     calendar = request.args.get('c', 1)
     schedule = request.args.get('s',None)
     variables_only = request.args.get('vars',None)

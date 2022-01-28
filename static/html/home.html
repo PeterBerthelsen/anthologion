@@ -1,16 +1,27 @@
 <head>
   <link href="../static/css/main.css" rel="stylesheet"/>
   <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
-  <title>Anthologion</title>
+  <title>Home | Anthologion</title>
   {% block head_html %}{% endblock %}
 </head>
 <body>
   <div id="wrapper">
     <div id="main">
       <h1>Anthologion</h1>
-      {% block contents %}{{ contents|safe }}{% endblock %}
-      <hr />
-      {% block post %}{{ post|safe }}{% endblock %}
+      <p>Welcome to the page! The site is currently under development.</p>
+      <form action="" method="post">
+        {{ form.csrf_token }}
+        <label for="lit_dt">Select A Date:</label>
+        {{ form.lit_dt }}
+        <br />
+        <label for="cal_fl">Use Calendar: </label>
+        {{ form.cal_fl }}
+        <br />
+        {{ form.var_fl }}
+        <br />
+        {{ form.submit }}
+      </form>
+
       <div id="footer">
         {% block footer %}
         &copy; 2022 Knot & Nous. Contents used with permission from other copyright holders.

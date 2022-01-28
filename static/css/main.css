@@ -587,3 +587,70 @@ input, select, textarea {
   			}
 
   		}
+			input[type="checkbox"],
+			input[type="radio"] {
+				-moz-appearance: none;
+				-webkit-appearance: none;
+				-ms-appearance: none;
+				appearance: none;
+				display: block;
+				float: left;
+				margin-right: -2rem;
+				opacity: 0;
+				width: 1rem;
+				z-index: -1;
+			}
+
+				input[type="checkbox"] + label,
+				input[type="radio"] + label {
+					text-decoration: none;
+					cursor: pointer;
+					display: inline-block;
+					font-size: 1rem;
+					letter-spacing: 0;
+					font-family: "Merriweather", Georgia, serif;
+					text-transform: none;
+					font-weight: 300;
+					padding-left: 2.8rem;
+					padding-right: 1rem;
+					position: relative;
+				}
+
+					input[type="checkbox"] + label:before,
+					input[type="radio"] + label:before {
+						-moz-osx-font-smoothing: grayscale;
+						-webkit-font-smoothing: antialiased;
+						display: inline-block;
+						font-style: normal;
+						font-variant: normal;
+						text-rendering: auto;
+						line-height: 1;
+						text-transform: none !important;
+						font-family: 'Font Awesome 5 Free';
+						font-weight: 900;
+					}
+
+					input[type="checkbox"] + label:before,
+					input[type="radio"] + label:before {
+						border-radius: 0;
+						border: solid 2px;
+						content: '';
+						display: inline-block;
+						font-size: 0.8rem;
+						height: 1.8rem;
+						left: 0;
+						line-height: 1.65rem;
+						position: absolute;
+						text-align: center;
+						top: -0.125rem;
+						width: 1.8rem;
+					}
+
+				input[type="checkbox"]:checked + label:before,
+				input[type="radio"]:checked + label:before {
+					content: '\f00c';
+				}
+
+			input[type="checkbox"] + label:before {
+				border-radius: 0;
+			}
