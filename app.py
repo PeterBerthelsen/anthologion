@@ -25,7 +25,7 @@ app.config['SECRET_KEY'] = 'boughtahondabutishouldaboughtakia'
 
 class HomeForm(FlaskForm):
     lit_dt = DateField(format='%m-%d-%Y', validators=[DataRequired()])
-    cal_fl = SelectField(choices=[(1,'New Calendar'),(0,'Old Calendar')])
+    cal_fl = SelectField(choices=[(0,'New Calendar'),(1,'Old Calendar')])
     var_fl = RadioField(choices=[(None, 'Full Service'),('true','Variables Only')])
     submit = SubmitField()
 

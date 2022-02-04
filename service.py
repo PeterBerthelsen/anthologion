@@ -450,9 +450,125 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
     night_string = (service_date - timedelta(days=1)).strftime('%m/%d/%Y')
     night_string_oc = night_string + ' (' + (date_oc - timedelta(days=1)).strftime('%m/%d/%Y') + ')'
 
+    relative_feasts = {
+        #MM-DD: #[Rank, Service Type, Day of Week, Service Name, Service Long Name]
+        '09-09': [6,1,None,'Nativity','Afterfeast of the Nativity of the Mother of God']
+        ,'09-10': [6,1,None,'Nativity','Afterfeast of the Nativity of the Mother of God']
+        ,'09-11': [6,1,None,'Nativity','Afterfeast of the Nativity of the Mother of God']
+        ,'09-15': [4,2,None,'Elevation','Afterfeast of the Elevation of the Cross']
+        ,'09-16': [4,2,None,'Elevation','Afterfeast of the Elevation of the Cross']
+        ,'09-17': [4,2,None,'Elevation','Afterfeast of the Elevation of the Cross']
+        ,'09-18': [4,2,None,'Elevation','Afterfeast of the Elevation of the Cross']
+        ,'09-19': [4,2,None,'Elevation','Afterfeast of the Elevation of the Cross']
+        ,'09-20': [4,2,None,'Elevation','Afterfeast of the Elevation of the Cross']
+        ,'10-11': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-12': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-13': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-14': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-15': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-16': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-17': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'11-22': [6,1,None,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
+        ,'11-23': [6,1,None,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
+        ,'11-24': [6,1,None,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
+        ,'12-11': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-12': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-13': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-14': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-15': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-16': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-17': [4,4,6,'Forefathers','Sunday of Our Holy Forefathers']
+        ,'12-18': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-19': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-20': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-21': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-22': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-23': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-24': [3,0,6,'Nativity', 'Sunday Before Nativity']
+        ,'12-27': [6,0,None,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-28': [6,0,None,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-29': [6,0,None,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-30': [6,0,None,'Nativity','The Afterfeast of the Nativity of our Lord']
+        ,'12-31': [4,0,None,'Nativity','The Leavetaking of the Nativity of our Lord']
+        ,'01-01': [4,0,6,'Theophany','Sunday Before Theophany']
+        ,'01-02': [4,0,6,'Theophany','Sunday Before Theophany']
+        ,'01-03': [4,0,6,'Theophany','Sunday Before Theophany']
+        ,'01-04': [4,0,6,'Theophany','Sunday Before Theophany']
+        ,'01-05': [4,0,6,'Theophany','Sunday Before Theophany']
+        ,'01-08': [6,0,None,'Theophany','Afterfeast of Theophany']
+        ,'01-09': [6,0,None,'Theophany','Afterfeast of Theophany']
+        ,'01-10': [6,0,None,'Theophany','Afterfeast of Theophany']
+        ,'01-11': [6,0,None,'Theophany','Afterfeast of Theophany']
+        ,'01-12': [6,0,None,'Theophany','Afterfeast of Theophany']
+        ,'01-13': [6,0,None,'Theophany','Afterfeast of Theophany']
+        ,'01-22': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'01-23': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'01-24': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'01-25': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'01-26': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'01-27': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'01-28': [3,17,6,'New Martyrs','Holy New Martyrs of Russia']
+        ,'02-03': [6,0,None,'Meeting','Afterfeast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-04': [6,0,None,'Meeting','Afterfeast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-05': [6,0,None,'Meeting','Afterfeast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-06': [6,0,None,'Meeting','Afterfeast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-07': [6,0,None,'Meeting','Afterfeast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-08': [6,0,None,'Meeting','Afterfeast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'07-13': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'07-14': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'07-15': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'07-16': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'07-17': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'07-18': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'07-19': [3,15,6,'Holy Fathers','Our Holy Fathers of the Fourth Ecumenical Council']
+        ,'08-07': [6,0,None,'Transfiguration','Afterfeast of the Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-08': [6,0,None,'Transfiguration','Afterfeast of the Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-09': [6,0,None,'Transfiguration','Afterfeast of the Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-10': [6,0,None,'Transfiguration','Afterfeast of the Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-11': [6,0,None,'Transfiguration','Afterfeast of the Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-12': [6,0,None,'Transfiguration','Afterfeast of the Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-16': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'08-17': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'08-18': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'08-19': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'08-20': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'08-21': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'08-22': [6,1,None,'Dormition','Afterfeast of the Dormition of the Theotokos']
+        ,'10-11': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-12': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-13': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-14': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-15': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-16': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+        ,'10-17': [3,15,6,'Holy Fathers','Our Holy Fathers of the Seventh Ecumenical Council']
+    }
+
     fixed_feasts = {
-        #MM-DD: #[Rank, Service Type, Service Name, Service Long Name]
-        '11-01': [5,24,'Cosmas and Damian','The Holy Cosmas and Damian, Wonderworkers and Unmercenary Physicians in Asia']
+        #MM-DD: #[Rank, Service Type, Service Name, Day of Week, Service Long Name]
+        '09-01': [4,16,'Symeon','Our Venerable Father Symeon the Stylite']
+        ,'09-04': [4,4,'Moses and Aaron','Holy Prophets Moses and Aaron']
+        ,'09-05': [5,4,'Zacharias','Holy Prophet Zacharias']
+        ,'09-06': [4,5,'Michael','Archangel Michael']
+        ,'09-08': [2,1,'Nativity','The Nativity of the Mother of God']
+        ,'09-12': [4,1,'Nativity','Leavetaking of the Nativity of the Mother of God']
+        ,'09-13': [4,0,'Sepulcher','Consecration of the Holy Sepulcher']
+        ,'09-14': [1,2,'Elevation','Elevation of the Cross']
+        ,'09-20': [4,16,'Eustathius','Greatmartyr Eustathius']
+        ,'09-21': [4,2,'Elevation','Leavetaking of the Elevation of the Cross']
+        ,'09-23': [4,3,'Conception','Conception of the Forerunner and Baptist John']
+        ,'09-24': [5,18,'Thekla','Protomartyr Thekla']
+        ,'09-25': [3,13,'Sergius','Sergius of Radonezh']
+        ,'09-26': [3,6,'John','Holy Apostle John']
+        ,'09-28': [4,12,'Chariton','Chariton the Confessor']
+        ,'10-01': [3,1,'Protection','Protection of the Mother of God']
+        ,'10-06': [4,6,'Thomas','Holy Apostle Thomas']
+        ,'10-09': [4,6,'James','Holy Apostle James Alphaeus']
+        ,'10-12': [3,13,'Symeon','Symeon the New Theologian']
+        ,'10-18': [3,6,'Luke','Holy Apostle Luke']
+        ,'10-19': [3,8,'John','John of Kronstadt']
+        ,'10-23': [4,6,'James','Holy Apostle James, the Brother of the Lord']
+        ,'10-26': [2,16,'Demetrius','The Holy and Glorious Great Martyr Demetrius, The Myrrh-Gusher of Thessalonica']
+        ,'11-01': [5,24,'Cosmas and Damian','The Holy Cosmas and Damian, Wonderworkers and Unmercenary Physicians in Asia']
         ,'11-03': [4,16,'George','The Consecration of the Church of the Great Martyr George of Lydda']
         ,'11-06': [5,12,'Paul','Our Father among the Saints, Paul the Confessor, Archbishop of Constantinople']
         ,'11-08': [3,5,'Archangels Michael, Gabriel, Raphael, Uriel, Salaphiel, Judgudiel, and Barachiel','The Synaxis of the Angels']
@@ -463,8 +579,6 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         ,'11-15': [5,17,'Shamuna, Guria, and Habib','The Holy Matryrs Shamuna, Guria, and Habib']
         ,'11-16': [3,6,'Matthew','The Holy Apostle and Evangelist Matthew']
         ,'11-21': [2,1,'Entrance','The Entrance of the Most Holy Theotokos into the Temple']
-        ,'11-22': [6,1,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
-        ,'11-23': [6,1,'Entrance','The Afterfeast of the Entrance of the Most Holy Theotokos into the Temple']
         ,'11-24': [3,18,'Catherine','The Holy Great Martyr Catherine of Alexandria']
         ,'11-25': [4,1,'Entrance','The Leavetaking of the Entrance of the Theotokos']
         ,'11-30': [3,6,'Andrew','The Holy and All-Praised Apostle Andrew, The First-Called']
@@ -477,20 +591,77 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         ,'12-15': [4,10,'Eleutherius','The Holy Hieromartyr Eleutherius']
         ,'12-17': [5,4,'Daniel','Holy Prophet Daniel']
         ,'12-20': [5,10,'Ignatius','Holy Hieromartyr Ignatius The God-Bearer']
-        ,'12-25': [1,0,'Nativity','The Nativity, According To The Flesh, Of Our Lord God & Savior Jesus Christ']
-        ,'12-27': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
-        ,'12-28': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
-        ,'12-29': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
-        ,'12-30': [6,0,'Nativity','The Afterfeast of the Nativity of our Lord']
-        ,'12-31': [4,0,'Nativity','The Leavetaking of the Nativity of our Lord']
-        
-
-
-
-        #Need October filled in
-        ,'10-26': [2,16,'Demetrius','The Holy and Glorious Great Martyr Demetrius, The Myrrh-Gusher of Thessalonica']
-        #,'': [0,0,'','']
-        #Keep filling in as time goes by...
+        ,'12-25': [1,0,'Nativity','The Nativity, According To The Flesh, Of Our Lord, God & Savior Jesus Christ']
+        ,'01-01': [3,8,'Basil','Bastil the Great']
+        ,'01-02': [3,13,'Seraphim','Seraphim of Sarov']
+        ,'01-06': [1,0,'Theophany','The Holy Theophany of our Lord, God & Savior Jesus Christ']
+        ,'01-07': [4,3,'Forerunner','Synaxis of the Forerunner']
+        ,'01-11': [3,13,'Theodosius','Theodosius the Cenobiarch']
+        ,'01-14': [4,0,'Theophany','Leavetaking of Theophany']
+        ,'01-17': [3,13,'Anthony','Anthony the Great']
+        ,'01-18': [3,9,'Athanasius and Cyril','Holy Hierarchs Athanasius and Cyril']
+        ,'01-19': [3,8,'Mark','Mark of Ephesus']
+        ,'01-20': [3,13,'Euthymius','Euthymius the Great']
+        ,'01-22': [5,6,'Timothy','Holy Apostle Timothy']
+        ,'01-24': [3,23,'Xenia','Xenia of St. Petersburg']
+        ,'01-25': [3,8,'Gregory','Gregory the Theologian']
+        ,'01-27': [3,8,'John','John Chrysostom']
+        ,'01-28': [4,13,'Ephrem','Ephrem the Syrian']
+        ,'01-29': [5,10,'Ignatius','Ignatius the God-Bearer']
+        ,'01-30': [3,9,'Holy Hierarchs','Three Holy Hierarchs']
+        ,'01-31': [4,24,'Cyrus and John','Holy Unmercenaries Cyrus and John']
+        ,'02-02': [2,0,'Meeting','Feast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-06': [3,12,'Photius','Photius the Great']
+        ,'02-08': [5,16,'Theodore','Martyr Theodore the General']
+        ,'02-09': [4,0,'The Meeting of Our Lord','Feast of the Meeting of Our Lord, God & Savior Jesus Christ']
+        ,'02-10': [3,10,'Haralambos','Haralambos of Magnesia']
+        ,'02-11': [5,10,'Blase','Blase of Sebaste']
+        ,'02-14': [3,9,'Cyril and Methodius','Cyril and Methodius']
+        ,'02-17': [5,16,'Theodore','Martyr Theodore the Soldier']
+        ,'02-24': [3,3,'Head','The First and Second Findings of the Head of the Holy & Glorious Prophet, Forerunner, and Baptist John']
+        ,'03-09': [3,17,'Martyrs of Sebaste','Forty Martyrs of Sebaste']
+        ,'03-12': [3,8,'Gregory','Gregory the Dialogist of Rome']
+        ,'03-25': [2,1,'Annunciation','Feast of the Annunciation of Our Most Holy Lady, the Theotokos & Ever-Virgin Mary']
+        ,'04-23': [3,16,'George','Greatmartyr George']
+        ,'04-25': [3,6,'Mark','Holy Apostle Mark']
+        ,'04-30': [3,6,'James','Holy Apostle James, the Brother of John']
+        ,'05-02': [4,8,'Athanasius','Athanasius the Great']
+        ,'05-08': [3,6,'John','Holy Apostle John']
+        ,'05-10': [4,6,'Simon','Holy Apostle Simon the Zealot']
+        ,'05-15': [5,13,'Pachomius','Pachomius the Great']
+        ,'05-21': [3,8,'Constantine and Helen','Constantine and Helen (replace references to "hierarch" with "sovereign")']
+        ,'05-25': [3,3,'Head','The Thrid Finding of the Precious Head of the Holy & Glorious Prophet, Forerunner, and Baptist John']
+        ,'06-01': [3,16,'Justin','Justin Martyr the Philosopher']
+        ,'06-04': [3,8,'Metrophanes','Metrophanes of Byzantium']
+        ,'06-08': [5,16,'Theodore','Martyr Theodore the General']
+        ,'06-11': [4,7,'Bartholomew and Barnabas','Holy Apostles Bartholomew and Barnabas']
+        ,'06-12': [3,14,'Onuphrius and Peter','Onuphrius and Peter of Mount Athos']
+        ,'06-24': [3,3,'Nativity','The Nativity of the Holy & Glorious Prophet, Forerunner, and Baptist John']
+        ,'06-29': [3,7,'Peter and Paul','Holy Apostles Peter and Paul']
+        ,'06-30': [4,7,'Apostles','Synaxis of the 12 Apostles']
+        ,'07-01': [4,24,'Cosmas and Damian','Holy Unmercenaries Cosmas and Damian']
+        ,'07-05': [4,13,'Athanasius','Athanasius of Athos']
+        ,'07-08': [4,16,'Propcopius','Greatmartyr Procopius']
+        ,'07-10': [3,10,'Joseph','Joseph of Damascus']
+        ,'07-11': [3,18,'Euphemia','Greatmartyr Euphemia']
+        ,'07-12': [3,13,'Paisios','Paisios the New of Mount Athos']
+        ,'07-13': [4,5,'Gabriel','Archangel Gabriel']
+        ,'07-15': [4,17,'Cyricus and Julitta','Martyrs Cyricus and Julitta']
+        ,'07-17': [4,18,'Marina','Greatmartyr Marina']
+        ,'07-20': [3,4,'Elijah','Holy Prophet Elijah']
+        ,'07-22': [4,6,'Mary','Mary Magdalene (replace male pronouns with female in service)']
+        ,'07-24': [3,17,'Boris and Gleb','Martyrs Boris and Gleb']
+        ,'07-26': [3,18,'Paraskeva','Martyr Paraskeva']
+        ,'07-27': [3,24,'Panteleimon','Martyr and Healer Panteleimon']
+        ,'08-01': [4,2,'Procession','Procession of the Cross']
+        ,'08-02': [5,10,'Stephen','Protomartyr Stephen']
+        ,'08-06': [1,0,'Transfiguration','The Holy Transfiguration of Our Lord, God & Savior Jesus Christ']
+        ,'08-13': [4,0,'Transfiguration','Leavetaking of the Transfiguration']
+        ,'08-15': [2,1,'Dormition','The Dormition of Our Most Holy Lady, the Theotokos & Ever-Virgin Mary']
+        ,'08-23': [4,1,'Dormition','Leavetaking of the Dormition of the Theotokos']
+        ,'08-25': [4,7,'Bartholomew and Titus','Holy Apostles Bartholomew and Titus']
+        ,'08-26': [5,19,'Adrian and Natalie','Martyrs Adrian and Natalie']
+        ,'08-29': [3,3,'Beheading','The Beheading of the Holy & Glorious Prophet, Forerunner, and Baptist John']
     }
 
     #grabs menaion info from dictionary if available
@@ -498,41 +669,58 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         menaion_date = date_oc.strftime('%m-%d')
     else: #new Calendar
         menaion_date = service_date.strftime('%m-%d')
-    menaion_service = fixed_feasts.get(menaion_date, None) #account for calendar here..
-    rank = menaion_service[0] if menaion_service else 7 #menaion rank or simple service
-    service_type = menaion_service[1] if menaion_service else None
-    service_name = menaion_service[2] if menaion_service else None
-    if type(service_type) == int:
-        service_type = menaion_class.get(service_type)
-    try:
-        service_long_name = menaion_service[3]
-    except: #IndexError #No long name listed. #NoneType #No Menaion
-        service_long_name = service_name
+
+    relative_feast = relative_feasts.get(menaion_date, None)
+    if relative_feast and relative_feast[2]: #if a weekday is required...
+        relative_feast = None if relative_feast[2] != weekday else relative_feast
+    fixed_feast = fixed_feasts.get(menaion_date, None)
+    relative_priority = relative_feast[0] if relative_feast else 7
+    fixed_priority = fixed_feast[0] if fixed_feast else 7
+
+
+    priority = min(relative_priority, fixed_priority)
+    if priority < 7:
+        if fixed_priority == priority:
+            menaion_service = fixed_feast
+            priority_type = 'fixed'
+        elif relative_priority == priority:
+            menaion_service = relative_feast
+            priority_type = 'relative'
+    else:
+        menaion_service = None
+        priority_type = None
+
     if menaion_service:
+        rank = menaion_service[0]
+        service_type = menaion_service[1]
+        if priority_type == 'moveable' or priority_type == 'relative':
+            service_name = menaion_service[3]
+            service_long_name = menaion_service[4]
+        elif priority_type == 'fixed':
+            service_name = menaion_service[2]
+            service_long_name = menaion_service[3]
+        if type(service_type) == int:
+            service_type = menaion_class.get(service_type)
         if service_type == 'Master':
             input_string = None
         else:
             input_string = process_pdf(filename=service_type,service='menaion')
+
         menaion = menaion_variables(
             input_string=input_string
             ,name=service_name
             ,service_type=service_type
             ,weekday=weekday
         )
-    else:
+        print(f'{priority_type} Menaion Service Found For {service_long_name}')
+    else: #no menaion
         menaion = None
+        service_type = None
+        service_name = None
+        service_long_name = None
+        print('No Menaion Service Found!')
 
-    moveable_feasts = {
-        #Pascha offset: #[Service Name, Paschal, Rank]
-    }
     paschal = None #for now...
-
-    """
-    Logic will be added here to gather feast days from above dictionaries to determine rank...
-    Will need variable logic for OC NC for menaion.
-    Also needed for Triodion/Pentecostarion (for paschal variable on rubrics)...
-    Until then, simple services via octoechos will be generated.
-    """
 
     liturgics = {} #dictionary for return
     liturgics['link_date'] = link_date
@@ -564,8 +752,8 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         links.append(f'<a href="#{link_date}-vespers">Vespers</a>')
         if variables_only_flag:
             liturgics['vespers'] = vespers_variables
-            print(vespers_variables.get('doxastichon'))
-            print(vespers_variables.get('dogmaticon'))
+            if service_long_name:
+                liturgics['long_name'] = service_long_name
         else:
             vespers = render_template('vespers.html',variables=vespers_variables, weekday=weekday, name=service_name, long_name=service_long_name)
             liturgics['vespers'] = vespers

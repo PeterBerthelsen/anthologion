@@ -9,6 +9,8 @@
 
   {% if liturgics.vespers is defined %}
     <h2 id="{{liturgics.vespers.link}}">Vespers</h2>
+    <h3>{{ liturgics.vespers.night_date }}</h3>
+    <h4>{{ liturgics.long_name }}</h4>
     <p><a href=#{{liturgics.link_date}}>Return to Beginning of Day</a></p>
     <div id={{liturgics.day_string ~ '_' ~ i}}>
       <h3>Kathisma Reading</h3>
@@ -103,6 +105,8 @@
 
   {% if liturgics.compline is defined %}
     <h2 id="{{liturgics.compline.link}}">Compline</h2>
+    <h3>{{ liturgics.compline.night_date }}</h3>
+    <h4>{{ liturgics.long_name }}</h4>
     <p><a href=#{{liturgics.link_date}}>Return to Beginning of Day</a></p>
     {% if liturgics.compline.odes is defined %}
       <div id={{liturgics.day_string ~ '_' ~ i}}>
@@ -120,6 +124,8 @@
 
   {% if liturgics.nocturns is defined %}
     <h2 id="{{liturgics.nocturns.link}}">Nocturns</h2>
+    <h3>{{ liturgics.nocturns.date }}</h3>
+    <h4>{{ liturgics.long_name }}</h4>
     <p><a href=#{{liturgics.link_date}}>Return to Beginning of Day</a></p>
     {% if liturgics.nocturns.odes is defined %}
       <div id={{liturgics.day_string ~ '_' ~ i}}>
@@ -137,6 +143,8 @@
 
   {% if liturgics.matins is defined %}
     <h2 id="{{liturgics.matins.link}}">Matins</h2>
+    <h3>{{ liturgics.matins.date }}</h3>
+    <h4>{{ liturgics.long_name }}</h4>
     <p><a href=#{{liturgics.link_date}}>Return to Beginning of Day</a></p>
     <div id={{liturgics.day_string ~ '_' ~ i}}>
       {% if liturgics.matins.m_troparia is defined or liturgics.matins.o_troparia is defined %}
@@ -340,6 +348,8 @@
 
   {% if liturgics.typika is defined %}
     <h2 id="{{liturgics.typika.link}}">Typika</h2>
+    <h3>{{ liturgics.typika.date }}</h3>
+    <h4>{{ liturgics.long_name }}</h4>
     <p><a href=#{{liturgics.link_date}}>Return to Beginning of Day</a></p>
     <div id={{liturgics.day_string ~ '_' ~ i}}>
       <h3>Beatitudes</h3>
