@@ -14,7 +14,7 @@ flask run
 """
 
 import os
-from flask import Flask, request, send_file, render_template, redirect
+from flask import Flask, request, send_file, render_template, redirect, after_this_request
 from flask_wtf import FlaskForm
 from wtforms.fields import DateField, RadioField, SelectField, SubmitField, BooleanField
 from wtforms.validators import DataRequired
@@ -41,7 +41,6 @@ def home():
         type = form.type_fl.data
         #vars = None if form.var_fl.data == 'None' else form.var_fl.data
         #For now, all requests will be vars...
-        print(f'Download: {download}')
         vars = 'True'
         if vars:
             return redirect(f"/{type}?date={form.lit_dt._value()}&c={calendar}&vars={vars}&f={download}")
@@ -154,8 +153,15 @@ def main():
 
 @app.route("/month", methods=['GET'])
 def build_month():
-    month = request.args.get('m', None)
-    year = request.args.get('y', None)
+    dd = request.args.get('date', None)
+    if dd:
+        month = int(dd.split('-')[1])
+        #day = int(dd.split('-')[2])
+        year = int(dd.split('-')[0])
+    else:
+        month = request.args.get('m', None)
+        #day = request.args.get('d', None)
+        year = request.args.get('y', None)
     calendar = request.args.get('c', 1)
     schedule = request.args.get('s',None)
     download = request.args.get('f',None)
