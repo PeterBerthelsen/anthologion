@@ -7,21 +7,33 @@
 <body>
   <div id="wrapper">
     <div id="main">
-      <h1>Anthologion</h1>
+      <h2>Anthologion</h2>
       <p>Welcome to the page! The site is currently under development.</p>
+      <p>Please select the following options:
+      <br /><b>Date:</b> The date for the service you'd like. Use the civil calendar dates. For Old Calendar, the site will automatically gather resources for the corresponding date.
+      <br /><b>Results Type:</b> service for a single day or entire month. For a full month, select any date of that month from the calendar.
+      <br /><b>Calendar:</b> New Calendar for the Revised Julian or civil calendar. Old Calendar for the Julian or Church calendar.
+      <br /><b>Process Type:</b> View or Download. View will display the results in the browser, download will generate a HTML file and download*.
+      </p>
       <form action="" method="post">
         {{ form.csrf_token }}
         <label for="lit_dt">Select A Date:</label>
         {{ form.lit_dt }}
         <br />
+        <label for="type_fl">Results Type:</label>
+        {{ form.type_fl }}
+        <br />
         <label for="cal_fl">Use Calendar: </label>
         {{ form.cal_fl }}
         <br />
-        {{ form.var_fl }}
+        <label for="down_fl">Process Type: </label>
+        {{ form.down_fl }}
         <br />
         {{ form.submit }}
       </form>
-
+      <p>
+      <b>*Note:</b> You can use the download function and <a href="https://www.amazon.com/sendtokindle/email">Send To Kindle</a> to have the entire service book available on a kindle. 
+      </p>
       <div id="footer">
         {% block footer %}
         &copy; 2022 Knot & Nous. Contents used with permission from other copyright holders.

@@ -415,6 +415,8 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         date_oc = service_date - timedelta(days=13)
         liturgical_day = paschalion(month=month, day=day, year=year)
 
+    print('pascha offset...')
+    print(liturgical_day.get('pascha_offset'))
     tone = liturgical_day.get('weekly_tone')
     weekday = service_date.weekday()
 
@@ -718,6 +720,7 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         service_type = None
         service_name = None
         service_long_name = None
+        rank = 7
         print('No Menaion Service Found!')
 
     paschal = None #for now...
