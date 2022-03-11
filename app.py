@@ -70,11 +70,13 @@ def main():
     download = True if download == '1' else False
     variables_only = request.args.get('vars',None)
     print(f' Loaded "/" for date: {month}/{day}/{year} ~ calendar: {calendar}')
-    if variables_only:
-        template = 'variableDay.html'
-        schedule = 'vcnmt'
-    else:
-        template = 'liturgicalDay.html'
+    # if variables_only:
+    #     template = 'variableDay.html'
+    #     schedule = 'vcnmt'
+    # else:
+    #     template = 'liturgicalDay.html'
+    template = 'variableDay.html'
+    schedule = 'vcnmt'
 
     liturgics = generate_day(
         month=month
@@ -82,7 +84,7 @@ def main():
         ,year=year
         ,calendar=calendar
         ,schedule=schedule
-        ,variables_only_flag=variables_only
+        ,variables_only_flag='True'
     )
 
     post = render_template(
@@ -175,11 +177,14 @@ def build_month():
     days = range(1,monthrange(year,month)[1] + 1)
     contents = '<h2>Days</h2>'
     post = ''
-    if variables_only:
-        template = 'variableDay.html'
-        schedule = 'vcnmt'
-    else:
-        template = 'liturgicalDay.html'
+    # if variables_only:
+    #     template = 'variableDay.html'
+    #     schedule = 'vcnmt'
+    # else:
+    #     template = 'liturgicalDay.html'
+    template = 'variableDay.html'
+    schedule = 'vcnmt'
+
 
     for day in days:
         liturgics = generate_day(
@@ -188,7 +193,7 @@ def build_month():
             ,year=year
             ,calendar=calendar
             ,schedule=schedule
-            ,variables_only_flag=variables_only
+            ,variables_only_flag='True'
         )
 
         contents += render_template(

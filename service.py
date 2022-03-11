@@ -143,232 +143,229 @@ def rubrics(rank:int, weekday:int, name:str='(name)', octoechos=None, menaion=No
     if rank == 7: #simple service
         return octoechos
 
-    if not paschal:
-        #ranked service outside Lent/Pentecost
-        #we will be working with the octoechos and menaion
-        vespers = {}
-        vo = octoechos.get('vespers')
-        vm = menaion.get('vespers') if menaion else None
+    vespers = {}
+    vo = octoechos.get('vespers')
+    vm = menaion.get('vespers') if menaion else None
 
-        #build out stichera
-        if rank == 1:
-            vo_stichera_needed = 4
-            vm_stichera_needed = 6
-        elif rank == 2:
-            vo_stichera_needed = 2 if weekday == 6 else 2
-            vm_stichera_needed = 6
-        elif rank == 3:
-            vo_stichera_needed = 6 if weekday == 6 else 0
-            vm_stichera_needed = 4 if weekday == 6 else 6
-        else:
-            vo_stichera_needed = 6 if weekday == 6 else 3
-            vm_stichera_needed = 4 if weekday == 6 else 3
+    #build out stichera
+    if rank == 1:
+        vo_stichera_needed = 4
+        vm_stichera_needed = 6
+    elif rank == 2:
+        vo_stichera_needed = 2 if weekday == 6 else 2
+        vm_stichera_needed = 6
+    elif rank == 3:
+        vo_stichera_needed = 6 if weekday == 6 else 0
+        vm_stichera_needed = 4 if weekday == 6 else 6
+    else:
+        vo_stichera_needed = 6 if weekday == 6 else 3
+        vm_stichera_needed = 4 if weekday == 6 else 3
 
-        vo_stichera = vo.get('stichera')
-        vm_stichera = vm.get('stichera') if vm else None
+    vo_stichera = vo.get('stichera')
+    vm_stichera = vm.get('stichera') if vm else None
 
-        if weekday == 6:
-            vo_stichera = vo_stichera[:7] #7 resurrection stichera.
-        else:
-            vo_stichera = vo_stichera[:3] #with menaion only 3 used.
+    if weekday == 6:
+        vo_stichera = vo_stichera[:7] #7 resurrection stichera.
+    else:
+        vo_stichera = vo_stichera[:3] #with menaion only 3 used.
 
-        if rank == 8:
-            vespers['m_stichera'] = vm_stichera if vm else None
-            vespers['o_stichera'] = vo_stichera
-        else:
-            po_stichera = []
-            pm_stichera = []
+    if rank == 8:
+        vespers['m_stichera'] = vm_stichera if vm else None
+        vespers['o_stichera'] = vo_stichera
+    else:
+        po_stichera = []
+        pm_stichera = []
 
-            vo_duplicates = vo_stichera_needed - len(vo_stichera)
-            vm_duplicates = vm_stichera_needed - len(vm_stichera)
+        vo_duplicates = vo_stichera_needed - len(vo_stichera)
+        vm_duplicates = vm_stichera_needed - len(vm_stichera)
 
-            #enumerate octoechos stichera, assign duplicates as needed
-            for i, s in enumerate(vo_stichera):
+        #enumerate octoechos stichera, assign duplicates as needed
+        for i, s in enumerate(vo_stichera):
+            po_stichera.append(s)
+            if i + 1 <= vo_duplicates:
                 po_stichera.append(s)
-                if i + 1 <= vo_duplicates:
-                    po_stichera.append(s)
 
-            #enumerate menaion stichera, assign duplicates as needed
-            for i, s in enumerate(vm_stichera):
+        #enumerate menaion stichera, assign duplicates as needed
+        for i, s in enumerate(vm_stichera):
+            pm_stichera.append(s)
+            if i + 1<= vm_duplicates:
                 pm_stichera.append(s)
-                if i + 1<= vm_duplicates:
-                    pm_stichera.append(s)
 
-            vespers['stichera'] = po_stichera + pm_stichera
+        vespers['stichera'] = po_stichera + pm_stichera
 
-        #determine stichera tone
-        vespers['stichera_tone'] = vm.get('stichera_tone') if vm else None
+    #determine stichera tone
+    vespers['stichera_tone'] = vm.get('stichera_tone') if vm else None
 
-        #doxastichon from menaion
-        vm_doxastichon = vm.get('doxastichon',None) if vm else None
-        if vm_doxastichon:
-            vespers['doxastichon'] = vm_doxastichon
+    #doxastichon from menaion
+    vm_doxastichon = vm.get('doxastichon',None) if vm else None
+    if vm_doxastichon:
+        vespers['doxastichon'] = vm_doxastichon
 
-        #dogmaticon from menaion
-        vm_dogmaticon = vm.get('dogmaticon',None) if vm else None
-        if vm_dogmaticon:
-            vespers['dogmaticon'] = vm_dogmaticon
+    #dogmaticon from menaion
+    vm_dogmaticon = vm.get('dogmaticon',None) if vm else None
+    if vm_dogmaticon:
+        vespers['dogmaticon'] = vm_dogmaticon
 
-        #determine theotokion
-        vo_theotokion = vo.get('theotokion', None)
-        vm_theotokion = vm.get('theotokion', None) if vm else None
+    #determine theotokion
+    vo_theotokion = vo.get('theotokion', None)
+    vm_theotokion = vm.get('theotokion', None) if vm else None
+    if rank == 8:
+        vespers['m_theotokion'] = vm_theotokion if vm else None
+        vespers['o_theotokion'] = vo_theotokion
+    elif vo_theotokion or vm_theotokion:
+        vespers['theotokion'] = vm_theotokion if vm_theotokion else vo_theotokion
+
+    #readings from menaion
+    vespers['readings'] = vm.get('readings') if vm else None
+
+    #determine aposticha
+    if rank == 8:
+        vespers['m_aposticha'] = vm.get('aposticha', None) if vm else None
+        vespers['o_aposticha'] = vo.get('aposticha', None)
+        #vespers['m_aposticha_theotokion'] = vm.get('aposticha_theotokion', None) if vm else None
+        #vespers['o_aposticha_theotokion'] = vo.get('aposticha_theotokion')
+    else:
+        aposticha = vm.get('aposticha', None)
+        if not aposticha:
+            aposticha = vo.get('aposticha')
+        vespers['aposticha'] = aposticha
+
+        #aposticha theotokion may need to be swapped based on rank...
+        #for now it's just based on presence of menaion or not.
+        aposticha_theotokion = vm.get('aposticha_theotokion')
+        if not aposticha_theotokion:
+            aposticha_theotokion = vo.get('aposticha_theotokion')
+        vespers['aposticha_theotokion'] = aposticha_theotokion
+
+
+    vm_apolytichion = vm.get('apolytichion', None) if vm else None
+    vespers['apolytichion'] = vm_apolytichion if vm_apolytichion else None
+
+    #Matins
+    matins = {}
+    mo = octoechos.get('matins')
+    mm = menaion.get('matins') if menaion else None
+
+    mm_troparion = mm.get('troparion', None) if mm else None
+    mo_troparion = mo.get('troparion', None)
+    if rank == 8:
+        matins['m_troparion'] = mm_troparion if mm else None
+        matins['o_troparion'] = mo_troparion
+    elif mm_troparion or mo_troparion:
+        matins['troparion'] = mm_troparion if mm_troparion else mo_troparion
+
+    if rank == 8:
+        matins['o_session1'] = mo.get('session1')
+        matins['o_session2'] = mo.get('session2')
+        matins['o_session3'] = mo.get('session3')
+        matins['m_session1'] = mm.get('session1') if mm else None
+        matins['m_session2'] = mm.get('session2') if mm else None
+        matins['m_session3'] = mm.get('session3') if mm else None
+        matins['o_ascent'] = mo.get('ascent')
+        matins['apolytichion'] = mm.get('apolytichion') if mm else None
+        matins['megalynarion'] = mm.get('megalynarion') if mm else None
+    elif service_type == 'Holy Fathers':
+        matins['session1'] = mo.get('session1')
+        matins['session2'] = mo.get('session2')
+        matins['session3'] = mo.get('session3')
+        matins['ascent'] = mo.get('ascent')
+        matins['prokeimenon'] = mo.get('prokeimenon')
+    else:
+        #sessional hymns are taken from the menaion for all ranks. Except Holy Fathers
+        matins['session1'] = mm.get('session1')
+        matins['session2'] = mm.get('session2')
+        matins['session3'] = mm.get('session3')
+        matins['apolytichion'] = mm.get('apolytichion')
+        matins['megalynarion'] = mm.get('megalynarion')
+
+    #aposticha currently only in octoechos, not used rank 4 or higher
+    if rank >= 5: #six verse & afterfeast
+        matins['aposticha'] = mo.get('aposticha')
+
+    matins['exapostilarion'] = mm.get('exapostilarion') if mm else None
+
+    if rank <= 3 or rank == 8: #polyeleos or higher
+        mo_prokeimenon = mo.get('prokeimenon', None)
+        mm_prokeimenon = mm.get('prokeimenon', None) if mm else None
         if rank == 8:
-            vespers['m_theotokion'] = vm_theotokion if vm else None
-            vespers['o_theotokion'] = vo_theotokion
-        elif vo_theotokion or vm_theotokion:
-            vespers['theotokion'] = vm_theotokion if vm_theotokion else vo_theotokion
+            matins['m_prokeimenon'] = mm_prokeimenon
+            matins['o_prokeimenon'] = mo_prokeimenon
+        elif mm_prokeimenon or mo_prokeimenon:
+            matins['prokeimenon'] = mm_prokeimenon if mm_prokeimenon else mo_prokeimenon
 
-        #readings from menaion
-        vespers['readings'] = vm.get('readings') if vm else None
+        matins['readings'] = mm.get('readings', None) if mm else None
+        matins['after50'] = mm.get('after50', None) if mm else None
 
-        #determine aposticha
+        mo_ascent = mo.get('ascent', None)
+        mm_ascent = mm.get('ascent', None) if mm else None
         if rank == 8:
-            vespers['m_aposticha'] = vm.get('aposticha', None) if vm else None
-            vespers['o_aposticha'] = vo.get('aposticha', None)
-            #vespers['m_aposticha_theotokion'] = vm.get('aposticha_theotokion', None) if vm else None
-            #vespers['o_aposticha_theotokion'] = vo.get('aposticha_theotokion')
-        else:
-            aposticha = vm.get('aposticha', None)
-            if not aposticha:
-                aposticha = vo.get('aposticha')
-            vespers['aposticha'] = aposticha
+            matins['m_ascent'] = mm_ascent if mm else None
+            matins['o_ascent'] = mo_ascent
+            matins['m_canon'] = mm.get('canon') if mm else None
+            matins['o_canon'] = mo.get('canon')
+        elif mo_ascent or mm_ascent:
+            matins['ascent'] = mm_ascent if mm_ascent else mo_ascent
+            matins['canon'] = mm.get('canon')
+    else:
+        matins['canon'] = mo.get('canon')
 
-            #aposticha theotokion may need to be swapped based on rank...
-            #for now it's just based on presence of menaion or not.
-            aposticha_theotokion = vm.get('aposticha_theotokion')
-            if not aposticha_theotokion:
-                aposticha_theotokion = vo.get('aposticha_theotokion')
-            vespers['aposticha_theotokion'] = aposticha_theotokion
+    #currently using octoechos praises. Need to do work on changing format to stichera to get menaion working.
+    matins['praises'] = mo.get('praises')
 
+    #establish Typika variables
+    liturgy = {}
+    to = octoechos.get('liturgy')
+    tm = menaion.get('liturgy') if menaion else None
 
-        vm_apolytichion = vm.get('apolytichion', None) if vm else None
-        vespers['apolytichion'] = vm_apolytichion if vm_apolytichion else None
+    to_beatitudes = to.get('beatitudes')
+    tm_beatitudes = tm.get('beatitudes') if tm else None
 
-        #Matins
-        matins = {}
-        mo = octoechos.get('matins')
-        mm = menaion.get('matins') if menaion else None
-
-        mm_troparion = mm.get('troparion', None) if mm else None
-        mo_troparion = mo.get('troparion', None)
-        if rank == 8:
-            matins['m_troparion'] = mm_troparion if mm else None
-            matins['o_troparion'] = mo_troparion
-        elif mm_troparion or mo_troparion:
-            matins['troparion'] = mm_troparion if mm_troparion else mo_troparion
-
-        if rank == 8:
-            matins['o_session1'] = mo.get('session1')
-            matins['o_session2'] = mo.get('session2')
-            matins['o_session3'] = mo.get('session3')
-            matins['m_session1'] = mm.get('session1') if mm else None
-            matins['m_session2'] = mm.get('session2') if mm else None
-            matins['m_session3'] = mm.get('session3') if mm else None
-            matins['o_ascent'] = mo.get('ascent')
-            matins['apolytichion'] = mm.get('apolytichion') if mm else None
-            matins['megalynarion'] = mm.get('megalynarion') if mm else None
-        elif service_type == 'Holy Fathers':
-            matins['session1'] = mo.get('session1')
-            matins['session2'] = mo.get('session2')
-            matins['session3'] = mo.get('session3')
-            matins['ascent'] = mo.get('ascent')
-            matins['prokeimenon'] = mo.get('prokeimenon')
-        else:
-            #sessional hymns are taken from the menaion for all ranks. Except Holy Fathers
-            matins['session1'] = mm.get('session1')
-            matins['session2'] = mm.get('session2')
-            matins['session3'] = mm.get('session3')
-            matins['apolytichion'] = mm.get('apolytichion')
-            matins['megalynarion'] = mm.get('megalynarion')
-
-        #aposticha currently only in octoechos, not used rank 4 or higher
-        if rank >= 5: #six verse & afterfeast
-            matins['aposticha'] = mo.get('aposticha')
-
-        matins['exapostilarion'] = mm.get('exapostilarion') if mm else None
-
-        if rank <= 3 or rank == 8: #polyeleos or higher
-            mo_prokeimenon = mo.get('prokeimenon', None)
-            mm_prokeimenon = mm.get('prokeimenon', None) if mm else None
-            if rank == 8:
-                matins['m_prokeimenon'] = mm_prokeimenon
-                matins['o_prokeimenon'] = mo_prokeimenon
-            elif mm_prokeimenon or mo_prokeimenon:
-                matins['prokeimenon'] = mm_prokeimenon if mm_prokeimenon else mo_prokeimenon
-
-            matins['readings'] = mm.get('readings', None) if mm else None
-            matins['after50'] = mm.get('after50', None) if mm else None
-
-            mo_ascent = mo.get('ascent', None)
-            mm_ascent = mm.get('ascent', None) if mm else None
-            if rank == 8:
-                matins['m_ascent'] = mm_ascent if mm else None
-                matins['o_ascent'] = mo_ascent
-                matins['m_canon'] = mm.get('canon') if mm else None
-                matins['o_canon'] = mo.get('canon')
-            elif mo_ascent or mm_ascent:
-                matins['ascent'] = mm_ascent if mm_ascent else mo_ascent
-                matins['canon'] = mm.get('canon')
-        else:
-            matins['canon'] = mo.get('canon')
-
-        #currently using octoechos praises. Need to do work on changing format to stichera to get menaion working.
-        matins['praises'] = mo.get('praises')
-
-        #establish Typika variables
-        liturgy = {}
-        to = octoechos.get('liturgy')
-        tm = menaion.get('liturgy') if menaion else None
-
-        to_beatitudes = to.get('beatitudes')
-        tm_beatitudes = tm.get('beatitudes') if tm else None
-
-        if rank == 8:
-            liturgy['m_beatitudes'] = tm_beatitudes
-            liturgy['o_beatitudes'] = to_beatitudes
-        else:
-            if weekday == 6:
-                beatitudes_needed = 10
-                feast_beatitudes = len(tm_beatitudes)
-                extra_beatitudes = beatitudes_needed - feast_beatitudes
-            elif rank <= 3:
-                beatitudes_needed = 8
-                feast_beatitudes = len(tm_beatitudes)
-                extra_beatitudes = beatitudes_needed - feast_beatitudes
-            elif rank > 6:
-                beatitudes_needed = 6
-                feast_beatitudes = len(tm_beatitudes)
-                extra_beatitudes = beatitudes_needed - feast_beatitudes
-            else: #afterfeast, 3 & 3
-                beatitudes_needed = 6
-                feast_beatitudes = 3
-                extra_beatitudes = 3
-
-            extra_beatitudes = None if extra_beatitudes <= 0 else extra_beatitudes
-            if extra_beatitudes:
-                beatitudes = to_beatitudes[0:extra_beatitudes] + tm_beatitudes[0:feast_beatitudes]
-            else:
-                beatitudes = tm_beatitudes
-            liturgy['beatitudes'] = beatitudes
-
+    if rank == 8:
+        liturgy['m_beatitudes'] = tm_beatitudes
+        liturgy['o_beatitudes'] = to_beatitudes
+    else:
         if weekday == 6:
-            liturgy['resurrection_troparion'] = to.get('resurrection_troparion')
+            beatitudes_needed = 10
+            feast_beatitudes = len(tm_beatitudes)
+            extra_beatitudes = beatitudes_needed - feast_beatitudes
+        elif rank <= 3:
+            beatitudes_needed = 8
+            feast_beatitudes = len(tm_beatitudes)
+            extra_beatitudes = beatitudes_needed - feast_beatitudes
+        elif rank > 6:
+            beatitudes_needed = 6
+            feast_beatitudes = len(tm_beatitudes)
+            extra_beatitudes = beatitudes_needed - feast_beatitudes
+        else: #afterfeast, 3 & 3
+            beatitudes_needed = 6
+            feast_beatitudes = 3
+            extra_beatitudes = 3
 
-        liturgy['troparion'] = tm.get('troparion') if tm else None
-        liturgy['kontakion'] = tm.get('kontakion') if tm else None
-        liturgy['prokeimenon'] = tm.get('prokeimenon') if tm else None
-        liturgy['readings'] = tm.get('readings') if tm else None
+        extra_beatitudes = None if extra_beatitudes <= 0 else extra_beatitudes
+        if extra_beatitudes:
+            beatitudes = to_beatitudes[0:extra_beatitudes] + tm_beatitudes[0:feast_beatitudes]
+        else:
+            beatitudes = tm_beatitudes
+        liturgy['beatitudes'] = beatitudes
 
-        compline = octoechos.get('compline') #no menaion variables
-        nocturns = octoechos.get('nocturns') #no menaion variables
+    if weekday == 6:
+        liturgy['resurrection_troparion'] = to.get('resurrection_troparion')
 
-        variables['vespers'] = vespers
-        variables['compline'] = compline
-        variables['nocturns'] = nocturns
-        variables['matins'] = matins
-        variables['liturgy'] = liturgy
+    liturgy['troparion'] = tm.get('troparion') if tm else None
+    liturgy['kontakion'] = tm.get('kontakion') if tm else None
+    liturgy['prokeimenon'] = tm.get('prokeimenon') if tm else None
+    liturgy['readings'] = tm.get('readings') if tm else None
 
-        return variables
+    compline = octoechos.get('compline') #no menaion variables
+    nocturns = octoechos.get('nocturns') #no menaion variables
+
+    variables['vespers'] = vespers
+    variables['compline'] = compline
+    variables['nocturns'] = nocturns
+    variables['matins'] = matins
+    variables['liturgy'] = liturgy
+
+    return variables
 
 def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, variables_only_flag=None):
     try:
@@ -415,8 +412,6 @@ def generate_day(month=None, day=None, year=None, calendar=1, schedule=None, var
         date_oc = service_date - timedelta(days=13)
         liturgical_day = paschalion(month=month, day=day, year=year)
 
-    print('pascha offset...')
-    print(liturgical_day.get('pascha_offset'))
     tone = liturgical_day.get('weekly_tone')
     weekday = service_date.weekday()
 
