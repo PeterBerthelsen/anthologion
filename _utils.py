@@ -44,10 +44,13 @@ def open_service(service:str, filename:str):
     payload = re.sub(r'((?<![.!?:A-Z])\s*)\n',r'\1',payload)
     return payload #return payload string
 
-def regex_parse(input:str, substitutions:dict):
+def regex_parse(input:str, substitutions:dict, regex_flags=None):
+    if not regex_flags:
+        regex_flags = re.S|re.I
     output = input
     for search, replace in substitutions.items():
-        output = re.sub(search,replace,output,flags=re.S|re.I)
+        output = re.sub(search,replace,output,regex_flags)
+    return output
 
 def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
     """
@@ -125,3 +128,24 @@ def string_search (input_string:str, start_searches:list=[], end_searches:list=[
     #successfully found begin and end, returning processed string.
     output = input_string[begin + len(start_searches[i]):end]
     return [begin, output]
+
+def format_text(input_string:str):
+    '''
+    Takes in plain text copied from online PDF resources
+    Adds formatting, then outputs HTML
+    '''
+
+    replacements_with_case = {
+        r'\n+\s+([^a-z]+)\s*\n': r'</p><h3>\1</h3><p>'
+    }
+
+    replacements_ignore_case = {
+        r':\n': ':<br>'
+        ,r'.*?([a-z]*theotokion.*?:|in tone [vi]+:)': r'</p><p><i>\1</i></p><p>'
+        ,r'\n\s+[*](tone ([vi ]+|[0-9 ]+):)': r'<p><i>\1</i></p>'
+    }
+
+    formatted_string = regex_parse(input_string, replacements_with_case, re.S)
+    formatted_string = regex_parse(formatted_string, replacements_ignore_case)
+
+    return formatted_string
