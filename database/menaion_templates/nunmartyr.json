@@ -1,0 +1,88 @@
+{
+  "saint_class": "NunMartyr",
+  "filename": "NunMartyr.pdf",
+  "total_chars": 34869,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 8,
+          "melody": null,
+          "text": "Spec. Mel.: “What shall we call you ...”: Through abstinence * subduing the bodily passions, * and by thy passion slaying the alien adversary, * O all-praised maiden martyr {saint_name}, * thou hast been a source of astonishment to the angels, * and by thy suffering of pangs for us, * thou hast brought joy to all, * O adornment of ascetics, and vessel of virginity!"
+        },
+        {
+          "order": 2,
+          "tone": 8,
+          "melody": null,
+          "text": "pray thou that our souls be saved. What shall we call thee, * O glorious one, * a bride of Christ made radiant through the beauty of virginity, * an elect daughter of Jerusalem on high, * a co- dweller and friend of the Angels? * Delighting now * in the spiritual palace, * O greatly-suffering adornment of ascetics {saint_name},"
+        },
+        {
+          "order": 3,
+          "tone": 8,
+          "melody": null,
+          "text": "pray thou that our souls be saved. Looking upon the beauty * of the Bridegroom, * O greatly suffering {saint_name}, * thou didst endure the breaking of thy teeth, * the severing of thy hands, feet and breasts, * and being cut in pieces by the lawless tormentors, * thou didst supra- naturally suffer pangs, * O incorrupt bride of Christ,"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone VIII: Which of thy kind deeds do we find most wondrous, * O most pure one? * For we see thee healing the sick, and delivering us from passions, * driving away the godless assaults of our enemies, * soothing the afflicted, * and through thine intercessions saving from misfortunes those who hymn thee. * O Virgin, mediatress, the joy of thy servants, ** pray thou that our souls be saved."
+      },
+      "stavrotheotokion": {
+        "text": "The ewe-lamb, as she beheld the Lamb * stretched out of His own will upon the Tree of the Cross, * cried out maternally, in pain with her weeping: * O my Son, what is this strange sight? * O Longsuffering One, how is it that Thou art slain, * Who, as Lord, bestoweth life upon all, granting resurrection to mortals? ** I glorify Thy great condescension, O my God!"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone II: Let us hymn with gladsome voices and solemn chant, * the venerable martyr {saint_name}, * for she hath vanquished the falshood of idols * and manfully subdued the adversary under her feet, * and after her repose ascended into the heavens, * bearing a crown upon her head, and crying aloud: * “Thee do I love and desire O my Bridegroom, * I have given my body over to torments for Thee, * that I might make my dwelling in the heavens, ** wherein all those who praise Thee abide”."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone II: The shadow of the law hath passed now that grace hath come, * for as the Bush wrapped in flame was not consumed, * so didst thou bear a Child O Virgin * and remained a Virgin; * in place of a pillar of fire, the Sun of righteousness hath dawned, * instead of Moses, Christ is come, ** the salvation of our souls."
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone IV: Spec. Mel.: “Thou hast given a sign ...”: In thy struggles, O all-praised {saint_name}, * thou hast endured a dual suffering, * mixing the sweat of abstinence * with the blood of Martyrdom; * wherefore, O holy one, * having ascended unto the Compassionate one * brightly adorned with unblemished virginity, * and as an invincible martyr, ** He hath bestowed upon thee double-crowns."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Wondrous is God in His saints, * the God of Israel.",
+            "text": "The fairness of thy form * and the beauty of thy divine soul * have been joined together in thee, * shining forth like a pure white lily * in the abodes of the ascetics * and the meadows of martyrdom, * O undefiled bride {saint_name}; * wherefore the divine Bridegroom hath also received thee ** as a virgin and martyr in the everlasting palaces."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "In the Congregations bless ye God, the Lord, * from the wellsprings of Israel.",
+            "text": "From childhood thou wast god-fearing * and presented as an honorable offering to the Almighty, * O all-praised {saint_name}, * wherefore thy guardian angel * protected thee, * assisting thee to trample underfoot * the raging of the tyrant, ** delivering thee to thy Bridegroom Christ."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "of the venerable nun-Martyr. Thy ewe-lamb {saint_name}, O Jesus crieth out with a loud voice: * “Thee do I love, O my Bridegroom, * and, seeking Thee, I endure suffering. * in Thy baptism I am cru- cified and buried with Thee. * I suffer for Thy sake, that I may reign with Thee; * I die for Thee, that I may live with Thee. * Accept me, who with love sacrifice myself for Thee, * as an unblemished offering!” ** By her supplications save Thou our souls, O most merciful One. (Twice)."
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "of the venerable nun-Martyr. Thy ewe-lamb {saint_name}, O Jesus crieth out with a loud voice: * “Thee do I love, O my Bridegroom, * and, seeking Thee, I endure suffering. * in Thy baptism I am cru- cified and buried with Thee. * I suffer for Thy sake, that I may reign with Thee; * I die for Thee, that I may live with Thee. * Accept me, who with love sacrifice myself for Thee, * as an unblemished offering!” ** By her supplications save Thou our souls, O most merciful One. (Twice)."
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "of the venerable nun-martyr, in Tone IV: Spec. Mel.: “Go thou quickly before ...”: Thy divine memory, O {saint_name}, * appeareth like a sun proclaiming thy life to the world, * for having subdued the passions of the flesh with abstinence, * thou hast united thyself to Christ by the blood of martyrdom; * wherefore we implore thee to deliver from every evil circumstance * those who praise thee, that we may cry unto thee: ** Rejoice, O venerable mother {saint_name}."
+      },
+      "ikos": {
+        "text": "Standing now before God, O most glorious venerable martyr, by thy God- pleasing entreaties open my lips, that I may praise thy divine life, O most-blessed one, and worthily depict thy sufferings which for the sake of thy fervent love, thou hast endured on earth. By thy faith thou didst ever pursue vigilance and abstinence, and loving purity, wast revealed to be an invincible maiden martyr; wherefore deliver us who praise thee from every evil circumstance, that we may cry out to thee: “Rejoice, O venerable mother”."
+      },
+      "exapostilarion": {
+        "text": "Like a river thou dost pour forth healing * unto those who in faith have recourse * unto thy honored shrine, O god-seeing {saint_name}, * thou vessel of virginity, and flower of great beauty, * as a daughter of the King, thou dost intimately take delight ** in the blessedness of the divine glory."
+      }
+    }
+  }
+}

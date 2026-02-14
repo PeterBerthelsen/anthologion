@@ -1,0 +1,88 @@
+{
+  "saint_class": "Martyrs",
+  "filename": "Martyrs.pdf",
+  "total_chars": 32793,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 4,
+          "melody": null,
+          "text": "Spec. Mel.: “As one valiant among the martyrs ...”: Enlightened by the Holy Spirit, * O most praiseworthy ones, * ye have taken up the fight against the prince of this world * and with God’s help * ye obtained victory over his snares; * wherefore celebrating today * your most radiant memory, * with praises"
+        },
+        {
+          "order": 2,
+          "tone": 4,
+          "melody": null,
+          "text": "we honor your pangs as is meet. Given over to wounds and tortures, * O holy ones, * ye remained staunch in your wise confession. * like candles enkindled with spiritual warmth, * ye ignite the hearts of the faithful with grace; * wherefore people * of every rank and age * keep the feast of your memorial,"
+        },
+        {
+          "order": 3,
+          "tone": 4,
+          "melody": null,
+          "text": "glorifying the Lord in hymns. With the splendor of your miracles * O Martyrs, * ye enlighten the whole of creation. * O valiant sufferers for the Savior * driving away the fog of passions and afflictions * from those who have recourse unto you * and who in faith seek your protection; * wherefore in faith"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone IV: Have compassion upon me, O Lady, * who am brought low by the assaults of the demons, * and have been cast down into the pit of destruction; * and set me firmly upon the rock of the virtues, * subduing the attacks of the enemy. * Vouchsafe that I may obey the commandments * of thy Son and our God, * that I may receive forgiveness ** on the Day of Judgment."
+      },
+      "stavrotheotokion": {
+        "text": "Seeing Christ, the Lover of mankind, * crucified and with His side pierced with a lance, * the most pure one lamented, crying aloud: * “What is this, O my Son ? * What have the ungrateful people rendered unto Thee * in return for all the good things Thou hast rendered unto them ?” * And yet thou dost show thy tender compassion for me, * that I may endure my childlessness. ** I stand in awe, O Compassionate One, at Thy voluntary crucifixion."
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone III: Behold O Christ God! * how good and beautiful is the brotherly love * that the martyrs have for each another. * For although not brethren by blood * the faith hath taught them to be like brothers * even unto the spilling of their blood; ** by their intercessions, O Christ God, save our souls."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone III: How can we, O all-honored one, * not marvel at thine Offspring? * who is both God and man. * For without knowing a man, O all-immaculate One, * without a father thou hast given birth to a Son in the flesh, * who without a mother was begotten from the Father before all ages, * yet in no way undergoing change, fusion or separation, * but preserving fully the characteristics of both natures. * Wherefore, O Sovereign Lady, and Virgin Mother, * beseech Him to save the souls of those ** who with Orthodox faith confess thee to be the true Theotokos."
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone IV: Spec. Mel.: “As one valiant among the martyrs ...”: O all-famed Martyrs, * resplendent as stars * ye illumine with divine effulgence * all the ends of the earth, * delivering all from the gloom of the demons, * and from pernicious passions and misfortunes; * wherefore gathered together today * we praise your bright, and radiant, ** and holy commemoration."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "The righteous cried, and the Lord heard them, * and He delivered them out of all their tribulations.",
+            "text": "Let the wondrous, divine and most wise Martyrs * be honored with sacred odes; * for with the spilling of their blood * they have rightly confessed * the uncreated Trinity * before their enemies, * thereby extinguishing the falsehood of paganism ** and thus received never fading glory."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Many are the tribulations of the righteous, * and the Lord shall deliver them out of them all.",
+            "text": "The lawless tyrant, unlawfully commanded you, * O blessed and greatly renowned martyrs, * to bow down before, and worship, * the dumb and soulless idols, * but with your wisdom, ye have put him to shame * and having patiently suffered, * ye have lawfully weaved for yourselves * crowns of victory, ** and now ceaselessly intercede for the whole world."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone I: We beseech Thee O Lord for the sake of the sufferings of Thy saints * which they endured on Thy behalf, * be compassionate unto us, ** and heal all or infirmities, O Lover of mankind. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone I: We beseech Thee O Lord for the sake of the sufferings of Thy saints * which they endured on Thy behalf, * be compassionate unto us, ** and heal all or infirmities, O Lover of mankind. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion of the martyrs, in Tone VIII: Spec. Mel.: “Seeking the highest ...”: O divine Martyrs, ye have appeared as bright beacons, * illumining the whole of creation with the radiance of your miracles, * unceasingly entreat Christ God on behalf of us all, * that we be released from our infirmities, ** and expel from us the profound darkness of ignorance. The"
+      },
+      "ikos": {
+        "text": "O beauteous choir of martyrs, brightly shining and divine beacons, ever standing before the supreme Light on high, illumined and deified by the rays proceeding from the never-waning Godhead! enlighten us who with faith celebrate your divine memory, O divinely blessed Martyrs, and pray unceasingly for us all, that we be delivered from the darkness of the passions, and from all misfortunes and malice of the enemy."
+      },
+      "exapostilarion": {
+        "text": "O passion-bearers you have been taken up * into the radiant habitations of paradise, * and vested therein in bright garments * woven by your multifarious tortures, * ye now stand before the throne of the Creator of all, * unceasingly making entreaty for us all."
+      }
+    }
+  }
+}

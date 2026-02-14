@@ -1,0 +1,91 @@
+{
+  "saint_class": "Apostles",
+  "filename": "Apostles.pdf",
+  "total_chars": 34040,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 4,
+          "melody": null,
+          "text": "Spec. Mel.: “As one valiant among the martyrs ...”: As eyewitnesses and ones who testified * of the incarnation of the Word, * O truly favored disciples, Ye are indeed blessed. * For like brilliant flashes of lightning you appeared to the world, * and like noetic mountains * dripping with sweet dew you nourished the faithful; * and like an assembly of eternally-flowing rivers of paradise * you gave unto the Churches of the Gentiles"
+        },
+        {
+          "order": 2,
+          "tone": 4,
+          "melody": null,
+          "text": "divine waters to drink. Like rays resplendent with the effulgence of the Spirit, * you were sent into the whole world * and wrought therein * an abundance of miracles, * showing yourselves to be ministers of the mysteries of Christ * and godly-written tablets of divine grace * inscribed by God * with the law taught by God,"
+        },
+        {
+          "order": 3,
+          "tone": 4,
+          "melody": null,
+          "text": "O ye sacred initiates. The rods of the fishermen * troubled the arrogant philosophers * and put in place the eloquent orators. * For clearly expounding in the gospels * the teachings of Divine wisdom * and the doctrines of grace, * you taught all the beneficial mystery * of participation in eternal delight,"
+        },
+        {
+          "order": 4,
+          "tone": 4,
+          "melody": null,
+          "text": "which is the never-waning glory and delight of the Angels."
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone IV: Rejoice luminous star that hath given birth to the never-setting Sun, * the Daystar that mystically shineth forth; * Rejoice, mind that hath flashed forth the divine light; * Rejoice, O tender ray of most immaculate and resplendent golden light * illumining the ends of the earth, * and revealing unto the faithful * the never-waning uncreated Light."
+      },
+      "stavrotheotokion": {
+        "text": "The most pure one, * beholding Christ, the lover of mankind, crucified, * His side pierced by a lance, * cried out, lamenting: * “What is this, O my Son? * How have these thankless people rewarded Thee * for the good things Thou hast done for them? * Dost Thou hasten to leave me childless, O most Beloved? ** I marvel, O Compassionate One, at Thy voluntary crucifixion!” If an Idiomelion be appointed:"
+      },
+      "idiomelon": null,
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VIII: In His love for mankind, the King of heaven appeared on earth * and dwelt among men; * for He Who received flesh from the pure Virgin * and cameth forth from her having received human nature, * is the only Son of God, * twofold in nature but not Hypostasis. * Therefore, proclaiming Him to be truly perfect God and perfect man, * we confess Christ our God. * Him do thou beseech, O unwedded Mother, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone VI: Spec. Mel.: “On the third day ...”: O ye disciples of Christ, * theologians and seers of God, * ye were shown to be ministers * of the great mysteries of God, * and having received the grace of healing, ** ye cure the infirmities of all mankind."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Their sound hath gone forth into all the earth * and their words unto the ends of the world.",
+            "text": "Ye are great refuges * and shelters for our souls, * and vanquishers of evil spirits, * O Apostles of the Lord * and God-seers; ** wherefore we ever honor you."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "The heavens declare the glory of God, * and the firmament proclaimeth the work of His hands.",
+            "text": "O ye, blessed Apostles of God, * deliver from every attack * and all machinations of the demons, * and from transgressions * and captivity to the evil one, ** all of those who in faith praise you."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone III: O holy Apostles * entreat the Merciful God * that He grant remission of sins ** unto our souls. (Twice)."
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone III: O holy Apostles * entreat the Merciful God * that He grant remission of sins ** unto our souls. (Twice)."
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion, in Tone IV: O wise Apostles, * appearing as branches on the vine of Christ, * bearing great clusters of virtues * and making the wine of salvation flow forth unto us; * partaking of which we are filled with gladness, * and celebrate your honored memory; * wherefore, O Apostles of the Lord, intercede before Christ our God * that we may be granted great mercy * and the remission of our sins. The"
+      },
+      "ikos": {
+        "text": "O god-seers, as disciples of the Master of all, with the net of your prayers snatch my humble soul from the abyss of transgressions, for it hath been ensnared in the nets of the demons. And grant that, passing the rest of my life in well- doing, I may hymn you with love and glorify the unblemished lives you led on earth, for ye Apostles of the Lord have enlightened those in darkness and taught them to honor the Divine Trinity."
+      },
+      "exapostilarion": {
+        "text": "O come, all ye people! * Let us hymn in divine odes * the Apostles of Christ, * the preachers of faith, ** as those who pray to Christ for our souls."
+      }
+    }
+  }
+}

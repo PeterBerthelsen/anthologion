@@ -1,0 +1,88 @@
+{
+  "saint_class": "MonasticMartyrs",
+  "filename": "MonasticMartyrs.pdf",
+  "total_chars": 34081,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 8,
+          "melody": null,
+          "text": "Spec. Mel.: “What shall we call you ...”: Having valiantly fought the good fight, * O venerable fathers, * manfully enduring the assaults of tyrants, * you gave up your souls to the sword * and put on crowns of martyrdom * and now with love worthily exult together with the Angels. * Great was your endurance * and still greater your spiritual gifts,"
+        },
+        {
+          "order": 2,
+          "tone": 8,
+          "melody": null,
+          "text": "ever intercede that our souls may be saved. You lived god-pleasing lives, O holy ones, * valiantly emulating the deeds of the martyrs, * for having sanctified your bodies by fasting * you manfully scorned torments, * and shed your blood with love, * that together you might put on the crowns of your sufferings;"
+        },
+        {
+          "order": 3,
+          "tone": 8,
+          "melody": null,
+          "text": "ever intercede that our souls be saved. O venerable martyrs of Christ! * You have struggled valiantly, * utterly disregarding temporal life * and manfully overcoming fleshly wisdom, * you willingly finished your course in martyrdom for Christ, * wherefore you have been found worthy to make your abodes with the angels; * we who lovingly honor your sacred memory * implore you to entreat the Lord"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone VIII: Whom hast thou emulated, O wretched soul, * who in no wise dost rouse thyself to repentance * nor fearest the fire which awaiteth the wicked? * Arise, and cry aloud, * calling upon her who alone is quick to help: * O Virgin Mother, * entreat thy Son and our God, ** to deliver me from the snares of the deceiver!"
+      },
+      "stavrotheotokion": {
+        "text": "The ewe-lamb, as she beheld the Lamb * stretched out of His own will upon the Tree of the Cross, * cried out maternally, in pain with her weeping: * O my Son, what is this strange sight? * O Longsuffering One, how is it that Thou art slain, * Who, as Lord, bestoweth life upon all, granting resurrection to mortals? ** I glorify Thy great condescension, O my God!"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VIII: Having lived angelic lives laboring in fasting, * and by abstinence subjecting your bodies to the spirit, * ye were revealed to be true laborers in the vineyards of the Lord, * fulfilling His commandments * and preserving the beauty of the original image within yourselves * accomplishing great feats of fasting * and suffering the pangs of martyrdom, * wherefore ye have been adorned with double crowns, ** fervently entreat the Savior that our souls be saved."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VIII: In His love for mankind, the King of heaven appeared on earth * and dwelt among men; * for He Who received flesh from the pure Virgin * and cameth forth from her having received human nature, * is the only Son of God, * twofold in nature but not Hypostasis. * Therefore, proclaiming Him to be truly perfect God and perfect man, * we confess Christ our God. * Him do thou beseech, O unwedded Mother, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone VIII: Spec. Mel.: “Thy Martyrs, O Lord ...”: O Lord, Thy venerable martyrs, * emulating the bodiless ones in prayer * and by abstinence * subduing the passions of the flesh, * shining forth with miraculous deeds, * they have enlightened the hearts of all the faithful; ** by their intercessions, grant unto Thy people, great mercy."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Precious in the sight of the Lord * is the death of His saints.",
+            "text": "O venerable Martyrs! * Animated with virtuous zeal, * ye have shattered the heresies of Arius and Nestorius, * and as champions of Orthodoxy, * ye have became renown among all peoples; * by their intercessions, O Christ, ** grant unto Thy people great mercy."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Blessed is the man that feareth the Lord, * in His commandments shall he greatly delight.",
+            "text": "O venerable martyrs, * like stars shining in the firmament of abstinence, * ye have illumined the souls of ascetics, * driving away legions of demons; * wherefore after your repose we ever bless you, * for you intercede on behalf of us who celebrate your holy memory, ** that our souls be saved."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion, in Tone II: Spec. Mel.: “Seeking the highest ...”: Passing unharmed through a multitude of tempests, * and having received the gift of miracles, * ye drowned the immaterial enemies with the streams of your tears, * O divinely-wise venerable-martyrs, * wherefore having received the gift of miracles, ** cease not to pray for us all."
+      },
+      "ikos": {
+        "text": "O venerable-martyrs! in your ascetic endeavors, and yet again in your sufferings, you have mortified your flesh on earth with a life-bearing death, emulating the passion of Christ God; wherefore Christ hath crowned you with double crowns and prepared eternal abodes for you in the heavens. Having joyfully entered therein, rewarded as both martyrs and venerable fathers, unceasingly intercede on behalf of us all."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “By the Spirit in the sanctuary ...”: With the struggles of asceticism * ye have utterly vanquished the serpent, the origin of evil, * and upon your repose ye have obtained crowns of martyrdom, * O adornment of the fathers, and glory of the martyrs, * assembly of venerable-martyrs, and most wondrous fathers."
+      }
+    }
+  }
+}

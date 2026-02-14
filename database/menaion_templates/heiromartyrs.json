@@ -1,0 +1,88 @@
+{
+  "saint_class": "Heiromartyrs",
+  "filename": "Heiromartyrs.pdf",
+  "total_chars": 33822,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 1,
+          "melody": null,
+          "text": "Spec. Mel.: “O all-praised martyrs ...”: In truth brightly adorning your Hierarchical vestments * with the blood of Martyrdom, * you presented yourselves unto the Creator * together with the Angels, * radiantly illumined * in both soul and body, * Entreat Him O ye glorious saints, * to grant peace and great mercy"
+        },
+        {
+          "order": 2,
+          "tone": 1,
+          "melody": null,
+          "text": "unto our souls. You have been revealed to us * as truly God-inspired vessels; * proclaiming the unspeakable mysteries of God * hidden in the divine scriptures, * thereby confirming the foolishness * of idol-worship, * whereby you brought all unto Christ; * entreat Him to grant peace and great mercy"
+        },
+        {
+          "order": 3,
+          "tone": 1,
+          "melody": null,
+          "text": "unto our souls. With the word of God’s understanding, * O most wise ones, * ye have delivered thy flock from ignorance, * and having saved them, * ye brought them unto Christ the Word * Who hath shone forth, * begotten of the Father our God; * Entreat Him to grant peace and great mercy"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone I: O all-hymned Virgin, * in whom Moses beheld a mystery with prophetic eyes * the bush that burned yet remained unconsumed; * for the fire of the Godhead did not burn thy womb, O pure one. * Wherefore, we beseech thee, as the Mother of our God: ** beg thou peace and great mercy for the world"
+      },
+      "stavrotheotokion": {
+        "text": "Standing before the Cross of thy Son and God, * and beholding His long-suffering, O pure Mother, * thou didst say, weeping: * “Woe is me, O my most sweet Child! * How is it that Thou dost unjustly suffer, O Word of God, ** that Thou mightest save mankind?”"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VIII: Ye have passed from this temporal world, * O godly called Hierarchs, * after enduring the most severe beatings, * being cut asunder and even crucified * for the sake of Christ, * but neither fire, nor wounds, nor instruments of torture, * could weaken the resolve of your souls, * wherefore having trampled underfoot the might of demons, * O glorious Hieromartyrs; ** we beseech you to pray Christ God that He save our souls."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VIII: In His love for mankind, the King of heaven appeared on earth * and dwelt among men; * for He Who received flesh from the pure Virgin * and cameth forth from her having received human nature, * is the only Son of God, * twofold in nature but not Hypostasis. * Therefore, proclaiming Him to be truly perfect God and perfect man, * we confess Christ our God. * Him do thou beseech, O unwedded Mother, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone IV: Spec. Mel.: “As one valiant among the martyrs ...,” Like most luminous stars * spiritually illumining * the firmament of the Church, * ye illumine all of creation, * driving away the power of darkness * by the radiant effulgence of your miracles, * wherefore we rejoice today * celebrating your radiant and holy memory, ** O glorious Hieromartyrs."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Thy priests be clothed with righteousness * and Thy righteous shall rejoice.",
+            "text": "Ye have appeared unto all to be equal in honor with the Apostles * O holy Hierarchs, * and with equally zealous minds, * you were unafraid of the godlessness of the inhuman tyrants, * but valiantly and earnestly preaching * the word of the Savior, * ye endured a multitude of sufferings; * for which ye now enjoy the blessings of future rewards, ** O most wise ones."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Blessed is the man that feareth the Lord, * in His commandments shall he greatly delight.",
+            "text": "Completing thine honored service * unto Christ the Master, * ye offered yourselves as a blameless sacrifice, * like a whole burnt and perfect offering * in your Martyrdom * O sacred and blessed Hierarchs; * pray Him to deliver from corruption and dangers * those who with faith and love ** celebrate your honored memory."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; if there be none, chant the following, Kontakion In Tone III: Spec. Mel.: “Today the Virgin ...”: We who have assembled today, * praise you in song as never-waning lights of the noetic Sun; * for having shone forth unto those in the darkness of ignorance, * ye called all to the heights of piety, * O holy Hieromartyrs. * Wherefore we cry unto you: ** Rejoice, O ye foundations of those who fast. The"
+      },
+      "ikos": {
+        "text": "Pour forth unto me thine uncreated grace, O Jesus the giver of life, that I may worthily hymn Thy Hierarchs who strove to emulate Thee, even unto death, mightily overcoming the forces of the enemy, and by power of Thy Cross, exposing the wickedness of the impious; wherefore they have been deemed worthy to be glorified by Thee, O Christ, and we cry unto them: Rejoice, O ye foundations of all those who fast."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “Hearken, O ye women ...”: This day hath been revealed as a special day set aside for us, * for it is a day in which we celebrate the solemn memory of the sacred successors of the holy Apostles * who are both God-bearing teachers of the faith * and invincible Martyrs. (Twice)"
+      }
+    }
+  }
+}
