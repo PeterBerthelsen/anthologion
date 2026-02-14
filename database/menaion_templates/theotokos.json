@@ -1,0 +1,86 @@
+{
+  "saint_class": "Theotokos",
+  "filename": "Theotokos.pdf",
+  "total_chars": 35553,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 4,
+          "melody": null,
+          "text": "Spec. Mel.: “Thou hast given a sign ...”: In a divine manner thou dost preserve and shelter * from all attacks of the enemy * those who with love celebrate Thy most glorious {saint_name} * and who cry unto thee: * Thou art our strength and confirmation * and thy Son and our God is our most comely joy, * Whom adoring we cry aloud saying:"
+        },
+        {
+          "order": 2,
+          "tone": 4,
+          "melody": null,
+          "text": "O Jesus, Thou all-powerful One, save our souls for Thou art compassionate! Having assembled today in godly manner, * we praise thee O Theotokos! * O most holy Virgin, * many are thy splendors and without end are thy wonders, * for thou art the holy protection, and praise, * the glory and source of all healing * to those who celebrate thy holy {saint_name}; * wherefore praying we cry to Thee:"
+        },
+        {
+          "order": 3,
+          "tone": 4,
+          "melody": null,
+          "text": "O Jesus, Thou all powerful One, save our souls for Thou art compassionate! As thou art One who is feared by our enemies * and cannot be vanquished, O most holy one, * by thine honorable supplications shelter and preserve us, * and grant unto those who solemnly * celebrate thy {saint_name}, * to call upon thy Son and say:"
+        },
+        {
+          "order": 4,
+          "tone": 4,
+          "melody": null,
+          "text": "O Jesus, Thou all-powerful One, save our souls for Thou art compassionate!"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "We shall never cease, unworthy though we be, * to proclaim thy might, O Theotokos; * for if thou didst not intercede on our behalf, * who would have delivered us from so many dangers? * who would have preserved us free till now? * we shall never turn away from thee, ** for thou dost ever preserve thy servants from all manner of evil. The Dismissal:"
+      },
+      "stavrotheotokion": null,
+      "idiomelon": null,
+      "dogmatic_theotokion": null,
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "Come, all ye from the ends of the earth, * and let us glorify the honorable {saint_name} of the Mother of God, * for lifting her hands up to her Son she prayeth on our behalf. * Therefore with psalms, hymns and spiritual odes, let us joyfully celebrate with all the saints, * for by her holy {saint_name} ** renewel of life hath been granted unto all the world."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "The Virgins that follow after her shall be brought unto the King, * those near her shall be brought unto Thee.",
+            "text": "Greatly hath God adorned thee with beauty * since in the midst of mankind He placed the true Light in thine arms. * We beseech thee, the hope of Christians, * the help of those afflicted with needs and sorrows, * thou who art a haven for those laboring in the abyss, * and who art ever in His light, * entreat Him that those who with love hymn thine all-honored {saint_name} ** be delivered from all afflictions."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Hearken, O daughter, and see * and incline thine ear.",
+            "text": "Thine all-honored {saint_name}, O most holy and pure Virgin, * art glorified both by Angels in the heavens * and by the race of mankind here on earth. * For thou, art the Mother of Christ God the Creator of all. We beseech thee, never cease to entreat Him on our behalf; * for next to God, we have placed our trust in thee, ** O Theotokos, thou most exalted One who knewest not wedlock."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope! (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope! (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "Kontakion, in Tone I: O Thou who, beyond all telling and understanding, * didst become the honored dwelling-place of the ineffable divine nature, * entreat thy Son that we obtain mercy in the day of judgment. * For thou art the Mother of the King of all, * the surety of sinners, ** and the granter of divine grace and spiritual healing. Another Kontakion, in Tone VI: We have no other help, we have no other hope but thee, * O pure Mother of God; * help us! for in thee do we hope, * and of thee do we boast; * for we are thy servants, ** let us not then be put to shame."
+      },
+      "ikos": {
+        "text": "Let us lovingly cry unto the Theotokos: Rejoice, mother of the never-setting Star! Rejoice, dawn of the mystic Day! Rejoice, thou who didst extinguish the furnace of error! Rejoice, thou who didst enlighten the initiates of the Trinity! Rejoice, thou who didst banish from power the inhuman tyrant! Rejoice, thou who hast shown us Christ as the Lord and Lover of mankind! Rejoice, thou who redeemest from pagan worship! Rejoice, thou who dost drag from the mire of works! Rejoice, thou who hast stopped the worship of fire! Rejoice, thou who hast quenched the flame of the passions! Rejoice, guide of the faithful to chastity! Rejoice, joy of all generations! Do thou entreat, O most pure one, thy Son and our God that we obtain mercy in the day of judgment."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “Hearken ye women ...”: Rejoice O Eve! and be renewed O Adam, * all ye prophets together with the apostles and martyrs, * all ye ascetics and hierarchs, rejoice and be glad; * for the divine {saint_name} of the most pure Theotokos Mary * hath been revealed to be a source of joy and gladness * unto the angels and mankind. (Thrice)"
+      }
+    }
+  }
+}
