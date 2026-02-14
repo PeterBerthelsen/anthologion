@@ -1,269 +1,795 @@
 {
-  "Heirarch": {
-    "saint_class": "Heirarch",
-    "filename": "Heirarch.pdf",
-    "total_chars": 36585,
-    "services": {
-      "vespers": {
-        "stichera_lord_i_cried": [
-          {
-            "order": 1,
-            "tone": 6,
-            "melody": null,
-            "text": "Spec. Mel.: “Having set aside ...”: Thou wast revealed as wholly consecrated and God-bearing, * vested with the Holy Spirit * and anointed with the holy chrism of God; * serenely ever approaching the holy of holies, * illumined with the splendor proceeding from God, * and initiated into the holy mysteries by grace, * as a true and most glorious Hierarch, * with boldness thou dost make entreaty"
-          },
-          {
-            "order": 2,
-            "tone": 6,
-            "melody": null,
-            "text": "for our souls. Thy life became resplendent with the radiance of the virtues, * and hath illumined the faithful, * and dispersed the foggy mist of error, * for thou O most blessed Hierarch {saint_name} * didst truly appear as a radiant sun; * and now having become, by the grace of the Holy Spirit, * a son of the day, * thou hast made thine abode wherein the Never-waning Light doth shine; * wherefore, honorably celebrating thy divine and radiant memory,"
-          },
-          {
-            "order": 3,
-            "tone": 6,
-            "melody": null,
-            "text": "we venerate thee with love, O ever-memorable one. Thy mind, O Divinely-wise one, inclined unto God * and nourished by faith, * hath become radiantly divine * O all-glorious one, * in a mortal and corrupt body contemplating incorruption; * O most wise one, * thou hast acquired the splendor of the incorporeal ones, * and remaining passionless thou art adorned with dispassion, * O Father {saint_name}, most wise Hierarch,"
-          },
-          {
-            "order": 4,
-            "tone": 6,
-            "melody": null,
-            "text": "radiant light and intercessor for those who with faith honor thy memory."
-          }
-        ],
-        "theotokion": {
-          "tone": null,
-          "text": "Rejoice, thou fulfillment of the law! * Rejoice, O temple of the Holy Trinity, * thou incorrupt Bride! * Rejoice, divine chariot of the King of all! * Rejoice, thou who like tongs * bore the Ember of immaterial fire in thine arms, * O new paradise, * garden enclosed, * divine and most radiant table, * undefiled dove, * throne of the Most High, * noetic bed of God, ** whom the Holy Spirit covered, O Maiden!"
-        },
-        "stavrotheotokion": {
-          "text": "When, of old, the unblemished ewe-lamb and immaculate Lady, * beheld her Lamb * upon the tree of the Cross, * she exclaimed maternally, and marveling cried aloud: * “O my Child most sweet, * what is this new and most strange sight I see? * How hath the thankless synagogue * betrayed Thee to the judg- ment-seat of Pilate * and condemned Thee to death, * Who art the Life of all? * Yet I hymn Thine ineffable condescension, ** O Word!”"
-        },
-        "idiomelon": {
-          "tone": null,
-          "text": "The fruits of thy virtues, * O venerable Father, * hath enlightened the hearts of the faithful; * for upon hearing of thine immeasurable humility * who could not but wonder at thy patience, * at thy gentle kindness towards the poor and needy, * at thy consolation of the sorrowing? * For in a Godly manner thou hast instructed all, * O Hierarch {saint_name}, * and now adorned with a never-fading crown; ** intercede for our souls."
-        },
-        "dogmatic_theotokion": {
-          "tone": null,
-          "text": "In His love for mankind, the King of heaven appeared on earth * and dwelt among men; * for He Who received flesh from the pure Virgin * and cameth forth from her having received human nature, * is the only Son of God, * twofold in nature but not Hypostasis. * Therefore, proclaiming Him to be truly perfect God and perfect man, * we confess Christ our God. * Him do thou beseech, O unwedded Mother, ** that our souls find mercy!"
-        },
-        "aposticha": {
-          "stichera": [
+  "description": "Menaion service templates for saint classes",
+  "version": "1.0",
+  "templates": {
+    "heirarch": {
+      "saint_class": "Heirarch",
+      "title": "The General Vigil Service to One Hierarch",
+      "services": {
+        "vespers": {
+          "stichera_lord_i_cried": [
             {
-              "order": 1,
-              "tone": null,
-              "verse": null,
-              "text": "O Hierarch {saint_name}, * radiance of the noetic light, * lamp of the Church, and adornment of Hierarchs, * true rule of the monastic life of fasting, * thou hast appeared as a defender of the faith ** delivering our souls from the destructive wiles of the enemy."
+              "tone": 6,
+              "melody": "Having set aside...",
+              "text": "Thou wast revealed as wholly consecrated and God-bearing, * vested with the Holy Spirit * and anointed with the holy chrism of God; * serenely ever approaching the holy of holies, * illumined with the splendor proceeding from God, * and initiated into the holy mysteries by grace, * as a true and most glorious Hierarch, * with boldness thou dost make entreaty ** for our souls."
             },
             {
-              "order": 2,
-              "tone": null,
-              "verse": "Precious in the sight of the Lord * is the death of His saints.",
-              "text": "O Hierarch {saint_name}, * having received from God great might, * by thy prayer thou dost expel the attacks of a multitude of evil spirits, ** from all those who with faith have recourse unto thee."
+              "tone": 6,
+              "melody": "Having set aside...",
+              "text": "Thy life became resplendent with the radiance of the virtues, * and hath illumined the faithful, * and dispersed the foggy mist of error, * for thou O most blessed Hierarch {saint_name} * didst truly appear as a radiant sun; * and now having become, by the grace of the Holy Spirit, * a son of the day, * thou hast made thine abode wherein the Never-waning Light doth shine; * wherefore, honorably celebrating thy divine and radiant memory, ** we venerate thee with love, O ever-memorable one."
             },
             {
-              "order": 3,
-              "tone": null,
-              "verse": "What shall I render unto the Lord * for all that he hath rendered unto me? How can we worthily hymn the great Hierarch {saint_name}, * the venerable mind, * the Godly-illumined light that doth enlighten and grant us divine understanding, * the confessor of profound mysteries.",
-              "text": "* Let us with one voice say: ** Rejoice O holy Hierarch {saint_name}, Father of our Fathers."
+              "tone": 6,
+              "melody": "Having set aside...",
+              "text": "Thy mind, O Divinely-wise one, inclined unto God * and nourished by faith, * hath become radiantly divine * O all-glorious one, * in a mortal and corrupt body contemplating incorruption; * O most wise one, * thou hast acquired the splendor of the incorporeal ones, * and remaining passionless thou art adorned with dispassion, * O Father {saint_name}, most wise Hierarch, ** radiant light and intercessor for those who with faith honor thy memory."
             }
           ],
-          "theotokion": null,
-          "stavrotheotokion": null
+          "theotokion": {
+            "tone": 6,
+            "text": "Rejoice, thou fulfillment of the law! * Rejoice, O temple of the Holy Trinity, * thou incorrupt Bride! * Rejoice, divine chariot of the King of all! * Rejoice, thou who like tongs * bore the Ember of immaterial fire in thine arms, * O new paradise, * garden enclosed, * divine and most radiant table, * undefiled dove, * throne of the Most High, * noetic bed of God, ** whom the Holy Spirit covered, O Maiden!"
+          },
+          "stavrotheotokion": {
+            "text": "When, of old, the unblemished ewe-lamb and immaculate Lady, * beheld her Lamb * upon the tree of the Cross, * she exclaimed maternally, and marveling cried aloud: * \"O my Child most sweet, * what is this new and most strange sight I see? * How hath the thankless synagogue * betrayed Thee to the judgment-seat of Pilate * and condemned Thee to death, * Who art the Life of all? * Yet I hymn Thine ineffable condescension, ** O Word!\""
+          },
+          "idiomelon": {
+            "tone": 8,
+            "rubric": "If an Idiomelon be appointed, Glory..., In Tone VIII",
+            "text": "The fruits of thy virtues, * O venerable Father, * hath enlightened the hearts of the faithful; * for upon hearing of thine immeasurable humility * who could not but wonder at thy patience, * at thy gentle kindness towards the poor and needy, * at thy consolation of the sorrowing? * For in a Godly manner thou hast instructed all, * O Hierarch {saint_name}, * and now adorned with a never-fading crown; ** intercede for our souls."
+          },
+          "dogmatic_theotokion": {
+            "tone": 8,
+            "rubric": "If the Celebration be with a Polyeleos, and not a Resurrection Service, sing the following Dogmatic, in Tone VIII (If the service is a Resurrection service sing the Dogmatic of the Tone for that service)",
+            "text": "In His love for mankind, the King of heaven appeared on earth * and dwelt among men; * for He Who received flesh from the pure Virgin * and cameth forth from her having received human nature, * is the only Son of God, * twofold in nature but not Hypostasis. * Therefore, proclaiming Him to be truly perfect God and perfect man, * we confess Christ our God. * Him do thou beseech, O unwedded Mother, ** that our souls find mercy!"
+          },
+          "aposticha": {
+            "stichera": [
+              {
+                "tone": 8,
+                "text": "O Hierarch {saint_name}, * radiance of the noetic light, * lamp of the Church, and adornment of Hierarchs, * true rule of the monastic life of fasting, * thou hast appeared as a defender of the faith ** delivering our souls from the destructive wiles of the enemy."
+              },
+              {
+                "tone": 8,
+                "verse": "Precious in the sight of the Lord * is the death of His saints.",
+                "text": "O Hierarch {saint_name}, * having received from God great might, * by thy prayer thou dost expel the attacks of a multitude of evil spirits, ** from all those who with faith have recourse unto thee."
+              },
+              {
+                "tone": 8,
+                "verse": "What shall I render unto the Lord * for all that he hath rendered unto me?",
+                "text": "How can we worthily hymn the great Hierarch {saint_name}, * the venerable mind, * the Godly-illumined light that doth enlighten and grant us divine understanding, * the confessor of profound mysteries. * Let us with one voice say: ** Rejoice O holy Hierarch {saint_name}, Father of our Fathers."
+              }
+            ],
+            "doxastikon": {
+              "tone": 8,
+              "text": "Thou art a good shepherd and a fervent teacher, * O Hierarch {saint_name}, * and ever praising thee we cry aloud: * God hath made thee an adornment of His Church * and unto His people revealed thine incorrupt body * which for many years remained hidden in the earth. * Wherefore cease not to make supplication unto Him on behalf of those * who praise thee and honor thy memory, * that by thy supplications we may obtain the remission of our sins ** and the salvation of our souls."
+            },
+            "theotokion": {
+              "tone": 8,
+              "rubric": "If the celebration be with a Polyeleos, chant the Resurrection Theotokion",
+              "text": "O unwedded Virgin! * thou who ineffably conceived God in the flesh, * Mother of God Most High: * accept the supplications of thy servants, O all-immaculate one, * granting unto all cleansing of transgressions; * and, accepting now our supplications, ** pray thou that we all be saved."
+            },
+            "theotokion_alternate": {
+              "rubric": "Otherwise, Theotokion",
+              "text": "O Sovereign lady, * accept the supplications of thy servants, ** and deliver us from all want and grief."
+            },
+            "stavrotheotokion": {
+              "text": "Beholding Thee O Lord Jesus, * nailed upon the cross and voluntarily accepting the passion, * the Virgin Mother cried aloud: * Woe is me, O my sweet Child! * how dost Thou wrongfully endure such wounds? * O compassionate Physician and healer of the infirmities of mankind, * Thou hast redeemed all from corruption ** by Thy tender compassion."
+            }
+          },
+          "troparion": {
+            "tone": 4,
+            "rubric": "The Troparion from the Typicon; but if there be none, chant the following",
+            "text": "The truth of things revealed thee to thy flock as a rule of faith, * icon of meekness, and teacher of temperance; * wherefore, thou hast attained the heights through humility and riches through poverty; * O hierarch {saint_name} our father, ** entreat Christ God, that our souls be saved."
+          }
         },
-        "troparion": {
-          "tone": null,
-          "text": "The truth of things revealed thee to thy flock as a rule of faith, * icon of meekness, and teacher of temperance; * wherefore, thou hast attained the heights through humility and riches through poverty; * O hierarch {saint_name} our father, ** entreat Christ God, that our souls be saved. (Twice)"
+        "matins": {
+          "troparion": {
+            "tone": 4,
+            "text": "The truth of things revealed thee to thy flock as a rule of faith, * icon of meekness, and teacher of temperance; * wherefore, thou hast attained the heights through humility and riches through poverty; * O hierarch {saint_name} our father, ** entreat Christ God, that our souls be saved.",
+            "rubric": "Twice"
+          },
+          "kathisma_hymns": [
+            {
+              "after": "1st chanting of the Psalter",
+              "tone": 1,
+              "melody": "Thy Tomb O Savior...",
+              "text": "As a servant of Christ the Lord of all, * thou didst teach the peoples, * instructing them O Hierarch, to understand the truth, * and illumining them with divine baptism; * wherefore we all call thee a teacher of truth, * Hierarch and favorite of Christ.",
+              "rubric": "Twice",
+              "theotokion": {
+                "tone": 1,
+                "text": "O pure Virgin Theotokos who knewest not wedlock, thou sole intercessor and protection of the faithful: from tribulations, sorrows and cruel circumstances deliver all who place their trust in thee, O Maiden, and save our souls by thy divine supplications."
+              }
+            },
+            {
+              "after": "2nd chanting of the Psalter",
+              "tone": 4,
+              "text": "From thy youth thou didst take up thy Cross, * and devoutly follow Christ, * subduing the subtlety of the flesh by abstinence; * wherefore sitting on the Hierarchical throne, * thou didst magnify, O Hierarch, * the Lord and His most pure Mother, * Who have adorned thee with an abundance of spiritual gifts, O God-blessed {saint_name}.",
+              "rubric": "Twice",
+              "theotokion": {
+                "tone": 4,
+                "text": "O all-immaculate Virgin * who hast given birth to the transcendent God: * do thou unceasingly entreat Him together with the Hierarch {saint_name}, * that He grant forgiveness of transgressions * and correction of life before the end, * to us who, as is meet, hymn thee with faith and love, ** O thou who alone art all-hymned."
+              }
+            },
+            {
+              "after": "Polyeleos",
+              "tone": 8,
+              "melody": "Of the wisdom...",
+              "text": "Having ruled over the passions of the flesh, * and fervently tended thy flock * thou, O holy one, wast revealed to be a glorious and godly Hierarch; * for thou didst enlighten a multitude of people with holy baptism * enjoining them to glorify One God in three Hypostases; * wherefore even after thy repose thou dost pour forth healings * unto those who make pilgrimage to the holy temple of God * and approach the shrine of thy relics, * O Hierarch {saint_name}, * entreat Christ God that He grant remission of sins * unto those who with love honor thy holy memory.",
+              "rubric": "Twice",
+              "theotokion": {
+                "tone": 8,
+                "text": "Let us hymn the heavenly gate and ark, * the all-holy mountain, the cloud of light, * the heavenly ladder, * the spiritual Paradise, the redemption of Eve, * the great treasure of the world; * because salvation for the world and forgiveness of ancient offences were wrought in her. * Therefore we cry unto her: * Intercede with thine own Son and God to grant forgiveness of offences ** to those who devoutly worship thy most holy Offspring."
+              }
+            },
+            {
+              "after": "50th Psalm",
+              "tone": 6,
+              "text": "O initiate of God's mysteries, * disciple of Christ, * servant of the Lord, * holy Hierarch {saint_name}, * thy life was in perfect accord with thy calling, * for together with the multitude of thy gray hairs there shone forth wisdom, * the serenity of thy countenance witnessed to the gentleness of thy soul * and the calm beauty of thy speech revealed thy compassionate nature. * Thy life upon the earth was glorious * and thy repose is with the saints; * do thou intercede on behalf of our souls."
+            }
+          ],
+          "megalynarion": {
+            "text": "We magnify thee, O Hierarch, Father {saint_name}, and honor thy holy memory, for thou dost pray for us unto Christ our God.",
+            "verse": "Hear this, all ye nations; give ear, all ye that inhabit the World."
+          },
+          "canon": {
+            "tone": 6,
+            "refrain": "Holy Hierarch {saint_name}, pray to God for us",
+            "odes": {
+              "1": {
+                "irmos": "When Israel walked on foot in the sea as on dry land, * on seeing their pursuer Pharaoh drowned, * they cried: * Let us sing to God * a song of victory.",
+                "troparia": [
+                  "O Holy Hierarch, numbered with the Angelic hosts, servant of God, Thou wast found worthy to stand before Him, do thou ever entreat Him on our behalf, that by thy prayers we may obtain eternal blessings.",
+                  "Elected by the Lord to serve the precious gospel, thou O blessed Father {saint_name}, nourished thy people with wisdom by thy wise instructions.",
+                  "Enriched with God's understanding, O most wise Hierarch of God, thou didst take the living-word that flowed from thy heart and feed it unto souls deadened by passions, O God-blessed {saint_name}."
+                ],
+                "theotokion": "The sacred choir of Prophets foretold of thee O pure one, as one who was to become a true Parent of God, higher than the Cherubim and all created things."
+              },
+              "3": {
+                "irmos": "There is none as holy as Thou, * O Lord my God, * who hast exalted the horn of The faithful O good One, * and strengthened us upon the rock * of Thy confession.",
+                "troparia": [
+                  "By Shedding forth divine sweetness from thy lips, O Father, thou hast banished the bitter drink of godlessness, giving to the thirsting devout the nectar of the knowledge of God, O blessed one.",
+                  "Predestined by God's judgment, thou didst appear O Hierarch offering the bloodless sacrifice unto God who offered up Himself for our sake, O Father Hierarch {saint_name}.",
+                  "The sepulcher, wherein thy precious body lieth, is likened unto a Godly paradise, shedding forth redolent aromas, and filling the faithful with a sweet fragrance, O most glorious and all-honored Hierarch {saint_name}."
+                ],
+                "theotokion": "O pure one, the mind of man is incapable of comprehending the unspeakable depths of thy birth-giving, for God humbled Himself for the sake of compassion, and entirely renewed me in thy womb.",
+                "sessional_hymn": {
+                  "tone": 4,
+                  "melody": "Thou hast appeared today...",
+                  "text": "In an Orthodox manner * thou, O holy one, hast tended the Church of Christ * driving off the bitter taxing of heresy, * wherefore, O blessed one, * thou dost now make thine abode on high.",
+                  "theotokion": {
+                    "tone": 4,
+                    "text": "The Word of the Father, Christ our God, * Who was incarnate of thee, * we have come to know, O Virgin Theotokos, * who alone art pure, who alone art blessed. ** Wherefore, we unceasingly hymn and magnify thee."
+                  },
+                  "stavrotheotokion": "Beholding thy Son lifted up upon the Tree, O most pure one, with thy maternal womb wounded with pain, thou didst piteously cry aloud: \"Woe is me! How is it that Thou hast set, O my timeless Light?\""
+                }
+              },
+              "4": {
+                "irmos": "Christ is my power, * my God and my Lord, * the holy Church divinely singeth, * crying with a pure mind, * keeping festival in the Lord.",
+                "troparia": [
+                  "Filled with the Holy Spirit, O sacred Father {saint_name}, thou hast driven away evil spirits from men and made them faithful with thy spiritual instructions.",
+                  "Thou didst teach that God is a Unity undivided and yet known in three Hypostases, not separated nor mingled, thus enlightening the devout with thy sacred theology.",
+                  "Having first mortified the subtleties of the flesh by abstinence and spiritual labors, thou hast been revealed to be a divine Hierarch and an all-sacred intercessor before the Trinity."
+                ],
+                "theotokion": "The foremothers curse hath been done away with by thee, O Mother of God; for thou, O most pure one, hast brought forth unto us the Source of holiness, the ever-lasting Life."
+              },
+              "5": {
+                "irmos": "Illumine with Thy divine light, I pray, O Good One, * the souls of those who with love rise early to pray to Thee, * that they may know Thee, O Word of God, * as the true God, * Who recalleth us from the darkness of sin.",
+                "troparia": [
+                  "Performing the divine mysteries in a godly manner, and with a most pure mind approaching the holy things, thou hast blamelessly served God as a most sacred Hierarch.",
+                  "By thy precious instructions those who were enslaved to idolatrous things have become favorites of God, and recalling them from their unworthy ways thou hast become a worthy servant of God Almighty.",
+                  "Called by grace O holy one, to abolish the lawlessness of idolatry by the sacred waters of Thine instructions, thou hast, by the grace of God, made barren and frozen hearts fertile with the fruits of the spirit."
+                ],
+                "theotokion": "O Mary, who knewest not wedlock, thou hast remained a Virgin even after thy strange birth-giving, for it was God Who was born from thee and Who hath ordered all things as He willeth, O Bride of God."
+              },
+              "6": {
+                "irmos": "Beholding the sea of life surging with the tempest of temptations, * I run to Thy calm haven, and cry to Thee: * Raise up my life from corruption, * O Most Merciful One.",
+                "troparia": [
+                  "At the bidding of God, thy tongue, sharpened by the Spirit in spiritual acuity, inscribed in the hearts of the devout as with a scribe's plume, the words of grace, O all-sacred Father.",
+                  "O sacred Father, as one who entered the spiritual holy of holies and there, by the light of the Trinity, learnt things divine, thou hast perfected in spirit the faithful, thyself being most perfect, O Holy Hierarch {saint_name}.",
+                  "Flushing away the foul commands of the wicked by the streams of thy commandments, thou hast appeared as a placid river watering with piety the communities of the faithful, O all-honored Hierarch."
+                ],
+                "theotokion": "O all-immaculate Maiden favored of God, the Word hath, without seed, made His abode within thy womb and come forth as a perfect man, renewing in a godly manner human nature as He Himself alone knoweth."
+              },
+              "7": {
+                "irmos": "An Angel made the furnace bedew the holy Children. * But the command of God consumed the Chaldeans * and prevailed upon the tyrant to cry: * O God of our fathers, Blessed art Thou.",
+                "troparia": [
+                  "Thou wast Illumined by the grace of the Spirit to comprehend the Divine will, and thus appeared as a radiant star enlightening those who wisely chant: \"O God of our fathers, Blessed art Thou\".",
+                  "O sacred Hierarch of the most holy Church, shining with virtuous deeds, the uncreated Trinity made its abode within thee, wherefore thou dost sing: \"O God of our fathers, Blessed art Thou\".",
+                  "Repelling sleep from thine eyes, with divine vigor thou didst receive the Divine Light from the Source of Light, Who hath made thee a pillar and support of the faithful, a true Hierarch."
+                ],
+                "theotokion": "He who is unapproachable, and seated in the bosom of the Begetter, hath now become seated within thy womb, O most pure one, as one approachable and imbued with thine image, having become accessible for the sake of saving fallen Adam."
+              },
+              "8": {
+                "irmos": "Thou didst make flame bedew the holy children, * and didst burn the sacrifice of a righteous man with water. * For Thou alone, O Christ, dost do all as Thou willest, * Thee do we exalt throughout all ages.",
+                "troparia": [
+                  "O blessed one, as one elevated unto God by thy pure thoughts thou hast humiliated the proud serpent by thy humility; wherefore we honor thee, exalting Christ unto the ages.",
+                  "O holy Hierarch {saint_name}, thou hast saved thy people from slavery to falsehood by preaching the incarnate Word and thus driving away the wickedness of idolatry, O most wise and God-bearing father.",
+                  "Leading a life like that of thy Master, in both word and deed fulfilling thy days in spiritual activity, thou, O Father, hast reposed and passed over to the celestial dwellings."
+                ],
+                "theotokion": "Freed from the primal curse by thy birth-giving, O most blessed divinely joyous Maiden, we send up unto thee the greeting of Gabriel: Rejoice thou, who art the cause of the salvation of all."
+              },
+              "9": {
+                "irmos": "It is impossible for mankind to see God * upon Whom the orders of Angels dare not gaze; * but through thee, O all-pure one, * did the Word Incarnate become a man * and with the Heavenly Hosts * Him we magnify and thee we call blessed.",
+                "troparia": [
+                  "Adorned with the virtues as with resplendent ornaments and radiant with their light, compassionate and meek, thou hast found thine abode in the land of the compassionate keeping company with the Heavenly Hosts.",
+                  "Beholding the brightness of God and of the Angels, the radiance of the Patriarchs, the Martyrs and the Apostles, with them entreat the Lover of mankind that we who praise thee, O holy one, be granted the remission of sins and restoration of life.",
+                  "Adorning the city of thy See with Thine episcopacy, thou hast arrayed with thy radiance all the cities of thy diocese, having lived therein as an Angel, thou hast hallowed them with thine unction and perfected the Divinely-wise people living therein."
+                ],
+                "theotokion": "The gentle heavenly rain O Virgin, descended into thy womb, and thereby dried up the streams of falsehood, showering incorruption upon all mankind by the redemption that hath been made possible through thee, O divinely joyous one."
+              }
+            }
+          },
+          "kontakion": {
+            "tone": 2,
+            "melody": "From the highest...",
+            "rubric": "The Kontakion from the Typicon; but if there be none, chant the following",
+            "text": "O Hierarch {saint_name}, * divine thunder, spiritual trumpet, * planter of faith and pruner of heresies, * great favorite of the Trinity, * standing with the Angels before God * unceasingly pray on behalf of us all."
+          },
+          "ikos": {
+            "text": "O Father, through laziness I the wretched one have fallen into the sleep of death, but do thou, a good shepherd, raise me up, and subdue the passions which wickedly torment me, that on arising I may hymn thy bright festival with a pure spirit. O Father, whom the Master of the universe hath worthily glorified as a most faithful servant and most wise teacher, a friend of God and skilled minister of His traditions, which thou hast well preserved; Undefiled unction, most wise {saint_name}, unceasingly pray for us all."
+          },
+          "exapostilarion": {
+            "tone": 3,
+            "melody": "Thou hast visited us...",
+            "text": "Today a glorious radiant festival * is revealed to the faithful, * for standing in the light of the glory * of the countenance of God, * the Holy Hierarch {saint_name}, doth remember us * who praise his honorable memory.",
+            "theotokion": {
+              "tone": 3,
+              "text": "O most pure one, we put our trust in God, * and in the crucified Christ who came forth from thee. * By thy supplications to Him * preserve us unharmed even unto the end."
+            }
+          },
+          "praises": {
+            "tone": 8,
+            "melody": "O most glorious wonder...",
+            "stichera": [
+              {
+                "text": "O venerable Father {saint_name}! * Having reached the pinnacle of the ladder of divine understanding * and approaching God as one who hath obtained the gift of adoption, * thou dost heal incurable diseases and drivest away unclean spirits; * therefore with joyful hearts we celebrate thy memory, * magnifying Christ Who hath exalted His favorite.",
+                "rubric": "Twice"
+              },
+              {
+                "text": "O marvelous Father {saint_name}! * Brightly illumined with thy divinely lucid mind, * thou hast pacified the boisterous sea of the passions, * and flying upon the wings of the purity of dispassion, * thou hast reached the heights of ineffable and incomprehensible blessedness, * ever interceding on behalf of us who praise thee."
+              },
+              {
+                "text": "O Father of Fathers {saint_name}! * thou art the Rule of the priesthood, * model of chastity, * stronghold of monastics, * strength of the Church, * lamp of love, throne of compassion, * Source of miracles, * tongue of fire, * font of sweetly-spoken words, * vessel of the Divine Spirit * and spiritual paradise, * O God-blessed one."
+              }
+            ],
+            "doxastikon": {
+              "tone": 6,
+              "text": "O venerable one, * thrice blessed holiest Father, * good shepherd and disciple of Christ the chief shepherd, * as one who hast laid down thy life for thy flock! * Do thou now also, O most praised Hierarch {saint_name}, * entreat Him with by thy prayers ** to grant us great mercy."
+            },
+            "theotokion": {
+              "tone": 6,
+              "text": "We have come to know God * Who was incarnate of thee, * O Virgin Theotokos. ** Him do thou entreat for the salvation of our souls."
+            },
+            "stavrotheotokion": {
+              "text": "Standing before the Cross * and beholding her Son voluntarily suffering, ** the Virgin-Mother magnified Him."
+            }
+          }
         }
       },
-      "matins": {
-        "troparion": {
-          "tone": null,
-          "text": "The truth of things revealed thee to thy flock as a rule of faith, * icon of meekness, and teacher of temperance; * wherefore, thou hast attained the heights through humility and riches through poverty; * O hierarch {saint_name} our father, ** entreat Christ God, that our souls be saved. (Twice)"
-        },
-        "kontakion": {
-          "tone": null,
-          "text": "Kontakion. In Tone II: Spec. Mel.: “From the highest ...”: O Hierarch {saint_name}, * divine thunder, spiritual trumpet, * planter of faith and pruner of heresies, * great favorite of the Trinity, * standing with the Angels before God * unceasingly pray on behalf of us all. The"
-        },
-        "ikos": {
-          "text": "O Father, through laziness I the wretched one have fallen into the sleep of death, but do thou, a good shepherd, raise me up, and subdue the passions which wickedly torment me, that on arising I may hymn thy bright festival with a pure spirit. O Father, whom the Master of the universe hath worthily glorified as a most faithful servant and most wise teacher, a friend of God and skilled minister of His traditions, which thou hast well preserved; Undefiled unction, most wise {saint_name}, unceasingly pray for us all."
-        },
-        "exapostilarion": {
-          "text": "Spec. Mel.: “Thou hast visited us ...”: Today a glorious radiant festival * is revealed to the faithful, * for standing in the light of the glory * of the countenance of God, * the Holy Hierarch {saint_name}, doth remember us * who praise his honorable memory."
-        }
+      "rubrics": {
+        "polyeleos_instructions": "If the Celebration be with a Polyeleos, and not a Resurrection Service, sing the Dogmatic in Tone VIII. If the service is a Resurrection service sing the Dogmatic of the Tone for that service.",
+        "doxology_instructions": "The great Doxology. If a small Doxology is read, and a Doxasticon is appointed, the Doxastikon is chanted after the Aposticha.",
+        "sunday_modifications": "If the service is a Resurrection service, sing the Dogmatic of the Tone for that service instead of the appointed Dogmatic Theotokion."
       }
-    }
-  },
-  "Theotokos": {
-    "saint_class": "Theotokos",
-    "filename": "Theotokos.pdf",
-    "total_chars": 35553,
-    "services": {
-      "vespers": {
-        "stichera_lord_i_cried": [
-          {
-            "order": 1,
-            "tone": 4,
-            "melody": null,
-            "text": "Spec. Mel.: “Thou hast given a sign ...”: In a divine manner thou dost preserve and shelter * from all attacks of the enemy * those who with love celebrate Thy most glorious {saint_name} * and who cry unto thee: * Thou art our strength and confirmation * and thy Son and our God is our most comely joy, * Whom adoring we cry aloud saying:"
-          },
-          {
-            "order": 2,
-            "tone": 4,
-            "melody": null,
-            "text": "O Jesus, Thou all-powerful One, save our souls for Thou art compassionate! Having assembled today in godly manner, * we praise thee O Theotokos! * O most holy Virgin, * many are thy splendors and without end are thy wonders, * for thou art the holy protection, and praise, * the glory and source of all healing * to those who celebrate thy holy {saint_name}; * wherefore praying we cry to Thee:"
-          },
-          {
-            "order": 3,
-            "tone": 4,
-            "melody": null,
-            "text": "O Jesus, Thou all powerful One, save our souls for Thou art compassionate! As thou art One who is feared by our enemies * and cannot be vanquished, O most holy one, * by thine honorable supplications shelter and preserve us, * and grant unto those who solemnly * celebrate thy {saint_name}, * to call upon thy Son and say:"
-          },
-          {
-            "order": 4,
-            "tone": 4,
-            "melody": null,
-            "text": "O Jesus, Thou all-powerful One, save our souls for Thou art compassionate!"
-          }
-        ],
-        "theotokion": {
-          "tone": null,
-          "text": "We shall never cease, unworthy though we be, * to proclaim thy might, O Theotokos; * for if thou didst not intercede on our behalf, * who would have delivered us from so many dangers? * who would have preserved us free till now? * we shall never turn away from thee, ** for thou dost ever preserve thy servants from all manner of evil. The Dismissal:"
-        },
-        "stavrotheotokion": null,
-        "idiomelon": null,
-        "dogmatic_theotokion": null,
-        "aposticha": {
-          "stichera": [
+    },
+    "theotokos": {
+      "saint_class": "Theotokos",
+      "title": "The Vigil Service Common to the Feasts of the Theotokos",
+      "services": {
+        "vespers": {
+          "stichera_lord_i_cried": [
             {
-              "order": 1,
-              "tone": null,
-              "verse": null,
-              "text": "Come, all ye from the ends of the earth, * and let us glorify the honorable {saint_name} of the Mother of God, * for lifting her hands up to her Son she prayeth on our behalf. * Therefore with psalms, hymns and spiritual odes, let us joyfully celebrate with all the saints, * for by her holy {saint_name} ** renewel of life hath been granted unto all the world."
+              "tone": 4,
+              "melody": "Thou hast given a sign...",
+              "text": "In a divine manner thou dost preserve and shelter * from all attacks of the enemy * those who with love celebrate Thy most glorious {event_name} * and who cry unto thee: * Thou art our strength and confirmation * and thy Son and our God is our most comely joy, * Whom adoring we cry aloud saying: ** O Jesus, Thou all-powerful One, save our souls for Thou art compassionate!"
             },
             {
-              "order": 2,
-              "tone": null,
-              "verse": "The Virgins that follow after her shall be brought unto the King, * those near her shall be brought unto Thee.",
-              "text": "Greatly hath God adorned thee with beauty * since in the midst of mankind He placed the true Light in thine arms. * We beseech thee, the hope of Christians, * the help of those afflicted with needs and sorrows, * thou who art a haven for those laboring in the abyss, * and who art ever in His light, * entreat Him that those who with love hymn thine all-honored {saint_name} ** be delivered from all afflictions."
+              "tone": 4,
+              "melody": "Thou hast given a sign...",
+              "text": "Having assembled today in godly manner, * we praise thee O Theotokos! * O most holy Virgin, * many are thy splendors and without end are thy wonders, * for thou art the holy protection, and praise, * the glory and source of all healing * to those who celebrate thy holy {event_name}; * wherefore praying we cry to Thee: ** O Jesus, Thou all powerful One, save our souls for Thou art compassionate!"
             },
             {
-              "order": 3,
-              "tone": null,
-              "verse": "Hearken, O daughter, and see * and incline thine ear.",
-              "text": "Thine all-honored {saint_name}, O most holy and pure Virgin, * art glorified both by Angels in the heavens * and by the race of mankind here on earth. * For thou, art the Mother of Christ God the Creator of all. We beseech thee, never cease to entreat Him on our behalf; * for next to God, we have placed our trust in thee, ** O Theotokos, thou most exalted One who knewest not wedlock."
+              "tone": 4,
+              "melody": "Thou hast given a sign...",
+              "text": "As thou art One who is feared by our enemies * and cannot be vanquished, O most holy one, * by thine honorable supplications shelter and preserve us, * and grant unto those who solemnly * celebrate thy {event_name}, * to call upon thy Son and say: ** O Jesus, Thou all-powerful One, save our souls for Thou art compassionate!"
             }
           ],
-          "theotokion": null,
-          "stavrotheotokion": null
+          "theotokion": {
+            "tone": 6,
+            "rubric": "Glory..., Now & Ever..., in Tone VI",
+            "text": "O most holy Theotokos, * today the Church of God hath been surrounded with a most luminous periphery, * celebrating thy {event_name}, * and shining forth with joy, * exulting mystically she crieth aloud unto thee: * Rejoice O Sovereign Lady, * precious diadem and crown of God's glory; * Rejoice thou only fulfillment of glory and eternal joy; * Rejoice haven of those who flee unto thee, ** the mediatress and salvation of our souls."
+          },
+          "aposticha": {
+            "stichera": [
+              {
+                "tone": 3,
+                "text": "Come, all ye from the ends of the earth, * and let us glorify the honorable {event_name} of the Mother of God, * for lifting her hands up to her Son she prayeth on our behalf. * Therefore with psalms, hymns and spiritual odes, let us joyfully celebrate with all the saints, * for by her holy {event_name} ** renewal of life hath been granted unto all the world."
+              },
+              {
+                "tone": 3,
+                "verse": "The Virgins that follow after her shall be brought unto the King, * those near her shall be brought unto Thee.",
+                "text": "Greatly hath God adorned thee with beauty * since in the midst of mankind He placed the true Light in thine arms. * We beseech thee, the hope of Christians, * the help of those afflicted with needs and sorrows, * thou who art a haven for those laboring in the abyss, * and who art ever in His light, * entreat Him that those who with love hymn thine all-honored {event_name} ** be delivered from all afflictions."
+              },
+              {
+                "tone": 3,
+                "verse": "Hearken, O daughter, and see * and incline thine ear.",
+                "text": "Thine all-honored {event_name}, O most holy and pure Virgin, * art glorified both by Angels in the heavens * and by the race of mankind here on earth. * For thou, art the Mother of Christ God the Creator of all. We beseech thee, never cease to entreat Him on our behalf; * for next to God, we have placed our trust in thee, ** O Theotokos, thou most exalted One who knewest not wedlock."
+              }
+            ],
+            "doxastikon": {
+              "tone": 2,
+              "text": "Having purified our thoughts and minds, * and beginning with the hymn of David saying: * Arise, O Lord, in Thy repose, * Thou and the ark of Thy covenant; * together with the Angels, we joyfully celebrate the Virgin, * the Bride of Christ our God, * the King of all. * For, like a beautiful chamber * Thou hast adorned her, O Master, * to rear and to shelter from hostile powers, * by the mighty power of her supplications, ** those who are numbered among the inhabitants of Thy city."
+            },
+            "theotokion": null,
+            "stavrotheotokion": null
+          },
+          "troparion": {
+            "tone": 4,
+            "rubric": "The Troparion of the Festival from the Typicon. If there be none, chant the following",
+            "text": "To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope!"
+          },
+          "troparion_theotokion": {
+            "tone": 4,
+            "text": "We shall never cease, unworthy though we be, * to proclaim thy might, O Theotokos; * for if thou didst not intercede on our behalf, * who would have delivered us from so many dangers? * who would have preserved us free till now? * we shall never turn away from thee, ** for thou dost ever preserve thy servants from all manner of evil."
+          }
         },
-        "troparion": {
-          "tone": null,
-          "text": "To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope! (Twice)"
+        "matins": {
+          "troparion": {
+            "tone": 4,
+            "text": "To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope!",
+            "rubric": "Twice"
+          },
+          "kathisma_hymns": [
+            {
+              "after": "1st chanting of the Psalter",
+              "tone": 4,
+              "melody": "Thou hast appeared today.",
+              "text": "Like the dawning of the morn, * the joy of thy {event_name} hath shone forth throughout all the world, * O Virgin Mother Mary. * Do thou illumine the thoughts ** of those who with love hymn thee here on earth.",
+              "rubric": "Glory..., Now & Ever..., the foregoing is repeated."
+            },
+            {
+              "after": "2nd chanting of the Psalter",
+              "tone": 4,
+              "melody": "Joseph marveled...",
+              "text": "Like a bright cloud, the Virgin Mary, * the true Theotokos, hath shone forth upon us all; * The condemnation of Adam is no more, and Eve hath been released from bonds; * wherefore with boldness we cry out to the only pure one, proclaiming: * O most holy Virgin, ** entreat thy Son to grant us the remission of our sins.",
+              "rubric": "Glory..., Now & Ever..., the foregoing is repeated."
+            },
+            {
+              "after": "Polyeleos",
+              "tone": 1,
+              "melody": "The angelic hosts were before Thy tomb...",
+              "text": "The fruit of thy virginal womb hath proved to be most comely, * for thou didst give birth to the Life of the world; * wherefore O most pure one, the heavenly powers cry out to thee * praising thy honored festival O Theotokos chanting: * Glory to thy {event_name}; * glory to thy virginity, * O Mother, who knewest not a man.",
+              "rubric": "Glory..., Now & Ever..., the foregoing is repeated."
+            },
+            {
+              "after": "50th Psalm",
+              "tone": 6,
+              "text": "Today the grace of gladness hath its beginning, * Today doth the gates of heaven open * and the divine doors open wide, * showing forth unto the world * the {event_name} of the Mother of our God, * through whom earthly things unite with the heavenly, ** unto the salvation of our souls."
+            }
+          ],
+          "megalynarion": {
+            "general": {
+              "text": "It is meet to magnify thee, O Theotokos, more honorable than the Cherubim and beyond compare more glorious than the Seraphim.",
+              "verse": "Remember, O Lord, David and all his meekness. How he made an oath unto the Lord, and vowed unto the God of Jacob."
+            },
+            "nativity": {
+              "text": "We magnify thee, O most holy Virgin, and we honor thy holy Parents, and we glorify thy most glorious Nativity.",
+              "verse": "Remember David, O Lord, and all his affliction."
+            },
+            "protection": {
+              "text": "We magnify thee, O most holy Virgin, and we honor thy honorable protection, thee whom Saint Andrew beheld in the air praying to Christ for us.",
+              "verse": "Remember, O Lord, David and all his meekness. How he made an oath unto the Lord, and vowed unto the God of Jacob."
+            },
+            "annunciation": {
+              "text": "The Archangel's cry we sing to thee, O Pure One, Hail, thou who art full of grace, the Lord is with thee.",
+              "verse": "Remember, O Lord, David and all his meekness. How he made an oath unto the Lord, and vowed unto the God of Jacob."
+            },
+            "dormition": {
+              "text": "We magnify thee, O all-immaculate Mother of Christ our God, and we glorify thy most glorious failing-asleep.",
+              "verse": "Remember, O Lord, David and all his meekness. How he made an oath unto the Lord, and vowed unto the God of Jacob."
+            }
+          },
+          "canon": {
+            "tone": 8,
+            "rubric": "The Irmoi to be sung twice; the Troparia 12 times.",
+            "refrain": "Most Holy Theotokos save us.",
+            "odes": {
+              "1": {
+                "irmos": "Having passed through the water as upon dry land, * and having escaped the malice of the Egyptians, * the Israelites cried aloud: * Unto our God and Redeemer let us sing.",
+                "troparia": [
+                  "Do thou graciously strengthen me with the power of God's grace, that I may chant of thy divine {event_name} with joy, O most pure one. For thou O most holy one, art the protection of thy city, and unto all thy flock an invincible dominion and strength.",
+                  "By thy supplications we have secured compassion and mercy, for thou hast brought forth God, the mighty One, Who saveth all the devout by thine intercessions, O most immaculate one; for His sake we all glorify thee, O Lady.",
+                  "We celebrate Thy divine {event_name}, since through thee O most pure Theotokos, we have been granted incorruptible salvation, and never-waning joy and hope, for thou art unto us a shelter and dominion, and a refuge for our souls.",
+                  "We thy people flee for refuge Under thy shelter, O Sovereign-Lady. O most spotless one, be thou a help unto us, thy servants, and ever make supplications for the salvation of those who with love hymn thee."
+                ],
+                "katavasia": "I shall open my mouth, * and be filled with the Spirit, * and utter discourse to the Queen and Mother; * and be seen radiantly keeping festival, * joyfully praising her wonders."
+              },
+              "3": {
+                "irmos": "O Lord, Creator of the vault of Heaven * and Builder of the Church, * do Thou strengthen me in Thy love, O Summit of desire, * O Support of the faithful, * O only Lover of mankind.",
+                "troparia": [
+                  "Let us with faith renew our hearts with the commemoration of the divine {event_name} of the holy Theotokos. Do thou, O most pure one, grant unto all who with faith pray for deliverance, protection from enemies, visible and invisible.",
+                  "Thou dost act most graciously by sanctifying those who with faith flee to thy temple and with love fall down before thy divine {event_name}. Do thou therefore entreat thy Son and our God to be gracious unto us, to deliver us from all dangers and to grant victory over adversaries to Orthodox Christians.",
+                  "In fulfillment of His Holy dispensation, God the Word assumed flesh from thee, making a house for Himself in thy holy womb, and granting us to see the day of thy divine {event_name}; which with love we celebrate, making entreaty to thee.",
+                  "With gladsome souls and joyful hearts we direct our minds unto the contemplation of thine honored and divine {event_name}, wherefore O Theotokos, we the faithful fall down before thee and entreat thee, since thou hast suckled with thy milk Him who feedeth us with His mercy, thy most pure Son."
+                ],
+                "katavasia": "O Theotokos, thou living and plentiful fount, * establish in spiritual fellowship those who sing hymns to thee, * and in thy divine glory * grant them crowns of glory.",
+                "sessional_hymn": {
+                  "tone": 4,
+                  "text": "Thy Church solemnly celebrates thy glorious {event_name}, * and in hymning thee, * we the faithful fervently entreat thee O pure Virgin * to strengthen us against the power of the enemy * and to utterly destroy the counsels of the wicked, ** and to direct our lives, that we may fulfill the divine will of thy Son."
+                }
+              },
+              "4": {
+                "irmos": "O Lord, I have heard the mystery of Thy dispensation; * I have considered Thy works, * and I have glorified Thy Divinity.",
+                "troparia": [
+                  "O pure Virgin, since thou hast passed over into the never-setting Light, remember us who celebrate thy honored {event_name} and make entreaty unto thy Son and our God, that He grant unto us the remission of our sins.",
+                  "As in crossing the horizon the resplendent sun doth shine forth, so also doth thy divine festival shine forth its illumining rays, driving away from us the darkness of the passions, bestowing cleansing upon our souls and deliverance from all perils.",
+                  "The darkness of evil hath now been dispersed, and like sunlight illumining our souls, the feast of thine honored {event_name}, shineth forth O all-immaculate Mother of God, wherefore we devoutly celebrate thy feast.",
+                  "O most pure and most immaculate Mother, our celebrated refuge and adoration, hymned by all, the ark of holiness of the mind and the inexhaustible source of cures for those who venerate thine honored {event_name}."
+                ],
+                "katavasia": "He who sitteth in glory upon the throne of the Godhead, * Jesus the true God, * is come in a swift cloud * and with His sinless hands he hath saved those who cry: * Glory to Thy power, O Christ."
+              },
+              "5": {
+                "irmos": "Disperse, O Word, the darkness from my soul, * O Christ God, the Light-Giver, * Having driven out the primordial darkness of the abyss, * grant unto me the light of Thy commandments, * that early in the morning I may glorify Thee.",
+                "troparia": [
+                  "Unto those that flee to thee for refuge, everything hath become filled with sanctity, and we the faithful, having obtained forgiveness, celebrate thine honored {event_name}, whereupon we entreat thee to bestow grace and mercy upon us, in the day of judgment.",
+                  "Adorned with the purity of virginity thou hast given birth to the comely One, thy Son and God; adorn also with the oil of gladness the Hierarchical orders, and all those who observe the feast of thine honored {event_name}; delivering them from all enemies and misfortunes.",
+                  "Thine honored festival appeareth like another paradise possessing in its midst thee, the sweet smelling blossom, issuing forth a fragrance bestowing fullness of heart to the faithful who with love venerate thee, O most immaculate Lady.",
+                  "O Virgin, thou hast appeared like a divine cloud sprinkling down upon fallen creation the gentle rain of salvation, with which the parched earth previously dried by sin, hath been watered, O most immaculate Lady, yielding the fruits of virtue; wherefore we glorify thee."
+                ],
+                "katavasia": "All creation stands in awe of thy divine glory; * for thou, O Virgin who hast not known wedlock, * didst contain within thy womb the God of all, * and gave birth to the timeless Son, * bestowing peace, upon all who hymn thee."
+              },
+              "6": {
+                "irmos": "Cleanse me, O Savior, * for many are mine iniquities; * lead me up from the abyss of evils I pray Thee, * for unto Thee have I cried, * and Thou hast hearkened unto me, * O God of my salvation.",
+                "troparia": [
+                  "Thou hast brought forth as a babe Him Who existed before all ages, and thereby renewed our hearts, corrupted by sins; accept our praises which we now offer on behalf of Thy feast, as an oblation of renewal, O most holy Theotokos.",
+                  "Holy is thy temple and truly wondrous is thy most honored {event_name} which we celebrate therein; granting unto all who glorify thee, O most pure one, healing for their hearts, and protection from all misfortunes.",
+                  "O Virgin Mother of God, coming together in thy temple every soul rejoiceth, celebrating thy feast. and chanting the praises of thine honored {event_name} which, resplendent as the sun, doth radiate with the light of God's grace. Illumine us and enlighten our hearts, O Virgin-Mother, Lady.",
+                  "We hymn thy most honored {event_name} and reverence thine immaculate conception and birth, O Bride of God and Maiden; the angelic orders and the choirs of all saints together with us glorify thee."
+                ],
+                "katavasia": "Celebrating the divine and solemn feast * of the Mother of God * O ye divinely wise, * let us come, clapping our hands, * and glorify God who was born of her."
+              },
+              "7": {
+                "irmos": "Once in Babylon the fire stood in awe * of God's condescension; * for which sake the youths in the furnace, * dancing with joyous steps as in a meadow, chanted: * O God of our fathers, Blessed art Thou!",
+                "troparia": [
+                  "Showing thyself to be the Queen of all, thou hast established for our sake thy divine {event_name} as a heavenly shelter, through which we obtain freedom from the assaults of invisible enemies. Therefore we cry unto thy Son saying: \"O God of our fathers, Blessed art Thou\".",
+                  "O Sovereign Theotokos and Virgin, the yearly liturgical cycle is crowned with thy nativity, and with all thy festivals. Do thou now also adorn the day of thine honored {event_name} with an outpouring of grace, for which reason we the faithful have assembled in thy holy temple.",
+                  "All the heavenly powers praise her who hath borne the Lord and the race of mankind doth glorify her who hath revealed to us the day of her honored {event_name}: For she is our refuge, hope and protection, and a shelter from all incursions of the adversary.",
+                  "O gracious cloud, bedew from above with the dew of thy grace and mercy, us who venerate the day of thy glorious {event_name}, which every soul gladly hymneth and glorifieth proclaiming: \"Blessed art thou among women and blessed is the fruit of thy womb\"."
+                ],
+                "katavasia": "Refusing to worship created things * in place of the Creator, * the divinely wise youths bravely trampled down the threatening fire * and rejoicing they sang aloud: * O supremely hymned Lord and God of our Fathers, Blessed art Thou."
+              },
+              "8": {
+                "irmos": "The Beginningless King of glory, * before Whom tremble all the hosts of heaven, * ye priests sing and ye peoples * supremely exalt throughout all ages.",
+                "troparia": [
+                  "Thou art the only Queen of all, O most pure Birthgiver of God, the holy throne and palace of Christ God. Do thou entreat Him that those who venerate thine honored {event_name} be granted the remission of their sins.",
+                  "O most glorious One, thou hast truly carried in thy holy arms the Lord Who assumed flesh from thee, and having ascended above into the heavens thou hast left mankind the celebration of the joyous day of thine honored {event_name}, wherefore we glorify thee, chanting: Chant unto the Lord and supremely exalt Him throughout all ages.",
+                  "Rejoice, O ye divine Prophets, venerating the honored {event_name} of the Virgin Theotokos, for she hath fulfilled your prophecies, bringing forth Christ the King of all, Whom we exalt throughout all ages.",
+                  "Thou art the uplifting of the fallen, the gladness of the despondent, the instructress of the wandering, the visitation and cure of the sick and unto all Christians salvation. O Lady, preserve us who entreat thee and venerate thy divine {event_name}, and deliver us from all attacks of the alien enemies."
+                ],
+                "katavasia": "The Offspring of the Theotokos * saved the holy children in the furnace. * He who was then prefigured hath now been born on earth, * and He gathereth all creation to hymn thee: * all ye works praise ye the Lord * and supremely exalt Him throughout all ages."
+              },
+              "9": {
+                "irmos": "Heaven was stricken with awe, * and the ends of the earth were filled with amazement, * for God hath appeared in the flesh, * and thy womb was rendered more spacious than the heavens. * Wherefore, the ranks of men and of angels * magnify thee as the Theotokos.",
+                "troparia": [
+                  "O city of God, glorious praises have been rendered unto thee, for He Who eternally reigneth over heaven and earth hath been born from thee raising thee from earth to heaven. Never cease to entreat Him on behalf of those who venerate thine honored {event_name}, by which we magnify thee.",
+                  "The incorporeal orders, the assembly of the patriarchs and Apostles, the choir of the prophets, the army of the martyrs, the companies of hierarchs and venerable fathers, and all ye saints rejoice with us celebrating the divine {event_name}, magnifying the Theotokos.",
+                  "O most pure Virgin, thou hast sanctified everything by thy childbearing and been revealed to be the cause of the splendid and all honorable day of thy divine {event_name}, which celebrating, we magnify thee.",
+                  "O most pure Birthgiver of God; exalt the horn of right believing Orthodox Christians and subdue the raging of our adversaries. Keep free from wars thy cities and preserve all Orthodox Christian lands wherein, O pure Lady, thy great and most-exalted name is magnified and faithfully glorified by all."
+                ],
+                "katavasia": "Let every mortal born on earth, * radiant with light, in spirit leap for joy; * and let the host of the angelic powers * celebrate and honor the holy feast of the Mother of God, * and let them cry aloud: * Rejoice! O Theotokos, thou pure Ever-Virgin."
+              }
+            }
+          },
+          "kontakion": {
+            "tone": 1,
+            "rubric": "The Kontakion of the Feast from the Typicon. But if there be none, chant the following",
+            "text": "O Thou who, beyond all telling and understanding, * didst become the honored dwelling-place of the ineffable divine nature, * entreat thy Son that we obtain mercy in the day of judgment. * For thou art the Mother of the King of all, * the surety of sinners, ** and the granter of divine grace and spiritual healing."
+          },
+          "kontakion_alternate": {
+            "tone": 6,
+            "text": "We have no other help, we have no other hope but thee, * O pure Mother of God; * help us! for in thee do we hope, * and of thee do we boast; * for we are thy servants, ** let us not then be put to shame."
+          },
+          "ikos": {
+            "text": "Let us lovingly cry unto the Theotokos: Rejoice, mother of the never-setting Star! Rejoice, dawn of the mystic Day! Rejoice, thou who didst extinguish the furnace of error! Rejoice, thou who didst enlighten the initiates of the Trinity! Rejoice, thou who didst banish from power the inhuman tyrant! Rejoice, thou who hast shown us Christ as the Lord and Lover of mankind! Rejoice, thou who redeemest from pagan worship! Rejoice, thou who dost drag from the mire of works! Rejoice, thou who hast stopped the worship of fire! Rejoice, thou who hast quenched the flame of the passions! Rejoice, guide of the faithful to chastity! Rejoice, joy of all generations! Do thou entreat, O most pure one, thy Son and our God that we obtain mercy in the day of judgment."
+          },
+          "exapostilarion": {
+            "tone": 2,
+            "melody": "Hearken ye women...",
+            "text": "Rejoice O Eve! and be renewed O Adam, * all ye prophets together with the apostles and martyrs, * all ye ascetics and hierarchs, rejoice and be glad; * for the divine {event_name} of the most pure Theotokos Mary * hath been revealed to be a source of joy and gladness * unto the angels and mankind.",
+            "rubric": "Thrice"
+          },
+          "praises": {
+            "tone": 1,
+            "stichera": [
+              {
+                "text": "O Theotokos, since thou art the well-spring of the Source of light * and the stream of inexhaustible tranquility * entreat Him to deliver from the darkness of ignorance * and from the passions of soul and body * those who celebrate thy divine {event_name}, * that in the world to come ** we may be delivered from eternal torments.",
+                "rubric": "Twice"
+              },
+              {
+                "text": "O Theotokos, He that was born of thee in the flesh * hath, in thy divine feast, * revealed thee to be the source of godly wisdom, * a depth of understanding and grace, * and the fathomless source of the Hypostatical knowledge of God. * For His sake grant unto me * a droplet of thy wisdom and understanding, ** and teach me the ways of a god-pleasing life."
+              },
+              {
+                "text": "Having beheld the solemn nativity, * chief among the mysterious wonders of Christ, * we honor and adore the venerable festival of thy divine {event_name} * O Lady, the venerated Icon of divine wonders; * O Theotokos, visit us in times of sickness and sorrows ** and deliver us from the torments to come."
+              }
+            ],
+            "doxastikon": {
+              "tone": 8,
+              "text": "Rejoice, thou praise of the universe! * Rejoice, temple of the Lord! * Rejoice, mountain overshadowed! * Rejoice, refuge of all! * Rejoice, golden candlestick! * Rejoice, honored glory of the Orthodox! * Rejoice, Mary, Mother of Christ God! * Rejoice, paradise! Rejoice, divine table! * Rejoice, tabernacle! Rejoice, golden jar! ** Rejoice, thou hope of all!"
+            }
+          }
         }
       },
-      "matins": {
-        "troparion": {
-          "tone": null,
-          "text": "To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope! (Twice)"
-        },
-        "kontakion": {
-          "tone": null,
-          "text": "Kontakion, in Tone I: O Thou who, beyond all telling and understanding, * didst become the honored dwelling-place of the ineffable divine nature, * entreat thy Son that we obtain mercy in the day of judgment. * For thou art the Mother of the King of all, * the surety of sinners, ** and the granter of divine grace and spiritual healing. Another Kontakion, in Tone VI: We have no other help, we have no other hope but thee, * O pure Mother of God; * help us! for in thee do we hope, * and of thee do we boast; * for we are thy servants, ** let us not then be put to shame."
-        },
-        "ikos": {
-          "text": "Let us lovingly cry unto the Theotokos: Rejoice, mother of the never-setting Star! Rejoice, dawn of the mystic Day! Rejoice, thou who didst extinguish the furnace of error! Rejoice, thou who didst enlighten the initiates of the Trinity! Rejoice, thou who didst banish from power the inhuman tyrant! Rejoice, thou who hast shown us Christ as the Lord and Lover of mankind! Rejoice, thou who redeemest from pagan worship! Rejoice, thou who dost drag from the mire of works! Rejoice, thou who hast stopped the worship of fire! Rejoice, thou who hast quenched the flame of the passions! Rejoice, guide of the faithful to chastity! Rejoice, joy of all generations! Do thou entreat, O most pure one, thy Son and our God that we obtain mercy in the day of judgment."
-        },
-        "exapostilarion": {
-          "text": "Spec. Mel.: “Hearken ye women ...”: Rejoice O Eve! and be renewed O Adam, * all ye prophets together with the apostles and martyrs, * all ye ascetics and hierarchs, rejoice and be glad; * for the divine {saint_name} of the most pure Theotokos Mary * hath been revealed to be a source of joy and gladness * unto the angels and mankind. (Thrice)"
-        }
+      "rubrics": {
+        "polyeleos_instructions": "After Praise ye the name of the Lord, the Megalynarion is chanted according to the specific feast (Nativity, Protection, Annunciation, Dormition, or the General Megalynarion).",
+        "doxology_instructions": "The Great Doxology, after which the Troparion for the feast is sung. If there is no Typicon entry, sing the general Troparion in Tone IV.",
+        "sunday_modifications": "If not a Resurrection Service, chant the Songs of Ascent in Tone IV, First Antiphon."
       }
-    }
-  },
-  "Martyr": {
-    "saint_class": "Martyr",
-    "filename": "Martyr.pdf",
-    "total_chars": 34277,
-    "services": {
-      "vespers": {
-        "stichera_lord_i_cried": [
-          {
-            "order": 1,
-            "tone": 1,
-            "melody": null,
-            "text": "Spec. Mel.: “O all-praised Martyrs ...”: O most blessed one, * comprehending with an upright and honorable heart * the uncircumscribable God, * and undeniably believing in Him; * thou hast faithfully followed * His ineffable and saving commandments, * O most wise one, * and patiently enduring sufferings,"
-          },
-          {
-            "order": 2,
-            "tone": 1,
-            "melody": null,
-            "text": "attained unto the eternal Kingdom. With thine honored blood * consecrating the earth * and abolishing the defiled blood-sacrifice * offered lawlessly unto demons, * O all-honored one, * thou didst receive an incorruptible crown upon thy brow. * Wherefore do thou intercede for us * that our souls be granted peace"
-          },
-          {
-            "order": 3,
-            "tone": 1,
-            "melody": null,
-            "text": "and great mercy. O all-honored Martyr {saint_name}, * Glorifying thy sacred struggles and exploits * we are also consecrated, * for by them thou hast become an associate of angels * and a companion of all the martyrs; * wherefore we beseech thee to pray, * together with them, * that our souls be granted"
-          }
-        ],
-        "theotokion": {
-          "tone": null,
-          "text": "Woe unto me the sinful one! * What shall become of me whose mind, soul, and body * are defiled by transgressions? * What must I do to escape the insufferable flames, * the unbreakable and eternal chains? * O all-immaculate one, * entreat thy Son before my end ** to grant me the remission of sins."
-        },
-        "stavrotheotokion": {
-          "text": "The Sovereign Lady, the unblemished ewe-lamb, * beholding her Lamb upon the Cross, * bereft of form and comeliness, * lamenting, said: “Woe is me! * Whither hath Thy comeliness gone, O most Sweet One? * Where is Thy splendor? Where is the brilliant grace * of Thine image, ** O my Son most beloved?”"
-        },
-        "idiomelon": {
-          "tone": null,
-          "text": "Today the universe is illumined * with the bright rays of the passion-bearer, * and the Church of God, adorned with flowers, * doth cry aloud unto thee, O Martyr {saint_name}; * O favorite of Christ * and most fervent intercessor, * *cease not to pray for thy servants."
-        },
-        "dogmatic_theotokion": {
-          "tone": null,
-          "text": "Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and most blessed one, ** that our souls find mercy!"
-        },
-        "aposticha": {
-          "stichera": [
+    },
+    "martyr": {
+      "saint_class": "Martyr",
+      "title": "The General Vigil Service to One Martyr",
+      "services": {
+        "vespers": {
+          "stichera_lord_i_cried": [
             {
-              "order": 1,
-              "tone": null,
-              "verse": null,
-              "text": "Spec. Mel.: “As one valiant among the martyrs ...”: Even though callous tyrants gave thee over * to be subjected to the most cruel and painful tortures, * and thy much-suffering and steadfastly enduring body * endured a multitude of torments, * thou, O godly-minded {saint_name}, * didst not renounce Christ, * neither didst thou offer sacrifice unto idols, * but endured all as if in another’s body, ** awaiting future reward and the undying love of the Word of God."
+              "tone": 1,
+              "melody": "O all-praised Martyrs...",
+              "text": "O most blessed one, * comprehending with an upright and honorable heart * the uncircumscribable God, * and undeniably believing in Him; * thou hast faithfully followed * His ineffable and saving commandments, * O most wise one, * and patiently enduring sufferings, ** attained unto the eternal Kingdom."
             },
             {
-              "order": 2,
-              "tone": null,
-              "verse": "The righteous man shall flourish like a palm-tree; * like a cedar in Lebanon shall he be multiplied.",
-              "text": "Raised up and cut asunder, * assaulted with stones, * wounded with iron instruments of torture * and executed with a sword; * thou didst remain steadfast, * affixing the gaze of thy soul upon the judicious Rock, * and wast thereby numbered * among the choirs of the Angels, ** and deemed worthy of the never-setting Light."
+              "tone": 1,
+              "melody": "O all-praised Martyrs...",
+              "text": "With thine honored blood * consecrating the earth * and abolishing the defiled blood-sacrifice * offered lawlessly unto demons, * O all-honored one, * thou didst receive an incorruptible crown upon thy brow. * Wherefore do thou intercede for us * that our souls be granted peace ** and great mercy."
             },
             {
-              "order": 3,
-              "tone": null,
-              "verse": "They that are planted in the house of the Lord, * in the courts of our God shall they blossom forth.",
-              "text": "Thy relics, O glorious {saint_name}, * grant healing of their senses, vanquishing of their passions, * unto those who desire it, * curing their infirmities, * dispersing whole hosts of evil spirits, * and supplying nourishing waters * unto the hearts of the faithful * cultivating the divine fruits of the virtues, ** and the proper understanding of piety."
+              "tone": 1,
+              "melody": "O all-praised Martyrs...",
+              "text": "O all-honored Martyr {saint_name}, * Glorifying thy sacred struggles and exploits * we are also consecrated, * for by them thou hast become an associate of angels * and a companion of all the martyrs; * wherefore we beseech thee to pray, * together with them, * that our souls be granted ** peace and great mercy."
             }
           ],
-          "theotokion": null,
-          "stavrotheotokion": null
+          "theotokion": {
+            "tone": 1,
+            "text": "Woe unto me the sinful one! * What shall become of me whose mind, soul, and body * are defiled by transgressions? * What must I do to escape the insufferable flames, * the unbreakable and eternal chains? * O all-immaculate one, * entreat thy Son before my end ** to grant me the remission of sins."
+          },
+          "stavrotheotokion": {
+            "text": "The Sovereign Lady, the unblemished ewe-lamb, * beholding her Lamb upon the Cross, * bereft of form and comeliness, * lamenting, said: \"Woe is me! * Whither hath Thy comeliness gone, O most Sweet One? * Where is Thy splendor? Where is the brilliant grace * of Thine image, ** O my Son most beloved?\""
+          },
+          "idiomelon": {
+            "tone": 6,
+            "rubric": "If an Idiomelon be appointed, Glory..., in Tone VI",
+            "text": "Today the universe is illumined * with the bright rays of the passion-bearer, * and the Church of God, adorned with flowers, * doth cry aloud unto thee, O Martyr {saint_name}; * O favorite of Christ * and most fervent intercessor, * cease not to pray for thy servants."
+          },
+          "dogmatic_theotokion": {
+            "tone": 6,
+            "rubric": "If the Celebration be with a Polyeleos, and not a Resurrection Service, sing the following Dogmatic in Tone VI (If the service is a Resurrection service sing the Dogmatic of the Tone for that service)",
+            "text": "Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and most blessed one, ** that our souls find mercy!"
+          },
+          "aposticha": {
+            "stichera": [
+              {
+                "tone": 4,
+                "melody": "As one valiant among the martyrs...",
+                "text": "Even though callous tyrants gave thee over * to be subjected to the most cruel and painful tortures, * and thy much-suffering and steadfastly enduring body * endured a multitude of torments, * thou, O godly-minded {saint_name}, * didst not renounce Christ, * neither didst thou offer sacrifice unto idols, * but endured all as if in another's body, ** awaiting future reward and the undying love of the Word of God."
+              },
+              {
+                "tone": 4,
+                "verse": "The righteous man shall flourish like a palm-tree; * like a cedar in Lebanon shall he be multiplied.",
+                "text": "Raised up and cut asunder, * assaulted with stones, * wounded with iron instruments of torture * and executed with a sword; * thou didst remain steadfast, * affixing the gaze of thy soul upon the judicious Rock, * and wast thereby numbered * among the choirs of the Angels, ** and deemed worthy of the never-setting Light."
+              },
+              {
+                "tone": 4,
+                "verse": "They that are planted in the house of the Lord, * in the courts of our God shall they blossom forth.",
+                "text": "Thy relics, O glorious {saint_name}, * grant healing of their senses, vanquishing of their passions, * unto those who desire it, * curing their infirmities, * dispersing whole hosts of evil spirits, * and supplying nourishing waters * unto the hearts of the faithful * cultivating the divine fruits of the virtues, ** and the proper understanding of piety."
+              }
+            ],
+            "doxastikon": {
+              "tone": 6,
+              "text": "O come all ye lovers of the Martyrs, * let us reverently glorify the famous Martyr of Christ {saint_name}, * who bravely finished his course here upon the earth, * bruising the head of the serpent, * and with his blood consecrating the earth, * he hath passed from here to the never-ending habitations of the righteous; * receiving there great honors for his exploits from the hand of the Almighty, * unto Whom he prayeth, that our souls be cleansed ** from all iniquity and granted great mercy."
+            },
+            "theotokion": {
+              "tone": 6,
+              "rubric": "If the celebration be with a Polyeleos, chant the Resurrection Theotokion",
+              "text": "Christ the Lord, my Creator and Redeemer, * Who came forth from thy womb, O most pure one, * and clothed Himself in my nature, * hath freed Adam from the primal curse. * Wherefore, like the angel * we unceasingly cry out to thee, O most pure one, * who art truly the Mother of God and Virgin: * Rejoice!, O Sovereign Lady, ** the intercession, protection and salvation for our souls!"
+            },
+            "theotokion_alternate": {
+              "rubric": "Otherwise, Theotokion",
+              "text": "O Theotokos, thou art the true vine * that hast budded forth for us the Fruit of life. * Thee do we entreat: * Pray thou, O Sovereign Lady, with the holy apostles, ** that He have mercy upon our souls."
+            },
+            "stavrotheotokion": {
+              "text": "The most pure one seeing Thee hanging upon the cross * with maternal tears cried aloud to Thee: * \"O my Son and God, * O my sweetest Child, * how is it that Thou sufferest ** such a shameful death?\""
+            }
+          },
+          "troparion": {
+            "tone": 4,
+            "rubric": "The Troparion from the Typicon; but if there be none, chant the following",
+            "text": "In his sufferings, Thy martyr {saint_name} O Lord, * received an imperishable crown from Thee, our God; * for, possessed of Thy might, * he set at naught the tyrants and crushed the feeble audacity of the demons. ** By his supplications save Thou our souls."
+          }
         },
-        "troparion": {
-          "tone": null,
-          "text": "In his sufferings, Thy martyr {saint_name} O Lord, * received an imperishable crown from Thee, our God; * for, possessed of Thy might, * he set at naught the tyrants and crushed the feeble audacity of the demons. ** By his supplications save Thou our souls. (Twice)."
+        "matins": {
+          "troparion": {
+            "tone": 4,
+            "text": "In his sufferings, Thy martyr {saint_name} O Lord, * received an imperishable crown from Thee, our God; * for, possessed of Thy might, * he set at naught the tyrants and crushed the feeble audacity of the demons. ** By his supplications save Thou our souls.",
+            "rubric": "Twice"
+          },
+          "kathisma_hymns": [
+            {
+              "after": "1st chanting of the Psalter",
+              "tone": 1,
+              "melody": "The choir of Angels...",
+              "text": "Counting as naught * military honors upon the earth, * O great Martyr {saint_name}, * thou didst desire the glory of heaven, * enduring great pangs and ultimately death; * wherefore we celebrate today thine all-holy memory, ** offering praise unto Christ, O most blessed {saint_name}.",
+              "theotokion": {
+                "tone": 1,
+                "text": "All we who with love flee for refuge to thy goodness * know thee to be the Mother of God * and after childbirth still truly Virgin; * for we sinners have thee as our protection; * we have thee as our salvation in misfortunes, ** as the only all-immaculate one."
+              }
+            },
+            {
+              "after": "2nd chanting of the Psalter",
+              "tone": 4,
+              "melody": "Thou hast appeared today...",
+              "text": "Faithfully finishing thine earthly course, * thou hast vanquished all the might of thy tormentors, * and obtained an eternal crown from the hand of the Almighty, * O all-honored {saint_name}, * revealed unto all ** to be a companion of the Angels.",
+              "rubric": "Twice",
+              "theotokion": {
+                "tone": 4,
+                "text": "The Word of the Father, Christ our God, * Who was incarnate of thee, * we have come to know, O Virgin Theotokos, * who alone art pure, who alone art blessed. ** Wherefore, we unceasingly hymn and magnify thee."
+              }
+            },
+            {
+              "after": "Polyeleos",
+              "tone": 4,
+              "text": "As Christ's invincible warrior, * and a great vanquisher of the enemy, * thou didst shine forth with great miracles, * wherefore let us all in faith magnify the Martyr {saint_name}, * for he poureth forth healings upon all those who come to him in faith, * a consoler of great pain ** and unceasing intercessor for the afflicted.",
+              "rubric": "Twice",
+              "theotokion": {
+                "tone": 4,
+                "text": "O Virgin Theotokos, * thou art an invincible wall for all Orthodox Christians. * For having recourse unto thee we remain unharmed * and in thee we have a sure intercessor for the forgiveness of our sins; * wherefore rendering thanks unto thee, we cry aloud! ** Rejoice, O thou who art full of grace, the Lord is with thee."
+              }
+            },
+            {
+              "after": "50th Psalm",
+              "tone": 6,
+              "text": "Today the universe is illumined * with the bright rays of the passion-bearer, * and the Church of God, decorated with flowers, * cries aloud unto thee, O Martyr {saint_name}; * O favorite of Christ * and most fervent intercessor, ** cease not to pray for thy servants."
+            }
+          ],
+          "megalynarion": {
+            "text": "We magnify thee, O holy Martyr {saint_name}, and honor thy precious sufferings which thou didst endure for the sake of Christ.",
+            "verse": "Our God is refuge and strength, a helper in afflictions which mightily befall us."
+          },
+          "canon": {
+            "tone": 5,
+            "refrain": "Holy Martyr {saint_name} pray to God for us",
+            "odes": {
+              "1": {
+                "irmos": "Christ, who with an upraised arm * bringeth wars to naught, * hath shaken horse and rider in the Red Sea; * but Israel hath He saved * as they chanted a song of victory.",
+                "troparia": [
+                  "As an invincible Martyr standing with boldness before the throne of God, do thou, O god-blessed one, preserve by thine intercessions those who lovingly celebrate thy holy passion.",
+                  "Having in thy soul an abiding supply of the living water, thou O holy and all-glorious one, dried up the turbid streams of evil, being strengthened by the grace of the Savior, O god-blessed one.",
+                  "O god-blessed one, strengthened with the power of God, and empowered to overcome the pride of the enemy, thou didst become a great champion and citizen of the city on high."
+                ],
+                "theotokion": "O most pure Sovereign Lady, reveal to me, the wretched one, thy compassion, diligently entreating thy Son, O most holy one, that by thine intercessions I may escape the eternal fire."
+              },
+              "3": {
+                "irmos": "By Thy command Thou didst establish the earth upon nothing * and suspended it unsupported; * do Thou establish Thy Church on the unshakeable rock of Thy commandments, O Christ, * who alone art good * and the Lover of mankind.",
+                "troparia": [
+                  "Withdrawing from the stench of the passions and approaching God with divine purity, thou, O right worthy one, didst obtain illumination from God, who revealed thee to be a son of light, as one who fulfilleth the work of light.",
+                  "Counting military calling and earthly glory as naught; thou didst enlist thyself as a soldier of Christ and now, numbered among the companies of Martyrs, thou dost rejoice therein O blessed god-bearer and Martyr {saint_name}.",
+                  "O wondrous one, directing the paths of thy progress in the ways of peace O glorious one, thou didst enter the Kingdom of God, and in the midst of paradise hast found eternal rest."
+                ],
+                "theotokion": "O pure Lady, having given birth unto the Master and Creator of the whole of creation, thou hast appeared more honorable than the Cherubim and Seraphim, wherefore all generations, bless thee as is meet.",
+                "sessional_hymn": {
+                  "tone": 5,
+                  "melody": "The Co-beginningless Word...",
+                  "text": "Illumined with the radiance of the virtues * and adorned with the crown of Martyrdom, * thou, O most wise one, * dost shine more brightly than the sun, * truly enlightening those who faithfully keep thy splendid memory: * O most glorious Martyr {saint_name}, * save those who fall down and worship thy holy relics.",
+                  "theotokion": {
+                    "tone": 5,
+                    "text": "Awesome is the miracle of thy conceiving, and the ineffable image of birth giving known in thee, O pure Ever-virgin, filleth my mind with awe and amazeth my thoughts. Thy glory hath spread over all, O Theotokos, unto the salvation of our souls."
+                  },
+                  "stavrotheotokion": "Through the Cross of thy Son, * O thou who art full of the grace of God, * hath the deception of idolatry been utterly vanquished, * and the might of the demons hath fallen; * wherefore, we, the faithful, ever hymn and bless thee as is meet, ** confessing thee to be the true Theotokos."
+                }
+              },
+              "4": {
+                "irmos": "Habbakuk, prophetically apprehending * Thy divine self-emptying, O Christ, * cried out to Thee with trembling: * Thou hast come for the salvation of Thy people; * to save Thine anointed Ones.",
+                "troparia": [
+                  "O most wise one, adorned with love and trust in God, thou hast shone forth as a Martyr, O most blessed one, becoming a co-dweller with the Angels, O most glorious one.",
+                  "Thou didst remain unshakable and unyielding, living in exile for the sake of the Lord God of all, deprived of thine own, O divinely blessed and most wise one.",
+                  "Having labored well and adorned now with the virtues of a Martyr, thou didst pass over to unseen blessings, reaping the rewards of thy labors."
+                ],
+                "theotokion": "The only Good One, who co-enthroned on high with the Father, hath for our sake became incarnate below of thee, O all-immaculate Lady, through the abundance of His compassion and Love for mankind."
+              },
+              "5": {
+                "irmos": "O Thou Who hast clothed Thyself in light as with a garment, * I rise early unto Thee and cry out to Thee: * Enlighten my darkened soul, O Christ, * in that Thou alone art compassionate!",
+                "troparia": [
+                  "Strengthened by the laws of the Almighty, thou didst reject the advice of the lawless, and suffering lawfully O Martyr {saint_name}, thou hast obtained a crown of incorruption.",
+                  "O most wise one, in the streams of thy blood thou hast extinguished the coals of carnal desire, and now, pouring forth healing waters, by the grace of God, thou drivest away the flames of infirmities.",
+                  "O Martyr thou wast empowered in the infirmity of thy flesh to bring to naught the snares of the crafty one, and by grace O wise one, thou hast cast off multitudes of his allurements."
+                ],
+                "theotokion": "I beseech thee O most immaculate Virgin, Mortify the soul corrupting passions of my body, for thou hast given birth in the flesh unto Christ God, the Source of dispassion."
+              },
+              "6": {
+                "irmos": "Calm the raging sea of the passions, * O Master Christ, * with its soul-destroying tempest, * and lead me up from corruption * in that Thou art compassionate.",
+                "troparia": [
+                  "Thou didst stand before the judgment seat of the law breakers, O Martyr of Christ {saint_name}, uprooting their deceit and manfully rebuking their accusations with thy wisdom, wherefore thou wast judged for the sake of Christ.",
+                  "Thou wast adorned in thy passion with godly virtues, O most wise Martyr of Christ; by which thou wast enlightened by Christ and remained incorrupt.",
+                  "With thy blood thou hast consecrated the earth and with thy consecrated soul hast thou, O most blessed one, illumined heaven and filled with joy the choirs of Martyrs."
+                ],
+                "theotokion": "Taught of the Spirit, the Prophet foresaw in thee a portal through which God would pass, becoming incarnate, yet leaving it sealed, O most immaculate one."
+              },
+              "7": {
+                "irmos": "The supremely exalted Lord of our fathers * quenched the flame, * and bedewed the Youths * as they chanted in harmony: * O God, blessed art Thou!",
+                "troparia": [
+                  "Translating thy Martyred body, the people who love to honor thee, O great sufferer and wise one, gratefully cry aloud: \"Blessed is the God of our Fathers\".",
+                  "By the grace of God thou hast destroyed the offerings of the Pagans, and by Martyrdom thou hast released thyself from fleshly ties. Suffering lawfully, O blessed one, thou didst end thy mortal life for Christ's sake.",
+                  "Seated upon thy blood as if upon a chariot, with joy thou didst ascend beyond this world to the abodes of rest, O rightly-praised Martyr."
+                ],
+                "theotokion": "The glory of all art thou, O pure one, and the strengthening of those who confess thee to be the Mother of our God, O all-immaculate one, Who supra-naturally passed through thy womb."
+              },
+              "8": {
+                "irmos": "Unto Thee the Fashioner of all, * the children in the furnace chanted a hymn: * All ye works of the Lord, * supremely exalt Him throughout all ages.",
+                "troparia": [
+                  "Thou wast an heir of Jerusalem on high and dying in exile, O most wise one, thou dost unceasingly hymn: \"All ye works of the Lord praise ye the Lord, and supremely exalt him throughout the ages\".",
+                  "Partaking of many sufferings, O blessed one, thou didst attain to the life that knoweth no sorrow, from whence thou dost now cry aloud: \"All ye works of the Lord praise ye the Lord, and supremely exalt him throughout the ages\".",
+                  "Empowered by the all-embracing might of God thou didst destroy the beguiling allurements of the Pagans and their crafty falsehoods and received from the Master of all the crown of incorruption, O Martyr."
+                ],
+                "theotokion": "The all-compassionate Word hath assumed flesh from thee, O pure one, uniting Himself to mankind. Beseech Him, O most holy one, to subdue the impulses of my flesh, and to save my soul."
+              },
+              "9": {
+                "irmos": "O Isaiah, rejoice and be glad! * The Virgin hath conceived in her womb, * and hath borne a Son, Emmanuel, * who is both God and man; * and Orient is His name; * Him we magnify, and the Virgin we call blessed.",
+                "troparia": [
+                  "O come all ye faithful, gathered together today let us celebrate the sacred commemoration of the most blessed and holy Martyr of Christ {saint_name}; for in his Martyrdom he, by divine power, hath vanquished multitudes of the enemy.",
+                  "Adorned, O glorious one, with the godly qualities of martyrdom, and riding upon thy blood as in a chariot of fire, thou hast joyfully ascended into the heavens where thou dost behold the ineffable goodness of our Savior.",
+                  "Dwelling now in the Kingdom on high, and gloriously adorned with the crown of a victor, O exceedingly praised Martyr, thou hast been revealed to be a prized warrior and passion-bearer of Christ God."
+                ],
+                "theotokion": "O most holy one, having given birth unto Christ, the enlightenment of those in darkness, enlighten thou my blinded soul and guide me along the paths that lead unto life, O directress of all who hymn thee."
+              }
+            }
+          },
+          "kontakion": {
+            "tone": 2,
+            "melody": "Seeking the highest...",
+            "rubric": "The Kontakion from the Typicon; but if there be none, chant the following",
+            "text": "Thou hast been manifest by thy splendor * as a bright star announcing Christ, * to the temporal world, O Martyr {saint_name}; * vanquishing the allurement of false gods, * thou hast granted the faithful true light, * ever interceding ** on behalf of us all."
+          },
+          "ikos": {
+            "text": "Grant me to hymn, O my God, to recount and honor the pangs of Thy passion-bearer and Martyr, that I may worthily praise the great sufferer {saint_name}, vanquisher of passions, great in piety, who now shineth forth in the midst of the choirs of the Martyrs, and with the multitude of Angels unceasingly hymneth Christ, receiving from above divine illumination, and ever praying on behalf of us all."
+          },
+          "exapostilarion": {
+            "tone": 3,
+            "text": "Illumining all creation like a brightly radiant sun beaming with wondrous rays, * O most glorious Martyr {saint_name}, * we honor thy memory and beseech thee to entreat Him Who rose from the grave, * that we be delivered from all dangers.",
+            "theotokion": {
+              "tone": 3,
+              "text": "With thine almighty protection preserve all of us, * thy servants O pure one, * unharmed by the attacks of the enemy; ** for thee alone do we have as our refuge in need."
+            }
+          },
+          "praises": {
+            "tone": 4,
+            "melody": "Called from above...",
+            "stichera": [
+              {
+                "text": "In psalms as well as in odes we praise thy glorious memory, O {saint_name}, * for thou hast brightly shone forth with renowned valor, * adorned with glory and grace. * Wherefore today O Martyr, the orders of Angels rejoice, * and the Martyrs together with the Apostles * praise thy valiant sufferings, * and hymn the Savior Christ our God, * who hath glorified thee; ** beseech Him to save and enlighten our souls.",
+                "rubric": "Twice"
+              },
+              {
+                "text": "Thou wast found, O {saint_name}, * to be armed with the breastplate of Christ by those who expected the to submit; * for being burned with fire for Christ's sake * and scorning the godless fury of the vain gods, * thou didst cry out to the lawless ones saying: * \"I wage war for my King, Christ; * neither beast, nor wheels, nor any other torment * can ever separate me from the love of Christ\", ** beseech Him to save and enlighten our souls."
+              },
+              {
+                "text": "Having contended with multifarious tortures, * and a multitude of fearful instruments, * thou, O crown-bearer {saint_name}, didst end thy devout life in Martyrdom; * wherefore we crown thy most splendid memory * with the flowers of hymns * and in faith kiss thy precious relics; * but since thou standest before the throne of the Master, Christ our God, * cease not to entreat Him ** to save and enlighten our souls."
+              }
+            ],
+            "doxastikon": {
+              "tone": 1,
+              "text": "O glory of the Martyrs {saint_name}! * thy splendid victories have destroyed the deceit of thine enemies, * and the glory of thy bodily sufferings hast thou borne meekly as a victor, * raise thou up from the fall into sin ** those who with faith honor thy memory."
+            },
+            "theotokion": {
+              "tone": 1,
+              "text": "Rejoice! O Virgin Theotokos, * for thou hast given birth to the King of heaven, ** the Savior and Enlightener of our souls."
+            },
+            "stavrotheotokion": {
+              "text": "The Sovereign Lady, the unblemished ewe-lamb, * beholding her Lamb upon the Cross, * bereft of form and comeliness, * lamenting, said: \"Woe is me! * Whither hath Thy comeliness gone, O most Sweet One? * Where is Thy splendor? Where is the brilliant grace * of Thine image, ** O my Son most beloved?\""
+            }
+          }
         }
       },
-      "matins": {
-        "troparion": {
-          "tone": null,
-          "text": "In his sufferings, Thy martyr {saint_name} O Lord, * received an imperishable crown from Thee, our God; * for, possessed of Thy might, * he set at naught the tyrants and crushed the feeble audacity of the demons. ** By his supplications save Thou our souls. (Twice)."
-        },
-        "kontakion": {
-          "tone": null,
-          "text": "Kontakion of the martyr, in Tone II: Spec. Mel.: “Seeking the highest ...”: Thou hast been manifest by thy splendor * as a bright star announcing Christ, * to the temporal world, O Martyr {saint_name}; * vanquishing the allurement of false gods, * thou hast granted the faithful true light, * ever interceding ** on behalf of us all. The"
-        },
-        "ikos": {
-          "text": "Grant me to hymn, O my God, to recount and honor the pangs of Thy passion-bearer and Martyr, that I may worthily praise the great sufferer {saint_name}, vanquisher of passions, great in piety, who now shineth forth in the midst of the choirs of the Martyrs, and with the multitude of Angels unceasingly hymneth Christ, receiving from above divine illumination, and ever praying on behalf of us all."
-        },
-        "exapostilarion": {
-          "text": "Illumining all creation like a brightly radiant sun beaming with wondrous rays, * O most glorious Martyr {saint_name}, * we honor thy memory and beseech thee to entreat Him Who rose from the grave, * that we be delivered from all dangers."
-        }
+      "rubrics": {
+        "polyeleos_instructions": "If the Celebration be with a Polyeleos, and not a Resurrection Service, sing the Dogmatic in Tone VI. If the service is a Resurrection service sing the Dogmatic of the Tone for that service.",
+        "doxology_instructions": "The great Doxology. If a small Doxology is read, and a Doxasticon is appointed, the Doxastikon is chanted after the Aposticha.",
+        "sunday_modifications": "If the service is a Resurrection service, sing the Dogmatic of the Tone for that service instead of the appointed Dogmatic Theotokion."
       }
     }
   }
