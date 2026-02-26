@@ -461,18 +461,38 @@ def _substitute_name(obj, name):
 # ---------------------------------------------------------------------------
 # Main resolver
 # ---------------------------------------------------------------------------
-def resolve(month, day, year, calendar=1):
+RANK_NAMES = {
+    1: 'Great Feast',
+    2: 'Vigil',
+    3: 'Polyeleos',
+    4: 'Doxology',
+    5: 'Six Stichera',
+    6: 'Afterfeast',
+    7: 'Simple',
+}
+
+
+def resolve(month, day, year, calendar=1, rank=None, menaion_source='general'):
     """
     Resolve all liturgical variables for a given date.
+
+    Args:
+        month, day, year: date components
+        calendar: 0 = new calendar, 1 = old calendar (default)
+        rank: override feast rank (1-7). 7 = simple service (octoechos only).
+              None = use the rank from the feast calendar.
+        menaion_source: 'general' (24 saint classes, default),
+                        'full' (366-day, not yet available),
+                        'none' (skip menaion entirely)
 
     Returns dict with:
       - liturgical: paschalion data (pascha_offset, tone, lent_week, etc.)
       - period: 'lent' | 'pre_lent' | 'paschal' | 'normal'
+      - rank: effective rank used (from calendar or override)
+      - rank_name: human-readable rank label
+      - menaion_source: which menaion was used ('general', 'full', 'none')
       - sources: which JSON sources contributed data
-      - triodion: triodion entry data (if applicable)
-      - pentecostarion: pentecostarion entry data (if applicable)
-      - octoechos: octoechos entry data (if applicable)
-      - menaion: menaion entry data (if applicable)
+      - triodion / pentecostarion / octoechos / menaion: entry data
       - feast: feast info (rank, name, long_name, service_type)
     """
     month = int(month) if isinstance(month, str) else month
@@ -503,6 +523,21 @@ def resolve(month, day, year, calendar=1):
     else:
         period = 'normal'
 
+    # Determine effective menaion source
+    if menaion_source == 'full':
+        # Full menaion (366 days) not yet extracted — fall back to general
+        effective_menaion = 'general'
+        menaion_note = 'full menaion not yet available, using general'
+    elif menaion_source == 'none':
+        effective_menaion = 'none'
+        menaion_note = None
+    else:
+        effective_menaion = 'general'
+        menaion_note = None
+
+    # Simple service (rank 7) means no menaion
+    skip_menaion = effective_menaion == 'none' or rank == 7
+
     sources = []
     result = {
         'date': service_date.isoformat(),
@@ -512,6 +547,8 @@ def resolve(month, day, year, calendar=1):
         'menaion_date': menaion_date,
         'liturgical': lit,
         'period': period,
+        'menaion_source': effective_menaion if not skip_menaion else 'none',
+        'menaion_note': menaion_note,
         'sources': sources,
         'triodion': None,
         'pentecostarion': None,
@@ -521,26 +558,28 @@ def resolve(month, day, year, calendar=1):
     }
 
     # --- Triodion ---
-    tri_key = _triodion_key(offset)
-    if tri_key and tri_key in _triodion:
-        tri_entry = _triodion[tri_key]
-        result['triodion'] = {
-            'key': tri_key,
-            'desc': tri_entry['desc'],
-            'services': tri_entry['services'],
-        }
-        sources.append('triodion')
+    if rank != 7:  # simple service skips moveable books too
+        tri_key = _triodion_key(offset)
+        if tri_key and tri_key in _triodion:
+            tri_entry = _triodion[tri_key]
+            result['triodion'] = {
+                'key': tri_key,
+                'desc': tri_entry['desc'],
+                'services': tri_entry['services'],
+            }
+            sources.append('triodion')
 
     # --- Pentecostarion ---
-    pent_key = _pentecostarion_key(offset)
-    if pent_key and pent_key in _pentecostarion:
-        pent_entry = _pentecostarion[pent_key]
-        result['pentecostarion'] = {
-            'key': pent_key,
-            'desc': pent_entry['desc'],
-            'services': pent_entry['services'],
-        }
-        sources.append('pentecostarion')
+    if rank != 7:
+        pent_key = _pentecostarion_key(offset)
+        if pent_key and pent_key in _pentecostarion:
+            pent_entry = _pentecostarion[pent_key]
+            result['pentecostarion'] = {
+                'key': pent_key,
+                'desc': pent_entry['desc'],
+                'services': pent_entry['services'],
+            }
+            sources.append('pentecostarion')
 
     # --- Octoechos ---
     oct_key = _octoechos_key(tone, weekday)
@@ -555,29 +594,44 @@ def resolve(month, day, year, calendar=1):
         sources.append('octoechos')
 
     # --- Menaion ---
-    men = _lookup_menaion(menaion_date, weekday)
-    if men:
-        result['menaion'] = men
-        result['feast'] = {
-            'rank': men['rank'],
-            'service_type': men['service_type'],
-            'service_name': men['service_name'],
-            'long_name': men['long_name'],
-        }
-        sources.append('menaion')
+    if not skip_menaion:
+        men = _lookup_menaion(menaion_date, weekday)
+        if men:
+            result['menaion'] = men
+            result['feast'] = {
+                'rank': men['rank'],
+                'service_type': men['service_type'],
+                'service_name': men['service_name'],
+                'long_name': men['long_name'],
+            }
+            sources.append('menaion')
+
+    # Effective rank: override > feast calendar > 7 (simple)
+    feast_rank = result['feast']['rank'] if result['feast'] else 7
+    effective_rank = rank if rank is not None else feast_rank
+    result['rank'] = effective_rank
+    result['rank_name'] = RANK_NAMES.get(effective_rank, f'Rank {effective_rank}')
 
     return result
 
 
-def resolve_service(month, day, year, service_type, calendar=1):
+def resolve_service(month, day, year, service_type, calendar=1,
+                    rank=None, menaion_source='general'):
     """
     Resolve variables for a specific service type (vespers, matins, liturgy, etc.)
     by merging from all applicable sources according to the priority chain.
 
+    Args:
+        service_type: 'vespers', 'matins', 'liturgy', 'compline', etc.
+        rank: override rank (7 = simple/octoechos only)
+        menaion_source: 'general', 'full', 'none'
+
     Returns a dict of variables ready for template rendering.
     """
-    ctx = resolve(month, day, year, calendar)
+    ctx = resolve(month, day, year, calendar, rank=rank,
+                  menaion_source=menaion_source)
     period = ctx['period']
+    effective_rank = ctx['rank']
 
     # Gather per-source service data
     tri_svc = (ctx['triodion'] or {}).get('services', {}).get(service_type)
@@ -585,38 +639,45 @@ def resolve_service(month, day, year, service_type, calendar=1):
     oct_svc = (ctx['octoechos'] or {}).get('services', {}).get(service_type)
     men_svc = ((ctx['menaion'] or {}).get('services') or {}).get(service_type)
 
-    # Determine primary source based on period
-    if period == 'lent' or period == 'pre_lent':
-        primary = tri_svc
-        primary_name = 'triodion'
-    elif period == 'paschal':
-        primary = pent_svc
-        primary_name = 'pentecostarion'
+    # Simple service: octoechos only
+    if effective_rank == 7:
+        merged = dict(oct_svc) if oct_svc and isinstance(oct_svc, dict) else {}
+        primary_name = 'octoechos'
     else:
-        primary = men_svc
-        primary_name = 'menaion'
+        # Determine primary source based on period
+        if period in ('lent', 'pre_lent'):
+            primary = tri_svc
+            primary_name = 'triodion'
+        elif period == 'paschal':
+            primary = pent_svc
+            primary_name = 'pentecostarion'
+        else:
+            primary = men_svc
+            primary_name = 'menaion'
 
-    # Build merged result: start with octoechos as base, overlay menaion, overlay primary
-    merged = {}
+        # Build merged result: octoechos base → menaion fill → primary overlay
+        merged = {}
 
-    if oct_svc and isinstance(oct_svc, dict):
-        merged.update(oct_svc)
+        if oct_svc and isinstance(oct_svc, dict):
+            merged.update(oct_svc)
 
-    if men_svc and isinstance(men_svc, dict) and primary_name != 'menaion':
-        # Menaion fills in where triodion/pentecostarion doesn't have content
-        for k, v in men_svc.items():
-            if v:  # only overlay non-empty
-                merged[k] = v
+        if men_svc and isinstance(men_svc, dict) and primary_name != 'menaion':
+            for k, v in men_svc.items():
+                if v:
+                    merged[k] = v
 
-    if primary and isinstance(primary, dict):
-        for k, v in primary.items():
-            if v:
-                merged[k] = v
+        if primary and isinstance(primary, dict):
+            for k, v in primary.items():
+                if v:
+                    merged[k] = v
 
     merged['_period'] = period
     merged['_sources'] = ctx['sources']
     merged['_primary'] = primary_name
     merged['_feast'] = ctx.get('feast')
+    merged['_rank'] = effective_rank
+    merged['_rank_name'] = ctx['rank_name']
+    merged['_menaion_source'] = ctx['menaion_source']
     merged['_weekday'] = ctx['weekday']
     merged['_tone'] = (ctx['liturgical'] or {}).get('weekly_tone')
     merged['_date'] = ctx['date']
