@@ -18,14 +18,11 @@ SERGIUS = 'http://www.st-sergius.org/'
 def open_service(service:str, filename:str):
     payload = ''
     f = filename if '.' in filename else filename + '.pdf'
-    # print(f[-4:])
-    #f = filename if filename[-4:] == '.pdf' else filename + '.pdf' #set download file name
     src = f'services/{service}/{f}'
     if f[-4:] == '.pdf':
         with fitz.open(src) as content:
             for page in content: #read each page
-                i = page.getText('blocks', flags=fitz.TEXT_INHIBIT_SPACES|fitz.TEXT_DEHYPHENATE)
-                #print(i)
+                i = page.get_text('blocks', flags=fitz.TEXT_INHIBIT_SPACES|fitz.TEXT_DEHYPHENATE)
                 if type(i) == str:
                     payload += i
                 if type(i) == list:
@@ -38,9 +35,7 @@ def open_service(service:str, filename:str):
                                     payload += k
     elif f[-4:] == '.txt':
         with open(src, 'r', encoding='utf-8') as fil:
-            #print(fil)
             payload = fil.read()
-    #payload = payload.replace('h2','p').replace('<b>','</p><p><b>')
     payload = re.sub(r'((?<![.!?:A-Z])\s*)\n',r'\1',payload)
     return payload #return payload string
 
@@ -87,7 +82,7 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
                 file.close() #close/save the file
                 with fitz.open(f) as content: #open for extraction
                     for page in content: #read each page
-                        payload += page.getText() #add each page to payload
+                        payload += page.get_text() #add each page to payload
                 os.remove(f) #delete downloaded file after payload established
                 return payload #return payload string
             else: #gather file from web
@@ -95,7 +90,7 @@ def process_pdf (filename:str, url:str=None, service:str=None, local:bool=True):
                 #print(f'opening local file: {os.path.join(dir,folder.get(service if service else caller),f)}')
                 with fitz.open(os.path.join(dir,folder.get(service if service else caller),f)) as content:
                     for page in content: #read each page
-                        payload += page.getText() #add each page to payload
+                        payload += page.get_text() #add each page to payload
                 return payload #return payload string
         except:
             print(f'Gathering {filename} from local = {local} FAILED! Attempting with local = {not local}')
