@@ -1,0 +1,94 @@
+{
+  "saint_class": "Nun",
+  "filename": "Nun.pdf",
+  "total_chars": 32996,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 8,
+          "melody": null,
+          "text": "Spec. Mel.: “Thy Martyrs, O Lord ...”: Enduring the labors of asceticism, * O honored mother {saint_name}, * thou hast obtained the grace to cleanse diseases * of both soul and body, * to vanquish unclean spirits by the spirit, * and to be a patron of the afflicted; * wherefore we beseech thee, that by thy prayers"
+        },
+        {
+          "order": 2,
+          "tone": 8,
+          "melody": null,
+          "text": "we be granted healing and great mercy. The shrine of thy relics * poureth forth recovery of sight to the blind, * and cures for all the infirm who approach them with faith * and implore thy visitation, * O right wondrous venerable mother {saint_name}; * wherefore we beseech thee, that by thy prayers"
+        },
+        {
+          "order": 3,
+          "tone": 8,
+          "melody": null,
+          "text": "we be granted healing and great mercy. Having acquired mercy towards thy neighbor, * and Orthodox faith and love towards God, * O God-blessed, honored {saint_name}; * the spiritual grace of God rested upon thee, * O venerable mother; * wherefore we beseech thee, that by thy prayers"
+        },
+        {
+          "order": 4,
+          "tone": 8,
+          "melody": null,
+          "text": "those who bless thee may be preserved in the faith."
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone VIII: O most pure one, held fast by our many afflictions * we entreat thee our intercessor; * forsake us not, that thy servants be not utterly ruined; * but do thou hasten to deliver us from every wrath and necessity, * O most holy tabernacle of God, ** for thou art an impregnable rampart and succor."
+      },
+      "stavrotheotokion": {
+        "text": "Beholding Thee O Lord Jesus, * nailed upon the cross and voluntarily accepting the passion, * the Virgin Mother cried aloud: * Woe is me, O my sweet Child! * how dost Thou wrongfully endure such wounds? * O compassionate Physician and healer of the infirmities of mankind, * Thou hast redeemed of all from corruption ** by Thy tender compassion."
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone II: Having cut down spiritual snares and bodily passions * with the sword of abstinence, * and having vanquished sinful thoughts with silence and fasting, * thou dist water the noetic desert * with the streams of thy tears, * blossoming forth the fruits of repentance; * wherefore we celebrate, O venerable one, ** thy sacred memory."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone II: The shadow of the law hath passed now that grace hath come, * for as the Bush wrapped in flame was not consumed, * so didst thou bear a Child O Virgin * and remained a Virgin; * in place of a pillar of fire, the Sun of righteousness hath dawned, * instead of Moses, Christ is come, ** the salvation of our souls."
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone I: Spec. Mel.: “Joy of the ranks of heaven ...”: Having true adoration for the splendor of the fathers, * and having loved incorruptible glory; * thou didst reject the delight of temporal things, O {saint_name}, * giving thy body over to a multitude of labors, * and now having obtained the reward of thy struggles, ** thou dost reign together with Christ."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Wondrous is God in His saints, * the God of Israel.",
+            "text": "Desiring the fair beauty of the Bridegroom Christ, * and striving to betroth thyself to Him, * thou didst adorn thyself * with the labors of asceticism, * and with a multitude of good deeds O {saint_name}, ** wherefore thou dost now reign with Him in paradise."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "In the Congregations bless ye God, * the Lord, from the wellsprings of Israel.",
+            "text": "Setting course for the divine haven, * thou hast calmly traversed the seas of worldly distractions, * piloting the ship of thy soul, * keeping it safe from foundering * on the shoals of temporal pleasures, ** and filling it with secret treasures."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: In thee, O mother, the image of God was preserved, * for taking up thy cross, thou didst follow after Christ; * by activity thou didst learn to disdain the flesh, as something transient, * but to care for thy soul as something immortal. ** Wherefore, with the angels thy spirit doth rejoice, O venerable {saint_name}. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: In thee, O mother, the image of God was preserved, * for taking up thy cross, thou didst follow after Christ; * by activity thou didst learn to disdain the flesh, as something transient, * but to care for thy soul as something immortal. ** Wherefore, with the angels thy spirit doth rejoice, O venerable {saint_name}. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; if there be none, chant the following: Kontakion of the venerable mother, in Tone II: Spec. Mel.: “Having received the grace ...”: Having discarded a bed for rest, * for the sake of thy love for God, * O Mother {saint_name}, * and illuminating thy spirit with fasting, * thou hast completely vanquished thine enemies; * and by thine intercessions ** destroyed the evil machinations of our adversaries. The"
+      },
+      "ikos": {
+        "text": "O my God, fashion my mind and bless my tongue, and grant me streams of fair speech, that I may hymn thy lamb whom Thou hast crowned with Thy grace. For if words worthy of her praise are not imparted to me, wretch that I am, how can I offer worthy gifts unto her, who is exceedingly rich both in words and deeds? Wherefore grant me the wisdom to declare unto all the glory of her ascetic struggles in vanquishing the noetic beasts, and by her fervent intercessions destroy the machinations of our adversaries."
+      },
+      "exapostilarion": {
+        "text": "Hiding thy shame from the prince of this world * beneath the vesture of thy tonsure, * thou hast in a most wise manner revealed his foolishness, * for though thou wast a Virgin in both soul and body * thou wast most manly in thine understanding and faith, O venerable {saint_name}, * thou beauty of chastity, and adornment of the tonsured."
+      }
+    }
+  }
+}

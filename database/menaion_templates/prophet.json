@@ -1,0 +1,94 @@
+{
+  "saint_class": "Prophet",
+  "filename": "Prophet.pdf",
+  "total_chars": 34287,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 4,
+          "melody": null,
+          "text": "Spec. Mel.: “Called from above ...”: Having received, in the purity of thy mind, * inspiration from the effulgent and exceedingly divine light, * thou wast revealed to be a divine oracle of the Spirit, * and a blessed prophet, * conveying that which was unveiled unto thee by Him, * O all- honored {saint_name}, * declaring unto all peoples the salvation that was to be bestowed * by the kingdom of Christ;"
+        },
+        {
+          "order": 2,
+          "tone": 4,
+          "melody": null,
+          "text": "do thou entreat Him to save and enlighten our souls. Thou, O God-inspired {saint_name}, * hath shone forth worthily with the vision of God * and prophetic understanding, * wherefore honored with grace, * thou wast deemed worthy of divine blessedness, * possessing now great boldness towards the exceedingly good One * and great compassion towards us, * cease not to pray on behalf of those who with faith praise thee * and honor thee as a god-declaring, venerable and acceptable prophet of God, * that we may be delivered from all misfortunes"
+        },
+        {
+          "order": 3,
+          "tone": 4,
+          "melody": null,
+          "text": "and that our souls be saved. Thy Prophet {saint_name} O Immortal One * hast been revealed to be like a light cloud sprinkling forth the waters of eternal life, * richly endowed with the most holy Spirit, * Which is one in essence with both Thee, the Father almighty, * and with Thy Son * Who shone forth from Thine essence; * Sending him forth Thou hast, through him, * foretold the saving revelation of Christ God,"
+        },
+        {
+          "order": 4,
+          "tone": 4,
+          "melody": null,
+          "text": "and announced the mystery of salvation unto all the Nations."
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone IV: In that I have fallen, accursed, * into the abyss of many falls * through my despondency and slothfulness, wretch that I am, * I am now held fast by doubt and despair. * Be a help and cleansing to me * and salvation, O most pure one, * bestowing upon me thy most compassionate consolation. * Thee do I beseech, * and to thee do I pray; * and I fall down and cry out to thee with faith: * Let me not utterly become ** a joy to the deceiver!"
+      },
+      "stavrotheotokion": {
+        "text": "“Lament not for Me, O Mother, * beholding Me thy Son and God hanging upon the Tree, * Who hath suspended the earth upon the waters unsupported, * and hath fashioned all creation; * for I shall arise and be glorified, * and shall crush the kingdoms of Hades with strength; * destroying its power * and delivering those in bondage * from its wickedness, * for I am compassionate; * and I shall bring them to My Father, ** in that I am the Lover of mankind.”"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VI: O Prophet and great herald of Christ, * thou who art never separated from the throne of glory, * ever present with all those who suffer; * thou dost ever minister from on high, blessing all the inhabited world * wherefore thou art ever glorified throughout all the world; ** pray thou that our souls be cleansed."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VI: Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and most blessed one, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone II: Spec. Mel.: “When from the tree ...”: Having found the purity of thy mind, * O Prophet {saint_name}, * to be manifestly like a resplendent mirror, * which through thee illumineth the world * with the brightness of the knowledge of God, * enlightening us with knowledge of the divine mysteries * and of the grace that was to be bestowed * upon all mankind, ** O most wondrous one."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Thou art a priest for ever, * after the order of Melchisedek.",
+            "text": "Being the mouth of God, * thou hast openly reproved evil-doers, * sentencing them to their inevitable judgment, * O {saint_name}, who art most noetically rich, * while following the righteous teachings of God’s decrees; * wherefore beholding the fulfillment * of thy most wise declarations, * we worthily praise thee in hymns, ** O blessed one."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Moses and Aaron among His priests, * and Samuel among them t",
+            "text": "hat call upon His name Standing before the throne of the Master, * satiated with the ineffable and divine glory, * permeated with light, * perceiving things above this world, * do thou, O God- inspired Prophet {saint_name}, * remember those who in faith honor thee, * praying, O favored of God, * that they be granted the salvation of their souls, ** and the remission of their sins."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone II: Celebrating the memory of Thy Prophet {saint_name}, O Lord, * through him we entreat Thee: ** Save Thou our souls! (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone II: Celebrating the memory of Thy Prophet {saint_name}, O Lord, * through him we entreat Thee: ** Save Thou our souls! (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion of the prophet, in Tone IV: Spec. Mel.: “Thou hast appeared today ...”: Thy pure heart, enlightened by the Spirit, * became the dwelling place of most splendid prophecy; * for thou dist behold things afar off * as though they were near. * Wherefore, we honor thee, ** O blessed and glorious Prophet {saint_name}."
+      },
+      "ikos": {
+        "text": "Adorned with the grace of prophesy, comprehending things to come, O god-inspired {saint_name}, Thou wast taught of the Spirit in a godly manner, foretelling the coming of Christ and the fruitful calling of the Gentiles; wherefore we celebrate thine honored memory and with love hymn thee, glorifying thee in faith and calling unto thee, O glorious one: unceasingly entreat Christ God on behalf of us all."
+      },
+      "exapostilarion": {
+        "text": "All the Prophets rejoice and joyfully exult * celebrating thy feast day, O divinely- wise one, * participating in delight and thy godly glory; * do thou intercede together with them * that those who hymn thee be saved."
+      }
+    }
+  }
+}

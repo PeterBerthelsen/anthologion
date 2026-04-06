@@ -1,0 +1,85 @@
+{
+  "saint_class": "MonasticMartyr",
+  "filename": "MonasticMartyr.pdf",
+  "total_chars": 34995,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 6,
+          "melody": null,
+          "text": "Spec. Mel.: “On the third day ...”: Let us, O faithful, as is meet, * praise the ascetic feats, and pangs, * of the wise faster and warrior of Christ, * and cry out unto the Lord: * By his prayers, O Christ God,"
+        },
+        {
+          "order": 2,
+          "tone": 6,
+          "melody": null,
+          "text": "deliver us from every evil circumstance. An abundance of most gracious peace * hath been granted thee from God, * O venerable father {saint_name}, * for thou didst endure * the turbulent storm of torments, * O invincible warrior,"
+        },
+        {
+          "order": 3,
+          "tone": 6,
+          "melody": null,
+          "text": "ever intercede for those who praise thee. Thou, O wise one, having suffered lawfully, * and been most wisely disposed to God, * became another temple of the Fashioner of all that is, * and revealed to be a god-bearing martyr, * thou light of the church,"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone VI: O pure Virgin Theotokos, * entreat the Lord that by thine intercessions, * He grant our souls remission of sins, ** peace and great mercy."
+      },
+      "stavrotheotokion": {
+        "text": "Upon beholding our Life suspended upon the Tree, * the all- immaculate Theotokos cried aloud, * maternally lamenting: ** O my Son and my God, save those who with love hymn Thee!"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone V: O venerable father, * thou didst not give sleep to thine eyes, * nor slumber to thine eyelids, * until thou didst free thy mind and body from the passions, * and prepare thyself to be a habitation of the Spirit; * Wherefore Christ having come unto thee with His Father * made His abode within thee. * O great preacher and venerable one, * having received the grace of the Consubstantial Trinity, ** pray thou for our souls."
+      },
+      "dogmatic_theotokion": null,
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone I: Spec. Mel.: “O all-praised Martyrs ...”: O most praiseworthy {saint_name}, * thou didst dedicate thy life * to the cultivation of the virtues; * wherefore the faithful who with faith praise Christ, * were humbled by thy doctrines, * and having confirmed them while in the world, * and standing now before the Divine Spirit, ** ever beseech Him for us."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Precious in the sight of the Lord * is the death of His saints.",
+            "text": "Thy life, O divinely inspired martyr {saint_name}, * was revealed to be * equal to that of the angels, * and like a sacrifice * of fragrant and precious incense, * thy confession was brought unto those on high. * Do thou now pray ** that our souls be granted peace and great mercy."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Blessed is the man that feareth the Lord, * in His commandments shall he greatly delight.",
+            "text": "Having been abundantly rich * in the vanquishing the passions, * thou, O {saint_name}, didst triumph over the tyrant; * and exulting now together with the crown-bearers, * remember, O blessed one, * all those who celebrate thy memory, * and entreat Christ ** to grant our souls peace and great mercy."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: In thee, O father, the image of God was preserved, * for taking up thy cross, thou didst follow after Christ; * by activity thou didst learn to disdain the flesh, as something transient, * but to care for thy soul as something immortal. ** Wherefore, with the angels thy spirit doth rejoice, O venerable {saint_name}. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: In thee, O father, the image of God was preserved, * for taking up thy cross, thou didst follow after Christ; * by activity thou didst learn to disdain the flesh, as something transient, * but to care for thy soul as something immortal. ** Wherefore, with the angels thy spirit doth rejoice, O venerable {saint_name}. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion of the venerable martyr, in Tone II: As a pious and capable faster, * as an all-honored and willing martyr, * and as one who led an eremitic life in the desert, * let us worthily extol in hymns the ever-lauded {saint_name}, ** for he hath trampled the serpent underfoot."
+      },
+      "ikos": {
+        "text": "Emulating the Lord’s passion O most blessed one, thou didst harbor the desire to sacrifice thyself for Him, and having manfully struggled against the adversaries, thou didst destroy the delusion of idolatry, bringing to naught the cunning machinations and wiles of the enemy, and hast thereby obtained a crown of honour, O {saint_name}, most venerable father; wherefore we in faith have recourse to thy protection and cry aloud to thee; From enemies visible and invisible do thou deliver us, for thou hast trampled the serpent underfoot."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “Hearken, O ye women ...”: Having been well proved; first by suffering, and then by thine accomplished and divine eremitic life, thou didst ascend into heaven, and standing now before Christ; do thou, O venerable father {saint_name}, fervently intercede on behalf of us who hymn thee."
+      }
+    }
+  }
+}

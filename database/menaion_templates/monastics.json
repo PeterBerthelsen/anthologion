@@ -1,0 +1,88 @@
+{
+  "saint_class": "Monastics",
+  "filename": "Monastics.pdf",
+  "total_chars": 31259,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 8,
+          "melody": null,
+          "text": "Spec. Mel.: “O most glorious wonder ...”: O divinely-wise, fathers! * You give light to the blind, * cures to the infirm, and health to the lame, * hearkening mercifully unto those * who in faith come to your holy temple * entreating your help, * for all we who praise you, * know you to be sure protectors and intercessors"
+        },
+        {
+          "order": 2,
+          "tone": 8,
+          "melody": null,
+          "text": "for our souls. O all-honored fathers! ascending to God * in the chariot of your virtues, * you received the honors of your victory, * and for our sakes, O fathers, * left your bodies in the grave * where they shed abundant healings, * driving away evil spirits; * wherefore we bless you,"
+        },
+        {
+          "order": 3,
+          "tone": 8,
+          "melody": null,
+          "text": "O most praised ones. Adorned with the life of fasting * you have been united * with the choirs of ascetics, * and now, O blessed ones, * you dwell joyfully in the heavenly habitations * where the choirs of angels rejoice, * truly deified with the divine light. * Remember those who with love bless you on earth"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone VIII: My thoughts are impure, * and my lips are false, * all my works are defiled. * What, then, shall I do? * How shall I meet the Judge? * O Virgin Sovereign Lady, * entreat the Lord, thy Son and Creator, * that He accept my soul in repentance, ** in that He alone is compassionate."
+      },
+      "stavrotheotokion": {
+        "text": "The unblemished ewe-lamb * upon beholding her lamb voluntarily nailed upon the tree, * lamented with maternal tenderness: * “Woe is me, O my most beloved child! * What is this that the ungrateful Jews have done to Thee, ** wishing to deprive me of Thee, O most beloved one”."
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VI: O venerable fathers! * the fame of your endeavors hath gone forth throughout all the earth, * for having vanquished hordes of demons * ye became like the angels whom you emulated in the purity of your lives, * wherefore ye now enjoy the reward of your labors in heaven. * Since ye posses great boldness before Christ God, ** entreat Him to grant peace to our souls."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VI: Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and most blessed one, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone IV: Spec. Mel.: “As one valiant among the martyrs ...”: In a divinely-wise manner * ye put off the old man and put on Christ, * shining like radiant stars upon the earth, * illumined with spiritual grace, * ye intercede on behalf of those * who fervently and faithfully celebrate * your honorable memory * that they be delivered ** from corruption and all dangers."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Precious in the sight of the Lord * is the death of His saints.",
+            "text": "Having inherited eternal life, * ye now enjoy spiritual nourishment * and immersion in the divine light, * O divinely-wise ones, * since ye have great boldness towards God, * reveal unto us your truly Christ-like love, * and deliver from dangers and the multiplicity of temptations * and from every affliction ** those who make recourse to you."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Blessed is the man that feareth the Lord, * in His commandments shall he greatly delight.",
+            "text": "O all-wondrous God-bearers, * champions of the Trinity! * With wisdom vesting yourselves * for the struggle against * the prince of this world, * ye have firmly subdued him * and obtained crowns of victory; * wherefore we, illumined with grace, ** celebrate your splendid memory."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but, if there be none, chant the following: Kontakion of the venerable ones, in Tone II: Spec. Mel.: “Seeking the highest ...”: Passing unharmed through a multitude of tempests, * and having received the gift of miracles, * ye drowned your immaterial enemies in the streams of your tears, * O divinely-wise and venerable ones, ** cease not to pray on behalf of us all."
+      },
+      "ikos": {
+        "text": "O venerable fathers, by your prayers and fasting ye have flourished like a beautiful garden issuing forth from paradise, planted with the abundance of your virtues, and filling all with the sweet fragrance of your many spiritual struggles, deeds and toils, amidst which ye have skillfully passed over to the life without sorrow, and now crowned with victory; cease not to pray on behalf of us all."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “Thou hast visited us ...”: Like the palms of David, O fathers, * ye have flourished and been revealed to be abodes of the Holy Spirit, * by whose action ye have been shown to be wondrous throughout all the world, * O holy venerable fathers {saint_name}, unceasingly pray for us * who faithfully honor your most sacred memory."
+      }
+    }
+  }
+}

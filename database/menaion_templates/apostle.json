@@ -1,0 +1,76 @@
+{
+  "saint_class": "Apostle",
+  "filename": "Apostle.pdf",
+  "total_chars": 32855,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 8,
+          "melody": null,
+          "text": "Spec. Mel.: “What shall we name thee ...”: O Apostle what shall we name thee?, * heaven, since thou hast confessed the glory of God ? * a stream, since thou dost mystically give drink unto creation? * a star, that illumines the Church? * a cup which pours forth holy nector? * or true friend of Christ and companion of the Bodiless Powers? * We entreat thee, do thou make supplication that our souls be saved. O glorious God-seeing Apostle! * Beautiful have become thy feet treading well along the paths of preaching * and making narrow the way of the enemy by the breadth of thy divine knowledge of the Word * who hath appeared in the coarseness of the flesh * and who O radiant one hath selected thee as a most glorious disciple. * Do thou make supplication unto Him that our souls may be saved. O Godly-spoken Apostle, * thou wast truly sent from Christ * as a luminous arrow wounding our enemies * and manifestly granting unto wounded souls cures; * wherefore we dutifully, * glorify thee and celebrate today thy holy feast. * Do thou ever intercede that our souls be saved."
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone IV: To the Theotokos we the sinful and lowly ones, * do we now earnestly hasten; * and we fall down in repentance, * crying out from the depths of our soul: * O Sovereign Lady, have compassionate pity and mercy upon us! * Hasten thou, for we are perishing * from the multitude of our transgressions! * Turn not thy servants empty away, ** for thee do we have as our only hope! The"
+      },
+      "stavrotheotokion": {
+        "text": "Upon beholding Thee, * the Lamb and Shepherd, upon the Tree, * the ewe-lamb who bore Thee lamented, * and maternally exclaimed to Thee: * “O most desired Son, * how is it that Thou art suspended upon the tree of the Cross? * How is it that Thine arms and legs are nailed * by the iniquitous ones, O long-suffering Word, ** and that Thou hast shed Thy blood, O Master?”"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VI: Divine grace was poured out through thy lips, * O glorious Apostle {saint_name}, * and thou wast shown to be a lamp of the Church of Christ, * teaching the spiritual sheep * to believe in the Consubstantial Trinity, * and in the One Divinity."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VI: Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and all-blessed one, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone IV: Spec. Mel.: “Thou hast given a sign ...”: O Apostle, having obtained * an invincible authority over demons, * and power in the name of Christ * drive thou away the princes of darkness. * Like a sun thou hast passed through the regions of the earth * shining forth enlightenment, * and, O glorious one, instructing all the lands, * preaching Christ’s first and saving coming."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Their sound hath gone forth into all the earth * and their words unto the ends of the world.",
+            "text": "Resembling the first grace * and the most essential and divine life, * thou hast shown thyself {saint_name} to be a good man in deed, * and named a son of divine grace. * for on account of the goodness of thy disposition and the purity of thy mind * thou hast appeared unto all to be a sincere disciple of Christ."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "The heavens declare the glory of God, * and the firmament proclaimeth the work of His hands.",
+            "text": "O Apostle {saint_name}, * through divine inspiration, * and like a well fashioned instrument, * thou hast devoted thyself to the conversion of the Gentiles, * instructing them by word and deed, * in the knowledge of Christ, * enlightening all to confess * the true Divinity of Jesus, the Savior of our souls."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone III: O holy Apostle {saint_name}, * entreat the Merciful God * that He grant remission of sins ** unto our souls."
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone III: O holy Apostle {saint_name}, * entreat the Merciful God * that He grant remission of sins ** unto our souls."
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion, in Tone IV: Spec. Mel.: “Thou hast appeared ...”: As a most bright star illumining all * with a multitude of thy miracles, * the Church hath for ever acquired thee, * O Apostle {saint_name}, * wherefore we cry aloud unto Christ: * Save, O Greatly-merciful One, * those who with faith honor the memory of Thine Apostle. The"
+      },
+      "ikos": {
+        "text": "O Lord grant unto me a stream of speech, O thou Who didst create the nature of water, and strengthen my heart, O Compassionate One, for Thou hast established the universe by Thy Word, wherefore enlighten my thoughts, O Thou who puttest on light as a garment, and grant that I may speak and hymn in a manner worthy of the veneration of Thine Apostle, O Greatly-merciful One."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “Foreseeing by the Spirit ...”: The hastening of thy beautiful feet O apostle {saint_name} hath brought thee to the kingdom of heaven, and entering therein rejoicing, thou standest now before the Holy Trinity beholding the Son and the Divine Spirit in the Father, wherefore with faith we commemorate thy most sacred and divine memory."
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "saint_class": "Nuns",
+  "filename": "Nuns.pdf",
+  "total_chars": 34345,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 1,
+          "melody": null,
+          "text": "Spec. Mel.: “Joy of the ranks of heaven ...”: Like effulgent beams of light from the heights, * ye enlighten the world with your noetic rays, * driving away the gloom * of the hordes of evil demons; * wherefore we celebrate"
+        },
+        {
+          "order": 2,
+          "tone": 1,
+          "melody": null,
+          "text": "your light-bearing and divine festival. O all-honored ones, having beheld the beauties of paradise, * and been abundantly filled therewith, * ye, have blossomed forth upon the world * like never- fading blooms of godly-understanding; * partaking thereof today with spiritual love,"
+        },
+        {
+          "order": 3,
+          "tone": 1,
+          "melody": null,
+          "text": "we are satiated with all things good for the soul. Ye have been adorned with your life of struggles * and like the sun having radiated upon all, * in the plenitude of ascetic deeds, * ye have thereby being glorified in them, O most honored ones, * taking delight in divine glory"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone I: Tempest-tossed on the abyss of transgressions, * fleeing to the calm haven * of thy most pure supplication, * I cry out to thee, O Birthgiver of God: ** Save me, O all-immaculate one, extending thy mighty right hand unto thy servant!"
+      },
+      "stavrotheotokion": {
+        "text": "Of old, when thou didst behold thy Son and Master stretching forth His hands upon the Cross, His side pierced by the spear, О pure Mother, thou didst cry out, lamenting: “Woe is me! How is it that Thou sufferest, ridding men of their suffering, О Lover of mankind?”"
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VIII: With the outpouring of tears * ye extinguished the fire of the passions of the flesh, * and having kindled the desire for things divine * and the love of Christ the King, * ye were dispassionately united to Him; * wherefore, having entered now into the noetic palaces, * intercede for those who honour you, ** before the Benefactor."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VIII: In His love for mankind, the King of heaven appeared on earth * and dwelt among men; * for He Who received flesh from the pure Virgin * and cameth forth from her having received human nature, * is the only Son of God, * twofold in nature but not Hypostasis. * Therefore, proclaiming Him to be truly perfect God and perfect man, * we confess Christ our God. * Him do thou beseech, O unwedded Mother, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone I: Spec. Mel.: “Joy of the ranks of heaven ...”: Having proceeded along the narrow path * that leadeth unto life, * ye preserved tranquility of spirit along the way, * for being fasters, and the glory of the venerable, * ye mightily overcame the snares of demons; * wherefore ye were deemed worthy to inherit the heavenly Kingdom * and now enjoying the delights thereof ** ye behold the never waning beauty therein."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Wondrous is God in His saints, * the God of Israel.",
+            "text": "Your most splendid life astonished the angels * and clearly frightened the raging demons; * brightly adorning the gatherings of the faithful, * enjoining them to ever continue along the path * that leadeth to the heavenly habitations of Christ; * Him do ye beseech * that those who in faith celebrate your all-honored memory, ** be delivered from corruption and misfortunes."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Precious in the sight of the Lord * is the death of His saints.",
+            "text": "Offering daily hymns and praise to Christ, * while dwelling in the desert O venerable ones, * ye gave your souls and thoughts * entirely to God alone, * and like the great Moses, * entered intractable regions; * wherefore ye obtained victory over the invisible enemy ** and become pure receptacles of the divine Spirit."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: O ye who are beautiful in soul and glorious in Christ, * having betrothed yourselves to the true desire, * and spurned the betrothal of temporal bridegrooms, * ye attained maturity in deeds of virtue, * and were thereby raised to the heights of incorruption, * abounding in riches, ye became the pillars and rule for monastic women. ** Wherefore cease ye never to pray for us who with love celebrate your memory. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: O ye who are beautiful in soul and glorious in Christ, * having betrothed yourselves to the true desire, * and spurned the betrothal of temporal bridegrooms, * ye attained maturity in deeds of virtue, * and were thereby raised to the heights of incorruption, * abounding in riches, ye became the pillars and rule for monastic women. ** Wherefore cease ye never to pray for us who with love celebrate your memory. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; if there be none, chant the following: Kontakion of the venerable mothers, in Tone II: Spec. Mel.: “Having received the grace ...”: Having emaciated your bodies by fasting, * and with ceaseless prayers entreated the Creator, * that ye might obtain * the forgiveness of your sins, * which ye received from God, * attaining thereby the Kingdom of heaven; ** intercede before Christ God for us all."
+      },
+      "ikos": {
+        "text": "O God, Thou Who dost close and open the abyss, bringing water up into the clouds, and sending rain to water the face of the earth. Grant also my barren soul, and open mine unworthy mouth, and my stuttering tongue, that I may utter worthy words, and hymn Thy venerable ones, whom Thou Thyself hast glorified, in so far as they despised the sweet things of this world, and for Thy sake emaciated their bodies; that by Thy might they might vanquish the devil, wherefore they received from Thee crowns of endurance; and now, standing before Thee in the heavens with all the saints, they unceasingly intercede for us all."
+      },
+      "exapostilarion": {
+        "text": "O venerable and all-honored ones, by your supplications unto God, deliver from every evil circumstance those who with love and gratitude celebrate your memory, and cleanse the defilement of my soul, despite the little I have hymned you."
+      }
+    }
+  }
+}

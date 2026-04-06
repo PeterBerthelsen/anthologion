@@ -1,0 +1,88 @@
+{
+  "saint_class": "HieroConfessor",
+  "filename": "HieroConfessor.pdf",
+  "total_chars": 32321,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 4,
+          "melody": null,
+          "text": "Spec. Mel.: “As one valiant among the martyrs ...”: We know thee, * O God inspired holy Father {saint_name}, * to be the foundation of truth * and confirmation of the faith, * the elucidation of dogmas and a model of piety, * an abode of purity, a select vessel, * the sweet redolence of the Spirit, * a great treasury of doctrines"
+        },
+        {
+          "order": 2,
+          "tone": 4,
+          "melody": null,
+          "text": "and a foundation of the Church of Christ. We praise thee, * O God-bearing, all-praised, most wise {saint_name} * as a successor to the Apostles, * as one sharing the temperament of the Confessors, * a zealous emulator of ascetics, * the seal of teachers, * a divine representative of the sages of God, * a God-flowing river of understanding"
+        },
+        {
+          "order": 3,
+          "tone": 4,
+          "melody": null,
+          "text": "which drowneth the thoughts of blaspheming heretics. Increasing thy talent of wisdom * O glorious {saint_name}, * thou wast deemed worthy * to participate in the joy of thy Lord; * adorned with the bright illumination * of divine grace * and spiritual radiance, * standing now before the life-creating right hand of God,"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone IV: O all-hymned Theotokos! * purify my passionate heart from pollution, * and cleanse, O pure one, the festering wounds of sin from my soul, * make steadfast my mind, * so that I, thy sinful and unprofitable servant, ** may magnify thy might and thy great intercession."
+      },
+      "stavrotheotokion": {
+        "text": "Seeing Christ, the Lover of mankind, * crucified and with His side pierced with a lance, * the most pure one lamented, crying aloud: * “What is this, O my Son ? * What have the ungrateful people rendered unto Thee * in return for all the good things Thou hast rendered unto them ?” * And yet thou dost show thy tender compassion for me, * that I may endure my childlessness. ** I stand in awe, O Compassionate One, at Thy voluntary crucifixion."
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VI: Grace poured forth abundantly from thy lips, * O glorious Father {saint_name}, * lamp of the Church of Christ, * ever teaching the spiritual sheep to believe in the Divinity one in essence ** and the Consubstantial Trinity."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VI: Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and most blessed one, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone VIII: Spec. Mel.: “O most glorious wonder ...”: O all-wise Father {saint_name}, * thou hast illumined the Church of Christ * with thine odes, * likened unto those of David * by the grace of the Spirit, * O most glorious Father, * striking the harp * and chanting things divine, ** thine odes draw all to the Church."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Precious in the sight of the Lord * is the death of His saints.",
+            "text": "O most glorious Father {saint_name}, * abandoning the unruly noise of the world, * thou, O holy one, * didst reach the calm haven of Christ. * clearly adorned with a multitude of graces * through the contemplation of the Divinity, * reflecting them upon the faithful, * before whom thou didst shine ** with thy God-pleasing life."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Blessed is the man that feareth the Lord, * in His commandments shall he greatly delight.",
+            "text": "Come, O ye born of earth, * let us today devoutly honor with hymns * the sacred and honorable memory of holy {saint_name}; * for, behold, in truth he hath been deemed worthy * to embrace the divine light. * O how ineffable is Thy kindness, * O Lord and Master, * through which we learned to glorify Thee, ** the most compassionate One!"
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: Teacher of Orthodoxy, instructor of piety and chastity, * luminary of the Church, God-inspired instructor of Hierarchs, * O most wise {saint_name}, thou hast illumined all by thy teaching; ** entreat Christ God that our souls be saved. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone VIII: Teacher of Orthodoxy, instructor of piety and chastity, * luminary of the Church, God-inspired instructor of Hierarchs, * O most wise {saint_name}, thou hast illumined all by thy teaching; ** entreat Christ God that our souls be saved. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion of the Holy Confessor, in Tone II: Finding delight in abstinence, * thou hast subdued the desires of the flesh * Revealed to be nurtured in the faith, * thou hast blossomed like the tree of life in paradise, ** O sacred Father {saint_name}. The"
+      },
+      "ikos": {
+        "text": "Standing now before God, O most glorious, most sacred, and holy Confessor {saint_name}, by thy God-pleasing prayers open my lips, that I may hymn thy blessed life and worthily describe thy virtues which, fervently loving God, thou hast practiced on earth; for thou wast revealed to be a fearless confessor, loving vigilance, purity, and abstinence, by which thou hast set aright the faith, O sacred Father {saint_name}."
+      },
+      "exapostilarion": {
+        "text": "Well tried in asceticism, and finishing thy divine course in suffering, * thou hast ascended into heaven and standest before Christ, * O venerable Father {saint_name}, * fervently entreat Him on behalf of us who hymn thee. (Twice)"
+      }
+    }
+  }
+}

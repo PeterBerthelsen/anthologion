@@ -1,0 +1,88 @@
+{
+  "saint_class": "Heirarchs",
+  "filename": "Heirarchs.pdf",
+  "total_chars": 31145,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 4,
+          "melody": null,
+          "text": "Spec. Mel.: “As one valiant among the martyrs ...”: O most praised Hierarchs, * as luminous stars of the spiritual firmament * ye have enlightened the world, O all-honored ones, * and illumined the universe * with the dogmas of the Orthodox faith * driving away the darkness of heresies. * O Hierarchs, entreat the Lord that those * who in faith celebrate your all-honored memory"
+        },
+        {
+          "order": 2,
+          "tone": 4,
+          "melody": null,
+          "text": "may be delivered from all adversities. Ye have enlightened the world, * with noetic radiance, * appearing unto all as light-bestowing suns * beaming dogmatic truth unto all the ends of the world, * ye enlighten the hearts of the faithful, * O all-blessed God-bearers, * and by the power of Him * Who shone forth from the Virgin"
+        },
+        {
+          "order": 3,
+          "tone": 4,
+          "melody": null,
+          "text": "ye drive away the darkness of heresies. O most blessed ones, * with the staff of your dogmas * ye have driven the spiritual wolves * far from the Church of Christ, * and encompassing her with a spiritual rampart, * ye have presented her whole and unconquerable unto Christ; * Pray Him that those who in faith * celebrate your all-honored memory,"
+        }
+      ],
+      "theotokion": {
+        "tone": null,
+        "text": "in Tone IV: Deliver thou my soul * from condemnation and grievous transgressions, * O most holy Bride of God, * and rescue it from death by thy supplications. * Grant that on the day of trial * I may receive the justification * which the assemblies of the saints have received; * and before the end show me forth as cleansed through repentance ** and by the shedding of tears."
+      },
+      "stavrotheotokion": {
+        "text": "Seeing Christ, the Lover of mankind, * crucified and with His side pierced with a lance, * the most pure one lamented, crying aloud: * “What is this, O my Son ? * What have the ungrateful people rendered unto Thee * in return for all the good things Thou hast rendered unto them ?” * And yet thou dost show thy tender compassion for me, * that I may endure my childlessness. ** I stand in awe, O Compassionate One, at Thy voluntary crucifixion."
+      },
+      "idiomelon": {
+        "tone": null,
+        "text": "..., in Tone VI: O ye men of God and faithful servants, * ministers of the Lord, * most esteemed Hierarchs, * select vessels, and pillars supporting the Church, * heirs of the kingdom, ** cease not to intercede before the Lord on our behalf."
+      },
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., in Tone VI: Who doth not call thee blessed, O most holy Virgin? * Who will not hymn thy most pure birthgiving? * For the only-begotten Son Who hath shone forth timelessly from the Father, * came forth, ineffably incarnate, from thee, O pure one; * By nature he is God, by nature for our sakes, he hath become a man * not divided into two Hypostases, * but known in two natures without commingling. * Him do thou beseech, O pure and most blessed one, ** that our souls find mercy!"
+      },
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone I: Spec. Mel.: “O all-praised martyrs ...”: Let us today worthily praise the divine and God-inspired Hierarchs, * wise in the Spirit, * spiritual trumpets of God, * divine mirrors, who grant unto us the golden streams of their instructions. * Pray unto Christ that He grant our souls peace and great mercy."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Precious in the sight of the Lord * is the death of His saints.",
+            "text": "Let us worthily hymn * and in spiritual odes praise the intellectual fonts of the divine and holy faith, * the golden-streamed rivers, * the brilliant lights, * the champions of the Trinity, * the receptacles of the grace of the Holy Spirit, * the immovable pillars and supports of the Church."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "Thy priests shall be clothed with righteousness, * and thy righteous shall rejoice.",
+            "text": "O ye thundering spiritual instruments of divine knowledge, * flashing lightning of divine sermons, * golden candlesticks bright and bearing the light of God, * most blessed Hierarchs! * Ever pray for us, who honor you, * that Christ grant unto our souls peace and great mercy."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)."
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone IV: O God of our fathers, * ever deal with us according to Thy meekness. * Take not Thy mercy from us, * but by the prayers of these saints ** direct our life in peace. (Twice)."
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "from the Typicon; but if there be none, chant the following: Kontakion, in Tone VIII: Spec. Mel.: “As the first fruits ...”: As teachers of virtue and adornments of the Church’s Hierarchy, * the Church glorifies you in hymns; * We beseech you, as ones invincible, to intercede on behalf of us who with love honor you ** that we be granted progress in virtues and release from temptations."
+      },
+      "ikos": {
+        "text": "O divine Hierarchs, You have appeared as rivers of piety filling the world with the streams of your dogmas, and with the gentle rain of your miracles, you wash away the filth of the passions, wherefore ye have worthily inherited the nourishing stream of the Holy Spirit; wherefore, gathered together today, we reverently honor you with hymns, and with faith cry out to you as ones invincible; Pray ye unceasingly to Christ God, for us all."
+      },
+      "exapostilarion": {
+        "text": "Let us praise the God-bearing Fathers as brightly-effulgent beams of light, * clearer than those from the sun, * shining forth as beacons of the pre-eternal light of the Holy Trinity, * of the three-rayed supra-naturally commingled Unity. (Twice)"
+      }
+    }
+  }
+}
