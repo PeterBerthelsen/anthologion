@@ -30,7 +30,8 @@ Query parameters (all optional — defaults to today):
     rank      Override feast rank (1-7). 7 = simple service (octoechos only).
     menaion   Menaion source: 'general' (default), 'full' (not yet available),
               'none' (skip menaion — same effect as rank=7 for menaion)
-    format    Output format: 'json' (default), 'html' (rendered service)
+    format    Output format: 'json' (default), 'html', 'epub', 'pdf'
+    scope     For epub/pdf: 'day' (default) or 'month'
 """
 
 import os
@@ -81,7 +82,7 @@ def _parse_options(args):
     if menaion_source not in ('general', 'full', 'none'):
         menaion_source = 'general'
     fmt = args.get('format', 'json')
-    if fmt not in ('json', 'html'):
+    if fmt not in ('json', 'html', 'epub', 'pdf'):
         fmt = 'json'
     return rank, menaion_source, fmt
 
@@ -229,14 +230,17 @@ def api_resolve():
     """
     Main endpoint: resolve all liturgical variables for a date.
 
-    Optional `service` param filters to a single merged service type.
-    Optional `rank` overrides feast rank (7 = simple/octoechos only).
-    Optional `menaion` selects source: general, full, none.
-    Optional `format` selects output: json (default), html.
+    Params:
+        service   Filter to one service type (vespers, matins, etc.)
+        rank      Override feast rank (1-7, 7=simple)
+        menaion   Source: general, full, none
+        format    Output: json (default), html, epub, pdf
+        scope     For epub/pdf: 'day' (default) or 'month'
     """
     m, d, y = _parse_date(request.args)
     calendar = request.args.get('calendar', 1, type=int)
     service = request.args.get('service', None)
+    scope = request.args.get('scope', 'day')
     rank, menaion_source, fmt = _parse_options(request.args)
 
     try:
@@ -244,6 +248,35 @@ def api_resolve():
     except ValueError:
         return jsonify({'error': f'Invalid date: {m}/{d}/{y}'}), 400
 
+    # --- EPUB export ---
+    if fmt == 'epub':
+        from export import export_epub
+        if scope == 'month':
+            data = export_epub(m, y, day=None, calendar=calendar,
+                               rank=rank, menaion_source=menaion_source)
+            fname = f'Anthologion-{y}-{m:02d}.epub'
+        else:
+            data = export_epub(m, y, day=d, calendar=calendar,
+                               rank=rank, menaion_source=menaion_source)
+            fname = f'Anthologion-{y}-{m:02d}-{d:02d}.epub'
+        return Response(data, content_type='application/epub+zip',
+                        headers={'Content-Disposition': f'attachment; filename="{fname}"'})
+
+    # --- PDF export ---
+    if fmt == 'pdf':
+        from export import export_pdf
+        if scope == 'month':
+            data = export_pdf(m, y, day=None, calendar=calendar,
+                              rank=rank, menaion_source=menaion_source)
+            fname = f'Anthologion-{y}-{m:02d}.pdf'
+        else:
+            data = export_pdf(m, y, day=d, calendar=calendar,
+                              rank=rank, menaion_source=menaion_source)
+            fname = f'Anthologion-{y}-{m:02d}-{d:02d}.pdf'
+        return Response(data, content_type='application/pdf',
+                        headers={'Content-Disposition': f'attachment; filename="{fname}"'})
+
+    # --- Single service (HTML or JSON) ---
     if service:
         merged = resolve_service(m, d, y, service, calendar,
                                  rank=rank, menaion_source=menaion_source)
@@ -265,6 +298,7 @@ def api_resolve():
             'variables': merged,
         }))
 
+    # --- Full context (JSON) ---
     ctx = resolve(m, d, y, calendar, rank=rank, menaion_source=menaion_source)
     return jsonify(_serialize({
         'date': ctx['date'],
@@ -467,11 +501,20 @@ _HOME_HTML = """<!DOCTYPE html>
           <option value="none">None (skip)</option>
         </select>
       </div>
+      <div class="form-group">
+        <label>Export Scope</label>
+        <select id="scope">
+          <option value="day">Single Day</option>
+          <option value="month">Entire Month</option>
+        </select>
+      </div>
     </div>
     <div class="btn-row">
       <button class="btn" onclick="fetchContext()">Resolve Context</button>
       <button class="btn-secondary" onclick="fetchHTML()">Render HTML</button>
       <button class="btn-secondary" onclick="fetchJSON()">View JSON</button>
+      <button class="btn-secondary" onclick="downloadEpub()" style="background:#2E7D32">Download EPUB</button>
+      <button class="btn-secondary" onclick="downloadPDF()" style="background:#1565C0">Download PDF</button>
     </div>
   </div>
 
@@ -502,8 +545,17 @@ _HOME_HTML = """<!DOCTYPE html>
     const rank = document.getElementById('rank').value;
     if (rank) p.set('rank', rank);
     p.set('menaion', document.getElementById('menaion').value);
+    p.set('scope', document.getElementById('scope').value);
     if (extra) Object.entries(extra).forEach(([k,v]) => p.set(k,v));
     return p.toString();
+  }
+
+  function downloadEpub() {
+    window.location.href = '/api/resolve?' + buildParams({format: 'epub'});
+  }
+
+  function downloadPDF() {
+    window.location.href = '/api/resolve?' + buildParams({format: 'pdf'});
   }
 
   async function fetchContext() {
@@ -605,7 +657,8 @@ def health():
         'params': {
             'rank': '1-7 (7=simple)',
             'menaion': 'general | full (coming soon) | none',
-            'format': 'json | html',
+            'format': 'json | html | epub | pdf',
+            'scope': 'day | month (for epub/pdf)',
             'service': 'vespers | matins | liturgy | compline | nocturns | ...',
             'calendar': '0=new, 1=old (default)',
         },
