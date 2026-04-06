@@ -1,0 +1,4 @@
+# Anthologion API dependencies
+# Install: pip install -r requirements_api.txt
+Flask>=3.0
+Jinja2>=3.1

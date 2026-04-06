@@ -311,6 +311,276 @@ def _menaion_summary(entry):
     }
 
 
+# ---------------------------------------------------------------------------
+# Home page UI
+# ---------------------------------------------------------------------------
+@app.route('/')
+def home():
+    """Interactive home page for testing the API."""
+    return Response(_HOME_HTML, content_type='text/html; charset=utf-8')
+
+
+_HOME_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anthologion</title>
+  <style>
+    :root {
+      --primary: #8B0000;
+      --accent: #4B0082;
+      --bg: #FFFEF5;
+      --text: #2C1810;
+      --border: #D4C5A9;
+      --card-bg: #FFF;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; padding: 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { color: var(--primary); text-align: center; font-size: 2em;
+         letter-spacing: 3px; margin-bottom: 5px; }
+    .subtitle { text-align: center; color: var(--accent); margin-bottom: 25px; }
+    .card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 24px; margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .card h2 { color: var(--primary); font-size: 1.1em; margin-bottom: 16px;
+               border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .form-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
+    .form-group { display: flex; flex-direction: column; min-width: 120px; }
+    .form-group label { font-size: 0.85em; color: #666; margin-bottom: 4px; font-weight: bold; }
+    .form-group select, .form-group input {
+      padding: 8px 12px; border: 1px solid var(--border); border-radius: 4px;
+      font-family: inherit; font-size: 0.95em; background: #FAFAF5;
+    }
+    .form-group select:focus, .form-group input:focus {
+      outline: none; border-color: var(--primary);
+    }
+    .btn {
+      display: inline-block; padding: 10px 24px; background: var(--primary);
+      color: white; border: none; border-radius: 4px; font-family: inherit;
+      font-size: 1em; cursor: pointer; letter-spacing: 1px;
+    }
+    .btn:hover { background: #6B0000; }
+    .btn-row { display: flex; gap: 10px; margin-top: 8px; }
+    .btn-secondary {
+      background: var(--accent); padding: 10px 24px; color: white;
+      border: none; border-radius: 4px; font-family: inherit;
+      font-size: 1em; cursor: pointer;
+    }
+    .btn-secondary:hover { background: #350066; }
+    .info-bar {
+      background: #F5F0E0; border-left: 4px solid var(--primary);
+      padding: 12px 16px; margin: 12px 0; font-size: 0.9em;
+      border-radius: 0 4px 4px 0;
+    }
+    .info-bar strong { color: var(--primary); }
+    #context-panel { display: none; }
+    #result-panel { display: none; }
+    #result-frame {
+      width: 100%; border: 1px solid var(--border); border-radius: 4px;
+      min-height: 400px; background: white;
+    }
+    pre {
+      background: #2C1810; color: #F5F0E0; padding: 16px; border-radius: 4px;
+      overflow-x: auto; font-size: 0.85em; line-height: 1.5;
+      max-height: 500px; overflow-y: auto;
+    }
+    .tag { display: inline-block; background: #E8E0D0; color: var(--accent);
+           padding: 2px 8px; border-radius: 3px; font-size: 0.8em; margin: 2px; }
+    .tag-primary { background: var(--primary); color: white; }
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .form-row { flex-direction: column; }
+      h1 { font-size: 1.5em; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>ANTHOLOGION</h1>
+  <p class="subtitle">Liturgical Service Generator</p>
+
+  <div class="card">
+    <h2>Service Options</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Month</label>
+        <input type="number" id="month" min="1" max="12" value="">
+      </div>
+      <div class="form-group">
+        <label>Day</label>
+        <input type="number" id="day" min="1" max="31" value="">
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <input type="number" id="year" min="1900" max="2200" value="">
+      </div>
+      <div class="form-group">
+        <label>Calendar</label>
+        <select id="calendar">
+          <option value="1">Old Calendar</option>
+          <option value="0">New Calendar</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Service</label>
+        <select id="service">
+          <option value="vespers">Vespers</option>
+          <option value="compline">Compline</option>
+          <option value="nocturns">Nocturns</option>
+          <option value="matins">Matins</option>
+          <option value="first_hour">First Hour</option>
+          <option value="third_hour">Third Hour</option>
+          <option value="sixth_hour">Sixth Hour</option>
+          <option value="ninth_hour">Ninth Hour</option>
+          <option value="typika">Typika</option>
+          <option value="liturgy">Liturgy</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Rank</label>
+        <select id="rank">
+          <option value="">Auto (from calendar)</option>
+          <option value="1">1 — Great Feast</option>
+          <option value="2">2 — Vigil</option>
+          <option value="3">3 — Polyeleos</option>
+          <option value="4">4 — Doxology</option>
+          <option value="5">5 — Six Stichera</option>
+          <option value="6">6 — Afterfeast</option>
+          <option value="7">7 — Simple (Octoechos only)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Menaion</label>
+        <select id="menaion">
+          <option value="general">General (24 classes)</option>
+          <option value="full">Full (366 days) — coming soon</option>
+          <option value="none">None (skip)</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="fetchContext()">Resolve Context</button>
+      <button class="btn-secondary" onclick="fetchHTML()">Render HTML</button>
+      <button class="btn-secondary" onclick="fetchJSON()">View JSON</button>
+    </div>
+  </div>
+
+  <div class="card" id="context-panel">
+    <h2>Liturgical Context</h2>
+    <div id="context-body"></div>
+  </div>
+
+  <div class="card" id="result-panel">
+    <h2 id="result-title">Result</h2>
+    <div id="result-body"></div>
+  </div>
+</div>
+
+<script>
+  // Set defaults to today
+  const now = new Date();
+  document.getElementById('month').value = now.getMonth() + 1;
+  document.getElementById('day').value = now.getDate();
+  document.getElementById('year').value = now.getFullYear();
+
+  function buildParams(extra) {
+    const p = new URLSearchParams();
+    p.set('m', document.getElementById('month').value);
+    p.set('d', document.getElementById('day').value);
+    p.set('y', document.getElementById('year').value);
+    p.set('calendar', document.getElementById('calendar').value);
+    const rank = document.getElementById('rank').value;
+    if (rank) p.set('rank', rank);
+    p.set('menaion', document.getElementById('menaion').value);
+    if (extra) Object.entries(extra).forEach(([k,v]) => p.set(k,v));
+    return p.toString();
+  }
+
+  async function fetchContext() {
+    const r = await fetch('/api/resolve?' + buildParams());
+    const d = await r.json();
+    const panel = document.getElementById('context-panel');
+    panel.style.display = 'block';
+
+    let html = '<div class="info-bar">';
+    html += '<strong>Date:</strong> ' + d.date + ' (' + d.weekday_name + ') | ';
+    html += '<strong>Period:</strong> ' + d.period + ' | ';
+    html += '<strong>Rank:</strong> ' + d.rank_name + ' (' + d.rank + ')';
+    if (d.liturgical) html += ' | <strong>Tone:</strong> ' + (d.liturgical.weekly_tone || 'N/A');
+    html += '</div>';
+
+    if (d.menaion_note) {
+      html += '<div class="info-bar"><strong>Note:</strong> ' + d.menaion_note + '</div>';
+    }
+
+    html += '<p style="margin:8px 0"><strong>Sources:</strong> ';
+    d.sources.forEach(s => { html += '<span class="tag tag-primary">' + s + '</span> '; });
+    html += '</p>';
+
+    if (d.feast) {
+      html += '<p><strong>Feast:</strong> ' + d.feast.long_name;
+      html += ' <span class="tag">' + d.feast.service_type + '</span></p>';
+    }
+
+    if (d.triodion) {
+      html += '<p><strong>Triodion:</strong> ' + d.triodion.desc;
+      html += ' — services: ' + d.triodion.services.map(s => '<span class="tag">'+s+'</span>').join(' ') + '</p>';
+    }
+    if (d.pentecostarion) {
+      html += '<p><strong>Pentecostarion:</strong> ' + d.pentecostarion.desc;
+      html += ' — services: ' + d.pentecostarion.services.map(s => '<span class="tag">'+s+'</span>').join(' ') + '</p>';
+    }
+    if (d.octoechos) {
+      html += '<p><strong>Octoechos:</strong> ' + d.octoechos.desc;
+      html += ' — services: ' + d.octoechos.services.map(s => '<span class="tag">'+s+'</span>').join(' ') + '</p>';
+    }
+    if (d.menaion) {
+      html += '<p><strong>Menaion:</strong> ' + d.menaion.long_name;
+      html += ' (' + d.menaion.service_type + ')';
+      html += ' — services: ' + d.menaion.services.map(s => '<span class="tag">'+s+'</span>').join(' ') + '</p>';
+    }
+
+    document.getElementById('context-body').innerHTML = html;
+  }
+
+  async function fetchHTML() {
+    const svc = document.getElementById('service').value;
+    const url = '/api/resolve?' + buildParams({service: svc, format: 'html'});
+    const r = await fetch(url);
+    const html = await r.text();
+    const panel = document.getElementById('result-panel');
+    panel.style.display = 'block';
+    document.getElementById('result-title').textContent = svc.charAt(0).toUpperCase() + svc.slice(1) + ' (HTML)';
+    document.getElementById('result-body').innerHTML =
+      '<iframe id="result-frame" srcdoc="' + html.replace(/"/g, '&quot;') + '"></iframe>';
+  }
+
+  async function fetchJSON() {
+    const svc = document.getElementById('service').value;
+    const url = '/api/resolve?' + buildParams({service: svc, format: 'json'});
+    const r = await fetch(url);
+    const d = await r.json();
+    const panel = document.getElementById('result-panel');
+    panel.style.display = 'block';
+    document.getElementById('result-title').textContent = svc.charAt(0).toUpperCase() + svc.slice(1) + ' (JSON)';
+    document.getElementById('result-body').innerHTML = '<pre>' + JSON.stringify(d, null, 2) + '</pre>';
+  }
+</script>
+</body>
+</html>
+"""
+
+
 @app.route('/api/paschalion')
 def api_paschalion():
     """Paschalion calculation for a date."""

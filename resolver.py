@@ -185,7 +185,16 @@ def _octoechos_key(tone, weekday):
 # ---------------------------------------------------------------------------
 # Fixed and relative feasts calendar (from service.py)
 # ---------------------------------------------------------------------------
-from menaion import menaion_class as _menaion_class
+# Inlined from menaion.py to avoid pulling in PyMuPDF at runtime.
+# Maps class ID → saint class name (matches menaion_data.json keys).
+_menaion_class = {
+    0: 'Master', 1: 'Theotokos', 2: 'Cross', 3: 'St John Baptist',
+    4: 'Prophet', 5: 'Angels', 6: 'Apostle', 7: 'Apostles',
+    8: 'Heirarch', 9: 'Heirarchs', 10: 'Hieromartyr', 11: 'Heiromartyrs',
+    12: 'HieroConfessor', 13: 'MonasticMartyr', 14: 'MonasticMartyrs',
+    15: 'Holy Fathers', 16: 'Martyr', 17: 'Martyrs', 18: 'Martyress',
+    19: 'Martyresses', 20: 'Nun', 21: 'Nuns', 23: 'Fools', 24: 'Unmercenaries',
+}
 
 _RELATIVE_FEASTS = {
     '09-09': [6, 1, None, 'Nativity', 'Afterfeast of the Nativity of the Mother of God'],
