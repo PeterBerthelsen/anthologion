@@ -1,0 +1,83 @@
+{
+  "saint_class": "Cross",
+  "filename": "Cross.pdf",
+  "total_chars": 32957,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [
+        {
+          "order": 1,
+          "tone": 7,
+          "melody": null,
+          "text": "Spec. Mel.: “Called from on high ...”: Today the divine multitude of the faithful rejoiceth; * for unto the ends of the world the Cross hath appeared, * illumining the firmament with light unapproachable, * brightening the air and adorning the face of the earth. * The Church of Christ hymneth with divine songs * venerating the divine and most wondrous Cross * which doth preserve her from above; * let us, strengthened by its power, * approach the Master calling out and saying:"
+        },
+        {
+          "order": 2,
+          "tone": 7,
+          "melody": null,
+          "text": "grant unto the world peace, and unto our souls enlightenment. Let creation today rejoice and be glad; * for the heavenly Cross shineth forth unto the ends of the world, * enlightening the earthly and uniting the scattered; * today mankind doth exult together * with the choirs of the Angels, * for the Cross, having destroyed the primal curse separating mankind from paradise, * hath now openly joined all into one. * Wherefore shining more brightly than the sun it enlighteneth the whole of creation with grace,"
+        },
+        {
+          "order": 3,
+          "tone": 7,
+          "melody": null,
+          "text": "cleansing and saving those who with faith honor it. The divine Cross hath appeared to the world * shining more brightly than the sun, * the revered scepter and crown of Christ the King. * It shineth forth clearly unto the ends of the world. * Bringing mankind forth from Hades * whom it hath greatly despoiled, * overturning the enemy and utterly destroying the arrogance of the demons. * And now declaring the resurrection of the Savior * it hath been revealed a Source of salvation to those who cry aloud:"
+        },
+        {
+          "order": 4,
+          "tone": 7,
+          "melody": null,
+          "text": "Grant unto the world peace and enlighten our souls."
+        }
+      ],
+      "theotokion": null,
+      "stavrotheotokion": null,
+      "idiomelon": null,
+      "dogmatic_theotokion": null,
+      "aposticha": {
+        "stichera": [
+          {
+            "order": 1,
+            "tone": null,
+            "verse": null,
+            "text": "in Tone II: Spec. Mel.: “O house of Ephratha ...”: With deified water O Word, * and Thy blood, * Thy Church * is brightly adorned like a bride, ** praising the glory of the cross."
+          },
+          {
+            "order": 2,
+            "tone": null,
+            "verse": "Exalt ye the Lord our God, * and worship the footstool of His feet, for He is holy.",
+            "text": "Let us bow down whilst exalting * the spear and the Cross, * the nails and other instruments * with which the life-bearing body of Christ ** wast affixed to the cross."
+          },
+          {
+            "order": 3,
+            "tone": null,
+            "verse": "But God is our King before the ages, * He hath wrought salvation in the midst of the earth.",
+            "text": "When Moses vanquished Amalek * holding his hands in the air, * he prefigured the form of the Cross * and the most pure passion ** of Christ our God."
+          }
+        ],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "in Tone I: Save O lord Thy people * and bless thine inheritance. * Grant now unto the faithful, * victory over adversaries, * and by the power of Thy Cross ** do Thou preserve Thy commonwealth. (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "in Tone I: Save O lord Thy people * and bless thine inheritance. * Grant now unto the faithful, * victory over adversaries, * and by the power of Thy Cross ** do Thou preserve Thy commonwealth. (Twice)"
+      },
+      "kontakion": {
+        "tone": null,
+        "text": "in Tone IV: Spec. Mel.: “Thou that wast of Thine own will ...”. Thou who wast of Thine own will lifted upon the Cross, * grant unto Thy new community named after Thee * Thy bounties, O Christ our God, * and by Thy power make glad all right believing Orthodox Christians, * conferring victories over enemies * upon those who have as an ally, * Thy weapon of peace, the invincible trophy. The"
+      },
+      "ikos": {
+        "text": "O ye who are zealous to understanding scripture, come and read what he who was caught up into the third heaven in paradise and who heard words divine and unspeakable, which cannot be uttered by human tongue, wrote unto the Galatians! “But God forbid”, saith he, “that I should glory, save in the Cross of our Lord Jesus Christ”, Who hath suffered thereupon and slain the passions. Therefore the same Cross of the Lord we all also hold in glory, for this tree of salvation is unto us a weapon of peace, and an invincible trophy."
+      },
+      "exapostilarion": {
+        "text": "The Cross is the preserver of the universe; * the Cross is the adornment of the Church; * the Cross is the might of kings; * the Cross is the foundation of the faithful; * the Cross is the glory of Angels ** and the scourge of demons. (Thrice)"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "saint_class": "Holy Fathers",
+  "filename": "Holy Fathers.pdf",
+  "total_chars": 29645,
+  "services": {
+    "vespers": {
+      "stichera_lord_i_cried": [],
+      "theotokion": null,
+      "stavrotheotokion": null,
+      "idiomelon": null,
+      "dogmatic_theotokion": {
+        "tone": null,
+        "text": "..., Theotokion in Tone IV: Mercifully regard the supplications of thy servants, * O all-immaculate one, * quelling the cruel uprisings of the demons against us, * delivering us from every sorrow; * for thee alone do we have as a steadfast and sure confirmation, * and having acquired thine intercession; * let not us who call upon thee be put to shame, * O Sovereign Lady. * Hasten thou to answer the entreaties of those who cry out to thee with faith: * Rejoice, thou help, joy and protection of all, ** and the salvation of our souls! Then: “Now lettest Thou Thy servant depart ...”, Trisagion through Our Father ...,: Then the blessing of the loaves. The Troparion, in Tone IV: O Theotokos and Virgin, rejoice, * O Mary, full of grace; the Lord is with thee; * blessed art thou among women, * and blessed is the Fruit of thy womb, ** for thou hast borne the Savior of our souls. (Twice) And of the Fathers, Troparion in Tone VIII: Most glorious art Thou, O Christ our God, * Thou hast established our Holy Fathers as luminaries upon the earth * and through them hath instructed us all in the true faith. ** O Most merciful One, glory be to Thee. (Once) And the Dismissal."
+      },
+      "aposticha": {
+        "stichera": [],
+        "theotokion": null,
+        "stavrotheotokion": null
+      },
+      "troparion": {
+        "tone": null,
+        "text": "of the Resurrection according to the Tone of the Vigil Service (Twice)"
+      }
+    },
+    "matins": {
+      "troparion": {
+        "tone": null,
+        "text": "of the Resurrection according to the Tone of the Vigil Service (Twice)"
+      },
+      "kontakion": null,
+      "ikos": {
+        "text": "Let us hearken unto the Church of God which crieth out with exalted preaching: let him that thirsteth come to me and drink the cup which I hold, for it is the cup of wisdom! This drink of truth have I drawn by the word, which poureth forth not the water of gainsaying, but of confession, which drinking, the present Israel beholdeth God, Who declareth: Behold ye, and see that it is I Myself Who am God, and I change not! I have been God from the beginning, and will be so hereafter; and other than Me there is no God! They that drink hereof shall be satisfied, and shall praise the great mystery of piety."
+      },
+      "exapostilarion": {
+        "text": "Spec. Mel.: “Hearken O ye, women ...”: Celebrating the memory of the divine fathers today, by their supplications, O most Compassionate One, we entreat Thee: deliver Thy people, O Lord, from all the harm of heresies, and grant that all may glorify the Father, the Word and the most Holy Spirit."
+      }
+    }
+  }
+}

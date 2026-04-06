@@ -1,0 +1,18 @@
+# Anthologion v2.0 - Modern Dependencies
+# Updated for Python 3.11+ and PostgreSQL
+
+# Web Framework
+Flask==3.0.2
+gunicorn==21.2.0
+
+# Database
+psycopg2-binary==2.9.9  # PostgreSQL adapter
+
+# PDF Processing (for one-time data extraction)
+PyMuPDF==1.23.26  # Modern version with wheels
+
+# Optional: Claude API for intelligent text extraction
+anthropic==0.18.1
+
+# Utilities
+python-dotenv==1.0.1  # Environment variable management
