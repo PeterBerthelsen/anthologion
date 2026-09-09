@@ -553,6 +553,7 @@ def resolve(month, day, year, calendar=1, rank=None, menaion_source='general'):
         'weekday': weekday,
         'weekday_name': ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
                          'Friday', 'Saturday', 'Sunday'][weekday],
+        'calendar': calendar,
         'menaion_date': menaion_date,
         'liturgical': lit,
         'period': period,
@@ -642,43 +643,30 @@ def resolve_service(month, day, year, service_type, calendar=1,
     period = ctx['period']
     effective_rank = ctx['rank']
 
-    # Gather per-source service data
+    from assembly import merge_service
+
     tri_svc = (ctx['triodion'] or {}).get('services', {}).get(service_type)
     pent_svc = (ctx['pentecostarion'] or {}).get('services', {}).get(service_type)
     oct_svc = (ctx['octoechos'] or {}).get('services', {}).get(service_type)
     men_svc = ((ctx['menaion'] or {}).get('services') or {}).get(service_type)
 
-    # Simple service: octoechos only
+    merged = merge_service(
+        service_type,
+        rank=effective_rank,
+        weekday=ctx['weekday'],
+        period=period,
+        oct_svc=oct_svc if isinstance(oct_svc, dict) else {},
+        men_svc=men_svc if isinstance(men_svc, dict) else {},
+        tri_svc=tri_svc if isinstance(tri_svc, dict) else {},
+        pent_svc=pent_svc if isinstance(pent_svc, dict) else {},
+    )
+    primary_name = merged.pop('_moveable_book', None) or (
+        'triodion' if period in ('lent', 'pre_lent') else
+        'pentecostarion' if period == 'paschal' else
+        'menaion' if men_svc else 'octoechos'
+    )
     if effective_rank == 7:
-        merged = dict(oct_svc) if oct_svc and isinstance(oct_svc, dict) else {}
         primary_name = 'octoechos'
-    else:
-        # Determine primary source based on period
-        if period in ('lent', 'pre_lent'):
-            primary = tri_svc
-            primary_name = 'triodion'
-        elif period == 'paschal':
-            primary = pent_svc
-            primary_name = 'pentecostarion'
-        else:
-            primary = men_svc
-            primary_name = 'menaion'
-
-        # Build merged result: octoechos base → menaion fill → primary overlay
-        merged = {}
-
-        if oct_svc and isinstance(oct_svc, dict):
-            merged.update(oct_svc)
-
-        if men_svc and isinstance(men_svc, dict) and primary_name != 'menaion':
-            for k, v in men_svc.items():
-                if v:
-                    merged[k] = v
-
-        if primary and isinstance(primary, dict):
-            for k, v in primary.items():
-                if v:
-                    merged[k] = v
 
     merged['_period'] = period
     merged['_sources'] = ctx['sources']
@@ -690,6 +678,7 @@ def resolve_service(month, day, year, service_type, calendar=1,
     merged['_weekday'] = ctx['weekday']
     merged['_tone'] = (ctx['liturgical'] or {}).get('weekly_tone')
     merged['_date'] = ctx['date']
+    merged['_calendar'] = calendar
 
     return merged
 

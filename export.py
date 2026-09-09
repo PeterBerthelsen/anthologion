@@ -82,16 +82,19 @@ def render_day_html(m, d, y, services=None, calendar=1, rank=None,
     </div>"""
 
     bodies = [header]
+    errors = []
     for svc in services:
         try:
             body, _ = _render_service_html(m, d, y, svc, calendar, rank,
                                            menaion_source)
-            if body.strip():
+            if body and body.strip():
                 bodies.append(body)
-        except Exception:
-            pass  # Service not available for this day/period
-
-    return '\n<hr/>\n'.join(bodies), ctx
+        except Exception as exc:
+            errors.append(f'{svc}: {type(exc).__name__}: {exc}')
+    html = '\n<hr/>\n'.join(bodies)
+    if errors:
+        html += '\n<!-- export errors: ' + ' | '.join(errors) + ' -->'
+    return html, ctx
 
 
 def render_month_html(m, y, services=None, calendar=1, rank=None,
@@ -227,3 +230,102 @@ def export_pdf(month, year, day=None, services=None, calendar=1,
     import weasyprint
     pdf_bytes = weasyprint.HTML(string=html).write_pdf()
     return pdf_bytes
+
+
+# ---------------------------------------------------------------------------
+# Markdown export
+# ---------------------------------------------------------------------------
+import re as _re
+
+_TAG_RE = _re.compile(r'<[^>]+>')
+_WS_RE = _re.compile(r'\n{3,}')
+
+
+def html_to_text(value):
+    if value is None:
+        return ''
+    if isinstance(value, list):
+        return '\n\n'.join(html_to_text(v) for v in value if v)
+    text = str(value)
+    text = text.replace('<br/>', '\n').replace('<br>', '\n')
+    text = text.replace('</p>', '\n\n').replace('</div>', '\n')
+    text = _TAG_RE.sub('', text)
+    text = text.replace('&nbsp;', ' ').replace('&amp;', '&')
+    text = text.replace('&lt;', '<').replace('&gt;', '>')
+    return _WS_RE.sub('\n\n', text).strip()
+
+
+def export_markdown_service(m, d, y, service_type, calendar=1, rank=None,
+                            menaion_source='general'):
+    from resolver import resolve, resolve_service
+    ctx = resolve(m, d, y, calendar, rank=rank, menaion_source=menaion_source)
+    vs = resolve_service(m, d, y, service_type, calendar,
+                         rank=rank, menaion_source=menaion_source)
+    feast = ctx.get('feast')
+    lines = [
+        f'# {service_type.replace("_", " ").title()}',
+        '',
+        f'{ctx["weekday_name"]}, {date(y, m, d).strftime("%B %d, %Y")}',
+        '',
+        f'- Calendar: {"old" if calendar == 1 else "new"}',
+        f'- Period: {ctx["period"]}',
+        f'- Tone: {(ctx.get("liturgical") or {}).get("weekly_tone") or "N/A"}',
+        f'- Rank: {ctx.get("rank_name", "Simple")}',
+    ]
+    if feast:
+        lines.append(f'- Feast: {feast["long_name"]}')
+    lines.append('')
+    if vs.get('stichera_block'):
+        lines += ['## Lord I have Cried (source note)', '',
+                  html_to_text(vs['stichera_block']), '']
+    stichera = vs.get('stichera') or []
+    if isinstance(stichera, list) and any(stichera):
+        lines += ['## Lord I have Cried', '']
+        sung = [s for s in stichera if s]
+        for i, hymn in enumerate(sung, 1):
+            lines += [f'### Stichera {i}', '', html_to_text(hymn), '']
+    skip = {'stichera', 'stichera_block', 'stichera_tone', 'link',
+            'night_date', 'vespers_kathisma'}
+    for key, val in vs.items():
+        if key.startswith('_') or key in skip or not val:
+            continue
+        heading = key.replace('_', ' ').title()
+        lines += [f'## {heading}', '', html_to_text(val), '']
+    return '\n'.join(lines).strip() + '\n', ctx
+
+
+def export_markdown_day(m, d, y, services=None, calendar=1, rank=None,
+                        menaion_source='general'):
+    services = services or DEFAULT_SERVICES
+    from resolver import resolve
+    ctx = resolve(m, d, y, calendar, rank=rank, menaion_source=menaion_source)
+    feast = ctx.get('feast')
+    parts = [
+        f'# Anthologion — {date(y, m, d).strftime("%B %d, %Y")}',
+        '',
+        f'{ctx["weekday_name"]} | {"Old" if calendar == 1 else "New"} Calendar | '
+        f'{ctx["period"]} | Tone {(ctx.get("liturgical") or {}).get("weekly_tone") or "N/A"}',
+        '',
+    ]
+    if feast:
+        parts += [f'**{feast["long_name"]}**', '']
+    for svc in services:
+        try:
+            md, _ = export_markdown_service(m, d, y, svc, calendar, rank,
+                                            menaion_source)
+            parts += [md, '', '---', '']
+        except Exception as exc:
+            parts += [f'## {svc}', '', f'_unavailable: {exc}_', '', '---', '']
+    return '\n'.join(parts).strip() + '\n', ctx
+
+
+def export_markdown_month(m, y, services=None, calendar=1, rank=None,
+                          menaion_source='general'):
+    days_in_month = monthrange(y, m)[1]
+    parts = [f'# Anthologion — {date(y, m, 1).strftime("%B %Y")}', '']
+    for d in range(1, days_in_month + 1):
+        md, _ = export_markdown_day(m, d, y, services, calendar, rank,
+                                    menaion_source)
+        parts.append(md)
+        parts.append('\n')
+    return '\n'.join(parts)

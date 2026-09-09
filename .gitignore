@@ -3,3 +3,6 @@ test.html
 test_vespers_output.html
 *.epub
 *.pdf
+.venv/
+out/
+.pytest_cache/

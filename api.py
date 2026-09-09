@@ -115,7 +115,7 @@ def _render_html(service_type, variables, ctx):
 
     weekday = ctx['weekday']
     service_date = date.fromisoformat(ctx['date'])
-    calendar = 1  # default, could be passed through ctx
+    calendar = ctx.get('calendar', 1)
     link_date = service_date.strftime('%m%d%Y')
 
     # Date strings
@@ -147,11 +147,11 @@ def _render_html(service_type, variables, ctx):
         vs['night_date'] = night_str
         vs['vespers_kathisma'] = parse_kathisma(KATHISMA_RUBRIC[weekday][0])
         vs.setdefault('prokeimenon', vespers_prokeimena(weekday))
-        # Ensure stichera is a list
+        from assembly import pad_stichera, as_hymn_list
         stichera = vs.get('stichera', [])
         if isinstance(stichera, str):
-            stichera = [stichera]
-        vs['stichera'] = stichera
+            stichera = as_hymn_list(stichera) or [stichera]
+        vs['stichera'] = pad_stichera(list(stichera or []))
 
     elif service_type == 'matins':
         vs['date'] = day_str
