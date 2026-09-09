@@ -18,15 +18,18 @@ from typing import Any
 
 STICHERA_SLOTS = 10
 
-# Rank → (octoechos count, menaion count) for weekdays / Sundays
-# Mirrors service.py rubrics().
+# Rank → (octoechos count, menaion count) for weekdays / Sundays.
+# St. Sergius:
+#   oktiochos/1-1.pdf Great Vespers: 7 Resurrection + 3 saint, or 4+6 if Polyeleos.
+#   Emenaion/09-08.pdf Great Vespers: 8 stichera of the feast.
+#   weekday oktiochos (e.g. 7-2.pdf): 3 repentance + menaion (or 3 angels).
 _STICHERA_COUNTS = {
-    1: {'weekday': (4, 6), 'sunday': (4, 6)},
-    2: {'weekday': (2, 6), 'sunday': (2, 6)},
-    3: {'weekday': (0, 6), 'sunday': (6, 4)},
-    4: {'weekday': (3, 3), 'sunday': (6, 4)},
-    5: {'weekday': (3, 3), 'sunday': (6, 4)},
-    6: {'weekday': (3, 3), 'sunday': (6, 4)},
+    1: {'weekday': (0, 8), 'sunday': (0, 8)},
+    2: {'weekday': (0, 8), 'sunday': (4, 6)},
+    3: {'weekday': (0, 6), 'sunday': (4, 6)},
+    4: {'weekday': (3, 3), 'sunday': (7, 3)},
+    5: {'weekday': (3, 3), 'sunday': (7, 3)},
+    6: {'weekday': (3, 3), 'sunday': (7, 3)},
 }
 
 
@@ -109,7 +112,8 @@ def _repeat_to_count(hymns: list[str], needed: int) -> list[str]:
 
 
 def assemble_stichera(rank: int, weekday: int,
-                      oct_stichera: Any, men_stichera: Any) -> list[str]:
+                      oct_stichera: Any, men_stichera: Any,
+                      fill_stichera: Any = None) -> list[str]:
     """
     Build Lord I have Cried stichera for a date.
 
@@ -118,10 +122,10 @@ def assemble_stichera(rank: int, weekday: int,
     """
     oct_list = as_hymn_list(oct_stichera)
     men_list = as_hymn_list(men_stichera)
+    fill_list = as_hymn_list(fill_stichera)
     sunday = weekday == 6
 
-    if rank == 7 or not men_list:
-        # Simple: all available octoechos stichera (6 weekday / up to 7 Sunday).
+    if rank == 7 or not (men_list or fill_list):
         if sunday:
             chosen = oct_list[:7]
         else:
@@ -132,8 +136,11 @@ def assemble_stichera(rank: int, weekday: int,
     oct_needed, men_needed = counts['sunday' if sunday else 'weekday']
 
     oct_source = oct_list[:7] if sunday else oct_list[:3]
+    men_source = list(men_list)
+    if len(men_source) < men_needed:
+        men_source = men_source + fill_list
     assembled = _repeat_to_count(oct_source, oct_needed) + _repeat_to_count(
-        men_list, men_needed
+        men_source, men_needed
     )
     return pad_stichera(assembled)
 
@@ -157,7 +164,8 @@ def first_nonempty(*values: Any) -> Any:
 
 def merge_service(service_type: str, *, rank: int, weekday: int,
                   period: str, oct_svc: dict | None, men_svc: dict | None,
-                  tri_svc: dict | None, pent_svc: dict | None) -> dict:
+                  tri_svc: dict | None, pent_svc: dict | None,
+                  full_svc: dict | None = None) -> dict:
     """
     Merge one service's variables.
 
@@ -166,6 +174,7 @@ def merge_service(service_type: str, *, rank: int, weekday: int,
     """
     oct_svc = oct_svc if isinstance(oct_svc, dict) else {}
     men_svc = men_svc if isinstance(men_svc, dict) else {}
+    full_svc = full_svc if isinstance(full_svc, dict) else {}
     tri_svc = tri_svc if isinstance(tri_svc, dict) else {}
     pent_svc = pent_svc if isinstance(pent_svc, dict) else {}
 
@@ -200,6 +209,14 @@ def merge_service(service_type: str, *, rank: int, weekday: int,
             if v:
                 merged[k] = v
 
+    # Full Menaion (great feasts) overlays general
+    if rank != 7:
+        for k, v in full_svc.items():
+            if k == 'stichera':
+                continue
+            if v:
+                merged[k] = v
+
     # Moveable book scalars overlay; blobs become notes
     if rank != 7:
         for k, v in moveable.items():
@@ -215,22 +232,27 @@ def merge_service(service_type: str, *, rank: int, weekday: int,
             elif v and not isinstance(v, list):
                 merged[k] = v
 
+    has_full = bool(as_hymn_list(full_svc.get('stichera')))
     stichera = assemble_stichera(
         rank, weekday, oct_svc.get('stichera'),
-        men_svc.get('stichera') if rank != 7 else None,
+        full_svc.get('stichera') if has_full else (men_svc.get('stichera') if rank != 7 else None),
+        fill_stichera=men_svc.get('stichera') if has_full else None,
     )
 
-    # If the moveable book has a *structured* stichera list, prefer assembling
-    # with it as the "menaion" slot (Triodion/Pentecostarion hymns at the end).
+    # Moveable structured stichera only when this is not a full great feast.
     moveable_stichera = as_hymn_list(moveable.get('stichera'))
-    if rank != 7 and moveable_stichera:
+    if rank != 7 and moveable_stichera and not has_full:
         stichera = assemble_stichera(
-            rank, weekday, oct_svc.get('stichera'), moveable_stichera
+            rank, weekday, oct_svc.get('stichera'), moveable_stichera,
+            fill_stichera=men_svc.get('stichera'),
         )
-    else:
+    elif not has_full:
         note = blob_note(moveable.get('stichera'))
         if note:
             merged['stichera_block'] = note
+
+    if has_full:
+        moveable_name = 'full_menaion'
 
     merged['stichera'] = stichera
     merged['_moveable_book'] = moveable_name

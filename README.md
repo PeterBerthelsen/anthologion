@@ -5,9 +5,9 @@ No AI is required at runtime.
 
 ## Sources
 
-- **Services (source of truth):** St. Sergius PDFs under `services/` (octoechos, menaion general classes, triodion, pentecostarion).
-- **Variables:** pulled from those books by typikon / resolver logic (`resolver.py`, `assembly.py`). Hymn text is never invented.
-- **Calendars:** `calendar=1` old (civil date − 13 days for the menaion), `calendar=0` new (civil menaion date). Pascha is the Julian/Alexandrian computation expressed on the Gregorian civil calendar for both.
+- **Services (source of truth):** St. Sergius PDFs — Full Menaion (`services/emenaion/`) for the twelve Great Feasts, General Menaion, Octoechos, Triodion, Pentecostarion.
+- **Variable priority:** Full Menaion (great feasts) → General Menaion → ordinary Octoechos. Moveable books still apply outside those feasts.
+- **Calendars:** `calendar=1` old (civil date − 13 days for the menaion), `calendar=0` new.
 
 ## No AI required to run
 
@@ -61,7 +61,8 @@ This repo builds artifacts. Later layers (not wired here): GitHub artifact mirro
 
 ## Honest gaps
 
-- Full 366-day menaion is not extracted; general saint-class templates are used.
+- Full 366-day menaion is not extracted. The **nine fixed Great Feasts** use Full Menaion (`database/full_menaion_data.json`); other days use general saint-class templates, then octoechos.
+- Palm Sunday, Ascension, and Pentecost remain in Triodion/Pentecostarion (moveable).
 - Triodion/Pentecostarion vespers often arrive as truncated PDF blobs. Those are kept as source notes (`stichera_block`) and do **not** overwrite structured octoechos/menaion stichera.
 - Pascha Sunday vespers is missing from pentecostarion file `10` (matins/liturgy only).
 - Liturgy has no HTML template yet; JSON/Markdown still emit liturgy variables when present.

@@ -58,6 +58,25 @@ def test_blob_is_not_structured():
     assert is_structured_hymn_list(['<p>Receive our evening prayers</p>'] * 6) is True
 
 
+def test_sunday_ordinary_is_seven_oct_plus_three_men():
+    oct_h = [f'o{i}' for i in range(7)]
+    men_h = [f'm{i}' for i in range(3)]
+    out = assemble_stichera(5, 6, oct_h, men_h)
+    sung = [x for x in out if x]
+    assert sung == [f'o{i}' for i in range(7)] + ['m0', 'm1', 'm2']
+
+
+def test_vigil_weekday_is_eight_menaion_only():
+    oct_h = [f'o{i}' for i in range(6)]
+    men_h = [f'm{i}' for i in range(3)]
+    out = assemble_stichera(2, 0, oct_h, men_h)
+    sung = [x for x in out if x]
+    assert len(sung) == 8
+    assert all(s.startswith('m') for s in sung)
+    assert out[-10] == ''
+    assert out[-9] == ''
+
+
 def test_weekday_six_stichera_is_three_oct_plus_three_men():
     oct_h = [f'o{i}' for i in range(6)]
     men_h = [f'm{i}' for i in range(3)]
@@ -84,6 +103,16 @@ def test_old_calendar_nativity_theotokos_on_civil_sep_21_2026():
     # Last slot must be a menaion hymn (name substituted), not an empty wrap.
     assert vs['stichera'][-1]
     assert '(name)' not in vs['stichera'][-1]
+    joined = '\n'.join(sung)
+    assert 'noetic thrones' in joined
+    assert 'full_menaion' in vs['_sources']
+    assert vs['_primary'] == 'full_menaion'
+
+
+def test_ordinary_saint_does_not_use_full_menaion():
+    ctx = resolve(9, 8, 2026, calendar=1)  # old cal → 08-26 Adrian
+    assert ctx.get('full_menaion') in (None, {})
+    assert ctx['menaion_source'] != 'full'
 
 
 def test_new_calendar_nativity_theotokos_on_civil_sep_8_2026():
