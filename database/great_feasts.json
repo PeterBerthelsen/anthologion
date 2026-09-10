@@ -1,0 +1,89 @@
+{
+  "fixed": {
+    "09-08": {
+      "name": "The Nativity of the Mother of God",
+      "files": [
+        "09-08.pdf"
+      ],
+      "rank": 2
+    },
+    "09-14": {
+      "name": "The Universal Exaltation of the Precious Cross",
+      "files": [
+        "09-14.pdf"
+      ],
+      "rank": 1
+    },
+    "11-21": {
+      "name": "The Entrance of the Theotokos into the Temple",
+      "files": [
+        "11-21.pdf"
+      ],
+      "rank": 2
+    },
+    "12-25": {
+      "name": "The Nativity of Our Lord Jesus Christ",
+      "files": [
+        "12-25.pdf"
+      ],
+      "rank": 1
+    },
+    "01-06": {
+      "name": "The Holy Theophany of our Lord Jesus Christ",
+      "files": [
+        "01-06.pdf"
+      ],
+      "rank": 1
+    },
+    "02-02": {
+      "name": "The Meeting of our Lord",
+      "files": [
+        "02-02.pdf"
+      ],
+      "rank": 2
+    },
+    "03-25": {
+      "name": "The Annunciation of the Theotokos",
+      "files": [
+        "03-25.pdf"
+      ],
+      "rank": 2
+    },
+    "08-06": {
+      "name": "The Transfiguration of our Lord",
+      "files": [
+        "08-06.pdf"
+      ],
+      "rank": 2
+    },
+    "08-15": {
+      "name": "The Dormition of the Theotokos",
+      "files": [
+        "08-15.pdf"
+      ],
+      "rank": 2
+    }
+  },
+  "moveable": {
+    "palm_sunday": {
+      "name": "Palm Sunday \u2014 The Entrance of the Lord into Jerusalem",
+      "source": "triodion",
+      "rank": 1
+    },
+    "ascension": {
+      "name": "The Ascension of our Lord",
+      "source": "pentecostarion",
+      "rank": 1
+    },
+    "pentecost": {
+      "name": "Pentecost \u2014 Holy Trinity Day",
+      "source": "pentecostarion",
+      "rank": 1
+    }
+  },
+  "priority": [
+    "full_menaion",
+    "general_menaion",
+    "octoechos"
+  ]
+}
