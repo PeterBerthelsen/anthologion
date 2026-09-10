@@ -499,8 +499,9 @@ def resolve(month, day, year, calendar=1, rank=None, menaion_source='general'):
         calendar: 0 = new calendar, 1 = old calendar (default)
         rank: override feast rank (1-7). 7 = simple service (octoechos only).
               None = use the rank from the feast calendar.
-        menaion_source: 'general' (24 saint classes, default),
-                        'full' (366-day, not yet available),
+        menaion_source: 'general' (24 saint classes, default; Full Menaion
+                        overlays the twelve great feasts when extracted),
+                        'full' (same lookup; labels source full when feast texts exist),
                         'none' (skip menaion entirely)
 
     Returns dict with:
@@ -543,9 +544,9 @@ def resolve(month, day, year, calendar=1, rank=None, menaion_source='general'):
 
     # Determine effective menaion source
     if menaion_source == 'full':
-        # Full menaion (366 days) not yet extracted — fall back to general
+        # 366-day book is not extracted; great-feast Full Menaion overlays when present.
         effective_menaion = 'general'
-        menaion_note = 'full menaion not yet available, using general'
+        menaion_note = None
     elif menaion_source == 'none':
         effective_menaion = 'none'
         menaion_note = None

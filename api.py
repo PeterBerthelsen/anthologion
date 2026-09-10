@@ -496,8 +496,8 @@ _HOME_HTML = """<!DOCTYPE html>
       <div class="form-group">
         <label>Menaion</label>
         <select id="menaion">
-          <option value="general">General (24 classes)</option>
-          <option value="full">Full (366 days) — coming soon</option>
+          <option value="general">Auto (Full feasts → General → Octoechos)</option>
+          <option value="full">Prefer Full Menaion</option>
           <option value="none">None (skip)</option>
         </select>
       </div>
@@ -656,7 +656,7 @@ def health():
         'data_sources': ['triodion', 'pentecostarion', 'octoechos', 'menaion'],
         'params': {
             'rank': '1-7 (7=simple)',
-            'menaion': 'general | full (coming soon) | none',
+            'menaion': 'general | full | none',
             'format': 'json | html | epub | pdf',
             'scope': 'day | month (for epub/pdf)',
             'service': 'vespers | matins | liturgy | compline | nocturns | ...',
@@ -667,5 +667,6 @@ def health():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    debug = os.environ.get('FLASK_DEBUG', '1') == '1'
-    app.run(host='0.0.0.0', port=port, debug=debug)
+    debug = os.environ.get('FLASK_DEBUG', '0') == '1'
+    host = os.environ.get('HOST', '127.0.0.1')
+    app.run(host=host, port=port, debug=debug)
